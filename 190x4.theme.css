@@ -1,13 +1,69 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.0
+ * @version 3.6.1
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+/* ============================================================
+   Шрифты загружаем через @font-face, а НЕ через @import.
+   @import создаёт отдельный CSSImportRule → подгруженная таблица
+   живёт как orphan stylesheet и не удаляется, когда BD снимает
+   <style data-bd-theme>. Симптомы: тема не выключается тогглом,
+   накладывается поверх других тем, тормоза от двойного фетча.
+   @font-face — правило ВНУТРИ таблицы, дропается атомарно.
+   ============================================================ */
+@font-face {
+    font-family: 'Orbitron';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('https://cdn.jsdelivr.net/npm/@fontsource/orbitron/files/orbitron-latin-500-normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Orbitron';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('https://cdn.jsdelivr.net/npm/@fontsource/orbitron/files/orbitron-latin-700-normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Orbitron';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('https://cdn.jsdelivr.net/npm/@fontsource/orbitron/files/orbitron-latin-900-normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Rajdhani';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('https://cdn.jsdelivr.net/npm/@fontsource/rajdhani/files/rajdhani-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Rajdhani';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('https://cdn.jsdelivr.net/npm/@fontsource/rajdhani/files/rajdhani-latin-500-normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Rajdhani';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('https://cdn.jsdelivr.net/npm/@fontsource/rajdhani/files/rajdhani-latin-600-normal.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Rajdhani';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('https://cdn.jsdelivr.net/npm/@fontsource/rajdhani/files/rajdhani-latin-700-normal.woff2') format('woff2');
+}
 
 /* ============================================================
    190x4 — Cyberpunk Discord Theme
