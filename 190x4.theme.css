@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.1
+ * @version 3.6.2
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -247,29 +247,16 @@ video + canvas {
 }
 
 /* Discord Mana design system — переопределяем ВСЕ background/brand переменные.
-   КРИТИЧНО: Discord использует compound-селекторы (.theme-darker.theme-dark.visual-refresh)
-   со специфичностью 0,3,0 — обычный .theme-dark (0,1,0) не победит даже с !important.
-   Поэтому здесь html.theme-darker.theme-dark.visual-refresh и подобное (0,3,1) — выше. */
-html.theme-dark,
-html.theme-darker,
-html.theme-light,
-html.visual-refresh,
-html.theme-dark.theme-darker,
-html.theme-darker.theme-dark,
-html.visual-refresh.theme-dark,
-html.visual-refresh.theme-darker,
-html.theme-darker.theme-dark.visual-refresh,
-html.visual-refresh.theme-darker.theme-dark,
-html.platform-win.theme-darker.theme-dark,
-html.platform-osx.theme-darker.theme-dark,
-html.platform-linux.theme-darker.theme-dark,
-html.platform-win.visual-refresh.theme-darker.theme-dark,
+   В 3.6.2 список свёрнут с 20+ compound-селекторов до 5: со всеми правилами
+   внутри блока, помеченными !important, специфичность не нужна — !important
+   перебивает Discord-овские compound (0,3,0) даже от :root (0,1,0).
+   Раздутый список форсил Chromium пересчитывать матчинг на каждой смене
+   класса на <html> (а Discord меняет их при смене темы/режима/платформы). */
+:root,
 .theme-dark,
 .theme-darker,
 .theme-light,
-.visual-refresh,
-.visual-refresh.theme-dark,
-.visual-refresh.theme-darker {
+.visual-refresh {
     /* === legacy background-* (старые) — намного прозрачнее === */
     --background-primary:           transparent !important;
     --background-secondary:         rgba(10, 10, 15, 0.35) !important;
@@ -608,24 +595,20 @@ html::after {
     box-shadow: inset 0 0 0 1px var(--x4-border-soft);
 }
 
-/* :has() для очистки фона предков voice-preview. Раньше было 11 селекторов —
-   :has() пересчитывается на каждой DOM-мутации, дорого. Оставлено 3 — общие
-   :has() с child-комбинатором покрывают всё дерево wrapper'ов (1-3 уровня). */
-*:has(> [class*="container__5aa3a"]),
-*:has(> div > [class*="container__5aa3a"]),
-*:has(> div > div > [class*="container__5aa3a"]) {
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-}
+/* :has() удалён в 3.6.2: универсальный * + :has() = O(N всего DOM) на каждую
+   DOM-мутацию, что в Discord-чате (typing/scroll/messages) даёт сотни мс
+   recalc-style в минуту. Защита, которую он обеспечивал, уже покрыта узкими
+   селекторами выше: блок [class*="chatLayoutContent"]/[class*="callContainerInner"]/...
+   обнуляет фон конкретных voice/chat-родителей по их класс-хешам Discord. */
 
-
-/* Inline gradient на контейнерах voice/chat (но не на avatar/user/button) */
-section[class*="chat"] [class*="container_"]:not([class*="message"]):not([class*="form_"]):not([class*="input_"]):not([class*="user"]):not([class*="avatar"]):not(button) {
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-}
+/* Удалено в 3.6.2:
+   section[class*="chat"] [class*="container_"]:not(message):not(form_)
+       :not(input_):not(user):not(avatar):not(button)
+   Селектор пробегал ВСЕ потомки <section class*="chat"> и применял 6 :not() —
+   а внутри секции чата это сотни элементов на каждое сообщение. Покрытие
+   полностью дублировалось блоком voice/chat-контейнеров выше
+   ([class*="chatContent_"], [class*="chatLayoutContent"], [class*="callContainerInner"], …),
+   так что удаление визуально безопасно. */
 
 /* Топ-бар канала */
 [class*="title_"][class*="container"],

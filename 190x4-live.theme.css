@@ -1,7 +1,7 @@
 /**
  * @name 190x4 (live)
  * @author 190x4
- * @version 3.6.1
+ * @version 3.6.2
  * @description Live-loader для темы 190x4 — тянет актуальный CSS прямо из GitHub. ВНИМАНИЕ: из-за @import не выключается тогглом BD (orphan stylesheet), для disable нужен полный рестарт Discord. Если важен рабочий тоггл — ставь статический 190x4.theme.css.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4-live.theme.css
