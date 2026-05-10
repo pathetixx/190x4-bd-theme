@@ -1,0 +1,1416 @@
+/**
+ * @name 190x4
+ * @author 190x4
+ * @version 3.6.0
+ * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
+ * @source https://190x4.pw
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   190x4 — Cyberpunk Discord Theme
+   Палитра выведена из логотипа: gunmetal PCB + red-neon eyes
+   ============================================================ */
+
+:root {
+    /* --- 190x4 brand palette --- */
+    --x4-bg-deep:        #06060a;
+    --x4-bg-base:        #0a0a0f;
+    --x4-bg-panel:       #11111a;
+    --x4-bg-elevated:    #181822;
+    --x4-bg-hover:       #1f1f2c;
+    --x4-bg-active:      #2a1018;
+
+    --x4-red:            #ff1a3a;
+    --x4-red-bright:     #ff2d4d;
+    --x4-red-deep:       #b3001f;
+    --x4-red-glow:       rgba(255, 26, 58, 0.45);
+    --x4-red-soft:       rgba(255, 26, 58, 0.12);
+
+    --x4-orange:         #ff6b1a;
+    --x4-orange-soft:    rgba(255, 107, 26, 0.18);
+
+    --x4-text:           #e8e8ec;
+    --x4-text-bright:    #ffffff;
+    --x4-text-muted:     #7a7a88;
+    --x4-text-faint:     #4a4a55;
+
+    --x4-border:         rgba(255, 26, 58, 0.25);
+    --x4-border-soft:    rgba(255, 255, 255, 0.06);
+
+    --x4-bg-image:       url('https://i.ibb.co/fd9VqZc9/190x4-logo.png');
+    --x4-overlay:        linear-gradient(rgba(6, 6, 10, 0.92), rgba(6, 6, 10, 0.92));
+
+    --x4-font-display:   'Orbitron', 'Rajdhani', sans-serif;
+    --x4-font-ui:        'Rajdhani', 'gg sans', 'Inter', sans-serif;
+
+    /* --- override Discord variables --- */
+    --background-primary:           transparent;
+    --background-secondary:         rgba(10, 10, 15, 0.72);
+    --background-secondary-alt:     rgba(17, 17, 26, 0.78);
+    --background-tertiary:          rgba(6, 6, 10, 0.85);
+    --background-accent:            var(--x4-bg-active);
+    --background-floating:          rgba(10, 10, 15, 0.96);
+    --background-mobile-primary:    var(--x4-bg-base);
+    --background-mobile-secondary:  var(--x4-bg-panel);
+
+    --background-modifier-hover:    var(--x4-red-soft);
+    --background-modifier-active:   rgba(255, 26, 58, 0.18);
+    --background-modifier-selected: rgba(255, 26, 58, 0.22);
+    --background-modifier-accent:   rgba(255, 26, 58, 0.08);
+
+    --channeltextarea-background:   rgba(17, 17, 26, 0.85);
+
+    --header-primary:               var(--x4-text-bright);
+    --header-secondary:             var(--x4-text);
+    --text-normal:                  var(--x4-text);
+    --text-muted:                   var(--x4-text-muted);
+    --text-link:                    var(--x4-red-bright);
+    --text-link-low-saturation:     var(--x4-red);
+    --text-positive:                #2dff8a;
+    --text-warning:                 var(--x4-orange);
+    --text-danger:                  var(--x4-red);
+    --text-brand:                   var(--x4-red);
+
+    --interactive-normal:           var(--x4-text);
+    --interactive-hover:            var(--x4-red-bright);
+    --interactive-active:           var(--x4-red);
+    --interactive-muted:            var(--x4-text-faint);
+
+    --brand-experiment:             var(--x4-red);
+    --brand-experiment-560:         var(--x4-red-bright);
+    --brand-experiment-600:         var(--x4-red-deep);
+    --brand-experiment-100:         var(--x4-red-soft);
+    --brand-experiment-200:         var(--x4-red-soft);
+    --brand-experiment-300:         var(--x4-red-glow);
+    --brand-experiment-400:         var(--x4-red);
+    --brand-experiment-500:         var(--x4-red);
+    --brand-experiment-700:         var(--x4-red-deep);
+    --brand-experiment-800:         var(--x4-red-deep);
+
+    --button-positive-background:        var(--x4-red);
+    --button-positive-background-hover:  var(--x4-red-bright);
+    --button-danger-background:          var(--x4-red-deep);
+    --button-danger-background-hover:    var(--x4-red);
+
+    --status-danger:                var(--x4-red);
+    --info-positive-foreground:     #2dff8a;
+    --info-warning-foreground:      var(--x4-orange);
+    --info-danger-foreground:       var(--x4-red);
+
+    --scrollbar-thin-thumb:         rgba(255, 26, 58, 0.35);
+    --scrollbar-thin-track:         transparent;
+    --scrollbar-auto-thumb:         rgba(255, 26, 58, 0.4);
+    --scrollbar-auto-track:         transparent;
+    --scrollbar-auto-scrollbar-color-thumb: rgba(255, 26, 58, 0.4);
+    --scrollbar-auto-scrollbar-color-track: transparent;
+
+    --mention-background:           rgba(255, 26, 58, 0.14);
+    --mention-foreground:           var(--x4-red-bright);
+    --mention-highlight:            rgba(255, 26, 58, 0.25);
+
+    --activity-card-background:     rgba(17, 17, 26, 0.85);
+
+    --channels-default:             var(--x4-text-muted);
+    --channel-icon:                 var(--x4-text-muted);
+    --channel-text-area-placeholder: var(--x4-text-faint);
+
+    --deprecated-card-bg:           rgba(17, 17, 26, 0.6);
+    --deprecated-card-editable-bg:  rgba(17, 17, 26, 0.6);
+    --deprecated-store-bg:          rgba(17, 17, 26, 0.6);
+    --deprecated-quickswitcher-input-background: rgba(10, 10, 15, 0.95);
+
+    --modal-background:             rgba(10, 10, 15, 0.97);
+    --modal-footer-background:      rgba(6, 6, 10, 0.9);
+
+    --input-background:             rgba(6, 6, 10, 0.6);
+}
+
+/* ============================================================
+   ГЛОБАЛЬНЫЙ ФОН — GGO Kirito-стратегия
+   Фон НА #app-mount (как в эталонной теме). Выше — никаких bg.
+   Внутренние обёртки делаем transparent поштучно.
+   ============================================================ */
+
+/* Фон вынесен в html::before — fixed pseudo вместо background-attachment:fixed.
+   Причина: attachment:fixed = full-viewport repaint на каждом скролле. */
+#app-mount {
+    background-color: transparent !important;
+}
+
+html,
+body {
+    background: transparent !important;
+}
+
+html::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url('https://i.ibb.co/fd9VqZc9/190x4-logo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #06060a;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* bg-overlay div: ЕДВА затемняем + лёгкий красный тинт.
+   Логотип 190x4 сам по себе тёмный — не дотемняем сильно. */
+[class*="bg__"][class*="theme-"],
+.bg__960e4 {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(40, 5, 10, 0.15) 100%
+    ) !important;
+    background-color: transparent !important;
+}
+
+/* === CANVAS — Discord рендерит фоны пикселями.
+   Ловим: с классом canvas_*, без класса вообще (voice preview!),
+   с vertical-align inline-style (тот что блокировал voice-preview). === */
+canvas[class*="canvas_"],
+canvas:not([class]),
+canvas[style*="vertical-align"],
+canvas[style*="vertical-align: top"] {
+    display: none !important;
+}
+
+/* Исключения: видео-звонки и screenshare — НЕ трогать */
+canvas[width="240"],
+canvas[style*="display: none"],
+[class*="videoWrapper_"] canvas,
+[class*="screenshare"] canvas,
+[class*="streamPreview"] canvas,
+video + canvas {
+    display: initial !important;
+}
+
+/* Discord Mana design system — переопределяем ВСЕ background/brand переменные.
+   КРИТИЧНО: Discord использует compound-селекторы (.theme-darker.theme-dark.visual-refresh)
+   со специфичностью 0,3,0 — обычный .theme-dark (0,1,0) не победит даже с !important.
+   Поэтому здесь html.theme-darker.theme-dark.visual-refresh и подобное (0,3,1) — выше. */
+html.theme-dark,
+html.theme-darker,
+html.theme-light,
+html.visual-refresh,
+html.theme-dark.theme-darker,
+html.theme-darker.theme-dark,
+html.visual-refresh.theme-dark,
+html.visual-refresh.theme-darker,
+html.theme-darker.theme-dark.visual-refresh,
+html.visual-refresh.theme-darker.theme-dark,
+html.platform-win.theme-darker.theme-dark,
+html.platform-osx.theme-darker.theme-dark,
+html.platform-linux.theme-darker.theme-dark,
+html.platform-win.visual-refresh.theme-darker.theme-dark,
+.theme-dark,
+.theme-darker,
+.theme-light,
+.visual-refresh,
+.visual-refresh.theme-dark,
+.visual-refresh.theme-darker {
+    /* === legacy background-* (старые) — намного прозрачнее === */
+    --background-primary:           transparent !important;
+    --background-secondary:         rgba(10, 10, 15, 0.35) !important;
+    --background-secondary-alt:     rgba(17, 17, 26, 0.4) !important;
+    --background-tertiary:          rgba(6, 6, 10, 0.4) !important;
+    --background-floating:          rgba(10, 10, 15, 0.85) !important;
+    --background-message-hover:     rgba(255, 26, 58, 0.05) !important;
+    --background-mentioned:         rgba(255, 26, 58, 0.14) !important;
+    --background-mentioned-hover:   rgba(255, 26, 58, 0.2) !important;
+
+    /* === Mana background-base-* (МАКСИМАЛЬНО прозрачно — обои дают цвет) === */
+    --background-base-lowest:       rgba(0, 0, 0, 0.15) !important;
+    --background-base-lower:        rgba(6, 6, 10, 0.18) !important;
+    --background-base-low:          rgba(10, 10, 15, 0.18) !important;
+    --background-base-medium:       rgba(17, 17, 26, 0.18) !important;
+    --background-base-high:         rgba(24, 24, 34, 0.25) !important;
+    --background-base-higher:       rgba(30, 30, 42, 0.35) !important;
+    --background-base-highest:      rgba(36, 36, 48, 0.5) !important;
+
+    /* === Mana bg-base-* === */
+    --bg-base-primary:              rgba(10, 10, 15, 0.18) !important;
+    --bg-base-secondary:            rgba(6, 6, 10, 0.22) !important;
+    --bg-base-tertiary:             rgba(17, 17, 26, 0.18) !important;
+
+    /* === Mana bg-surface-* (модалки, попауты) === */
+    --bg-surface-raised:            rgba(17, 17, 26, 0.78) !important;
+    --bg-surface-overlay:           rgba(10, 10, 15, 0.85) !important;
+    --bg-surface-overlay-tmp:       rgba(10, 10, 15, 0.9) !important;
+
+    /* === Mana bg-mod-* (модификаторы прозрачности) === */
+    --bg-mod-faint:                 rgba(255, 255, 255, 0.04) !important;
+    --bg-mod-subtle:                rgba(255, 255, 255, 0.08) !important;
+    --bg-mod-medium:                rgba(255, 26, 58, 0.1) !important;
+    --bg-mod-strong:                rgba(255, 26, 58, 0.18) !important;
+    --bg-mod-stronger:              rgba(255, 26, 58, 0.24) !important;
+    --bg-mod-strongest:             rgba(255, 26, 58, 0.32) !important;
+
+    /* === Mana bg-overlay-* (поверх wallpaper) === */
+    --bg-overlay-1:                 rgba(10, 10, 15, 0.45) !important;
+    --bg-overlay-2:                 rgba(17, 17, 26, 0.55) !important;
+    --bg-overlay-3:                 rgba(17, 17, 26, 0.65) !important;
+    --bg-overlay-4:                 rgba(6, 6, 10, 0.75) !important;
+    --bg-overlay-5:                 rgba(6, 6, 10, 0.85) !important;
+    --bg-overlay-app-frame:         transparent !important;
+    --bg-overlay-chat:              transparent !important;
+    --bg-overlay-floating:          rgba(10, 10, 15, 0.88) !important;
+    --bg-overlay-selected:          rgba(255, 26, 58, 0.2) !important;
+    --bg-overlay-hover:             rgba(255, 26, 58, 0.1) !important;
+    --bg-overlay-active:            rgba(255, 26, 58, 0.24) !important;
+    --bg-overlay-pressed:           rgba(255, 26, 58, 0.3) !important;
+
+    /* === Brand variables (Mana brand-* + legacy --brand-experiment) === */
+    --brand-500:                    var(--x4-red) !important;
+    --brand-560:                    var(--x4-red-bright) !important;
+    --brand-600:                    var(--x4-red-deep) !important;
+    --brand-100:                    var(--x4-red-soft) !important;
+    --brand-200:                    var(--x4-red-soft) !important;
+    --brand-300:                    var(--x4-red-glow) !important;
+    --brand-400:                    var(--x4-red) !important;
+    --brand-700:                    var(--x4-red-deep) !important;
+    --brand-800:                    var(--x4-red-deep) !important;
+    --brand-900:                    var(--x4-red-deep) !important;
+
+    --control-brand-foreground:     var(--x4-red) !important;
+    --control-brand-foreground-new: var(--x4-red-bright) !important;
+
+    --button-primary-background:        var(--x4-red) !important;
+    --button-primary-background-hover:  var(--x4-red-bright) !important;
+    --button-primary-background-active: var(--x4-red-deep) !important;
+    --button-secondary-background:      rgba(255, 255, 255, 0.06) !important;
+    --button-secondary-background-hover: rgba(255, 26, 58, 0.18) !important;
+    --button-outline-brand-text:        var(--x4-red-bright) !important;
+    --button-outline-brand-border:      var(--x4-red) !important;
+    --button-outline-brand-background-hover: var(--x4-red-soft) !important;
+
+    /* Чат-панель / channels / sidebar — пробросить */
+    --channels-default:             var(--x4-text-muted) !important;
+    --channel-icon:                 var(--x4-text-muted) !important;
+}
+
+/* Все промежуточные обёртки → transparent.
+   ВАЖНО: ловим как app_HASH (одно подчёркивание) так и app__HASH (два) */
+#app-mount > div,
+#app-mount [class*="appAsidePanelWrapper"],
+#app-mount [class*="notAppAsidePanel"],
+#app-mount [class*="appDevToolsWrapper"],
+#app-mount [class^="app_"]:not([class*="application"]),
+#app-mount [class^="app__"]:not([class*="application"]),
+#app-mount [class*=" app_"]:not([class*="application"]),
+#app-mount [class*=" app__"]:not([class*="application"]),
+#app-mount [class*="layers_"],
+#app-mount [class*="layers__"],
+#app-mount [class*="baseLayer"],
+/* Структурные wrapper'ы — двойное подчёркивание (структура, не панели) */
+#app-mount [class*="container__"]:not([class*="container__5e434"][class*="message"]),
+#app-mount [class*="content__"]:not([class*="message"]):not([class*="contents__"]),
+#app-mount [class*="base__"],
+#app-mount [class*="page__"],
+#app-mount [class*="wrapper__"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="contentRegion"],
+#app-mount [class*="standardSidebarView"],
+/* Friends/Now-Playing/Home wrapper'ы */
+#app-mount [class*="container__133bf"],
+#app-mount [class*="upperContainer"],
+#app-mount [class*="tabBody__"],
+#app-mount [class*="nowPlayingColumn"],
+#app-mount [class*="peopleColumn"],
+#app-mount [class*="homeWrapper"],
+#app-mount [class*="mainPageScroller"],
+/* Чат и channel wrapper'ы */
+#app-mount [class*="chatContent_"],
+#app-mount [class*="channelChatWrapper"],
+#app-mount [class*="form_"][class*="f75fb0"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* hex-grid + scanlines overlay. mix-blend-mode убран — каждый repaint композитил
+   фуллскрин-слой через blend, дорого. Компенсация через alpha в rgba. */
+html::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.025) 0px,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px,
+            transparent 3px
+        ),
+        radial-gradient(
+            ellipse at top,
+            transparent 60%,
+            rgba(255, 26, 58, 0.04) 100%
+        );
+}
+
+/* ============================================================
+   SERVER LIST (левый рейл с серверами)
+   ============================================================ */
+
+[class*="guilds_"],
+[class*="guilds-"] {
+    background: rgba(6, 6, 10, 0.35) !important;
+    border-right: 1px solid var(--x4-border);
+    box-shadow: inset -1px 0 0 rgba(255, 26, 58, 0.1);
+}
+
+/* Иконка сервера: квадратные углы по умолчанию, скругление при hover */
+[class*="listItem_"] [class*="wrapper_"],
+[class*="listItem-"] [class*="wrapper-"] {
+    transition: border-radius 0.25s cubic-bezier(0.2, 0.8, 0.4, 1),
+                box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.4, 1) !important;
+}
+
+[class*="listItemWrapper_"] [class*="wrapper_"],
+[class*="listItem_"] svg foreignObject > div,
+[class*="listItem-"] svg foreignObject > div {
+    border-radius: 8px !important;
+}
+
+[class*="listItem_"]:hover svg foreignObject > div,
+[class*="listItem-"]:hover svg foreignObject > div {
+    border-radius: 14px !important;
+    box-shadow:
+        0 0 0 2px var(--x4-red),
+        0 0 18px var(--x4-red-glow);
+}
+
+/* Activity-индикатор слева у иконки */
+[class*="pill_"] [class*="item_"],
+[class*="pill-"] [class*="item-"] {
+    background-color: var(--x4-red) !important;
+    box-shadow: 0 0 12px var(--x4-red-glow), 0 0 4px var(--x4-red-bright);
+    border-radius: 0 4px 4px 0;
+}
+
+/* Home button (Discord logo) */
+[class*="homeIcon_"],
+[class*="homeIcon-"] {
+    background: linear-gradient(135deg, var(--x4-red-deep), var(--x4-red)) !important;
+    color: #fff !important;
+}
+
+/* ============================================================
+   CHANNEL SIDEBAR (список каналов)
+   ============================================================ */
+
+[class*="sidebar_"],
+[class*="sidebar-"] {
+    background: rgba(10, 10, 15, 0.35) !important;
+    border-right: 1px solid var(--x4-border-soft);
+}
+
+/* Заголовок гильдии */
+[class*="header_"] [class*="name_"],
+[class*="title_"][class*="header_"] {
+    font-family: var(--x4-font-display) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase;
+    color: var(--x4-text-bright) !important;
+    text-shadow: 0 0 8px var(--x4-red-glow);
+}
+
+/* Категории каналов */
+[class*="categoryHeader"] h3,
+[class*="categoryHeader"] [class*="name_"] {
+    font-family: var(--x4-font-display) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.15em !important;
+    color: var(--x4-text-muted) !important;
+    text-transform: uppercase;
+    font-size: 11px !important;
+}
+
+/* Сами каналы */
+[class*="containerDefault_"]:hover {
+    background: var(--x4-red-soft) !important;
+}
+
+[class*="modeSelected_"],
+[class*="modeSelected-"] {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 26, 58, 0.22) 0%,
+        rgba(255, 26, 58, 0.08) 100%
+    ) !important;
+    box-shadow: inset 3px 0 0 var(--x4-red), inset 0 0 24px rgba(255, 26, 58, 0.12);
+}
+
+[class*="modeSelected_"] [class*="name_"],
+[class*="modeSelected-"] [class*="name_"] {
+    color: var(--x4-text-bright) !important;
+    text-shadow: 0 0 6px var(--x4-red-glow);
+}
+
+/* Unread mark */
+[class*="modeUnread_"] [class*="name_"] {
+    color: var(--x4-text-bright) !important;
+}
+
+/* ============================================================
+   CHAT — сообщения
+   ============================================================ */
+
+[class*="chat_"],
+[class*="chat-"] {
+    background: transparent !important;
+}
+
+/* ============================================================
+   VOICE CHANNEL PREVIEW — синий градиент Discord перекрывал обои
+   ============================================================ */
+
+[class*="emptyChannel"],
+[class*="emptyChannelWrapper"],
+[class*="callContainer"],
+[class*="connectingPreview"],
+[class*="voiceUsersWrapper"],
+[class*="voiceUsersInformation"],
+[class*="noChatPlaceholder"],
+[class*="rtcChatLayout"],
+[class*="chatLayoutContent"],
+[class*="callContainerInner"],
+[class*="voicePanel_"],
+[class*="callConnection"],
+[class*="connectionArea"],
+[class*="voiceChannel_"],
+[class*="emptyChannelContent"],
+[class*="joinSection"],
+[class*="voiceChat_"],
+[class*="chatContent_"],
+[class*="content_"][class*="chat"],
+[class*="form_"][class*="chat"],
+[class*="container_"][class*="chat"],
+[class*="rtcConnection"],
+[class*="pulseGradient"],
+[class*="pulse_"],
+[class*="gradient__"][class*="11664"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* pulseGradient содержит canvas — скрываем сам контейнер тоже */
+[class*="pulseGradient"] {
+    display: none !important;
+}
+
+/* === VOICE CHANNEL PREVIEW — точная структура (Mana) ===
+   container_HASH > tiles_HASH > wrapper_HASH > tile_HASH > tileChild + content + border
+   + channelName + participantsRow + joinButton */
+[class*="container__5aa3a"],
+[class*="tiles__5aa3a"],
+[class*="wrapper__2f4f7"],
+[class*="tile__2f4f7"],
+[class*="tileChild__2f4f7"],
+[class*="content__2f4f7"],
+[class*="border__2f4f7"],
+[class*="overlayContainer__2f4f7"],
+[class*="overlayTop__2f4f7"],
+[class*="indicators__2f4f7"],
+[class*="voiceChannelEffectsContainer__2f4f7"],
+[class*="channelName__5aa3a"],
+[class*="participantsRow__5aa3a"],
+[class*="joinButton__5aa3a"],
+[class*="focusTarget__54e4b"],
+/* Прицельные паттерны — на случай если хеш сменится */
+[class*="tiles__"],
+[class*="tileChild__"],
+[class*="overlayContainer__"],
+[class*="overlayTop__"],
+[class*="participantsRow"],
+[class*="joinButton"],
+[class*="channelName__"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* Сам tile (плитка с аватаром) — лёгкая красная рамка вместо solid bg */
+[class*="tile__2f4f7"],
+[class*="wrapper__2f4f7"][class*="tile_"] {
+    background: rgba(0, 0, 0, 0.25) !important;
+    border: 1px solid var(--x4-border-soft) !important;
+    border-radius: 8px;
+}
+
+[class*="border__2f4f7"] {
+    border-color: var(--x4-border) !important;
+    box-shadow: inset 0 0 0 1px var(--x4-border-soft);
+}
+
+/* :has() для очистки фона предков voice-preview. Раньше было 11 селекторов —
+   :has() пересчитывается на каждой DOM-мутации, дорого. Оставлено 3 — общие
+   :has() с child-комбинатором покрывают всё дерево wrapper'ов (1-3 уровня). */
+*:has(> [class*="container__5aa3a"]),
+*:has(> div > [class*="container__5aa3a"]),
+*:has(> div > div > [class*="container__5aa3a"]) {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+
+/* Inline gradient на контейнерах voice/chat (но не на avatar/user/button) */
+section[class*="chat"] [class*="container_"]:not([class*="message"]):not([class*="form_"]):not([class*="input_"]):not([class*="user"]):not([class*="avatar"]):not(button) {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* Топ-бар канала */
+[class*="title_"][class*="container"],
+section[class*="title-"] {
+    background: rgba(6, 6, 10, 0.78) !important;
+    border-bottom: 1px solid var(--x4-border) !important;
+    box-shadow: 0 1px 12px rgba(255, 26, 58, 0.08);
+}
+
+[class*="title_"][class*="container"] [class*="topic"] {
+    font-family: var(--x4-font-ui) !important;
+}
+
+/* Сообщения */
+[class*="messageListItem_"] [class*="message_"]:hover,
+[class*="messageListItem-"] [class*="message-"]:hover {
+    background: rgba(255, 26, 58, 0.04) !important;
+    box-shadow: inset 2px 0 0 var(--x4-red);
+}
+
+/* Mentions */
+[class*="mentioned_"] [class*="message_"],
+[class*="mentioned-"] [class*="message-"] {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 26, 58, 0.16) 0%,
+        rgba(255, 26, 58, 0.02) 60%,
+        transparent 100%
+    ) !important;
+    box-shadow: inset 3px 0 0 var(--x4-red), 0 0 20px rgba(255, 26, 58, 0.08) !important;
+}
+
+/* Mention-pill в тексте */
+[class*="mention"]:not([class*="mentioned-"]) {
+    background: var(--x4-red-soft) !important;
+    color: var(--x4-red-bright) !important;
+    border-radius: 4px;
+    padding: 0 4px;
+    font-weight: 600;
+    transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+[class*="mention"]:not([class*="mentioned-"]):hover {
+    background: var(--x4-red) !important;
+    color: #fff !important;
+    box-shadow: 0 0 12px var(--x4-red-glow);
+}
+
+/* Имена пользователей */
+[class*="username_"] {
+    font-weight: 600 !important;
+}
+
+/* Timestamps */
+[class*="timestamp_"] {
+    font-family: 'Rajdhani', monospace !important;
+    color: var(--x4-text-faint) !important;
+    letter-spacing: 0.05em;
+}
+
+/* Reply line */
+[class*="repliedMessage_"]::before {
+    border-color: var(--x4-red) !important;
+}
+
+/* Code blocks */
+code,
+pre code,
+[class*="markup_"] code {
+    background: rgba(0, 0, 0, 0.55) !important;
+    border: 1px solid var(--x4-border) !important;
+    color: var(--x4-red-bright) !important;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+    border-radius: 4px !important;
+}
+
+pre {
+    background: rgba(0, 0, 0, 0.65) !important;
+    border: 1px solid var(--x4-border) !important;
+    border-left: 3px solid var(--x4-red) !important;
+    border-radius: 4px !important;
+}
+
+pre code {
+    background: transparent !important;
+    border: none !important;
+    color: var(--x4-text) !important;
+}
+
+/* Spoiler */
+[class*="spoilerText_"] {
+    background-color: rgba(255, 26, 58, 0.4) !important;
+}
+
+/* ============================================================
+   INPUT — поле ввода сообщения
+   ============================================================ */
+
+[class*="channelTextArea_"] [class*="scrollableContainer_"],
+[class*="channelTextArea_"] form {
+    background: rgba(6, 6, 10, 0.85) !important;
+    border: 1px solid var(--x4-border) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.5), inset 0 0 0 1px transparent;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+[class*="channelTextArea_"] form:focus-within {
+    border-color: var(--x4-red) !important;
+    box-shadow: 0 0 0 1px var(--x4-red), 0 0 20px var(--x4-red-glow);
+}
+
+/* ============================================================
+   MEMBERS LIST (правая панель)
+   ============================================================ */
+
+[class*="membersWrap_"] [class*="members_"] {
+    background: rgba(10, 10, 15, 0.3) !important;
+    border-left: 1px solid var(--x4-border-soft);
+}
+
+[class*="membersGroup_"] h3 {
+    font-family: var(--x4-font-display) !important;
+    letter-spacing: 0.15em !important;
+    font-size: 11px !important;
+    color: var(--x4-text-muted) !important;
+    text-transform: uppercase;
+}
+
+[class*="member_"]:hover {
+    background: var(--x4-red-soft) !important;
+}
+
+/* ============================================================
+   AVATARS — оставляем дефолтные круглые (Discord)
+   Никаких border-radius override'ов
+   ============================================================ */
+
+/* ============================================================
+   MODAL & POPOUT — полупрозрачные с backdrop blur
+   ============================================================ */
+
+[class*="root_"][class*="medium"],
+[class*="root_"][class*="small"],
+[class*="root_"][class*="fullscreen"],
+[class*="modal_"] {
+    background: rgba(10, 10, 15, 0.78) !important;
+    border: 1px solid var(--x4-border) !important;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(255, 26, 58, 0.15) !important;
+}
+
+/* Layer-контейнер модалок — прозрачный, чтобы blur работал */
+[class*="layerContainer_"] [class*="layer_"][class*="modal"],
+[class*="layerContainer-"] [class*="layer-"][class*="modal"] {
+    background: transparent !important;
+}
+
+/* Backdrop за модалкой — полупрозрачный, не плотный чёрный */
+[class*="backdrop_"] {
+    background: rgba(0, 0, 0, 0.55) !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+[class*="header_"][class*="title"] h1,
+[class*="header_"][class*="title"] h2 {
+    font-family: var(--x4-font-display) !important;
+    letter-spacing: 0.05em !important;
+}
+
+[class*="footer_"] {
+    background: rgba(6, 6, 10, 0.9) !important;
+    border-top: 1px solid var(--x4-border-soft) !important;
+}
+
+/* User popout / profile */
+[class*="userPopoutOuter_"],
+[class*="userProfileOuterUnthemedNormal_"],
+[class*="userPopout_"] {
+    background: rgba(10, 10, 15, 0.98) !important;
+    border: 1px solid var(--x4-border) !important;
+    box-shadow: 0 0 30px rgba(255, 26, 58, 0.18) !important;
+}
+
+[class*="banner_"] {
+    background-color: var(--x4-bg-active) !important;
+}
+
+/* Tooltips */
+[class*="tooltip_"] {
+    background: rgba(6, 6, 10, 0.97) !important;
+    border: 1px solid var(--x4-border) !important;
+    box-shadow: 0 0 16px var(--x4-red-glow) !important;
+    font-family: var(--x4-font-ui) !important;
+    letter-spacing: 0.03em;
+}
+
+[class*="tooltipPointer_"] {
+    border-color: var(--x4-red) transparent transparent transparent !important;
+}
+
+/* Context menu (правый клик) */
+[class*="menu_"][role="menu"] {
+    background: rgba(10, 10, 15, 0.98) !important;
+    border: 1px solid var(--x4-border) !important;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 26, 58, 0.1) !important;
+}
+
+[class*="menu_"][role="menu"] [class*="item_"]:hover,
+[class*="menu_"][role="menu"] [class*="focused_"] {
+    background: var(--x4-red) !important;
+    color: #fff !important;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================
+   BUTTONS — Mana design system
+   primary_HASH = brand (красим красным)
+   secondary_HASH = neutral (тёмные с красным hover)
+   ============================================================ */
+
+/* Brand/primary кнопки — ТОЛЬКО filled (не lookBlank/lookLink/lookGhost) */
+button[data-mana-component="button"][class*="primary_"]:not([class*="secondary_"]):not([class*="ghost_"]),
+button[class*="lookFilled_"][class*="colorBrand"]:not([class*="lookBlank_"]),
+button[class*="lookFilled-"][class*="colorBrand-"]:not([class*="lookBlank_"]),
+[class*="button_"][class*="colorBrand_"]:not([class*="lookBlank_"]):not([class*="lookLink_"]),
+[class*="button_"][class*="primary_"]:not([class*="secondary_"]):not([class*="lookBlank_"]):not([class*="ghost_"]),
+button[type="submit"][class*="lookFilled_"]:not([class*="lookBlank_"]) {
+    background: linear-gradient(135deg, var(--x4-red-deep), var(--x4-red)) !important;
+    background-color: var(--x4-red) !important;
+    border: 1px solid var(--x4-red-bright) !important;
+    color: #fff !important;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease !important;
+}
+
+/* lookBlank — ПОЛНОСТЬЮ прозрачные кнопки (микро/звук/настройки/чат-иконки)
+   НЕ красим, только лёгкий hover */
+button[class*="lookBlank_"],
+button[class*="lookBlank_"][class*="colorBrand"],
+button[class*="lookBlank_"][class*="colorPrimary"],
+button[class*="lookBlank_"][class*="colorSecondary"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+button[class*="lookBlank_"]:hover {
+    background: rgba(255, 26, 58, 0.1) !important;
+    background-color: rgba(255, 26, 58, 0.1) !important;
+}
+
+/* Иконки в шапке/поиске (clickable) — тоже не красим, только hover */
+[class*="clickable_"] {
+    background-color: transparent !important;
+}
+
+[class*="clickable_"]:hover {
+    background-color: rgba(255, 26, 58, 0.1) !important;
+}
+
+/* === Premium-nameplate override === */
+/* Discord ставит inline --custom-nameplate на основе купленного nameplate.
+   У тебя стоит #90000733 (красный). Это даёт красные плэйты вокруг кнопок.
+   Подавляем — белый минимальный alpha. */
+[style*="--custom-nameplate"] {
+    --custom-nameplate: rgba(255, 255, 255, 0.04) !important;
+    --custom-nameplate-neutral: rgba(255, 255, 255, 0.04) !important;
+    --custom-nameplate-neutral-hovered: rgba(255, 26, 58, 0.12) !important;
+}
+
+button[data-mana-component="button"][class*="primary_"]:not([class*="secondary_"]):hover,
+button[class*="colorBrand"]:hover,
+[class*="button_"][class*="primary_"]:not([class*="secondary_"]):hover {
+    background: linear-gradient(135deg, var(--x4-red), var(--x4-red-bright)) !important;
+    background-color: var(--x4-red-bright) !important;
+    box-shadow: 0 0 24px var(--x4-red-glow) !important;
+}
+
+/* Secondary кнопки (тёмные типа "Изменить", "Найти беседу") */
+button[data-mana-component="button"][class*="secondary_"],
+button[class*="lookFilled_"][class*="colorPrimary"],
+button[class*="lookFilled_"][class*="colorSecondary"],
+button[class*="colorPrimary_"]:not([class*="colorBrand"]),
+button[class*="colorSecondary_"],
+[class*="button_"][class*="secondary_"] {
+    background: rgba(255, 255, 255, 0.06) !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid var(--x4-border-soft) !important;
+    color: var(--x4-text) !important;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease !important;
+}
+
+button[data-mana-component="button"][class*="secondary_"]:hover,
+button[class*="lookFilled_"][class*="colorPrimary"]:hover,
+button[class*="lookFilled_"][class*="colorSecondary"]:hover,
+button[class*="colorPrimary_"]:not([class*="colorBrand"]):hover,
+button[class*="colorSecondary_"]:hover,
+[class*="button_"][class*="secondary_"]:hover {
+    background: rgba(255, 26, 58, 0.18) !important;
+    background-color: rgba(255, 26, 58, 0.18) !important;
+    border-color: var(--x4-red) !important;
+    color: var(--x4-text-bright) !important;
+    box-shadow: 0 0 12px rgba(255, 26, 58, 0.3) !important;
+}
+
+/* Универсальный inline blurple-фон (rgb 88,101,242) — на ЛЮБОМ button */
+button[style*="rgb(88, 101, 242)"],
+button[style*="background: rgb(88, 101, 242)"],
+button[style*="background-color: rgb(88, 101, 242)"] {
+    background: var(--x4-red) !important;
+    background-color: var(--x4-red) !important;
+    box-shadow: 0 0 12px var(--x4-red-glow) !important;
+}
+
+/* Кнопки-ссылки (text-only) */
+button[class*="lookLink_"],
+button[class*="colorLink_"] {
+    color: var(--x4-red-bright) !important;
+}
+
+button[class*="lookLink_"]:hover,
+button[class*="colorLink_"]:hover {
+    color: var(--x4-red) !important;
+    text-shadow: 0 0 6px var(--x4-red-glow);
+}
+
+/* ============================================================
+   SETTINGS — полупрозрачные панели с blur
+   ============================================================ */
+
+[class*="standardSidebarView_"] [class*="sidebar_"],
+[class*="standardSidebarView-"] [class*="sidebar-"] {
+    background: rgba(6, 6, 10, 0.5) !important;
+    border-right: 1px solid var(--x4-border-soft) !important;
+}
+
+[class*="standardSidebarView_"] [class*="contentRegion_"],
+[class*="standardSidebarView-"] [class*="contentRegion-"],
+[class*="contentColumn_"] {
+    background: rgba(10, 10, 15, 0.4) !important;
+}
+
+/* ============================================================
+   SCROLLBARS
+   ============================================================ */
+
+::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 26, 58, 0.35) !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: 0 0 6px rgba(255, 26, 58, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--x4-red) !important;
+    box-shadow: 0 0 10px var(--x4-red-glow);
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* ============================================================
+   QUICK SWITCHER (Ctrl+K)
+   ============================================================ */
+
+[class*="quickswitcher_"] {
+    background: rgba(10, 10, 15, 0.98) !important;
+    border: 1px solid var(--x4-red) !important;
+    box-shadow: 0 0 40px var(--x4-red-glow) !important;
+}
+
+[class*="quickswitcher_"] input {
+    font-family: var(--x4-font-display) !important;
+    color: var(--x4-text-bright) !important;
+}
+
+/* ============================================================
+   LINKS
+   ============================================================ */
+
+a,
+[class*="anchor_"] {
+    color: var(--x4-red-bright) !important;
+    transition: text-shadow 0.15s ease;
+}
+
+a:hover,
+[class*="anchor_"]:hover {
+    color: var(--x4-red-bright) !important;
+    text-shadow: 0 0 8px var(--x4-red-glow);
+}
+
+/* ============================================================
+   USER AREA (внизу слева — твой ник + статус)
+   ============================================================ */
+
+[class*="panels_"],
+section[class*="panels-"] {
+    background: rgba(6, 6, 10, 0.92) !important;
+    border-top: 1px solid var(--x4-border) !important;
+    box-shadow: 0 -1px 12px rgba(255, 26, 58, 0.1);
+}
+
+/* ============================================================
+   VOICE / CALL
+   ============================================================ */
+
+[class*="rtcConnectionStatus_"] {
+    color: var(--x4-red-bright) !important;
+    font-family: var(--x4-font-display) !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+[class*="voiceUser_"]:hover {
+    background: var(--x4-red-soft) !important;
+}
+
+[class*="speaking_"] {
+    border-color: var(--x4-red) !important;
+    box-shadow: 0 0 14px var(--x4-red-glow) !important;
+}
+
+/* ============================================================
+   NOTIFICATIONS / BADGES
+   ============================================================ */
+
+[class*="numberBadge_"],
+[class*="textBadge_"],
+[class*="iconBadge_"] {
+    background: var(--x4-red) !important;
+    box-shadow: 0 0 10px var(--x4-red-glow), 0 0 4px var(--x4-red-bright);
+    color: #fff !important;
+    font-weight: 700;
+    border: none !important;
+}
+
+/* ============================================================
+   FORMS — input/textarea
+   ============================================================ */
+
+input[class*="input_"],
+[class*="inputDefault_"],
+textarea[class*="input_"] {
+    background: rgba(6, 6, 10, 0.7) !important;
+    border: 1px solid var(--x4-border-soft) !important;
+    color: var(--x4-text) !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[class*="input_"]:focus,
+[class*="inputDefault_"]:focus-within,
+textarea[class*="input_"]:focus {
+    border-color: var(--x4-red) !important;
+    box-shadow: 0 0 0 1px var(--x4-red), 0 0 14px var(--x4-red-glow) !important;
+    outline: none !important;
+}
+
+/* ============================================================
+   ANIMATIONS — pulse для уведомлений
+   ============================================================ */
+
+/* Pulse через opacity, не box-shadow. box-shadow не композитится GPU —
+   каждый кадр анимации = repaint бейджа, дорого если бейджей много. */
+@keyframes x4-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.55; }
+}
+
+[class*="numberBadge_"]:not(:empty),
+[class*="lowerBadge_"][class*="numberBadge_"] {
+    animation: x4-pulse 2.4s ease-in-out infinite;
+    will-change: opacity;
+}
+
+/* ============================================================
+   FOCUS RING — везде красный, не сине-фиолетовый
+   ============================================================ */
+
+*:focus-visible {
+    outline-color: var(--x4-red) !important;
+}
+
+/* ============================================================
+   TOGGLE SWITCHES — Discord Mana switch
+   Точная структура: <input type="checkbox"> + <div class="switchIndicator_HASH">
+   Inline color: rgb(88, 101, 242) blurple — НЕ зелёный
+   ============================================================ */
+
+/* OFF state (по умолчанию) — все switchIndicator'ы тёмные */
+[class*="switchIndicator_"],
+[data-mana-component="switch"] {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: var(--x4-border-soft) !important;
+    box-shadow: none !important;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+/* ON state — соседний input:checked → красим красным */
+input[type="checkbox"]:checked + [class*="switchIndicator_"],
+input[type="checkbox"]:checked + [data-mana-component="switch"],
+input[type="checkbox"]:checked ~ [class*="switchIndicator_"],
+input[type="checkbox"]:checked ~ [data-mana-component="switch"] {
+    background-color: var(--x4-red) !important;
+    background: var(--x4-red) !important;
+    border-color: var(--x4-red-bright) !important;
+    box-shadow: 0 0 12px var(--x4-red-glow), inset 0 0 6px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Кружок-thumb внутри */
+[class*="thumb_"] rect,
+[class*="thumb-"] rect {
+    fill: #fff !important;
+}
+
+/* Discord blurple inline-style. Раньше был `*[style*=...]` — браузер сканил
+   inline-style на КАЖДОМ элементе DOM (десятки тысяч в Discord) при любой
+   мутации. Сужено до тегов где Discord реально кладёт rgb(88,101,242) inline. */
+button[style*="rgb(88, 101, 242)"],
+button[style*="rgb(88,101,242)"],
+div[style*="rgb(88, 101, 242)"],
+div[style*="rgb(88,101,242)"],
+span[style*="rgb(88, 101, 242)"],
+span[style*="rgb(88,101,242)"] {
+    background-color: var(--x4-red) !important;
+    background: var(--x4-red) !important;
+    border-color: var(--x4-red-bright) !important;
+    box-shadow: 0 0 10px var(--x4-red-glow) !important;
+}
+
+/* Hover-вариант blurple */
+button[style*="rgb(71, 82, 196)"],
+button[style*="rgb(71,82,196)"],
+div[style*="rgb(71, 82, 196)"],
+div[style*="rgb(71,82,196)"] {
+    background-color: var(--x4-red-bright) !important;
+    background: var(--x4-red-bright) !important;
+}
+
+/* Семантика: [role="switch"] (на старых формах Discord) */
+[role="switch"][aria-checked="true"] {
+    background-color: var(--x4-red) !important;
+    background: var(--x4-red) !important;
+    border-color: var(--x4-red-bright) !important;
+    box-shadow: 0 0 12px var(--x4-red-glow) !important;
+}
+
+[role="switch"][aria-checked="false"] {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Старый класс checked_ (на случай legacy-компонентов) */
+[class*="container_"][class*="checked_"],
+[class*="checked_"][class*="container_"],
+[class*="container-"][class*="checked-"] {
+    background-color: var(--x4-red) !important;
+    background: var(--x4-red) !important;
+    border-color: var(--x4-red-bright) !important;
+    box-shadow: 0 0 12px var(--x4-red-glow) !important;
+}
+
+/* Toggle-кнопки с aria-pressed (List/Grid view в BD-themes, фильтры) */
+[role="button"][aria-pressed="true"],
+button[aria-pressed="true"],
+[class*="selected_"][role="button"],
+[class*="bd-button"][class*="selected"],
+.bd-button.selected {
+    background: var(--x4-red) !important;
+    background-color: var(--x4-red) !important;
+    color: #fff !important;
+    box-shadow: 0 0 8px var(--x4-red-glow) !important;
+}
+
+[role="button"][aria-pressed="true"]:hover,
+button[aria-pressed="true"]:hover {
+    background: var(--x4-red-bright) !important;
+    background-color: var(--x4-red-bright) !important;
+}
+
+/* BD-собственные switch'и (в Settings → BetterDiscord) */
+.bd-switch,
+.bd-switch-body,
+[class*="bdSwitch"] {
+    width: 42px !important;
+    height: 24px !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid var(--x4-border-soft) !important;
+    position: relative !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.bd-switch.bd-switch-checked,
+.bd-switch[aria-checked="true"],
+[class*="bdSwitch"][class*="checked"],
+.bd-switch input:checked ~ .bd-switch-body {
+    background: var(--x4-red) !important;
+    border-color: var(--x4-red-bright) !important;
+    box-shadow: 0 0 12px var(--x4-red-glow) !important;
+}
+
+/* Конверсия BD-checkbox'ов в pill-toggle: native input -> pill */
+input.bd-checkbox,
+input[type="checkbox"][class*="bd-"],
+input[type="checkbox"][class*="bdCheckbox"] {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    width: 42px !important;
+    height: 24px !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid var(--x4-border-soft) !important;
+    position: relative !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+    margin: 0 !important;
+}
+
+input.bd-checkbox:checked,
+input[type="checkbox"][class*="bd-"]:checked,
+input[type="checkbox"][class*="bdCheckbox"]:checked {
+    background: var(--x4-red) !important;
+    border-color: var(--x4-red-bright) !important;
+    box-shadow: 0 0 12px var(--x4-red-glow) !important;
+}
+
+/* Кружок-thumb через ::after на input */
+input.bd-checkbox::after,
+input[type="checkbox"][class*="bd-"]::after,
+input[type="checkbox"][class*="bdCheckbox"]::after {
+    content: "" !important;
+    position: absolute !important;
+    width: 18px !important;
+    height: 18px !important;
+    border-radius: 50% !important;
+    background: #fff !important;
+    top: 50% !important;
+    left: 2px !important;
+    transform: translateY(-50%) !important;
+    transition: left 0.2s ease !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+input.bd-checkbox:checked::after,
+input[type="checkbox"][class*="bd-"]:checked::after,
+input[type="checkbox"][class*="bdCheckbox"]:checked::after {
+    left: 20px !important;
+}
+
+/* ============================================================
+   SETTINGS TABS — выделенный таб ("Безопасность", "Контент"...)
+   Чистый вариант: только тонкое красное подчёркивание + text-glow,
+   без ярких боксов на фоне. Отдельно убиваем дефолтный синий indicator.
+   ============================================================ */
+
+/* Горизонтальные табы (Discord-стиль "вкладки сверху") */
+[role="tab"][aria-selected="true"] {
+    background: transparent !important;
+    color: var(--x4-red-bright) !important;
+    box-shadow: inset 0 -2px 0 var(--x4-red) !important;
+    text-shadow: 0 0 8px var(--x4-red-glow);
+}
+
+[role="tab"]:not([aria-selected="true"]) {
+    color: var(--x4-text-muted) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+[role="tab"]:not([aria-selected="true"]):hover {
+    color: var(--x4-text-bright) !important;
+    background: rgba(255, 26, 58, 0.06) !important;
+}
+
+/* Индикатор активного таба — ТОЛЬКО indicator/dot элементы внутри.
+   topPill_/bottomPill_ — это сам бар, его НЕ красим! */
+[role="tab"] [class*="indicator_"],
+[class*="tabBar_"] [class*="indicator_"],
+[class*="tabBar__133bf"] [class*="indicator_"] {
+    background: var(--x4-red) !important;
+    background-color: var(--x4-red) !important;
+    box-shadow: 0 0 8px var(--x4-red-glow) !important;
+}
+
+/* Сам таб-бар — прозрачный, не подсвечиваем */
+[role="tablist"],
+[class*="tabBar_"],
+[class*="topPill_"],
+[class*="bottomPill_"],
+[class*="underlinedBar_"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    border-bottom-color: var(--x4-border-soft) !important;
+}
+
+/* Кнопка "Добавить в друзья" — не сплошной красный, тонкий outline */
+[class*="addFriend_"],
+[class*="addFriend__133bf"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--x4-red-bright) !important;
+    border: 1px solid var(--x4-red) !important;
+    box-shadow: 0 0 0 1px transparent !important;
+    border-radius: 4px;
+}
+
+[class*="addFriend_"]:hover {
+    background: var(--x4-red-soft) !important;
+    background-color: var(--x4-red-soft) !important;
+    box-shadow: 0 0 8px var(--x4-red-glow) !important;
+}
+
+/* Вертикальный sidebar в Settings ("Моя учётная запись" → разделы слева) */
+[class*="side_"] [class*="item_"][class*="selected_"],
+[class*="standardSidebarView"] [class*="item_"][class*="selected_"] {
+    background: rgba(255, 26, 58, 0.12) !important;
+    color: var(--x4-text-bright) !important;
+    box-shadow: inset 3px 0 0 var(--x4-red) !important;
+    text-shadow: 0 0 6px var(--x4-red-glow);
+}
+
+[class*="side_"] [class*="item_"]:not([class*="selected_"]):hover,
+[class*="standardSidebarView"] [class*="item_"]:not([class*="selected_"]):hover {
+    background: rgba(255, 26, 58, 0.06) !important;
+    color: var(--x4-text-bright) !important;
+}
+
+/* Слайдер-кружок внутри */
+[role="switch"] [class*="slider_"],
+[role="switch"] [class*="slider-"],
+[role="switch"] svg circle {
+    fill: #fff !important;
+}
+
+/* SVG-иконка внутри слайдера (✓ когда ON) */
+[role="switch"][aria-checked="true"] svg path:not([fill="none"]) {
+    fill: var(--x4-red) !important;
+    color: var(--x4-red) !important;
+}
+
+/* Чекбоксы (квадратные) — тоже красные */
+[class*="checkbox_"][class*="checked_"],
+[class*="checkbox-"][class*="checked-"],
+[role="checkbox"][aria-checked="true"] {
+    background-color: var(--x4-red) !important;
+    border-color: var(--x4-red-bright) !important;
+}
+
+/* Native-контролы: accent-color */
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--x4-red) !important;
+}
+
+/* Слайдеры громкости / прочие range */
+[class*="grabber_"],
+[class*="grabber-"] {
+    background-color: var(--x4-red) !important;
+    border-color: var(--x4-red-bright) !important;
+    box-shadow: 0 0 10px var(--x4-red-glow) !important;
+}
+
+[class*="barFill_"],
+[class*="barFill-"] {
+    background-color: var(--x4-red) !important;
+}
+
+/* Радио-кнопки в стиле Discord */
+[class*="radioSelected_"],
+[class*="radioSelected-"] {
+    background-color: var(--x4-red) !important;
+    border-color: var(--x4-red-bright) !important;
+}
+
+/* ============================================================
+   TITLE BAR — брендинг "190x4" в шапке окна
+   Стратегия: сдвигаем UI на 24px вниз, наша полоса висит сверху чисто
+   Без анимаций / glitch — пер запросу
+   ============================================================ */
+
+/* Сдвигаем весь Discord на 24px вниз */
+#app-mount {
+    margin-top: 24px !important;
+    height: calc(100vh - 24px) !important;
+}
+
+/* Стилизуем нативный title bar если он есть */
+[class*="titleBar_"],
+[class*="titleBar-"],
+[class*="bar_"][class*="titleBar"] {
+    background: rgba(6, 6, 10, 0.95) !important;
+    border-bottom: 1px solid var(--x4-border) !important;
+    box-shadow: 0 1px 12px rgba(255, 26, 58, 0.12);
+}
+
+/* Наш бар сверху viewport */
+body::before {
+    content: "▰ 190x4 // NET_RUNNER_KAI ▰";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.5em !important;
+    color: #ff2d4d;
+    text-shadow:
+        0 0 6px #ff1a3a,
+        0 0 12px rgba(255, 26, 58, 0.55);
+    background: linear-gradient(
+        180deg,
+        rgba(6, 6, 10, 0.98) 0%,
+        rgba(10, 10, 15, 0.92) 100%
+    );
+    border-bottom: 1px solid rgba(255, 26, 58, 0.45);
+    box-shadow: 0 2px 14px rgba(255, 26, 58, 0.2);
+    pointer-events: none;
+    z-index: 99999;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Wordmark Discord (если был на месте брендинга) */
+[class*="wordmark_"],
+[class*="wordmark-"] {
+    display: none !important;
+}

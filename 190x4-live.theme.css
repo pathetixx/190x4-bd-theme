@@ -1,0 +1,23 @@
+/**
+ * @name 190x4 (live)
+ * @author 190x4
+ * @version 3.6.0
+ * @description Live-loader для темы 190x4 — тянет актуальный CSS прямо из GitHub. Перезапусти Discord, чтобы получить свежую версию. Для офлайна используй обычный 190x4.theme.css.
+ * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
+ * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4-live.theme.css
+ */
+
+/* ============================================================
+   190x4 — Live theme loader
+   ============================================================
+   Этот файл — тонкая обёртка. Весь CSS живёт в репо на GitHub
+   и подгружается через @import при каждом запуске Discord.
+
+   Зачем: автообновления без переустановки .theme.css.
+   Минус: при старте Discord нужен интернет (так же, как для шрифтов).
+
+   Если хочешь офлайн-вариант — поставь обычный 190x4.theme.css
+   рядом и отключи этот.
+   ============================================================ */
+
+@import url('https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css');
