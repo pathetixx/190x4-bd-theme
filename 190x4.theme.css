@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.3
+ * @version 3.6.4
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -595,12 +595,15 @@ html::after {
     box-shadow: inset 0 0 0 1px var(--x4-border-soft);
 }
 
-/* Voice-preview ancestors → transparent (восстановлено в 3.6.3, регрессия 3.6.2).
-   В 3.6.2 удалили *:has() из-за лагов — но без него родители container__5aa3a
-   остались тёмными и фон-логотип пропал в центре экрана.
-   Решение: limited :has() — НЕ universal `*`, а конкретные prefix-классы.
-   Chromium проверяет :has() только на узлах, matching prefix (1-5 на странице),
-   а не на всех 5-15 тыс. узлов DOM — стоимость в десятки раз меньше. */
+/* Voice-preview ancestors → transparent (расширено в 3.6.4, регрессия 3.6.2).
+   В 3.6.2 удалили *:has() из-за лагов; в 3.6.3 вернули limited :has() с
+   прибитыми prefix-классами (chatLayoutContent/callConnection/...), но они
+   не совпали с реальным wrapper'ом в текущем Discord — фон остался чёрным.
+   3.6.4: расширяем prefix-кандидатов до практически любого структурного
+   класса, который может оказаться родителем (content/wrapper/main/page/
+   panel/region/layout/empty/noChat). Это всё ещё limited :has() — не
+   universal `*`, Chromium проверяет :has() только на узлах с этими
+   prefix-классами (несколько десятков на странице, не 15 тыс.). */
 [class*="chatLayoutContent"]:has([class*="container__5aa3a"]),
 [class*="callContainerInner"]:has([class*="container__5aa3a"]),
 [class*="callConnection"]:has([class*="container__5aa3a"]),
@@ -608,9 +611,35 @@ html::after {
 [class*="emptyChannelContent"]:has([class*="container__5aa3a"]),
 [class*="voiceChannel_"]:has([class*="container__5aa3a"]),
 [class*="voiceChat_"]:has([class*="container__5aa3a"]),
+[class*="content_"]:has([class*="container__5aa3a"]),
+[class*="content__"]:has([class*="container__5aa3a"]),
+[class*="wrapper_"]:has([class*="container__5aa3a"]),
+[class*="wrapper__"]:has([class*="container__5aa3a"]),
+[class*="main_"]:has([class*="container__5aa3a"]),
+[class*="main__"]:has([class*="container__5aa3a"]),
+[class*="page_"]:has([class*="container__5aa3a"]),
+[class*="page__"]:has([class*="container__5aa3a"]),
+[class*="panel_"]:has([class*="container__5aa3a"]),
+[class*="panel__"]:has([class*="container__5aa3a"]),
+[class*="region"]:has([class*="container__5aa3a"]),
+[class*="layout"]:has([class*="container__5aa3a"]),
+[class*="empty_"]:has([class*="container__5aa3a"]),
+[class*="empty__"]:has([class*="container__5aa3a"]),
+[class*="noChat"]:has([class*="container__5aa3a"]),
+[class*="container_"]:has([class*="container__5aa3a"]):not([class*="container__5aa3a"]),
+section[class*="chat"]:has([class*="container__5aa3a"]),
 section[class*="chat"] > div:has([class*="container__5aa3a"]),
 section[class*="chat"] > div > div:has([class*="container__5aa3a"]),
-section[class*="chat"] > div > div > div:has([class*="container__5aa3a"]) {
+section[class*="chat"] > div > div > div:has([class*="container__5aa3a"]),
+main:has([class*="container__5aa3a"]),
+main > div:has([class*="container__5aa3a"]) {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* Брат container__5aa3a: содержит "Участники без видео скрыты" */
+[class*="content__5aa3a"] {
     background: transparent !important;
     background-color: transparent !important;
     background-image: none !important;
