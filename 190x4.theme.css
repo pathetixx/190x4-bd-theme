@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.2
+ * @version 3.6.3
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -595,11 +595,26 @@ html::after {
     box-shadow: inset 0 0 0 1px var(--x4-border-soft);
 }
 
-/* :has() удалён в 3.6.2: универсальный * + :has() = O(N всего DOM) на каждую
-   DOM-мутацию, что в Discord-чате (typing/scroll/messages) даёт сотни мс
-   recalc-style в минуту. Защита, которую он обеспечивал, уже покрыта узкими
-   селекторами выше: блок [class*="chatLayoutContent"]/[class*="callContainerInner"]/...
-   обнуляет фон конкретных voice/chat-родителей по их класс-хешам Discord. */
+/* Voice-preview ancestors → transparent (восстановлено в 3.6.3, регрессия 3.6.2).
+   В 3.6.2 удалили *:has() из-за лагов — но без него родители container__5aa3a
+   остались тёмными и фон-логотип пропал в центре экрана.
+   Решение: limited :has() — НЕ universal `*`, а конкретные prefix-классы.
+   Chromium проверяет :has() только на узлах, matching prefix (1-5 на странице),
+   а не на всех 5-15 тыс. узлов DOM — стоимость в десятки раз меньше. */
+[class*="chatLayoutContent"]:has([class*="container__5aa3a"]),
+[class*="callContainerInner"]:has([class*="container__5aa3a"]),
+[class*="callConnection"]:has([class*="container__5aa3a"]),
+[class*="connectionArea"]:has([class*="container__5aa3a"]),
+[class*="emptyChannelContent"]:has([class*="container__5aa3a"]),
+[class*="voiceChannel_"]:has([class*="container__5aa3a"]),
+[class*="voiceChat_"]:has([class*="container__5aa3a"]),
+section[class*="chat"] > div:has([class*="container__5aa3a"]),
+section[class*="chat"] > div > div:has([class*="container__5aa3a"]),
+section[class*="chat"] > div > div > div:has([class*="container__5aa3a"]) {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
 
 /* Удалено в 3.6.2:
    section[class*="chat"] [class*="container_"]:not(message):not(form_)
@@ -797,6 +812,20 @@ pre code {
 
 [class*="banner_"] {
     background-color: var(--x4-bg-active) !important;
+}
+
+/* RTC debug popout (#rtc_debug_panel-tab) — opaque фон под графиком пинга,
+   чтобы цифры/график read'ились поверх фон-логотипа без прозрачного шума.
+   Добавлено в 3.6.3 по просьбе. Хеш popout-классов __56e31 — стабилен
+   у Discord, дополнительно ловим по id и по любому wrapper'у с graphContainer. */
+#rtc_debug_panel-tab,
+#rtc_debug_panel-tab > div,
+#rtc_debug_panel-tab > div > div,
+[class*="popoutText__56e31"],
+[class*="graphContainer__56e31"],
+[class*="popoutBottom__56e31"],
+[class*="separator__56e31"] {
+    background-color: rgba(6, 6, 10, 0.97) !important;
 }
 
 /* Tooltips */
