@@ -16,8 +16,16 @@
    Зачем: автообновления без переустановки .theme.css.
    Минус: при старте Discord нужен интернет (так же, как для шрифтов).
 
+   ВАЖНО: используем jsDelivr (cdn.jsdelivr.net/gh/...), а не
+   raw.githubusercontent.com — последний отдаёт CSS как text/plain
+   с X-Content-Type-Options: nosniff, и браузер (Electron в Discord)
+   отказывается применять такой @import. jsDelivr отдаёт text/css.
+
+   jsDelivr кэширует ветки ~7 минут — после push'а в main свежая
+   версия раскатывается до клиентов в течение этого окна.
+
    Если хочешь офлайн-вариант — поставь обычный 190x4.theme.css
    рядом и отключи этот.
    ============================================================ */
 
-@import url('https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css');
+@import url('https://cdn.jsdelivr.net/gh/pathetixx/190x4@main/betterdiscord/190x4-theme/190x4.theme.css');
