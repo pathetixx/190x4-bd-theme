@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.6
+ * @version 3.6.7
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -375,27 +375,18 @@ video + canvas {
     background-image: none !important;
 }
 
-/* hex-grid + scanlines overlay. mix-blend-mode убран — каждый repaint композитил
-   фуллскрин-слой через blend, дорого. Компенсация через alpha в rgba. */
+/* Красная виньетка сверху (без scanlines — убраны в 3.6.7, мешали поверх видео). */
 html::after {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 9999;
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(255, 255, 255, 0.025) 0px,
-            rgba(255, 255, 255, 0.025) 1px,
-            transparent 1px,
-            transparent 3px
-        ),
-        radial-gradient(
-            ellipse at top,
-            transparent 60%,
-            rgba(255, 26, 58, 0.04) 100%
-        );
+    background: radial-gradient(
+        ellipse at top,
+        transparent 60%,
+        rgba(255, 26, 58, 0.04) 100%
+    );
 }
 
 /* ============================================================
