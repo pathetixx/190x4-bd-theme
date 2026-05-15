@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.14
+ * @version 3.6.15
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -1482,9 +1482,13 @@ input[type="radio"] {
     box-shadow: 0 0 10px var(--x4-red-glow) !important;
 }
 
+/* 3.6.15: barFill убран вообще — на soundboard volume он выглядел как
+   тупая красная заливка под knob'ом. На всех слайдерах теперь только
+   knob + дефолтный track Discord'а. */
 [class*="barFill_"],
 [class*="barFill-"] {
-    background-color: var(--x4-red-deep) !important;
+    background-color: transparent !important;
+    background: transparent !important;
 }
 
 /* Радио-кнопки в стиле Discord */
@@ -1688,6 +1692,18 @@ body::before {
     border-bottom-left-radius: 8px !important;
     box-shadow: 0 0 8px var(--x4-red-glow) !important;
     outline: none !important;
+}
+
+/* 3.6.15: `hasLeading__0f084` модификатор у Discord обнулял right-corners
+   правилом со specificity (0,2,0), и мой `[class*=...]` (0,1,0) проигрывал.
+   Поднимаем до (0,3,0) через тройной class-match. */
+.wrapper__72c38.container__0f084.hasLeading__0f084,
+.wrapper__72c38.container__0f084 {
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    overflow: hidden !important;
 }
 
 /* Сам input — фон/обводку убираем, чтобы не было двойного ring'а. */

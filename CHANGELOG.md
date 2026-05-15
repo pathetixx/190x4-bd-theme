@@ -2,6 +2,12 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.6.15] — 2026-05-15
+
+### Fixed
+- Search wrapper right corners: добавлено правило `.wrapper__72c38.container__0f084` (specificity 0,3,0) — раньше Discord'овский `.hasLeading__0f084` обнулял right-radii и побеждал по специфичности.
+- Slider `barFill_`: `background: transparent` — убрана сплошная красная заливка под knob'ом (на всех слайдерах: soundboard volume, mic, speaker и проч.). Knob и track остаются.
+
 ## [3.6.14] — 2026-05-15
 
 ### Fixed
