@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.17
+ * @version 3.6.18
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -698,15 +698,12 @@ section[class*="title-"] {
 }
 
 /* Mentions */
+/* 3.6.18: mention (в т.ч. reply тебе) — БЕЗ заливки-блока.
+   Только тонкая красная полоса слева как метка пинга. */
 [class*="mentioned_"] [class*="message_"],
 [class*="mentioned-"] [class*="message-"] {
-    background: linear-gradient(
-        90deg,
-        rgba(255, 26, 58, 0.16) 0%,
-        rgba(255, 26, 58, 0.02) 60%,
-        transparent 100%
-    ) !important;
-    box-shadow: inset 3px 0 0 var(--x4-red), 0 0 20px rgba(255, 26, 58, 0.08) !important;
+    background: transparent !important;
+    box-shadow: inset 2px 0 0 var(--x4-red) !important;
 }
 
 /* Mention-pill в тексте */
@@ -905,8 +902,11 @@ pre code {
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 26, 58, 0.1) !important;
 }
 
-[class*="menu_"][role="menu"] [class*="item_"]:hover,
-[class*="menu_"][role="menu"] [class*="focused_"] {
+/* :not(hideInteraction_) — пункты со слайдером/без интеракции
+   (напр. «Громкость звуковой панели») Discord сам помечает
+   hideInteraction_, их НЕ заливаем красным. */
+[class*="menu_"][role="menu"] [class*="item_"]:not([class*="hideInteraction_"]):hover,
+[class*="menu_"][role="menu"] [class*="focused_"]:not([class*="hideInteraction_"]) {
     background: var(--x4-red) !important;
     color: #fff !important;
     box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3);
@@ -1573,6 +1573,15 @@ body::before {
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
+}
+
+/* 3.6.18: repliedTextContent_ наследует messageContent_ gutter
+   (margin-left:-80px; padding-left:80px) от основного сообщения —
+   внутри узкого reply-preview сдвигает текст на 80px, он наезжает
+   на ник/аватар. DOM-дамп 2026-05-15 подтвердил. Обнуляем gutter. */
+[class*="repliedTextContent_"] {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
 }
 
 /* 3.6.17: НЕ трогаем кастомный display-name плагина (container_dfb989 /
