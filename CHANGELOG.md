@@ -2,6 +2,15 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.6.13] — 2026-05-15
+
+### Fixed
+- Search bar `wrapper__72c38` / `container__0f084`: явный `border-radius: 8px` в default и focus-within (правый угол был острый).
+- Radio outer-ring: структурный селектор `svg circle:not([class*="innerDot"])` внутри `[role="radio"][aria-checked="true"]` / `:checked` ancestor'ов — раньше класс `outerCircleRadio_*` не всегда был на DOM, теперь ловим любую SVG-окружность кроме innerDot.
+
+### Added
+- Soundboard panel: неоновая красная обводка как у voice info popup'а. Ловим через `[class*="popout_"]:has(input[placeholder*="звук"])` и аналоги — border `var(--x4-red)`, тройной box-shadow с red-glow.
+
 ## [3.6.12] — 2026-05-15
 
 ### Fixed

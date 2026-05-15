@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.12
+ * @version 3.6.13
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -1668,6 +1668,7 @@ body::before {
 [class*="container__0f084"] {
     background: rgba(6, 6, 10, 0.7) !important;
     border: 1px solid var(--x4-border-soft) !important;
+    border-radius: 8px !important;
     box-shadow: none !important;
     outline: none !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
@@ -1676,6 +1677,7 @@ body::before {
 [class*="wrapper__72c38"]:focus-within,
 [class*="container__0f084"]:focus-within {
     border-color: var(--x4-red) !important;
+    border-radius: 8px !important;
     box-shadow: 0 0 8px var(--x4-red-glow) !important;
     outline: none !important;
 }
@@ -1695,16 +1697,25 @@ input[class*="input__0f084"] {
     fill: var(--x4-red-bright) !important;
 }
 
-/* Soundboard panel — красный border в стиле темы. */
-[class*="soundboard"][class*="popout_"],
+/* Soundboard panel — неоновая красная обводка как у voice info popup'а.
+   Ловим через :has(input[placeholder="Найдите идеальный звук"]) — поймает
+   как popout_, так и любой outer wrapper. */
+[class*="popout_"]:has(input[placeholder*="звук"]),
+[class*="popout_"]:has(input[placeholder*="sound"]),
+[class*="popover_"]:has(input[placeholder*="звук"]),
+[class*="popover_"]:has(input[placeholder*="sound"]),
 [class*="soundboardPopout"],
-[class*="popover_"]:has([data-mana-component="text-input"][placeholder*="звук"]),
-[class*="popover_"]:has([data-mana-component="text-input"][placeholder*="sound"]) {
-    border: 1px solid var(--x4-border) !important;
+[class*="soundboardWrapper"],
+[class*="soundboardContainer"],
+[class*="soundboard"][class*="popout"] {
+    background: rgba(10, 10, 15, 0.97) !important;
+    border: 1px solid var(--x4-red) !important;
+    border-radius: 8px !important;
     box-shadow:
-        0 0 0 1px rgba(255, 26, 58, 0.15),
-        0 8px 32px rgba(0, 0, 0, 0.6),
-        0 0 24px rgba(255, 26, 58, 0.15) !important;
+        0 0 0 1px var(--x4-red-soft),
+        0 0 24px rgba(255, 26, 58, 0.4),
+        0 0 60px rgba(255, 26, 58, 0.18),
+        0 8px 32px rgba(0, 0, 0, 0.7) !important;
 }
 
 [class*="soundButton"]:hover,
@@ -1727,19 +1738,23 @@ label:has(input[type="radio"]:checked) [class*="innerDotRadio"],
     fill: var(--x4-red) !important;
 }
 
-/* Outer-ring у выбранного radio — должен совпадать с inner-dot'ом,
-   иначе остаётся blurple обводка вокруг красной точки.
-   Список ancestor'ов = ровно как у innerDotRadio. Красим и stroke и fill,
-   чтобы получался solid-red disk (как у тебя в reference-скрине). */
+/* Outer-ring у выбранного radio.
+   Discord может использовать не только класс outerCircleRadio_*, но и
+   обычный <circle> без класса. Ловим структурно: любой SVG circle/path
+   внутри selected radio КРОМЕ innerDotRadio. */
+[role="radio"][aria-checked="true"] svg circle:not([class*="innerDot"]),
+[aria-checked="true"] svg circle:not([class*="innerDot"]),
+input[type="radio"]:checked ~ * svg circle:not([class*="innerDot"]),
+input[type="radio"]:checked + * svg circle:not([class*="innerDot"]),
+label:has(input[type="radio"]:checked) svg circle:not([class*="innerDot"]),
+[class*="radioOption_"][class*="checked"] svg circle:not([class*="innerDot"]),
+[class*="radioOption_"][class*="selected"] svg circle:not([class*="innerDot"]),
+[class*="radioItem_"][class*="checked"] svg circle:not([class*="innerDot"]),
+[class*="radioItem_"][class*="selected"] svg circle:not([class*="innerDot"]),
 [role="radio"][aria-checked="true"] [class*="outerCircleRadio"],
 [aria-checked="true"] [class*="outerCircleRadio"],
 input[type="radio"]:checked ~ * [class*="outerCircleRadio"],
-input[type="radio"]:checked + * [class*="outerCircleRadio"],
-label:has(input[type="radio"]:checked) [class*="outerCircleRadio"],
-[class*="radioOption_"][class*="checked"] [class*="outerCircleRadio"],
-[class*="radioOption_"][class*="selected"] [class*="outerCircleRadio"],
-[class*="radioItem_"][class*="checked"] [class*="outerCircleRadio"],
-[class*="radioItem_"][class*="selected"] [class*="outerCircleRadio"] {
+label:has(input[type="radio"]:checked) [class*="outerCircleRadio"] {
     stroke: var(--x4-red) !important;
     fill: var(--x4-red) !important;
 }
