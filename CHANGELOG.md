@@ -2,6 +2,15 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.6.10] — 2026-05-15
+
+### Fixed
+- `popover_*` теперь точно opaque: было побиение специфичности линией `#app-mount [class*="container__"]:not(...)` (1,3,0) → поднят до того же уровня через `#app-mount` префикс.
+- Radio в Settings: `[class*="innerDotRadio"]` ограничен через `[role="radio"][aria-checked="true"]` parent — раньше красил дот ВСЕМ радио, включая невыбранные.
+- `+` (Add Server) / compass (Discover): селекторы `circleIconButton_` / `circleIcon_` возвращены — выпали при правке 3.6.9.
+- DM home («Личные сообщения»): красим `[class*="wrapper_"]` внутри `:first-child` listItem + `:has(a[href="/channels/@me"])` listItem'а; раньше aria-label не хватало.
+- Soundboard search: убрана двойная обводка — на родительских обёртках с `*:has(> input[data-mana-component="text-input"])` глушится `box-shadow`/`outline`.
+
 ## [3.6.9] — 2026-05-15
 
 ### Fixed
