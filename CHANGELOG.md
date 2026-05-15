@@ -2,16 +2,18 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
-## [3.6.8] — 2026-05-15 — 6 точечных фиксов по UI
+## [3.6.8] — 2026-05-15
 
 ### Fixed
-- **Reply preview в чужом сообщении (DM)** уезжал из flex'а — добавлен жёсткий `display:flex / nowrap / min-width:0 / overflow:ellipsis` на `repliedMessage_*` и его текст-контент.
-- **Voice info popout: чёрный фон вылезал за скруглённые края** — `[class*="layerContainer_"] [class*="layer_"]` теперь прозрачный целиком, не только для `modal`.
-- **Server rail кнопки**: home (DMs), `+` (Add Server) и compass (Discover) больше не получают дефолтный blurple на hover — покрыты `homeIcon_` / `circleIconButton_` / `circleIcon_` с красным фоном и квадратно→скруглённой анимацией.
-- **Soundboard search bar**: синяя/розовая дефолтная обводка → красная рамка с focus-glow, через явный `searchBar_` / `searchBarComponent_` / `searchBarHeader_`.
-- **Radio в Settings → Конфиденциальность** (и других местах) был синим — теперь покрыт через `[role="radio"][aria-checked="true"]` + SVG `[fill]` / `[stroke]` + inner `[class*="dot_"]` + инлайновый blurple-hex (`#5865F2`).
-- **Account Settings**: кнопка "Показать" под email и дефолтные серые разделители между секциями — `lookLink_` / `revealButton_` / `anchor_` теперь красные, `divider_` / `dividerDefault_` / row-bottom-border перекрашены в `--x4-border-soft`.
-- Добавлены `!important` на `--background-modifier-accent/hover/active/selected` во второй override-блок (раньше теряли priority под `.theme-dark`).
+- Reply preview в чужом сообщении (DM) уезжал из flex'а — `repliedMessage_*` теперь `display:flex / nowrap / min-width:0`, цитата с `text-overflow:ellipsis`.
+- Voice info popout: чёрный фон вылезал за скруглённые края — `[class*="layerContainer_"] [class*="layer_"]` прозрачный целиком, не только для `modal`.
+- Server rail: `homeIcon_` (DMs), `circleIconButton_` / `circleIcon_` (`+` / compass) красный hover/selected, квадратно→скруглённая анимация.
+- Soundboard search bar (`searchBar_` / `searchBarComponent_` / `searchBarHeader_`): красная рамка + glow на focus.
+- Radio в Settings: `[role="radio"][aria-checked="true"]` + SVG `[fill]` / `[stroke]` + inner `[class*="dot_"]` + инлайновый `#5865F2`.
+- Account Settings: `lookLink_` / `revealButton_` / `anchor_` красные; `divider_` / `dividerDefault_` / row-bottom-border в `--x4-border-soft`.
+
+### Changed
+- `--background-modifier-accent/hover/active/selected` с `!important` во втором override-блоке (раньше `.theme-dark` перетирал `:root`).
 
 ## [3.6.0] — 2026-05-10 — first public release
 
