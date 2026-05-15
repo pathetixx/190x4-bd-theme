@@ -2,6 +2,17 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.6.12] — 2026-05-15
+
+### Fixed
+- Soundboard search border: точечно по реальным классам `wrapper__72c38` / `container__0f084`. Убран универсальный `*:has(input[data-mana-component="text-input"])` — он резал border у любого предка с фокус-input'ом, включая popover самого soundboard'а.
+- Soundboard panel border восстановлен (popover не теряет border на focus search).
+- Radio outer-ring у выбранной кнопки: список ancestor'ов = как у innerDot, fill + stroke красные → solid-red disk вместо двутонной (красная точка / синяя обводка).
+- DM home logo: точечно через `[class*="childWrapper__6e9f8"]:has(svg path[d^="M19.73 4.87"])` (Discord clyde path). Background gradient + SVG path fill в `#fff`.
+
+### Changed
+- В override-блок добавлены `--icon-strong`, `--icon-tertiary`, `--icon-staff-badge-foreground`, `--icon-foreground-brand` → красные. SVG-иконки с `fill="var(--icon-strong)"` (search-magnifier и т.п.) больше не блюрпурпурные.
+
 ## [3.6.11] — 2026-05-15
 
 ### Fixed
