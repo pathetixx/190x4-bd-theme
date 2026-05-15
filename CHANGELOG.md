@@ -2,6 +2,12 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.7.1] — 2026-05-15
+
+### Fixed
+- Кнопка «Скрыть профиль пользователя» (и прочие нативные icon-toggle тулбара) больше не заливается сплошным красным. Это `<div role="button" class="iconWrapper_… selected_…">` без `aria-pressed`, поэтому фикс 3.7.0 (только `aria-pressed`) её не покрывал — её ловил селектор `[class*="selected_"][role="button"]`. Добавлено `:not([class*="iconWrapper"]):not([class*="lookBlank"])` — toggle-кнопки BD-тем (List/Grid/фильтры) не затронуты.
+- Убрана красная `box-shadow`-обводка (`0 0 0 2px` + `0 0 18px` glow) вокруг иконок серверов при наведении (правило `[class*="listItem_"]:hover svg foreignObject > div`). Оставлен только нативный squircle→круг morph.
+
 ## [3.7.0] — 2026-05-15
 
 ### Fixed

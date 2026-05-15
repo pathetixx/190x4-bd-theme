@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.7.0
+ * @version 3.7.1
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -433,12 +433,11 @@ html::after {
     border-radius: 8px !important;
 }
 
+/* 3.7.1: красный box-shadow-обводку на hover убрали (по запросу) —
+   оставлен только нативный squircle→круг morph. */
 [class*="listItem_"]:hover svg foreignObject > div,
 [class*="listItem-"]:hover svg foreignObject > div {
     border-radius: 14px !important;
-    box-shadow:
-        0 0 0 2px var(--x4-red),
-        0 0 18px var(--x4-red-glow);
 }
 
 /* Activity-индикатор слева у иконки */
@@ -1272,7 +1271,7 @@ div[style*="rgb(71,82,196)"] {
 /* Toggle-кнопки с aria-pressed (List/Grid view в BD-themes, фильтры) */
 [role="button"][aria-pressed="true"]:not([class*="lookBlank"]),
 button[aria-pressed="true"]:not([class*="lookBlank"]),
-[class*="selected_"][role="button"],
+[class*="selected_"][role="button"]:not([class*="iconWrapper"]):not([class*="lookBlank"]),
 [class*="bd-button"][class*="selected"],
 .bd-button.selected {
     background: var(--x4-red) !important;

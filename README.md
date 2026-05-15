@@ -4,7 +4,7 @@
 
 [**English**](#english) · [**Русский**](#русский)
 
-[![version](https://img.shields.io/badge/version-3.7.0-ff1a3a?style=flat-square)](#changelog)
+[![version](https://img.shields.io/badge/version-3.7.1-ff1a3a?style=flat-square)](#changelog)
 [![BetterDiscord](https://img.shields.io/badge/BetterDiscord-%E2%89%A5%201.10-ff1a3a?style=flat-square)](https://betterdiscord.app/)
 [![License](https://img.shields.io/badge/license-MIT-ff1a3a?style=flat-square)](../../LICENSE)
 
