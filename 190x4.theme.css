@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.10
+ * @version 3.6.11
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -1456,17 +1456,28 @@ input[type="radio"] {
     accent-color: var(--x4-red) !important;
 }
 
-/* Слайдеры громкости / прочие range */
+/* Слайдеры громкости / прочие range.
+   3.6.11: убрали постоянный glow на grabber'е (был как заливка),
+   barFill стал deep-red вместо bright — чтобы громкость не выглядела
+   как сплошная красная заливка popup'а. Glow возвращается на hover. */
 [class*="grabber_"],
 [class*="grabber-"] {
     background-color: var(--x4-red) !important;
     border-color: var(--x4-red-bright) !important;
+    box-shadow: none !important;
+    transition: box-shadow 0.15s ease !important;
+}
+
+[class*="grabber_"]:hover,
+[class*="grabber-"]:hover,
+[class*="grabber_"]:active,
+[class*="grabber-"]:active {
     box-shadow: 0 0 10px var(--x4-red-glow) !important;
 }
 
 [class*="barFill_"],
 [class*="barFill-"] {
-    background-color: var(--x4-red) !important;
+    background-color: var(--x4-red-deep) !important;
 }
 
 /* Радио-кнопки в стиле Discord */
@@ -1587,15 +1598,18 @@ body::before {
 }
 
 /* DM home button ("Личные сообщения").
-   Discord красит ВНУТРЕННЮЮ обёртку wrapper_ внутри listItem_, не сам <a>.
-   Берём listItem :first-child гильд-рейла + :has по href и вариантам aria. */
-[class*="guilds_"] [class*="listItem_"]:first-child [class*="wrapper_"],
-[class*="guilds_"] [class*="listItem_"]:has(a[href="/channels/@me"]) [class*="wrapper_"],
-[class*="listItem_"]:has(a[href="/channels/@me"]) > a,
-[class*="listItem_"]:has(a[href="/channels/@me"]) > * > [class*="wrapper_"],
-a[href="/channels/@me"],
-a[aria-label*="ичные сообщения"],
-a[aria-label*="Direct Messages"] {
+   ВАЖНО: НЕ использовать `:first-child` — он матчит первый сервер
+   КАЖДОЙ папки и красит чужие иконки красным квадратом.
+   Скоупим строго к гильд-рейлу + ловим по aria-label и href. */
+[class*="guilds_"] a[href^="/channels/@me"],
+[class*="guilds_"] [aria-label="Личные сообщения"],
+[class*="guilds_"] [aria-label="Direct Messages"],
+[class*="guilds_"] [aria-label*="ичные сообщения"][role="button"],
+[class*="guilds_"] [class*="listItem_"]:has(a[href^="/channels/@me"]) [class*="wrapper_"],
+[class*="guilds_"] [class*="listItem_"]:has([aria-label="Личные сообщения"]) [class*="wrapper_"],
+[class*="guilds_"] [class*="listItem_"]:has([aria-label="Direct Messages"]) [class*="wrapper_"],
+[class*="guilds_"] [class*="dmsListItem_"],
+[class*="guilds_"] [class*="dmsListItem_"] [class*="wrapper_"] {
     background: linear-gradient(135deg, var(--x4-red-deep), var(--x4-red)) !important;
     background-color: var(--x4-red) !important;
     color: #fff !important;
@@ -1606,9 +1620,10 @@ a[aria-label*="Direct Messages"] {
                 box-shadow 0.2s ease !important;
 }
 
-[class*="guilds_"] [class*="listItem_"]:first-child [class*="wrapper_"] svg,
-[class*="listItem_"]:has(a[href="/channels/@me"]) svg,
-a[href="/channels/@me"] svg {
+[class*="guilds_"] a[href^="/channels/@me"] svg,
+[class*="guilds_"] [class*="dmsListItem_"] svg,
+[class*="guilds_"] [aria-label="Личные сообщения"] svg,
+[class*="guilds_"] [aria-label="Direct Messages"] svg {
     color: #fff !important;
     fill: currentColor !important;
 }
@@ -1655,31 +1670,59 @@ input[class*="input__0f084"]:focus-visible {
     outline: none !important;
 }
 
-/* Discord рисует blurple ring на родителе через box-shadow.
-   Глушим на всех обёртках где сидит наш text-input. */
+/* Discord рисует blurple ring на родителе через box-shadow + иногда
+   border-color остаётся на левом ребре. Чистим на всех обёртках. */
 *:has(> input[data-mana-component="text-input"]):focus-within,
 *:has(> input[data-mana-component="text-input"]:focus),
+*:has(input[data-mana-component="text-input"]:focus),
 [class*="container_"]:has(input[data-mana-component="text-input"]:focus),
-[class*="wrapper_"]:has(input[data-mana-component="text-input"]:focus) {
+[class*="wrapper_"]:has(input[data-mana-component="text-input"]:focus),
+[class*="searchBar"]:focus-within,
+[class*="searchInput"]:focus-within {
     box-shadow: none !important;
     outline: none !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
 }
 
-/* Radio (Settings → Конфиденциальность и т.п.).
-   Реальные классы: outerCircleRadio__ + innerDotRadio__ (SVG circles).
-   ОГРАНИЧИВАЕМ: красим только когда radio aria-checked="true". Иначе
-   плодим красные точки на ВСЕХ радио, включая невыбранные. */
+/* Soundboard panel — общий красный border в стиле темы.
+   Применяется к контейнеру soundboard'а если он есть как popover_. */
+[class*="soundboard"][class*="popout_"],
+[class*="soundboardPopout"],
+[class*="popover_"]:has([data-mana-component="text-input"][placeholder*="звук"]),
+[class*="popover_"]:has([data-mana-component="text-input"][placeholder*="sound"]) {
+    border: 1px solid var(--x4-border) !important;
+    box-shadow:
+        0 0 0 1px rgba(255, 26, 58, 0.15),
+        0 8px 32px rgba(0, 0, 0, 0.6),
+        0 0 24px rgba(255, 26, 58, 0.15) !important;
+}
+
+/* Сами кнопки-звуки внутри soundboard'a — тонкий красный hover-ring */
+[class*="soundButton"]:hover,
+[class*="soundButtonInner"]:hover {
+    box-shadow: 0 0 0 1px var(--x4-red), 0 0 12px rgba(255, 26, 58, 0.25) !important;
+}
+
+/* Radio.
+   Cast wider net по селекторам "выбранного" предка — в 3.6.10 только
+   [role="radio"][aria-checked="true"] не цеплялся в свежей сборке. */
 [role="radio"][aria-checked="true"] [class*="innerDotRadio"],
-[role="radio"][aria-checked="true"] [class*="innerDotRadio_"],
-[class*="radioOption_"][class*="selected_"] [class*="innerDotRadio"],
-[class*="radioOption_"][class*="checked_"] [class*="innerDotRadio"] {
+[aria-checked="true"] [class*="innerDotRadio"],
+input[type="radio"]:checked ~ * [class*="innerDotRadio"],
+input[type="radio"]:checked + * [class*="innerDotRadio"],
+label:has(input[type="radio"]:checked) [class*="innerDotRadio"],
+[class*="radioOption_"][class*="checked"] [class*="innerDotRadio"],
+[class*="radioOption_"][class*="selected"] [class*="innerDotRadio"],
+[class*="radioItem_"][class*="checked"] [class*="innerDotRadio"],
+[class*="radioItem_"][class*="selected"] [class*="innerDotRadio"] {
     fill: var(--x4-red) !important;
-    color: var(--x4-red) !important;
 }
 
 [role="radio"][aria-checked="true"] [class*="outerCircleRadio"],
-[role="radio"][aria-checked="true"] [class*="outerCircleRadio_"],
-[class*="radioOption_"][class*="selected_"] [class*="outerCircleRadio"] {
+[aria-checked="true"] [class*="outerCircleRadio"],
+input[type="radio"]:checked ~ * [class*="outerCircleRadio"],
+label:has(input[type="radio"]:checked) [class*="outerCircleRadio"] {
     stroke: var(--x4-red) !important;
 }
 

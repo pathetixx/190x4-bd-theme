@@ -2,6 +2,17 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.6.11] — 2026-05-15
+
+### Fixed
+- DM home: убран `:first-child` в селекторе — он красил первый сервер КАЖДОЙ папки (отсюда красный квадрат поверх чужого сервера). Скоуп строго `[class*="guilds_"]` + `a[href^="/channels/@me"]` / `[aria-label="Личные сообщения"]` / `[class*="dmsListItem_"]`.
+- Radio: расширили "selected ancestor" — добавлены `input[type="radio"]:checked ~/+ *`, `label:has(input:checked)`, `[class*="radioOption_"][class*="checked|selected"]`.
+- Soundboard search: добавлен `border-left/right-color: transparent` на focus-within родителей — отрезает синий кусок обводки слева/справа.
+- Volume slider: `grabber_` без постоянного glow (glow только на hover/active), `barFill_` в `--x4-red-deep` вместо `--x4-red` — слайдер перестал выглядеть как сплошная красная заливка popup'а.
+
+### Added
+- Soundboard panel: красный border + soft red box-shadow на popover'е, hover-ring на `soundButton_`.
+
 ## [3.6.10] — 2026-05-15
 
 ### Fixed
