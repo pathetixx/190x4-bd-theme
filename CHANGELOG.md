@@ -2,6 +2,13 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.6.14] — 2026-05-15
+
+### Fixed
+- Radio: по реальной структуре `radioGroupOption__64e61` + `data-selected="true"` + 3 круга (`outerRadioBase` / `outerRadioFill` / `innerDotRadio`). Outer заливка red, центр-точка `#fff` (классический radio look).
+- Soundboard panel: ловим точный root `picker__09f65` через `:has(input[placeholder*="звук"])` — стилизация как у voice popup (border + drop-shadow + red glow).
+- Search wrapper: индивидуальные `border-top/bottom-left/right-radius: 8px` вместо shorthand — Discord перебивал shorthand per-corner правилом, правый угол оставался острый.
+
 ## [3.6.13] — 2026-05-15
 
 ### Fixed
