@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.15
+ * @version 3.6.16
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -1464,22 +1464,25 @@ input[type="radio"] {
 }
 
 /* Слайдеры громкости / прочие range.
-   3.6.11: убрали постоянный glow на grabber'е (был как заливка),
-   barFill стал deep-red вместо bright — чтобы громкость не выглядела
-   как сплошная красная заливка popup'а. Glow возвращается на hover. */
+   3.6.16: grabber теперь БЕЛЫЙ knob с тонкой красной обводкой
+   (классический slider look) вместо сплошного красного кружка.
+   Subtle glow только на hover. */
 [class*="grabber_"],
 [class*="grabber-"] {
-    background-color: var(--x4-red) !important;
-    border-color: var(--x4-red-bright) !important;
+    background-color: #fff !important;
+    background: #fff !important;
+    border: 2px solid var(--x4-red) !important;
+    border-color: var(--x4-red) !important;
     box-shadow: none !important;
-    transition: box-shadow 0.15s ease !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
 }
 
 [class*="grabber_"]:hover,
 [class*="grabber-"]:hover,
 [class*="grabber_"]:active,
 [class*="grabber-"]:active {
-    box-shadow: 0 0 10px var(--x4-red-glow) !important;
+    border-color: var(--x4-red-bright) !important;
+    box-shadow: 0 0 6px rgba(255, 26, 58, 0.4) !important;
 }
 
 /* 3.6.15: barFill убран вообще — на soundboard volume он выглядел как

@@ -2,6 +2,11 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.6.16] — 2026-05-15
+
+### Changed
+- `grabber_*` (slider knob): `background: #fff` + `border: 2px solid var(--x4-red)` вместо solid-red заливки. По DOM-дампу soundboard volume единственный оставшийся красный элемент после 3.6.15 был сам knob (16px). Subtle red glow только на hover/active.
+
 ## [3.6.15] — 2026-05-15
 
 ### Fixed
