@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.16
+ * @version 3.6.17
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -1464,25 +1464,24 @@ input[type="radio"] {
 }
 
 /* Слайдеры громкости / прочие range.
-   3.6.16: grabber теперь БЕЛЫЙ knob с тонкой красной обводкой
-   (классический slider look) вместо сплошного красного кружка.
-   Subtle glow только на hover. */
+   3.6.17: возврат к сплошному КРАСНОМУ knob (как в 3.6.15) — белый
+   knob из 3.6.16 был регрессией. Заливка (barFill) остаётся прозрачной.
+   Glow усиливается на hover/drag. */
 [class*="grabber_"],
 [class*="grabber-"] {
-    background-color: #fff !important;
-    background: #fff !important;
-    border: 2px solid var(--x4-red) !important;
-    border-color: var(--x4-red) !important;
-    box-shadow: none !important;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+    background-color: var(--x4-red) !important;
+    background: var(--x4-red) !important;
+    border: 2px solid var(--x4-red-bright) !important;
+    border-color: var(--x4-red-bright) !important;
+    box-shadow: 0 0 6px var(--x4-red-glow) !important;
+    transition: box-shadow 0.15s ease !important;
 }
 
 [class*="grabber_"]:hover,
 [class*="grabber-"]:hover,
 [class*="grabber_"]:active,
 [class*="grabber-"]:active {
-    border-color: var(--x4-red-bright) !important;
-    box-shadow: 0 0 6px rgba(255, 26, 58, 0.4) !important;
+    box-shadow: 0 0 10px var(--x4-red-glow) !important;
 }
 
 /* 3.6.15: barFill убран вообще — на soundboard volume он выглядел как
@@ -1576,18 +1575,12 @@ body::before {
     white-space: nowrap !important;
 }
 
-/* Кастомный display-name внутри repliedMessage_ (container_dfb989 +
-   loop_dfb989 gradient) — ограничиваем ширину чтобы не ломал ряд. */
-[class*="repliedMessage_"] [class*="container_dfb989"],
-[class*="repliedMessage_"] [class*="usernameText_"],
-[class*="repliedMessage_"] [data-username-with-effects] {
-    max-width: 35% !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-    flex-shrink: 1 !important;
-    min-width: 0 !important;
-}
+/* 3.6.17: НЕ трогаем кастомный display-name плагина (container_dfb989 /
+   loop_dfb989 / gradient_dfb989). Прошлый clamp max-width:35% +
+   overflow:hidden на loop-градиенте заставлял ник «уезжать» — анимация
+   loop_ под overflow:hidden визуально прокручивает текст за край.
+   DOM-дамп 2026-05-15 это подтвердил. Reply-текст ниже ужимается
+   нативно через правило repliedTextPreview_/repliedTextContent_. */
 
 /* Voice info popover (RTC debug, settings, voice-status и т.д.).
    Outer popover_d6f39b совпадал с container__50387 на одном узле,
