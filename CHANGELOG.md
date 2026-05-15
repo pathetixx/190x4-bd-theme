@@ -2,6 +2,30 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.7.0] — 2026-05-15
+
+### Fixed
+- Reply-превью в DM больше не наезжает на ник/аватар и с сообщения-ответа убран красный фон-блок. Правило `[class*="mention"]:not([class*="mentioned-"])` исключало только legacy `mentioned-`, поэтому ловило контейнер сообщения `mentioned__` (reply тебе = пинг), и его `padding: 0 4px` (specificity 0,2,0 > Discord 0,1,0) затирал нативный cozy-гаттер ~72px под аватар. Исключение расширено до `:not([class*="mentioned"])` — правило остаётся только на инлайн-плашках упоминаний.
+- Убрано красное свечение-ореол вокруг иконок серверов с непрочитанным/пингом. У `numberBadge_`/`textBadge_`/`iconBadge_` снят `box-shadow`-glow (DOM-дамп показал, что «обводка» = именно glow бейджа, а не mention-правило). Красная заливка бейджа и пульс сохранены.
+- Нативные toggle-кнопки тулбара (напр. «Скрыть профиль пользователя») больше не заливаются сплошным красным. Селекторы `[role="button"][aria-pressed="true"]` / `button[aria-pressed="true"]` (правило для toggle BD-тем) теперь исключают `lookBlank`-иконки, и нативное прозрачное правило `lookBlank` снова побеждает.
+
+## [3.6.18] — 2026-05-15
+
+### Fixed
+- Пункты контекст-меню без интеракции (`hideInteraction_`, напр. «Громкость звуковой панели») больше не заливаются красным на hover/focus.
+- Reply-текст (`repliedTextContent_`) больше не наследует messageContent-гаттер `margin-left:-80px; padding-left:80px`.
+
+### Changed
+- Mention-подсветка сообщения сведена к тонкой левой полосе (`inset 2px 0 0`) без градиент-блока.
+
+## [3.6.17] — 2026-05-15
+
+### Changed
+- `grabber_*` (slider knob) возвращён к сплошному красному — белый knob из 3.6.16 был регрессией.
+
+### Removed
+- Снят clamp `max-width:35% + overflow:hidden` с кастомного градиент-ника в reply (`container_dfb989`/`loop_dfb989`) — `loop_`-анимация под `overflow:hidden` визуально прокручивала ник за край.
+
 ## [3.6.16] — 2026-05-15
 
 ### Changed

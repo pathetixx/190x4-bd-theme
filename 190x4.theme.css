@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.18
+ * @version 3.7.0
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -707,7 +707,7 @@ section[class*="title-"] {
 }
 
 /* Mention-pill в тексте */
-[class*="mention"]:not([class*="mentioned-"]) {
+[class*="mention"]:not([class*="mentioned"]) {
     background: var(--x4-red-soft) !important;
     color: var(--x4-red-bright) !important;
     border-radius: 4px;
@@ -716,7 +716,7 @@ section[class*="title-"] {
     transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
 
-[class*="mention"]:not([class*="mentioned-"]):hover {
+[class*="mention"]:not([class*="mentioned"]):hover {
     background: var(--x4-red) !important;
     color: #fff !important;
     box-shadow: 0 0 12px var(--x4-red-glow);
@@ -1137,7 +1137,7 @@ section[class*="panels-"] {
 [class*="textBadge_"],
 [class*="iconBadge_"] {
     background: var(--x4-red) !important;
-    box-shadow: 0 0 10px var(--x4-red-glow), 0 0 4px var(--x4-red-bright);
+    box-shadow: none !important;
     color: #fff !important;
     font-weight: 700;
     border: none !important;
@@ -1270,8 +1270,8 @@ div[style*="rgb(71,82,196)"] {
 }
 
 /* Toggle-кнопки с aria-pressed (List/Grid view в BD-themes, фильтры) */
-[role="button"][aria-pressed="true"],
-button[aria-pressed="true"],
+[role="button"][aria-pressed="true"]:not([class*="lookBlank"]),
+button[aria-pressed="true"]:not([class*="lookBlank"]),
 [class*="selected_"][role="button"],
 [class*="bd-button"][class*="selected"],
 .bd-button.selected {
@@ -1281,8 +1281,8 @@ button[aria-pressed="true"],
     box-shadow: 0 0 8px var(--x4-red-glow) !important;
 }
 
-[role="button"][aria-pressed="true"]:hover,
-button[aria-pressed="true"]:hover {
+[role="button"][aria-pressed="true"]:not([class*="lookBlank"]):hover,
+button[aria-pressed="true"]:not([class*="lookBlank"]):hover {
     background: var(--x4-red-bright) !important;
     background-color: var(--x4-red-bright) !important;
 }
