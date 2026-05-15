@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.6.8
+ * @version 3.6.9
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4/tree/main/betterdiscord/190x4-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4/main/betterdiscord/190x4-theme/190x4.theme.css
@@ -270,6 +270,15 @@ video + canvas {
     --background-modifier-hover:    rgba(255, 26, 58, 0.12) !important;
     --background-modifier-active:   rgba(255, 26, 58, 0.18) !important;
     --background-modifier-selected: rgba(255, 26, 58, 0.22) !important;
+
+    /* Text-link family — Discord красит ссылки/«Показать» через эти,
+       а не через --brand-500. В первом :root они уже есть, но не !important
+       и .theme-dark перекрывал. */
+    --text-link:                    var(--x4-red-bright) !important;
+    --text-link-low-saturation:     var(--x4-red) !important;
+    --text-brand:                   var(--x4-red-bright) !important;
+    --text-link-foreground:         var(--x4-red-bright) !important;
+    --text-link-foreground-hover:   var(--x4-red) !important;
 
     /* === Mana background-base-* (МАКСИМАЛЬНО прозрачно — обои дают цвет) === */
     --background-base-lowest:       rgba(0, 0, 0, 0.15) !important;
@@ -1526,197 +1535,173 @@ body::before {
 }
 
 /* ============================================================
-   3.6.8 — точечные фиксы по 6 скринам (2026-05-15)
+   Точечные фиксы по реальному DOM текущей сборки Discord (Mana).
+   Селекторы выведены из живой разметки, а не угаданы.
    ============================================================ */
 
-/* === 1. Reply preview внутри чужого сообщения уезжал из flex'а ===
-   Когда другой юзер reply'ит на твоё сообщение в DM, Discord рендерит
-   [class*="repliedMessage_"] с цепочкой: avatar(small) + текст-цитата.
-   Под нашими transparency-правилами обёртки сжимались и контент
-   расползался. Жёстко фиксируем flex+overflow на репли-блоке. */
-[class*="repliedMessage_"] {
-    display: flex !important;
-    align-items: center !important;
-    flex-wrap: nowrap !important;
-    gap: 4px !important;
-    min-width: 0 !important;
-    max-width: calc(100% - 16px) !important;
-}
-
+/* Reply preview внутри чужого сообщения.
+   Hard `display:flex` на repliedMessage_ ломал layout: внутри живёт
+   гранёный display-name с loop-градиентом + curved spine, своим
+   inline-flex. Оставляем только overflow-защиту на текстовом контенте. */
 [class*="repliedTextPreview_"],
-[class*="repliedTextContent_"],
-[class*="repliedMessageContent_"] {
+[class*="repliedTextContent_"] {
     min-width: 0 !important;
-    max-width: 100% !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
-    flex: 0 1 auto !important;
 }
 
-[class*="repliedMessage_"] [class*="executedCommandText"],
-[class*="repliedMessage_"] [class*="username_"] {
-    flex-shrink: 0 !important;
+/* Кастомный display-name внутри repliedMessage_ (container_dfb989 +
+   loop_dfb989 gradient) — ограничиваем ширину чтобы не ломал ряд. */
+[class*="repliedMessage_"] [class*="container_dfb989"],
+[class*="repliedMessage_"] [class*="usernameText_"],
+[class*="repliedMessage_"] [data-username-with-effects] {
+    max-width: 35% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    flex-shrink: 1 !important;
     min-width: 0 !important;
 }
 
-/* === 3. Server-rail кнопки: home (DMs) + Add Server + Discover ===
-   homeIcon в selected-state выходил белой плиткой с Discord-логотипом
-   (наше старое правило красило только сам SVG, не его обёртку).
-   circleIconButton (+ и compass) вообще не были покрыты — на hover
-   получали дефолтный blurple. */
-a[class*="homeIcon_"],
-[class*="listItem_"] a[class*="homeIcon"] {
-    background: rgba(255, 26, 58, 0.12) !important;
+/* Voice info popover (RTC debug, settings, voice-status и т.д.).
+   Outer wrapper popover_d6f39b был прозрачным → видно чёрный фон родителя
+   за скруглёнными краями. Делаем outer opaque dark, border-radius НЕ
+   трогаем (у Discord свой стоит). */
+[class*="popover_"] {
+    background: rgba(10, 10, 15, 0.97) !important;
+    background-color: rgba(10, 10, 15, 0.97) !important;
+    border: 1px solid var(--x4-border) !important;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(255, 26, 58, 0.18) !important;
+}
+
+/* Внутренний container__ внутри popover_ — пусть остаётся прозрачным,
+   чтобы родительский opaque просвечивал ровно. */
+[class*="popover_"] [class*="container__"],
+[class*="popover_"] [class*="tabPanel__"],
+[class*="popover_"] [class*="tabs__"] {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* DM home button ("Личные сообщения").
+   В текущей сборке Discord это НЕ homeIcon_*, а просто <a href="/channels/@me">
+   с aria-label. Ловим по aria и href. */
+a[aria-label*="ичные сообщения"],
+a[aria-label*="Direct Messages"],
+[class*="guilds_"] a[href="/channels/@me"],
+[class*="tree_"] a[href="/channels/@me"] {
+    background-color: rgba(255, 26, 58, 0.12) !important;
     color: var(--x4-red-bright) !important;
     transition: background-color 0.2s ease, color 0.2s ease,
                 border-radius 0.25s cubic-bezier(0.2, 0.8, 0.4, 1),
                 box-shadow 0.2s ease !important;
 }
 
-a[class*="homeIcon_"]:hover {
-    background: var(--x4-red) !important;
-    color: #fff !important;
-    border-radius: 14px !important;
-    box-shadow: 0 0 14px var(--x4-red-glow) !important;
-}
-
-a[class*="homeIcon_"][class*="selected_"],
-[class*="listItem_"][class*="selected_"] a[class*="homeIcon"],
-[class*="selected_"] a[class*="homeIcon_"] {
+a[aria-label*="ичные сообщения"]:hover,
+a[aria-label*="Direct Messages"]:hover,
+[class*="guilds_"] a[href="/channels/@me"]:hover,
+a[aria-label*="ичные сообщения"][class*="selected_"],
+a[aria-label*="Direct Messages"][class*="selected_"],
+[class*="listItem_"][class*="selected_"] a[href="/channels/@me"] {
     background: linear-gradient(135deg, var(--x4-red-deep), var(--x4-red)) !important;
+    background-color: var(--x4-red) !important;
     color: #fff !important;
     border-radius: 14px !important;
     box-shadow: 0 0 16px var(--x4-red-glow) !important;
 }
 
-/* + (Add Server) и compass (Discover) — Discord использует
-   [class*="circleIconButton_"] вместе с [class*="circleIcon_"]. */
-[class*="circleIconButton_"],
-[class*="circleIcon_"] {
-    background-color: rgba(255, 255, 255, 0.06) !important;
-    color: var(--x4-red-bright) !important;
-    transition: background-color 0.2s ease, color 0.2s ease,
-                border-radius 0.25s cubic-bezier(0.2, 0.8, 0.4, 1) !important;
+/* SVG Discord-логотипа внутри DM-кнопки — path с fill="currentColor",
+   красится через color на родителе (выше). На всякий случай явно. */
+a[aria-label*="ичные сообщения"] svg,
+a[aria-label*="Direct Messages"] svg,
+[class*="guilds_"] a[href="/channels/@me"] svg {
+    color: currentColor !important;
 }
 
-[class*="circleIconButton_"]:hover,
-[class*="circleIcon_"]:hover,
-[class*="listItem_"]:hover [class*="circleIconButton_"],
-[class*="listItem_"]:hover [class*="circleIcon_"] {
-    background-color: var(--x4-red) !important;
-    color: #fff !important;
-    border-radius: 14px !important;
-    box-shadow: 0 0 14px var(--x4-red-glow) !important;
-}
-
-/* === 4. Soundboard search bar — синяя/розовая обводка из дефолта ===
-   У Discord searchBar отдельный компонент, не попадал под наш
-   [class*="inputDefault_"]. Плюс focus давал brand-500 box-shadow. */
-[class*="searchBar_"],
-[class*="searchBarComponent_"],
-[class*="container_"][class*="searchBar"],
-[class*="searchBarHeader_"] {
+/* Soundboard / любой Mana text-input — focus blurple → red.
+   В свежем Discord <input data-mana-component="text-input" class="input__0f084">. */
+input[data-mana-component="text-input"],
+input[class*="input__0f084"] {
     background: rgba(6, 6, 10, 0.7) !important;
     border: 1px solid var(--x4-border-soft) !important;
     box-shadow: none !important;
+    outline: none !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-[class*="searchBar_"]:focus-within,
-[class*="searchBarComponent_"]:focus-within,
-[class*="container_"][class*="searchBar"]:focus-within,
-[class*="searchBarHeader_"]:focus-within {
+input[data-mana-component="text-input"]:focus,
+input[class*="input__0f084"]:focus {
     border-color: var(--x4-red) !important;
     box-shadow: 0 0 0 1px var(--x4-red), 0 0 14px var(--x4-red-glow) !important;
     outline: none !important;
 }
 
-[class*="searchBar_"] input,
-[class*="searchBarComponent_"] input,
-[class*="searchBarHeader_"] input {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
-}
-
-/* === 5. Radio (Settings → spam filter) — синяя точка ===
-   Современный Discord использует <div role="radio"> + SVG. accent-color
-   на native input не помогает. Красим напрямую: и outer-ring SVG,
-   и inner-dot (бывает отдельным div), и инлайновый brand-color если есть. */
-[role="radio"][aria-checked="true"] {
-    color: var(--x4-red) !important;
+/* Родительский wrapper иногда сам рисует focus-ring (box-shadow). */
+[class*="inputWrapper_"]:focus-within,
+[class*="textInputWrapper"]:focus-within,
+:has(> input[data-mana-component="text-input"]:focus) {
+    box-shadow: 0 0 0 1px var(--x4-red), 0 0 14px var(--x4-red-glow) !important;
     border-color: var(--x4-red) !important;
 }
 
-[role="radio"][aria-checked="true"] svg [fill]:not([fill="none"]):not([fill="transparent"]):not([fill="white"]):not([fill="#fff"]):not([fill="#FFFFFF"]),
-[role="radio"][aria-checked="true"] svg circle:not([fill="white"]):not([fill="#fff"]),
-[role="radio"][aria-checked="true"] svg path:not([fill="none"]) {
+/* Radio (Settings → Конфиденциальность и т.п.).
+   Реальные классы: outerCircleRadio__ + innerDotRadio__ (SVG circles).
+   В выбранном state Discord красит fill через --brand-500, но он бывает
+   локально перебит до blurple — ловим напрямую. */
+[class*="innerDotRadio"],
+[class*="innerDotRadio_"] {
     fill: var(--x4-red) !important;
     color: var(--x4-red) !important;
 }
 
-[role="radio"][aria-checked="true"] svg [stroke]:not([stroke="none"]):not([stroke="transparent"]) {
+[class*="outerCircleRadio"],
+[class*="outerCircleRadio_"] {
     stroke: var(--x4-red) !important;
 }
 
-/* Inner dot как отдельный div */
-[role="radio"][aria-checked="true"] [class*="dot_"],
-[role="radio"][aria-checked="true"] [class*="inner_"],
-[class*="radioItem_"][class*="checked_"] [class*="dot_"],
-[class*="radioOption_"][class*="selected_"] [class*="dot_"] {
-    background-color: var(--x4-red) !important;
-    background: var(--x4-red) !important;
-    box-shadow: 0 0 8px var(--x4-red-glow) !important;
-}
-
-/* Inline blurple hex (#5865F2) на самом radio */
-[role="radio"][style*="#5865F2"],
-[role="radio"][style*="#5865f2"],
-[role="radio"][style*="rgb(88, 101, 242)"],
-[role="radio"][style*="rgb(88,101,242)"] {
-    background-color: var(--x4-red) !important;
-    background: var(--x4-red) !important;
-    border-color: var(--x4-red-bright) !important;
-}
-
-/* === 6. Account Settings: "Показать" + дефолтные разделители ===
-   "Показать" под email — у Discord это button[class*="lookLink_"]
-   c color: var(--brand-500). У свежей сборки лейаут переехал на
-   data-mana-component=button с lookOutlined → не попадал. */
-button[class*="lookLink_"],
-button[class*="lookLink_"][class*="colorBrand"],
-button[class*="lookLink_"][class*="colorLink"],
-[class*="revealButton_"],
-[class*="revealText_"],
-[class*="reveal_"][class*="button"],
-button[class*="anchor_"],
-a[class*="anchor_"][class*="colorBrand"] {
+/* Mana brand-link button ("Показать", "Подробнее", и т.д.) —
+   button_a22cb0 + brand_a22cb0 без lookFilled/secondary.
+   Текстовый span внутри использует color:currentColor → красим
+   родительский button. */
+button[data-mana-component="button"][class*="brand_a22cb0"]:not([class*="lookFilled"]):not([class*="secondary"]),
+button[class*="button_a22cb0"][class*="brand_a22cb0"]:not([class*="secondary"]):not([class*="lookFilled"]) {
     color: var(--x4-red-bright) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
 }
 
-button[class*="lookLink_"]:hover,
-button[class*="anchor_"]:hover,
-[class*="revealButton_"]:hover,
-[class*="revealText_"]:hover {
+button[data-mana-component="button"][class*="brand_a22cb0"]:not([class*="lookFilled"]):not([class*="secondary"]):hover {
     color: var(--x4-red) !important;
-    text-shadow: 0 0 6px var(--x4-red-glow);
+    background: rgba(255, 26, 58, 0.08) !important;
 }
 
-/* Разделители-строки в "Моя учётная запись" были дефолтные грейные.
-   Подхватываем как явный divider_, так и border-bottom на rows. */
+/* Разделители-строки в Account Settings и других местах. */
 [class*="divider_"]:not([class*="dividerRule_"]):not([class*="dividerLong_"]),
 [class*="dividerDefault_"],
+[class*="separator__66f0f"],
 [class*="userSettings"] hr,
-hr[class*="divider"] {
+hr[class*="divider"],
+hr[class*="separator"] {
     background-color: var(--x4-border-soft) !important;
     border-color: var(--x4-border-soft) !important;
     background-image: none !important;
 }
 
-/* Row separators в Account view — border-bottom на каждой field-row */
-[class*="userSettingsAccount"] [class*="row_"]:not(:last-child),
-[class*="userSettingsAccount_"] [class*="container_"] > [class*="row_"]:not(:last-child) {
-    border-bottom: 1px solid var(--x4-border-soft) !important;
+/* RTC debug popup — старые селекторы _56e31 устарели,
+   текущая сборка использует _effb26 (графики/статсы) и _66f0f. */
+#rtc_debug_panel-tab,
+#rtc_debug_panel-tab > div,
+#rtc_debug_panel-tab > div > div,
+[class*="graphContainer_effb26"],
+[class*="statsRow_effb26"],
+[class*="statsText_effb26"],
+[class*="userSelectText_effb26"],
+[class*="container_effb26"],
+[class*="devButtons_effb26"],
+[class*="securedBanner__66f0f"] {
+    background-color: transparent !important;
 }

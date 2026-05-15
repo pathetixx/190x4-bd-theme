@@ -2,6 +2,20 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.6.9] — 2026-05-15
+
+### Fixed
+- `popover_*` (voice info, RTC debug, прочее) opaque dark; внутренний `container__` / `tabPanel__` / `tabs__` оставлен прозрачным. Border-radius Discord'а не трогаем.
+- DM home («Личные сообщения»): через `a[aria-label*="ичные сообщения"]` / `[aria-label*="Direct Messages"]` / `[href="/channels/@me"]`. `homeIcon_*` устарел в текущей сборке.
+- Radio (Settings): `[class*="innerDotRadio"]` + `[class*="outerCircleRadio"]` — fill/stroke в `--x4-red` напрямую.
+- Mana text-input (`input[data-mana-component="text-input"]` / `input__0f084`): focus border + box-shadow красные.
+- Mana brand-link button (`button_a22cb0 brand_a22cb0` без `lookFilled`/`secondary`) — color `--x4-red-bright`. Покрывает «Показать», «Подробнее» и аналоги.
+- RTC debug popup: классы обновлены на `_effb26` / `_66f0f` (старые `_56e31` устарели).
+
+### Changed
+- `repliedMessage_*`: убран жёсткий `display:flex / nowrap / max-width` — ломал внутренний display-name с loop-градиентом. Оставлен только `overflow:ellipsis` на `repliedTextPreview_` / `repliedTextContent_`, плюс `max-width:35%` на кастомном display-name.
+- `--text-link`, `--text-link-low-saturation`, `--text-brand`, `--text-link-foreground`, `--text-link-foreground-hover` пробрасываются с `!important` во второй override-блок.
+
 ## [3.6.8] — 2026-05-15
 
 ### Fixed
