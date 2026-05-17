@@ -6,7 +6,7 @@
 
 [![version](https://img.shields.io/badge/version-3.7.1-ff1a3a?style=flat-square)](#changelog)
 [![BetterDiscord](https://img.shields.io/badge/BetterDiscord-%E2%89%A5%201.10-ff1a3a?style=flat-square)](https://betterdiscord.app/)
-[![License](https://img.shields.io/badge/license-MIT-ff1a3a?style=flat-square)](../../LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-ff1a3a?style=flat-square)](LICENSE)
 
 ---
 
@@ -53,7 +53,7 @@ The whole palette is defined as CSS custom properties on `:root` at the top of t
 
 ### License
 
-[MIT](../../LICENSE) © 2026 PathetiX
+[MIT](LICENSE) © 2026 PathetiX
 
 ---
 
@@ -100,4 +100,4 @@ Cyberpunk-тема red-neon. Палитра выведена прямо из л�
 
 ### Лицензия
 
-[MIT](../../LICENSE) © 2026 PathetiX
+[MIT](LICENSE) © 2026 PathetiX
