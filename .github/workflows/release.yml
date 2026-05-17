@@ -1,0 +1,32 @@
+name: release
+
+# Tag-driven release: theme-vX.Y.Z -> publishes 190x4.theme.css
+on:
+  push:
+    tags:
+      - 'theme-v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Derive version + verify asset
+        id: v
+        run: |
+          set -euo pipefail
+          echo "ver=${GITHUB_REF_NAME#theme-}" >> "$GITHUB_OUTPUT"
+          test -f 190x4.theme.css
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: 190x4 Theme ${{ steps.v.outputs.ver }}
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: 190x4.theme.css

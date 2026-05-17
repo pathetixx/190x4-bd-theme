@@ -2,6 +2,11 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.7.2] — 2026-05-17
+
+### Fixed
+- `@updateUrl` and `@source` now point to the standalone repo `pathetixx/190x4-bd-theme` (after the monorepo was split). They previously referenced the deleted `pathetixx/190x4` path, so BD auto-update of the theme was broken.
+
 ## [3.7.1] — 2026-05-15
 
 ### Fixed
@@ -119,7 +124,7 @@ All notable changes to the theme are listed here. Format loosely follows [Keep a
 
 ## [3.6.0] — 2026-05-10 — first public release
 
-First version published as part of the [`pathetixx/190x4`](https://github.com/pathetixx/190x4) repo. Earlier iterations lived only in my local BetterDiscord folder.
+First version published as part of the `pathetixx/190x4` monorepo (since split into `pathetixx/190x4-bd-theme`). Earlier iterations lived only in my local BetterDiscord folder.
 
 ### Style at this version
 
