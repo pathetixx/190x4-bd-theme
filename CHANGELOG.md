@@ -2,6 +2,11 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [3.8.1] — 2026-10-14
+
+### Changed
+- Новый фон: тёмная печатная плата с кибер-маской они и красным неоном. Картинка лежит в репо (`assets/background.webp`) и грузится с jsDelivr вместо ibb; масштаб — обычный `cover`, обрезка под старую HUD-панель больше не нужна.
+
 ## [3.8.0] — 2026-10-14
 
 ### Added

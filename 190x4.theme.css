@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.8.0
+ * @version 3.8.1
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -96,7 +96,9 @@
     --x4-border:         rgba(255, 26, 58, 0.25);
     --x4-border-soft:    rgba(255, 255, 255, 0.06);
 
-    --x4-bg-image:       url('https://i.ibb.co/fd9VqZc9/190x4-logo.png');
+    /* Фон лежит в репо (assets/), отдаётся jsDelivr по тегу релиза —
+       кэш постоянный, смена картинки = новый релиз темы. */
+    --x4-bg-image:       url('https://cdn.jsdelivr.net/gh/pathetixx/190x4-bd-theme@theme-v3.8.1/assets/background.webp');
     --x4-overlay:        linear-gradient(rgba(6, 6, 10, 0.92), rgba(6, 6, 10, 0.92));
 
     --x4-font-display:   'Orbitron', 'Rajdhani', sans-serif;
@@ -201,11 +203,6 @@ body {
     background: transparent !important;
 }
 
-/* В левых ~22% картинки зашита своя HUD-панель (маска, «SYSTEM STATUS…»,
-   второй логотип). При cover она ложилась под список каналов/ЛС и мешала
-   читать. Масштабируем так, чтобы левая панель уходила за край экрана:
-   ширина ≥ 129vw (78% картинки = весь экран) и ≥ 178vh (покрыть высоту
-   при соотношении 1672×941), привязка к правому краю. */
 html::before {
     content: "";
     position: fixed;
@@ -213,8 +210,8 @@ html::before {
     /* Через переменную — README обещает `--x4-bg-image: none` для отключения
        фона, а прямой url() здесь это ломал. */
     background-image: var(--x4-bg-image);
-    background-size: max(129vw, 178vh) auto;
-    background-position: right center;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     background-color: #06060a;
     z-index: -1;

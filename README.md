@@ -4,7 +4,7 @@
 
 [**English**](#english) · [**Русский**](#русский)
 
-[![version](https://img.shields.io/badge/version-3.8.0-ff1a3a?style=flat-square)](#changelog)
+[![version](https://img.shields.io/badge/version-3.8.1-ff1a3a?style=flat-square)](#changelog)
 [![BetterDiscord](https://img.shields.io/badge/BetterDiscord-%E2%89%A5%201.10-ff1a3a?style=flat-square)](https://betterdiscord.app/)
 [![License](https://img.shields.io/badge/license-MIT-ff1a3a?style=flat-square)](LICENSE)
 
@@ -20,7 +20,7 @@ Highlights:
 
 - **Palette**: deep gunmetal backgrounds (`#06060a`–`#181822`), accent reds (`#ff1a3a`, `#ff2d4d`, `#b3001f`), occasional orange highlights.
 - **Type**: [Orbitron](https://fonts.google.com/specimen/Orbitron) for display, [Rajdhani](https://fonts.google.com/specimen/Rajdhani) for body. Loaded via `@font-face` from jsDelivr/fontsource (needs internet on first run to fetch the woff2 files).
-- **Background**: a dimmed 190x4 logo behind the chat, with a near-opaque overlay so it doesn't fight the text.
+- **Background**: a dark circuit-board scene with a red-eyed cyber-oni mask, kept almost black so it never fights the text.
 - **Borders & glow**: red-neon outlines on focus / active states.
 
 ### Requirements
@@ -71,7 +71,7 @@ Cyberpunk-тема red-neon. Палитра выведена прямо из л�
 
 - **Палитра**: глубокий gunmetal-фон (`#06060a`–`#181822`), акцентные красные (`#ff1a3a`, `#ff2d4d`, `#b3001f`), редкие оранжевые подсветки.
 - **Шрифты**: [Orbitron](https://fonts.google.com/specimen/Orbitron) — для крупного текста, [Rajdhani](https://fonts.google.com/specimen/Rajdhani) — для основного. Подгружаются через `@font-face` с jsDelivr/fontsource (на первом запуске нужен интернет, чтобы скачать woff2-файлы).
-- **Фон**: затемнённый логотип 190x4 за чатом, поверх плотный оверлей — чтобы не перетягивал внимание с текста.
+- **Фон**: тёмная сцена с печатной платой и кибер-маской они с красным глазом — почти чёрная, чтобы не спорить с текстом.
 - **Бордеры и glow**: красно-неоновые контуры на фокусе/активных элементах.
 
 ### Требования
