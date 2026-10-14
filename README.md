@@ -4,7 +4,7 @@
 
 [**English**](#english) · [**Русский**](#русский)
 
-[![version](https://img.shields.io/badge/version-3.7.2-ff1a3a?style=flat-square)](#changelog)
+[![version](https://img.shields.io/badge/version-3.8.0-ff1a3a?style=flat-square)](#changelog)
 [![BetterDiscord](https://img.shields.io/badge/BetterDiscord-%E2%89%A5%201.10-ff1a3a?style=flat-square)](https://betterdiscord.app/)
 [![License](https://img.shields.io/badge/license-MIT-ff1a3a?style=flat-square)](LICENSE)
 
@@ -26,7 +26,7 @@ Highlights:
 ### Requirements
 
 - [BetterDiscord](https://betterdiscord.app/) **≥ 1.10**
-- Internet on first launch (Google Fonts).
+- Internet on first launch (fonts from jsDelivr).
 
 ### Install
 
@@ -38,6 +38,10 @@ Highlights:
 3. Discord → **Settings → BetterDiscord → Themes**, toggle **190x4** on.
 
 To update: grab the newest `190x4.theme.css` from a release and overwrite. After replacing the file, **fully quit Discord through the system tray** (not Ctrl+R, not the window X — both leave the Electron process alive with cached CSS) and start it again.
+
+### Companion plugin: voice nameplates
+
+Discord shows nameplates only in the member list and DMs. [`plugins/190x4VoiceNameplates.plugin.js`](plugins/190x4VoiceNameplates.plugin.js) adds them to voice channel participants too — same palette gradient, animation on hover. Drop it into the BetterDiscord **plugins** folder (`%AppData%\BetterDiscord\plugins\` on Windows) and enable it in **Settings → BetterDiscord → Plugins**. Works with or without the theme.
 
 ### Customising
 
@@ -73,7 +77,7 @@ Cyberpunk-тема red-neon. Палитра выведена прямо из л�
 ### Требования
 
 - [BetterDiscord](https://betterdiscord.app/) **≥ 1.10**
-- Интернет на первом запуске (Google Fonts).
+- Интернет на первом запуске (шрифты с jsDelivr).
 
 ### Установка
 
@@ -85,6 +89,10 @@ Cyberpunk-тема red-neon. Палитра выведена прямо из л�
 3. В Discord → **Настройки → BetterDiscord → Themes** включи **190x4**.
 
 Чтобы обновиться: качаешь свежий `190x4.theme.css` из релиза и перезаписываешь. После замены файла **полностью закрой Discord через системный трей** (не Ctrl+R и не крестик в окне — оба оставляют Electron-процесс жить с закэшированным CSS) и запусти заново.
+
+### Плагин-компаньон: таблички в войсе
+
+Discord показывает таблички с именем только в списке участников и в ЛС. [`plugins/190x4VoiceNameplates.plugin.js`](plugins/190x4VoiceNameplates.plugin.js) добавляет их участникам голосового канала — тот же градиент палитры, анимация при наведении. Положи файл в папку **plugins** BetterDiscord (`%AppData%\BetterDiscord\plugins\` на Windows) и включи в **Настройки → BetterDiscord → Plugins**. Работает и без темы.
 
 ### Кастомизация
 

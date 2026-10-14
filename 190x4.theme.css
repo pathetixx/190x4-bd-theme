@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.7.2
+ * @version 3.8.0
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -201,13 +201,20 @@ body {
     background: transparent !important;
 }
 
+/* В левых ~22% картинки зашита своя HUD-панель (маска, «SYSTEM STATUS…»,
+   второй логотип). При cover она ложилась под список каналов/ЛС и мешала
+   читать. Масштабируем так, чтобы левая панель уходила за край экрана:
+   ширина ≥ 129vw (78% картинки = весь экран) и ≥ 178vh (покрыть высоту
+   при соотношении 1672×941), привязка к правому краю. */
 html::before {
     content: "";
     position: fixed;
     inset: 0;
-    background-image: url('https://i.ibb.co/fd9VqZc9/190x4-logo.png');
-    background-size: cover;
-    background-position: center;
+    /* Через переменную — README обещает `--x4-bg-image: none` для отключения
+       фона, а прямой url() здесь это ломал. */
+    background-image: var(--x4-bg-image);
+    background-size: max(129vw, 178vh) auto;
+    background-position: right center;
     background-repeat: no-repeat;
     background-color: #06060a;
     z-index: -1;
@@ -355,6 +362,18 @@ video + canvas {
     /* Чат-панель / channels / sidebar — пробросить */
     --channels-default:             var(--x4-text-muted) !important;
     --channel-icon:                 var(--x4-text-muted) !important;
+
+    /* Mana interactive-background-* — hover/selected у каналов, ЛС, пунктов
+       настроек. Дефолт Discord — серый oklab, поверх нашего красного
+       градиента выбранного канала ложился серой плашкой. */
+    --interactive-background-hover:    rgba(255, 26, 58, 0.08) !important;
+    --interactive-background-active:   rgba(255, 26, 58, 0.16) !important;
+    --interactive-background-selected: rgba(255, 26, 58, 0.14) !important;
+
+    /* Кольцо «говорит» у аватарок войса и рамка плитки в звонке — Discord
+       ставит inline box-shadow через эту переменную (зелёная по умолчанию).
+       Подключено/говорит в 190x4 = акцентный красный, не зелёный. */
+    --status-speaking:              var(--x4-red-bright) !important;
 }
 
 /* Все промежуточные обёртки → transparent.
@@ -1085,14 +1104,19 @@ button[class*="colorLink_"]:hover {
    LINKS
    ============================================================ */
 
-a,
-[class*="anchor_"] {
+/* Только настоящие ссылки (текст сообщений, эмбеды, подписи). Голый `a`
+   красил строки ЛС, пункты «Nitro/Магазин» и прочую навигацию — это
+   тоже <a>, и ники в списке ЛС становились сплошь красными. */
+[class*="anchor_"],
+[class*="markup_"] a,
+[class*="embed"] a {
     color: var(--x4-red-bright) !important;
     transition: text-shadow 0.15s ease;
 }
 
-a:hover,
-[class*="anchor_"]:hover {
+[class*="anchor_"]:hover,
+[class*="markup_"] a:hover,
+[class*="embed"] a:hover {
     color: var(--x4-red-bright) !important;
     text-shadow: 0 0 8px var(--x4-red-glow);
 }
@@ -1835,4 +1859,38 @@ hr[class*="separator"] {
 [class*="devButtons_effb26"],
 [class*="securedBanner__66f0f"] {
     background-color: transparent !important;
+}
+
+/* ============================================================
+   3.8.0 — фиксы под осеннюю сборку Discord (живой DOM 2026-10-14)
+   ============================================================ */
+
+/* Настройки теперь открываются модалкой modal_ + container__. Её фон —
+   --background-base-lower (у нас 0.18 alpha), а container__ гасит правило
+   прозрачных обёрток выше, поэтому сквозь настройки читался чат.
+   Даём модалке плотную подложку с размытием. (1,2,0) + позже по файлу. */
+#app-mount [class*="modal_"][class*="container__"] {
+    background: rgba(8, 8, 12, 0.94) !important;
+    background-color: rgba(8, 8, 12, 0.94) !important;
+    border: 1px solid var(--x4-border) !important;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(255, 26, 58, 0.12) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Плитки участников в звонке: Discord заливает фон inline-цветом из
+   аватарки (жёлтые/розовые/синие плашки поверх обоев). background-image
+   рисуется ПОВЕРХ background-color — накрываем цвет тёмным слоем, лёгкий
+   оттенок остаётся. opacity нельзя: аватар — потомок этого же узла. */
+[class*="tile__"] [class*="background_"][style*="background-color"] {
+    background-image: linear-gradient(rgba(6, 6, 10, 0.86), rgba(6, 6, 10, 0.86)) !important;
+}
+
+/* «Голосовая связь подключена» и таймер в войс-канале — Discord красит
+   через --text-feedback-positive (зелёный). Подключено = акцентный красный. */
+[class*="rtcConnectionStatusConnected"],
+[class*="channelInfo_"] [class*="tabularNumbers"] {
+    color: var(--x4-red-bright) !important;
 }
