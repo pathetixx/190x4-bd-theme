@@ -4,7 +4,7 @@
 
 [**English**](#english) · [**Русский**](#русский)
 
-[![version](https://img.shields.io/badge/version-3.8.1-ff1a3a?style=flat-square)](#changelog)
+[![version](https://img.shields.io/badge/version-3.9.0-ff1a3a?style=flat-square)](#changelog)
 [![BetterDiscord](https://img.shields.io/badge/BetterDiscord-%E2%89%A5%201.10-ff1a3a?style=flat-square)](https://betterdiscord.app/)
 [![License](https://img.shields.io/badge/license-MIT-ff1a3a?style=flat-square)](LICENSE)
 
@@ -39,9 +39,18 @@ Highlights:
 
 To update: grab the newest `190x4.theme.css` from a release and overwrite. After replacing the file, **fully quit Discord through the system tray** (not Ctrl+R, not the window X — both leave the Electron process alive with cached CSS) and start it again.
 
-### Companion plugin: voice nameplates
+### Telegram-style chat
 
-Discord shows nameplates only in the member list and DMs. [`plugins/190x4VoiceNameplates.plugin.js`](plugins/190x4VoiceNameplates.plugin.js) adds them to voice channel participants too — same palette gradient, animation on hover. Drop it into the BetterDiscord **plugins** folder (`%AppData%\BetterDiscord\plugins\` on Windows) and enable it in **Settings → BetterDiscord → Plugins**. Works with or without the theme.
+In the **Cozy** message display every message is a bubble sized to its content; consecutive messages from one author are joined into a group, replies sit inside the bubble, date separators are centred pills.
+
+### Companion plugin
+
+[`plugins/190x4Companion.plugin.js`](plugins/190x4Companion.plugin.js):
+
+- puts **your own messages on the right** in red bubbles (Discord's markup has no "own message" marker, so the theme can't do it alone — without the plugin all bubbles stay on the left);
+- shows **nameplates for voice channel participants** (Discord shows them only in the member list and DMs), animated on hover.
+
+Drop it into the BetterDiscord **plugins** folder (`%AppData%\BetterDiscord\plugins\` on Windows) and enable it in **Settings → BetterDiscord → Plugins**.
 
 ### Customising
 
@@ -90,9 +99,18 @@ Cyberpunk-тема red-neon. Палитра выведена прямо из л�
 
 Чтобы обновиться: качаешь свежий `190x4.theme.css` из релиза и перезаписываешь. После замены файла **полностью закрой Discord через системный трей** (не Ctrl+R и не крестик в окне — оба оставляют Electron-процесс жить с закэшированным CSS) и запусти заново.
 
-### Плагин-компаньон: таблички в войсе
+### Чат в стиле Telegram
 
-Discord показывает таблички с именем только в списке участников и в ЛС. [`plugins/190x4VoiceNameplates.plugin.js`](plugins/190x4VoiceNameplates.plugin.js) добавляет их участникам голосового канала — тот же градиент палитры, анимация при наведении. Положи файл в папку **plugins** BetterDiscord (`%AppData%\BetterDiscord\plugins\` на Windows) и включи в **Настройки → BetterDiscord → Plugins**. Работает и без темы.
+В режиме отображения **«Уютный»** каждое сообщение — пузырь по размеру содержимого; сообщения одного автора подряд склеиваются в группу, ответ — плашка внутри пузыря, даты — пилюли по центру.
+
+### Плагин-компаньон
+
+[`plugins/190x4Companion.plugin.js`](plugins/190x4Companion.plugin.js):
+
+- уводит **твои сообщения вправо** в красных пузырях (в разметке Discord нет признака «моё сообщение», одна тема этого не может — без плагина все пузыри слева);
+- показывает **таблички с именем у участников голосового канала** (Discord рисует их только в списке участников и ЛС), с анимацией при наведении.
+
+Положи файл в папку **plugins** BetterDiscord (`%AppData%\BetterDiscord\plugins\` на Windows) и включи в **Настройки → BetterDiscord → Plugins**.
 
 ### Кастомизация
 

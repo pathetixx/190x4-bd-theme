@@ -1,10 +1,10 @@
 /**
- * @name 190x4VoiceNameplates
- * @description Таблички с именем (nameplates) у участников в списке голосового канала — как в списке участников сервера. Анимация при наведении.
- * @version 1.0.0
+ * @name 190x4Companion
+ * @description Компаньон темы 190x4: таблички с именем у участников голосового канала и пометка своих сообщений для чата в стиле Telegram (свои — справа).
+ * @version 2.0.0
  * @author 190x4
  * @source https://github.com/pathetixx/190x4-bd-theme/tree/main/plugins
- * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/plugins/190x4VoiceNameplates.plugin.js
+ * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/plugins/190x4Companion.plugin.js
  */
 
 const { DOM, ReactUtils, Webpack } = BdApi;
@@ -20,14 +20,17 @@ const PALETTES = {
 const CDN = "https://cdn.discordapp.com/media/v1/collectibles-shop/";
 const ROW = '[class*="voiceUser__"]';
 const NAME = '[class*="username__"]';
+const MSG = 'li[id^="chat-messages-"]';
+const GROUP_START = '[class*="groupStart_"]';
 
-module.exports = class VoiceNameplates {
+module.exports = class Companion {
     constructor(meta) { this.meta = meta; }
 
     start() {
         this.UserStore = Webpack.getStore("UserStore");
         this.GuildMemberStore = Webpack.getStore("GuildMemberStore");
         this.AccessibilityStore = Webpack.getStore("AccessibilityStore");
+        this.MessageStore = Webpack.getStore("MessageStore");
 
         DOM.addStyle(this.meta.name, `
             .x4np-host { isolation: isolate; border-radius: var(--radius-sm, 4px); }
@@ -62,6 +65,10 @@ module.exports = class VoiceNameplates {
         this.timer = null;
         document.querySelectorAll(".x4np").forEach(n => n.remove());
         document.querySelectorAll(".x4np-host").forEach(row => this.unhost(row));
+        document.querySelectorAll("[data-x4-self], [data-x4-end]").forEach(li => {
+            delete li.dataset.x4Self;
+            delete li.dataset.x4End;
+        });
         DOM.removeStyle(this.meta.name);
     }
 
@@ -86,6 +93,32 @@ module.exports = class VoiceNameplates {
     scan() {
         for (const row of document.querySelectorAll(ROW)) {
             try { this.render(row); } catch (e) { console.error(`[${this.meta.name}]`, e); }
+        }
+        try { this.markMessages(); } catch (e) { console.error(`[${this.meta.name}]`, e); }
+    }
+
+    // Чат «как в Telegram» рисует тема, но в разметке Discord нет признака
+    // «моё сообщение» и «последнее в группе». Ставим их атрибутами на <li>:
+    //   data-x4-self — автор = текущий пользователь (тема уводит вправо);
+    //   data-x4-end  — последнее сообщение группы (хвостик пузыря).
+    // id элемента: chat-messages-<channelId>-<messageId>.
+    markMessages() {
+        const me = this.UserStore?.getCurrentUser()?.id;
+        if (!me) return;
+        for (const li of document.querySelectorAll(MSG)) {
+            const [channelId, messageId] = li.id.slice("chat-messages-".length).split("-");
+            const author = this.MessageStore?.getMessage(channelId, messageId)?.author?.id;
+            const self = author === me;
+            if (self !== (li.dataset.x4Self === "1")) {
+                if (self) li.dataset.x4Self = "1"; else delete li.dataset.x4Self;
+            }
+            // Группа кончается, если дальше не продолжение: другой узел
+            // (разделитель даты, «новые сообщения») или новый groupStart.
+            const next = li.nextElementSibling;
+            const end = !next?.matches(MSG) || !!next.querySelector(`:scope > ${GROUP_START}`);
+            if (end !== (li.dataset.x4End === "1")) {
+                if (end) li.dataset.x4End = "1"; else delete li.dataset.x4End;
+            }
         }
     }
 

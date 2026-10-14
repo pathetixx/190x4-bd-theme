@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 3.8.1
+ * @version 3.9.0
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -1890,4 +1890,149 @@ hr[class*="separator"] {
 [class*="rtcConnectionStatusConnected"],
 [class*="channelInfo_"] [class*="tabularNumbers"] {
     color: var(--x4-red-bright) !important;
+}
+
+/* ============================================================
+   3.9.0 — ЧАТ В СТИЛЕ TELEGRAM (только режим «Уютный»)
+   Каждое сообщение — пузырь по ширине содержимого. Сообщения одного
+   автора подряд склеиваются: внутренние углы малые, внешние большие.
+   Свои сообщения справа и красные — для этого плагин 190x4Companion
+   ставит на <li> атрибуты data-x4-self (моё) и data-x4-end (последнее
+   в группе). Без плагина все пузыри просто слева.
+   Скоуп — main чата: поиск/закрепы/треды в попаутах не трогаем.
+   ============================================================ */
+
+:root {
+    --x4-bubble-other:        rgba(17, 17, 26, 0.86);
+    --x4-bubble-other-border: rgba(255, 255, 255, 0.07);
+    --x4-bubble-self:         linear-gradient(135deg, rgba(110, 10, 26, 0.9), rgba(58, 6, 16, 0.9));
+    --x4-bubble-self-border:  rgba(255, 26, 58, 0.4);
+    --x4-bubble-radius:       16px;
+    --x4-bubble-joint:        6px;
+}
+
+/* Пузырь. Отступ 64px = место под аватар (16 + 40 + 8). */
+main[class*="chatContent_"] li[id^="chat-messages-"] > [class*="cozyMessage_"],
+main[class*="chatContent_"] li[id^="chat-messages-"] > [class*="cozyMessage_"]:hover {
+    width: fit-content !important;
+    max-width: min(72%, 760px) !important;
+    min-height: 0 !important;
+    margin: 1px auto 1px 64px !important;
+    padding: 6px 12px 7px !important;
+    background: var(--x4-bubble-other) !important;
+    border: 1px solid var(--x4-bubble-other-border) !important;
+    border-radius: var(--x4-bubble-joint) var(--x4-bubble-radius) var(--x4-bubble-radius) var(--x4-bubble-joint) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
+    box-sizing: border-box;
+}
+
+/* Внешние углы группы: первый — сверху, последний — снизу. */
+main[class*="chatContent_"] li[id^="chat-messages-"] > [class*="cozyMessage_"][class*="groupStart_"] {
+    border-top-left-radius: var(--x4-bubble-radius) !important;
+    margin-top: 2px !important;
+}
+main[class*="chatContent_"] li[data-x4-end] > [class*="cozyMessage_"] {
+    border-bottom-left-radius: var(--x4-bubble-radius) !important;
+}
+
+/* Discord сдвигает текст в «жёлоб» аватара (margin -72 / padding 72) —
+   внутри пузыря жёлоба нет. */
+main[class*="chatContent_"] [class*="cozyMessage_"] [class*="messageContent_"] {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+/* Аватар и украшение — absolute от корня сообщения; корень уехал на
+   64px + 1px рамки, возвращаем их в левый жёлоб. Время продолжения
+   группы (видно при наведении) — туда же. */
+main[class*="chatContent_"] [class*="cozyMessage_"] [class*="avatar_"],
+main[class*="chatContent_"] [class*="cozyMessage_"] [class*="avatarDecoration_"],
+main[class*="chatContent_"] [class*="cozyMessage_"] [class*="timestampVisibleOnHover_"] {
+    translate: -65px 0;
+}
+
+/* Вложения/эмбеды/реакции — по ширине содержимого, а не всей ленты. */
+main[class*="chatContent_"] [class*="cozyMessage_"] [id^="message-accessories-"] {
+    grid-template-columns: minmax(0, auto) !important;
+}
+
+/* Время в шапке — мельче и тише, как в Telegram. */
+main[class*="chatContent_"] [class*="cozyMessage_"] [class*="header_"] [class*="timestamp_"] {
+    font-size: 11px !important;
+    opacity: 0.75;
+}
+
+/* --- Свои сообщения: справа, красные, без аватара и ника --- */
+main[class*="chatContent_"] li[data-x4-self] > [class*="cozyMessage_"],
+main[class*="chatContent_"] li[data-x4-self] > [class*="cozyMessage_"]:hover {
+    margin: 1px 16px 1px auto !important;
+    background: var(--x4-bubble-self) !important;
+    border-color: var(--x4-bubble-self-border) !important;
+    border-radius: var(--x4-bubble-radius) var(--x4-bubble-joint) var(--x4-bubble-joint) var(--x4-bubble-radius) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), 0 0 14px rgba(255, 26, 58, 0.1) !important;
+}
+main[class*="chatContent_"] li[data-x4-self] > [class*="cozyMessage_"][class*="groupStart_"] {
+    border-top-right-radius: var(--x4-bubble-radius) !important;
+}
+main[class*="chatContent_"] li[data-x4-self][data-x4-end] > [class*="cozyMessage_"] {
+    border-bottom-right-radius: var(--x4-bubble-radius) !important;
+}
+main[class*="chatContent_"] li[data-x4-self] [class*="avatar_"],
+main[class*="chatContent_"] li[data-x4-self] [class*="avatarDecoration_"],
+main[class*="chatContent_"] li[data-x4-self] [class*="headerText_"] {
+    display: none !important;
+}
+/* Время продолжения у своих — слева от пузыря (справа — край ленты). */
+main[class*="chatContent_"] li[data-x4-self] [class*="timestampVisibleOnHover_"] {
+    translate: none;
+    left: -62px !important;
+    right: auto !important;
+}
+
+/* --- Упоминание тебя: красная кромка вместо жёлтой полосы на всю ширину --- */
+main[class*="chatContent_"] li[id^="chat-messages-"] > [class*="cozyMessage_"][class*="mentioned_"] {
+    border-color: var(--x4-red) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), 0 0 12px rgba(255, 26, 58, 0.25) !important;
+}
+main[class*="chatContent_"] [class*="cozyMessage_"][class*="mentioned_"]::before {
+    display: none !important;
+}
+
+/* --- Ответ: плашка внутри пузыря с красной полосой слева --- */
+main[class*="chatContent_"] [class*="cozyMessage_"] [class*="repliedMessage_"] {
+    margin: 0 0 4px !important;
+    padding: 3px 8px !important;
+    background: rgba(255, 26, 58, 0.08) !important;
+    border-left: 2px solid var(--x4-red) !important;
+    border-radius: 6px !important;
+}
+/* Изогнутая «нить» ответа слева — отдельный элемент, вне пузыря она
+   висит в воздухе. */
+main[class*="chatContent_"] [class*="cozyMessage_"] [class*="repliedMessageClickableSpine"] {
+    display: none !important;
+}
+
+/* Время в своём пузыре — светлее: на красном серое тонет. */
+main[class*="chatContent_"] li[data-x4-self] [class*="timestamp_"] {
+    color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* --- Разделитель даты: пилюля по центру вместо линии на всю ширину --- */
+main[class*="chatContent_"] [class*="divider__"][class*="hasContent__"][role="separator"] {
+    height: auto !important;
+    border-top: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    justify-content: center !important;
+    margin: 16px 0 8px !important;
+}
+main[class*="chatContent_"] [class*="divider__"][class*="hasContent__"][role="separator"] > span {
+    position: static !important;
+    margin: 0 auto !important;
+    padding: 2px 10px !important;
+    background: rgba(10, 10, 15, 0.85) !important;
+    border: 1px solid var(--x4-border) !important;
+    border-radius: 10px !important;
+    color: var(--x4-text) !important;
+    font-size: 12px !important;
 }
