@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 4.0.2
+ * @version 4.0.3
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -2521,29 +2521,6 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
 }
 #app-mount section[class*="panels__"] [class*="labelWrapper_"] a {
     font-family: var(--ct-mono) !important;
-}
-/* Строка статуса собирается столбиком с высотой по содержимому. Без этого
-   в режиме Discord «enlarge-target-size» (крупные элементы панели) строка
-   с пингом и название канала налезали друг на друга, а значок сигнала
-   раздувался до 32px. */
-#app-mount section[class*="panels__"] [class*="rtcConnectionStatus__"] {
-    height: auto !important; min-height: 32px; align-items: center !important;
-}
-#app-mount section[class*="panels__"] [class*="labelWrapper_"] {
-    display: flex !important; flex-direction: column !important; justify-content: center;
-    gap: 2px; flex: 1 1 auto; min-width: 0; margin: 0 !important; padding: 0 !important; overflow: hidden;
-}
-#app-mount section[class*="panels__"] [class*="labelWrapper_"] > * { flex: 0 0 auto; min-width: 0; max-width: 100%; margin: 0 !important; }
-#app-mount section[class*="panels__"] [class*="labelWrapper_"] > button { display: block !important; width: 100%; text-align: start; }
-#app-mount section[class*="panels__"] [class*="rtcConnectionStatusLabel"] {
-    height: auto !important; margin: 0 !important; line-height: 16px !important;
-}
-#app-mount section[class*="panels__"] .pingDisplay {
-    line-height: 14px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-#app-mount section[class*="panels__"] svg[class*="largePing"] {
-    width: 20px !important; height: 20px !important; padding: 0 !important;
-    margin: 0 8px 0 0 !important; border-radius: 0 !important; box-shadow: none !important;
 }
 /* значок пинга — свои «палки сигнала», без зелёной подложки */
 #app-mount section[class*="panels__"] svg[class*="ping_"] {

@@ -1,7 +1,7 @@
 /**
  * @name 190x4Companion
- * @description Компаньон темы 190x4: таблички с именем у участников голосового канала, пометка своих сообщений для чата в стиле Telegram (свои — справа) и анимации рамок, табличек и аватарок всегда — без наведения мыши.
- * @version 2.1.0
+ * @description Компаньон темы 190x4: таблички с именем у участников голосового канала, пометка своих сообщений для чата в стиле Telegram (свои — справа) и анимации рамок, табличек и аватарок всегда — без наведения мыши; единая раскладка панели голосового подключения.
+ * @version 2.2.0
  * @author 190x4
  * @source https://github.com/pathetixx/190x4-bd-theme/tree/main/plugins
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/plugins/190x4Companion.plugin.js
@@ -26,6 +26,14 @@ const GROUP_START = '[class*="groupStart_"]';
 // (хэш a_…), видео табличек с именем
 const ANIM = 'img[src*="/collectibles-shop/"], img[src*="avatar-decoration-presets/"], img[src*="/a_"], video[src*="/collectibles-shop/"]';
 
+// Раскладку панели голосового подключения Discord выбирает экспериментом:
+// в варианте 2 пинг стоит строкой над статусом, статус и название канала —
+// одним блоком, значок сигнала крупный. Тема рассчитана на этот вариант,
+// а у части людей Discord включает другой — строки налезают друг на друга.
+// Включаем вариант 2 на сеанс (без записи в аккаунт), у всех одинаково.
+const LAYOUT_EXPERIMENT = "2026-09-a11y-chassis-target-size";
+const LAYOUT_VARIANT = 2;
+
 module.exports = class Companion {
     constructor(meta) { this.meta = meta; }
 
@@ -35,6 +43,7 @@ module.exports = class Companion {
         this.AccessibilityStore = Webpack.getStore("AccessibilityStore");
         this.MessageStore = Webpack.getStore("MessageStore");
         this.settings = { alwaysAnimate: Data.load(this.meta.name, "alwaysAnimate") ?? true };
+        this.pinLayout();
 
         DOM.addStyle(this.meta.name, `
             .x4np-host { isolation: isolate; border-radius: var(--radius-sm, 4px); }
@@ -139,6 +148,7 @@ module.exports = class Companion {
     }
 
     stop() {
+        this.unpinLayout();
         this.observer?.disconnect();
         this.observer = null;
         this.srcObserver?.disconnect();
@@ -154,6 +164,27 @@ module.exports = class Companion {
             delete li.dataset.x4End;
         });
         DOM.removeStyle(this.meta.name);
+    }
+
+    pinLayout() {
+        try {
+            this.Dispatcher = Webpack.getModule(m => m?.dispatch && m?.subscribe, { searchExports: true });
+            const store = Webpack.getStore("ApexExperimentStore");
+            // свой вариант, выставленный руками, не трогаем
+            if (!this.Dispatcher || store?.getExperimentSessionOverride?.(LAYOUT_EXPERIMENT)) return;
+            this.Dispatcher.dispatch({ type: "APEX_EXPERIMENT_SESSION_OVERRIDE_CREATE", experimentName: LAYOUT_EXPERIMENT, variantId: LAYOUT_VARIANT });
+            this.layoutPinned = true;
+        } catch (e) {
+            console.error("[190x4Companion] layout pin failed", e);
+        }
+    }
+
+    unpinLayout() {
+        if (!this.layoutPinned) return;
+        this.layoutPinned = false;
+        try {
+            this.Dispatcher?.dispatch({ type: "APEX_EXPERIMENT_SESSION_OVERRIDE_DELETE", experimentName: LAYOUT_EXPERIMENT });
+        } catch (e) { /* Discord уже выгружается */ }
     }
 
     // user и guildId лежат в props строки войса (2 уровня вверх по fiber).
