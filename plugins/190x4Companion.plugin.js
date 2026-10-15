@@ -1,13 +1,13 @@
 /**
  * @name 190x4Companion
- * @description Компаньон темы 190x4: таблички с именем у участников голосового канала и пометка своих сообщений для чата в стиле Telegram (свои — справа).
- * @version 2.0.0
+ * @description Компаньон темы 190x4: таблички с именем у участников голосового канала, пометка своих сообщений для чата в стиле Telegram (свои — справа) и анимации рамок, табличек и аватарок всегда — без наведения мыши.
+ * @version 2.1.0
  * @author 190x4
  * @source https://github.com/pathetixx/190x4-bd-theme/tree/main/plugins
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/plugins/190x4Companion.plugin.js
  */
 
-const { DOM, ReactUtils, Webpack } = BdApi;
+const { DOM, ReactUtils, Webpack, Data, UI } = BdApi;
 
 // Палитры табличек — копия таблицы Discord (darkBackground), по ним
 // строится тот же градиент, что Discord рисует в списке участников.
@@ -22,6 +22,9 @@ const ROW = '[class*="voiceUser__"]';
 const NAME = '[class*="username__"]';
 const MSG = 'li[id^="chat-messages-"]';
 const GROUP_START = '[class*="groupStart_"]';
+// анимируемое: рамки аватаров (по sku и по пресету), анимированные аватарки
+// (хэш a_…), видео табличек с именем
+const ANIM = 'img[src*="/collectibles-shop/"], img[src*="avatar-decoration-presets/"], img[src*="/a_"], video[src*="/collectibles-shop/"]';
 
 module.exports = class Companion {
     constructor(meta) { this.meta = meta; }
@@ -31,6 +34,7 @@ module.exports = class Companion {
         this.GuildMemberStore = Webpack.getStore("GuildMemberStore");
         this.AccessibilityStore = Webpack.getStore("AccessibilityStore");
         this.MessageStore = Webpack.getStore("MessageStore");
+        this.settings = { alwaysAnimate: Data.load(this.meta.name, "alwaysAnimate") ?? true };
 
         DOM.addStyle(this.meta.name, `
             .x4np-host { isolation: isolate; border-radius: var(--radius-sm, 4px); }
@@ -55,12 +59,92 @@ module.exports = class Companion {
             this.timer = setTimeout(() => { this.timer = null; this.scan(); }, 250);
         });
         this.observer.observe(document.body, { childList: true, subtree: true });
+
+        // Discord возвращает статичную картинку при уходе курсора (меняет src)
+        // и ставит видео табличек на паузу — сразу возвращаем анимацию.
+        this.srcObserver = new MutationObserver(muts => {
+            if (!this.animating()) return;
+            for (const m of muts) this.animateNode(m.target);
+        });
+        this.srcObserver.observe(document.body, { attributes: true, subtree: true, attributeFilter: ["src"] });
+        this.onPause = e => {
+            const v = e.target;
+            if (v?.tagName === "VIDEO" && this.animating() && (v.currentSrc || v.src || "").includes("/collectibles-shop/")) {
+                setTimeout(() => v.isConnected && v.paused && v.play().catch(() => {}), 0);
+            }
+        };
+        document.addEventListener("pause", this.onPause, true);
         this.scan();
+    }
+
+    getSettingsPanel() {
+        return UI.buildSettingsPanel({
+            settings: [{
+                type: "switch",
+                id: "alwaysAnimate",
+                name: "Анимации всегда",
+                note: "Рамки аватаров, таблички с именем и анимированные аватарки играют без наведения мыши. Если в Discord включено «уменьшение движения» — не трогаем.",
+                value: this.settings.alwaysAnimate
+            }],
+            onChange: (_, id, value) => {
+                this.settings[id] = value;
+                Data.save(this.meta.name, id, value);
+                if (value) this.animateAll(); else this.restoreStatic();
+            }
+        });
+    }
+
+    animating() {
+        return this.settings?.alwaysAnimate && !this.AccessibilityStore?.useReducedMotion;
+    }
+
+    // Статичный URL → анимированный (null — менять нечего). Проверено по CDN:
+    // collectibles-shop/<sku>/static → /animated (APNG), пресеты рамок
+    // passthrough=false → true, аватарки a_<hash> → animated=true.
+    static animatedSrc(src) {
+        if (!src) return null;
+        if (src.includes("/collectibles-shop/") && /\/static(\?|$)/.test(src)) return src.replace(/\/static(\?|$)/, "/animated$1");
+        if (src.includes("avatar-decoration-presets/") && src.includes("passthrough=false")) return src.replace("passthrough=false", "passthrough=true");
+        if (/\/a_[0-9a-f]+\.(webp|png|jpg|gif)/.test(src) && /\/(avatars|banners)\//.test(src) && !/[?&]animated=true/.test(src)) {
+            return src + (src.includes("?") ? "&" : "?") + "animated=true";
+        }
+        return null;
+    }
+
+    animateNode(el) {
+        if (el.tagName === "IMG") {
+            const next = Companion.animatedSrc(el.getAttribute("src"));
+            if (next) {
+                el.dataset.x4Static = el.getAttribute("src");
+                el.setAttribute("src", next);
+            }
+        } else if (el.tagName === "VIDEO" && (el.currentSrc || el.src || "").includes("/collectibles-shop/") && el.paused) {
+            el.muted = true;
+            el.loop = true;
+            el.play().catch(() => {});
+        }
+    }
+
+    animateAll() {
+        if (!this.animating()) return;
+        document.querySelectorAll(ANIM).forEach(el => this.animateNode(el));
+    }
+
+    restoreStatic() {
+        document.querySelectorAll("img[data-x4-static]").forEach(img => {
+            img.setAttribute("src", img.dataset.x4Static);
+            delete img.dataset.x4Static;
+        });
+        document.querySelectorAll('video[src*="/collectibles-shop/"]').forEach(v => v.pause());
     }
 
     stop() {
         this.observer?.disconnect();
         this.observer = null;
+        this.srcObserver?.disconnect();
+        this.srcObserver = null;
+        document.removeEventListener("pause", this.onPause, true);
+        this.restoreStatic();
         clearTimeout(this.timer);
         this.timer = null;
         document.querySelectorAll(".x4np").forEach(n => n.remove());
@@ -95,6 +179,7 @@ module.exports = class Companion {
             try { this.render(row); } catch (e) { console.error(`[${this.meta.name}]`, e); }
         }
         try { this.markMessages(); } catch (e) { console.error(`[${this.meta.name}]`, e); }
+        try { this.animateAll(); } catch (e) { console.error(`[${this.meta.name}]`, e); }
     }
 
     // Чат «как в Telegram» рисует тема, но в разметке Discord нет признака
@@ -164,7 +249,7 @@ module.exports = class Companion {
                 if (this.AccessibilityStore?.useReducedMotion) return;
                 row.querySelector(":scope > .x4np video")?.play().catch(() => {});
             };
-            row._x4npLeave = () => row.querySelector(":scope > .x4np video")?.pause();
+            row._x4npLeave = () => { if (!this.animating()) row.querySelector(":scope > .x4np video")?.pause(); };
             row.addEventListener("mouseenter", row._x4npEnter);
             row.addEventListener("mouseleave", row._x4npLeave);
         }

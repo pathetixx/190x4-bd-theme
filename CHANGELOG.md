@@ -2,6 +2,11 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [4.0.1] — 2026-10-15
+
+### Added
+- Плагин 190x4Companion 2.1.0: анимации рамок аватаров, табличек с именем и анимированных аватарок играют всегда, без наведения мыши. Переключатель «Анимации всегда» в настройках плагина; при включённом «уменьшении движения» не срабатывает.
+
 ## [4.0.0] — 2026-10-15
 
 ### Changed
