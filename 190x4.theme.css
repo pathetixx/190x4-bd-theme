@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 4.1.0
+ * @version 4.1.1
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -947,6 +947,9 @@ button[class*="colorBrand"]:hover,
     background: linear-gradient(135deg, var(--x4-red), var(--x4-red-bright)) !important;
     background-color: var(--x4-red-bright) !important;
     box-shadow: 0 0 24px var(--x4-red-glow) !important;
+    /* на красной заливке значок белый, иначе красный градиент сливается
+       (например, «Настройки пользователя» в панели) */
+    --x4-ico-fill: #fff !important;
 }
 
 /* Secondary кнопки (тёмные типа "Изменить", "Найти беседу") */
@@ -2653,3 +2656,185 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
 }
 /* неактивное — приглушённый хром */
 #app-mount :is([aria-disabled="true"], [class*="disabled_"]) { --x4-ico-fill: linear-gradient(135deg, #6e7380, #3a3d46); }
+
+/* ============================================================
+   4.1.1 — ПЛАШКИ-УВЕДОМЛЕНИЯ НАД ОКНОМ
+   «Вы были в голосовом канале…» и прочие notice Discord: вместо
+   зелёной/синей полосы — графит с красной кромкой и контурной кнопкой.
+   ============================================================ */
+#app-mount [class*="notice__"] {
+    background: linear-gradient(90deg, rgba(255, 26, 58, 0.1), rgba(14, 4, 7, 0.94) 25%, rgba(14, 4, 7, 0.94) 75%, rgba(255, 26, 58, 0.1)) !important;
+    color: var(--x4-text) !important;
+    border-bottom: 1px solid var(--x4-border) !important;
+    box-shadow: 0 0 18px rgba(255, 26, 58, 0.12) !important;
+    font-family: var(--x4-font-ui);
+    letter-spacing: 0.02em;
+}
+/* важное (ошибки, предупреждения) — заметнее, но в той же гамме */
+#app-mount [class*="notice__"]:is([class*="colorDanger"], [class*="colorWarning"], [class*="colorError"]) {
+    background: linear-gradient(90deg, rgba(179, 0, 31, 0.55), rgba(40, 4, 10, 0.95) 30%, rgba(40, 4, 10, 0.95) 70%, rgba(179, 0, 31, 0.55)) !important;
+    border-bottom-color: var(--x4-red) !important;
+}
+#app-mount [class*="notice__"] :is(button, a[class*="button"]) {
+    background: transparent !important;
+    border: 1px solid var(--x4-red) !important;
+    border-radius: 0 !important;
+    color: #fff !important;
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+    transition: background-color 0.15s ease !important;
+}
+#app-mount [class*="notice__"] :is(button, a[class*="button"]):hover {
+    background: var(--x4-red) !important;
+}
+#app-mount [class*="notice__"] [class*="closeButton_"] { color: var(--x4-text-muted, #9a9aa5) !important; opacity: 1 !important; }
+#app-mount [class*="notice__"] [class*="closeButton_"]:hover { color: var(--x4-red-bright) !important; }
+#app-mount [class*="notice__"] [class*="closeButton_"] svg path { fill: currentColor !important; }
+
+/* ============================================================
+   4.1.1 — ЗВУКОВАЯ ПАНЕЛЬ
+   Кнопки звуков — контурные HUD-плашки со срезом угла, как кнопки
+   панели войса; заголовки разделов — моноширинные капсом.
+   ============================================================ */
+/* поиск: рамку и свечение рисует внешний div, у самого input — только мешающий второй контур */
+#app-mount [class*="picker_"] > [class*="header_"] input {
+    box-shadow: none !important;
+    outline: none !important;
+}
+#app-mount [class*="picker_"] > [class*="header_"] {
+    box-shadow: 0 1px 0 var(--x4-border) !important;
+}
+
+/* заголовки разделов */
+#app-mount [class*="picker_"] [class*="sectionContainer_"] {
+    background: transparent !important;
+}
+#app-mount [class*="picker_"] [class*="sectionHeader_"] { color: var(--x4-red) !important; }
+#app-mount [class*="picker_"] [class*="sectionHeader_"] [class*="sectionTitle_"] {
+    color: var(--x4-text) !important;
+    font-family: var(--x4-font-display) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* кнопки звуков */
+#app-mount li[class*="soundButtonWrapper_"] {
+    background: transparent !important;
+    border-radius: 0 !important;
+}
+#app-mount [class*="soundButton_"] {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 26, 58, 0.22) !important;
+    border-radius: 0 !important;
+    clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
+    transition: background-color 0.15s ease, border-color 0.15s ease !important;
+}
+#app-mount [class*="soundButton_"] [class*="soundName_"] {
+    color: var(--x4-text) !important;
+}
+#app-mount [class*="soundButton_"]:hover,
+#app-mount [class*="soundButton_"]:focus-within {
+    background: rgba(255, 26, 58, 0.14) !important;
+    border-color: var(--x4-red) !important;
+}
+/* слой с «Избранное» / «Предпрослушать» под курсором — графит вместо серого */
+#app-mount [class*="soundButton_"] [class*="buttonOverlayBackground_"] {
+    background: rgba(20, 4, 8, 0.92) !important;
+}
+#app-mount [class*="soundButton_"] [class*="secondaryButton_"] { color: var(--x4-text-muted) !important; }
+#app-mount [class*="soundButton_"] [class*="secondaryButton_"]:hover { color: var(--x4-red-bright) !important; }
+#app-mount [class*="soundButton_"] [class*="primaryIcon_"] { color: var(--x4-red-bright) !important; }
+/* звук, который играет сейчас */
+#app-mount [class*="soundButton_"]:is([class*="playing_"], [class*="Playing_"]) {
+    background: var(--x4-red) !important;
+    border-color: var(--x4-red-bright) !important;
+}
+#app-mount [class*="soundButton_"]:is([class*="playing_"], [class*="Playing_"]) [class*="soundName_"] { color: #fff !important; }
+
+/* Столбец категорий: все пункты — одинаковые плашки 26×26 со срезом угла.
+   Discord кладёт значки 24px и аватарки 32px в колонку шириной 26px —
+   отсюда разнобой размеров и вылезающие аватарки. */
+#app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"] {
+    --np-br: rgba(255, 255, 255, 0.28);
+    position: relative; overflow: visible !important;
+    display: flex !important; align-items: center; justify-content: center;
+    width: 26px !important; height: 26px !important; padding: 0 !important;
+    margin: 0 0 10px !important; box-sizing: border-box; flex: 0 0 auto;
+    background: #0c0c12 !important; border-radius: 0 !important; box-shadow: none !important;
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+/* HUD-скобки на двух несрезанных углах — как у иконок полосы серверов */
+#app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"]::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2;
+    background:
+        linear-gradient(var(--np-br), var(--np-br)) top right / 7px 1.5px no-repeat,
+        linear-gradient(var(--np-br), var(--np-br)) top right / 1.5px 7px no-repeat,
+        linear-gradient(var(--np-br), var(--np-br)) bottom left / 7px 1.5px no-repeat,
+        linear-gradient(var(--np-br), var(--np-br)) bottom left / 1.5px 7px no-repeat;
+}
+/* аватарки приглушены, под курсором и у выбранной — полный цвет */
+#app-mount [class*="categoryList_"] [class*="category_"] img {
+    filter: saturate(0.5) brightness(0.8) contrast(1.1);
+    transition: filter 0.2s ease;
+}
+#app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"]:hover,
+#app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"][class*="selected_"],
+#app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"]:has([class*="selected_"]) {
+    --np-br: var(--x4-red-bright);
+}
+#app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"]:hover img,
+#app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"]:has([class*="selected_"]) img { filter: none; }
+#app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"][class*="selected_"],
+#app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"]:has([class*="selected_"]) {
+    background: var(--x4-red-soft) !important;
+}
+/* полоску выбора слева прячем — выбор показывает сама плашка */
+#app-mount [class*="categoryList_"] [class*="categoryPill_"] { display: none !important; }
+/* значки — 16px хромом, у выбранной и под курсором красные */
+#app-mount [class*="categoryList_"] svg[class*="categoryIconIcon_"] {
+    width: 16px !important; height: 16px !important; color: #c9ccd4 !important;
+}
+#app-mount [class*="categoryList_"] [class*="category_"]:hover svg[class*="categoryIconIcon_"],
+#app-mount [class*="categoryList_"] [class*="selected_"] svg[class*="categoryIconIcon_"] { color: var(--x4-red-bright) !important; }
+/* аватарки серверов — во всю плашку, срез угла даёт сама плашка */
+#app-mount [class*="categoryList_"] [class*="category_"] > div:has(> svg[class*="mask_"]) { width: 26px; height: 26px; }
+#app-mount [class*="categoryList_"] [class*="category_"] svg[class*="mask_"] { width: 26px !important; height: 26px !important; }
+#app-mount [class*="categoryList_"] [class*="category_"] svg[class*="mask_"] foreignObject,
+#app-mount [class*="picker_"] [class*="sectionHeaderContent_"] svg[class*="mask_"] foreignObject { mask: none !important; }
+#app-mount [class*="picker_"] [class*="sectionHeaderContent_"] svg[class*="mask_"] {
+    clip-path: polygon(22% 0, 100% 0, 100% 78%, 78% 100%, 0 100%, 0 22%);
+}
+
+/* «Звуки Discord» — знак 190x4 вместо логотипа Discord (как в полосе серверов) */
+#app-mount [class*="categoryList_"] [class*="categoryIcon_"]:has(path[d^="M19.73 4.87"]) {
+    --np-br: rgba(255, 26, 58, 0.6);
+    flex-direction: column; gap: 0; line-height: 1;
+    /* ::before/::after заняты надписью — скобки фоном */
+    background:
+        linear-gradient(var(--np-br), var(--np-br)) top right / 7px 1.5px no-repeat,
+        linear-gradient(var(--np-br), var(--np-br)) top right / 1.5px 7px no-repeat,
+        linear-gradient(var(--np-br), var(--np-br)) bottom left / 7px 1.5px no-repeat,
+        linear-gradient(var(--np-br), var(--np-br)) bottom left / 1.5px 7px no-repeat,
+        #08080e !important;
+}
+#app-mount [class*="categoryList_"] [class*="categoryIcon_"]:has(path[d^="M19.73 4.87"]):is(:hover, [class*="selected_"]) {
+    --np-br: var(--x4-red-bright);
+    background-color: var(--x4-red-soft) !important;
+}
+#app-mount [class*="categoryList_"] [class*="categoryIcon_"]:has(path[d^="M19.73 4.87"]) svg { display: none !important; }
+#app-mount [class*="categoryList_"] [class*="categoryIcon_"]:has(path[d^="M19.73 4.87"])::before {
+    position: static; inset: auto; background: none;
+    content: "190"; font: 900 8px/1 'Orbitron', sans-serif; color: #fff; letter-spacing: 0.04em;
+}
+#app-mount [class*="categoryList_"] [class*="categoryIcon_"]:has(path[d^="M19.73 4.87"])::after {
+    position: static; inset: auto; background: none; z-index: auto;
+    content: "x4"; font: 900 10px/1 'Orbitron', sans-serif; color: var(--x4-red-bright);
+    text-shadow: 0 0 6px var(--x4-red-glow); margin-top: 1px;
+}
+#app-mount [class*="picker_"] svg[class*="headerIcon_"]:has(> path[d^="M19.73 4.87"]) { display: none !important; }
+#app-mount [class*="picker_"] [class*="sectionHeaderContent_"]:has(> svg > path[d^="M19.73 4.87"])::before {
+    content: "190x4"; font: 900 10px/1 'Orbitron', sans-serif; letter-spacing: 0.04em;
+    background: linear-gradient(90deg, #fff 0 58%, var(--x4-red-bright) 58% 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin-inline-end: 6px;
+}
