@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 4.1.1
+ * @version 4.1.2
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -592,48 +592,11 @@ html::after {
     box-shadow: inset 0 0 0 1px var(--x4-border-soft);
 }
 
-/* Voice-preview ancestors → transparent (расширено в 3.6.4, регрессия 3.6.2).
-   В 3.6.2 удалили *:has() из-за лагов; в 3.6.3 вернули limited :has() с
-   прибитыми prefix-классами (chatLayoutContent/callConnection/...), но они
-   не совпали с реальным wrapper'ом в текущем Discord — фон остался чёрным.
-   3.6.4: расширяем prefix-кандидатов до практически любого структурного
-   класса, который может оказаться родителем (content/wrapper/main/page/
-   panel/region/layout/empty/noChat). Это всё ещё limited :has() — не
-   universal `*`, Chromium проверяет :has() только на узлах с этими
-   prefix-классами (несколько десятков на странице, не 15 тыс.). */
-[class*="chatLayoutContent"]:has([class*="container__5aa3a"]),
-[class*="callContainerInner"]:has([class*="container__5aa3a"]),
-[class*="callConnection"]:has([class*="container__5aa3a"]),
-[class*="connectionArea"]:has([class*="container__5aa3a"]),
-[class*="emptyChannelContent"]:has([class*="container__5aa3a"]),
-[class*="voiceChannel_"]:has([class*="container__5aa3a"]),
-[class*="voiceChat_"]:has([class*="container__5aa3a"]),
-[class*="content_"]:has([class*="container__5aa3a"]),
-[class*="content__"]:has([class*="container__5aa3a"]),
-[class*="wrapper_"]:has([class*="container__5aa3a"]),
-[class*="wrapper__"]:has([class*="container__5aa3a"]),
-[class*="main_"]:has([class*="container__5aa3a"]),
-[class*="main__"]:has([class*="container__5aa3a"]),
-[class*="page_"]:has([class*="container__5aa3a"]),
-[class*="page__"]:has([class*="container__5aa3a"]),
-[class*="panel_"]:has([class*="container__5aa3a"]),
-[class*="panel__"]:has([class*="container__5aa3a"]),
-[class*="region"]:has([class*="container__5aa3a"]),
-[class*="layout"]:has([class*="container__5aa3a"]),
-[class*="empty_"]:has([class*="container__5aa3a"]),
-[class*="empty__"]:has([class*="container__5aa3a"]),
-[class*="noChat"]:has([class*="container__5aa3a"]),
-[class*="container_"]:has([class*="container__5aa3a"]):not([class*="container__5aa3a"]),
-section[class*="chat"]:has([class*="container__5aa3a"]),
-section[class*="chat"] > div:has([class*="container__5aa3a"]),
-section[class*="chat"] > div > div:has([class*="container__5aa3a"]),
-section[class*="chat"] > div > div > div:has([class*="container__5aa3a"]),
-main:has([class*="container__5aa3a"]),
-main > div:has([class*="container__5aa3a"]) {
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-}
+/* Предки превью звонка (container__5aa3a) раньше делались прозрачными
+   через :has() на любом структурном контейнере. С раскладкой 4.0 они
+   прозрачны и так, а :has() на верхних узлах заставлял пересчитывать
+   стили всей страницы при любом изменении внутри (ввод, наведение,
+   индикатор говорящего) — блок удалён в 4.1.2. */
 
 /* Брат container__5aa3a: содержит "Участники без видео скрыты" */
 [class*="content__5aa3a"] {
@@ -2215,43 +2178,31 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
    КУРСОР — хромированные, средний размер (~22px): стрелка с красной
    кромкой, «указатель» с красной вставкой и точкой, I-черта с красной нитью.
    SVG 32×32 с градиентами прямо в теме.
-   Discord сам ставит cursor на тысячах элементов, наследование не
-   спасает — задаём явно: всем стрелку, кликабельным указатель, полям
-   и тексту сообщений I-черту. Изменение размера, «нельзя» и
-   перетаскивание оставляем системными.
+   Discord сам ставит cursor на тысячах элементов — их перебиваем
+   inherit: стрелка у #app-mount, указатель у кликабельных, I-черта у
+   полей и текста сообщений, вложенное наследует. Изменение размера,
+   «нельзя» и перетаскивание оставляем системными.
    ============================================================ */
-:root {
-    --x4-cur-arrow:   url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cdefs%3E%3ClinearGradient id=%22c%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23ffffff%22/%3E%3Cstop offset=%22.25%22 stop-color=%22%23d9dce4%22/%3E%3Cstop offset=%22.45%22 stop-color=%22%236e7380%22/%3E%3Cstop offset=%22.55%22 stop-color=%22%23f4f5f8%22/%3E%3Cstop offset=%22.75%22 stop-color=%22%239aa0ad%22/%3E%3Cstop offset=%221%22 stop-color=%22%233a3d46%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform=%22scale%281.35%29%22%3E%3Cpath d=%22M2 2 V16 L5.6 12.6 L8.3 18.4 L10.6 17.4 L8 11.7 H13 Z%22 fill=%22url%28%23c%29%22 stroke=%22%2307070b%22 stroke-width=%221.1%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M8 11.7 H13 L2 2%22 fill=%22none%22 stroke=%22%23ff1a3a%22 stroke-width=%22.9%22 stroke-linejoin=%22round%22/%3E%3C/g%3E%3C/svg%3E") 3 3, default;
-    --x4-cur-pointer: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cdefs%3E%3ClinearGradient id=%22c%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23ffffff%22/%3E%3Cstop offset=%22.25%22 stop-color=%22%23d9dce4%22/%3E%3Cstop offset=%22.45%22 stop-color=%22%236e7380%22/%3E%3Cstop offset=%22.55%22 stop-color=%22%23f4f5f8%22/%3E%3Cstop offset=%22.75%22 stop-color=%22%239aa0ad%22/%3E%3Cstop offset=%221%22 stop-color=%22%233a3d46%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform=%22scale%281.35%29%22%3E%3Cpath d=%22M2 2 V16 L5.6 12.6 L8.3 18.4 L10.6 17.4 L8 11.7 H13 Z%22 fill=%22url%28%23c%29%22 stroke=%22%2307070b%22 stroke-width=%221.1%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M3.4 5.4 V12.8 L5.8 10.6 H9.4 Z%22 fill=%22%23ff1a3a%22/%3E%3Ccircle cx=%2214.5%22 cy=%2215.5%22 r=%221.6%22 fill=%22%23ff1a3a%22 stroke=%22%2307070b%22 stroke-width=%22.8%22/%3E%3C/g%3E%3C/svg%3E") 3 3, pointer;
-    --x4-cur-text:    url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cdefs%3E%3ClinearGradient id=%22c%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%235a5e69%22/%3E%3Cstop offset=%22.4%22 stop-color=%22%23ffffff%22/%3E%3Cstop offset=%221%22 stop-color=%22%233a3d46%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform=%22translate%2816 16%29 scale%281.35%29 translate%28-16 -16%29%22%3E%3Cpath d=%22M13 8.5 H15 L16 9.5 L17 8.5 H19 V9.9 H17.4 L16.7 10.6 V21.4 L17.4 22.1 H19 V23.5 H17 L16 22.5 L15 23.5 H13 V22.1 H14.6 L15.3 21.4 V10.6 L14.6 9.9 H13 Z%22 fill=%22url%28%23c%29%22 stroke=%22%2307070b%22 stroke-width=%22.8%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M16 11.4 V20.6%22 stroke=%22%23ff1a3a%22 stroke-width=%22.7%22/%3E%3C/g%3E%3C/svg%3E") 16 16, text;
-}
-#app-mount,
-#app-mount * {
-    cursor: var(--x4-cur-arrow) !important;
-}
+/* Курсор задаём только узлам, где он меняется; остальные наследуют
+   (inherit дешёвый). Значения — прямо в правилах, не через var():
+   длинный data:-SVG через переменную разбирался заново на каждом из
+   тысяч элементов, и любой полный пересчёт стилей стоил ~40 мс. */
+#app-mount { cursor: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cdefs%3E%3ClinearGradient id=%22c%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23ffffff%22/%3E%3Cstop offset=%22.25%22 stop-color=%22%23d9dce4%22/%3E%3Cstop offset=%22.45%22 stop-color=%22%236e7380%22/%3E%3Cstop offset=%22.55%22 stop-color=%22%23f4f5f8%22/%3E%3Cstop offset=%22.75%22 stop-color=%22%239aa0ad%22/%3E%3Cstop offset=%221%22 stop-color=%22%233a3d46%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform=%22scale%281.35%29%22%3E%3Cpath d=%22M2 2 V16 L5.6 12.6 L8.3 18.4 L10.6 17.4 L8 11.7 H13 Z%22 fill=%22url%28%23c%29%22 stroke=%22%2307070b%22 stroke-width=%221.1%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M8 11.7 H13 L2 2%22 fill=%22none%22 stroke=%22%23ff1a3a%22 stroke-width=%22.9%22 stroke-linejoin=%22round%22/%3E%3C/g%3E%3C/svg%3E") 3 3, default !important; }
+#app-mount * { cursor: inherit !important; }
 #app-mount :is(a, button, label, select, summary,
     [role="button"], [role="link"], [role="tab"], [role="treeitem"], [role="menuitem"],
     [role="menuitemcheckbox"], [role="menuitemradio"], [role="option"], [role="switch"],
     [role="checkbox"], [role="radio"], [class*="clickable"], [class*="interactive_"]),
-#app-mount :is(a, button, label, select, summary,
-    [role="button"], [role="link"], [role="tab"], [role="treeitem"], [role="menuitem"],
-    [role="menuitemcheckbox"], [role="menuitemradio"], [role="option"], [role="switch"],
-    [role="checkbox"], [role="radio"], [class*="clickable"], [class*="interactive_"]) * {
-    cursor: var(--x4-cur-pointer) !important;
+/* ссылки внутри текста сообщения — снова указатель */
+#app-mount :is([class*="messageContent_"], [class*="markup_"]) :is(a, [role="button"], [class*="mention"]) {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cdefs%3E%3ClinearGradient id=%22c%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23ffffff%22/%3E%3Cstop offset=%22.25%22 stop-color=%22%23d9dce4%22/%3E%3Cstop offset=%22.45%22 stop-color=%22%236e7380%22/%3E%3Cstop offset=%22.55%22 stop-color=%22%23f4f5f8%22/%3E%3Cstop offset=%22.75%22 stop-color=%22%239aa0ad%22/%3E%3Cstop offset=%221%22 stop-color=%22%233a3d46%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform=%22scale%281.35%29%22%3E%3Cpath d=%22M2 2 V16 L5.6 12.6 L8.3 18.4 L10.6 17.4 L8 11.7 H13 Z%22 fill=%22url%28%23c%29%22 stroke=%22%2307070b%22 stroke-width=%221.1%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M3.4 5.4 V12.8 L5.8 10.6 H9.4 Z%22 fill=%22%23ff1a3a%22/%3E%3Ccircle cx=%2214.5%22 cy=%2215.5%22 r=%221.6%22 fill=%22%23ff1a3a%22 stroke=%22%2307070b%22 stroke-width=%22.8%22/%3E%3C/g%3E%3C/svg%3E") 3 3, pointer !important;
 }
 #app-mount :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-    textarea, [contenteditable="true"], [role="textbox"], [class*="messageContent_"], [class*="markup_"]),
-#app-mount :is([contenteditable="true"], [role="textbox"], [class*="messageContent_"], [class*="markup_"]) * {
-    cursor: var(--x4-cur-text) !important;
-}
-/* ссылки внутри текста сообщения — снова указатель */
-#app-mount :is([class*="messageContent_"], [class*="markup_"]) :is(a, [role="button"], [class*="mention"]),
-#app-mount :is([class*="messageContent_"], [class*="markup_"]) :is(a, [role="button"]) * {
-    cursor: var(--x4-cur-pointer) !important;
+    textarea, [contenteditable="true"], [role="textbox"], [class*="messageContent_"], [class*="markup_"]) {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cdefs%3E%3ClinearGradient id=%22c%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%235a5e69%22/%3E%3Cstop offset=%22.4%22 stop-color=%22%23ffffff%22/%3E%3Cstop offset=%221%22 stop-color=%22%233a3d46%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform=%22translate%2816 16%29 scale%281.35%29 translate%28-16 -16%29%22%3E%3Cpath d=%22M13 8.5 H15 L16 9.5 L17 8.5 H19 V9.9 H17.4 L16.7 10.6 V21.4 L17.4 22.1 H19 V23.5 H17 L16 22.5 L15 23.5 H13 V22.1 H14.6 L15.3 21.4 V10.6 L14.6 9.9 H13 Z%22 fill=%22url%28%23c%29%22 stroke=%22%2307070b%22 stroke-width=%22.8%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M16 11.4 V20.6%22 stroke=%22%23ff1a3a%22 stroke-width=%22.7%22/%3E%3C/g%3E%3C/svg%3E") 16 16, text !important;
 }
 /* системные курсоры, которые несут смысл */
-#app-mount :is([aria-disabled="true"], :disabled, [class*="disabled_"]),
-#app-mount :is([aria-disabled="true"], :disabled, [class*="disabled_"]) * { cursor: not-allowed !important; }
+#app-mount :is([aria-disabled="true"], :disabled, [class*="disabled_"]) { cursor: not-allowed !important; }
 #app-mount [class*="resizeHandle"],
 #app-mount [class*="ResizeHandle"] { cursor: col-resize !important; }
 
@@ -2797,7 +2748,7 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
 #app-mount [class*="categoryList_"] [class*="category_"]:hover svg[class*="categoryIconIcon_"],
 #app-mount [class*="categoryList_"] [class*="selected_"] svg[class*="categoryIconIcon_"] { color: var(--x4-red-bright) !important; }
 /* аватарки серверов — во всю плашку, срез угла даёт сама плашка */
-#app-mount [class*="categoryList_"] [class*="category_"] > div:has(> svg[class*="mask_"]) { width: 26px; height: 26px; }
+#app-mount [class*="categoryList_"] [class*="category_"] > div:not([class*="categoryPill_"]) { width: 26px; height: 26px; }
 #app-mount [class*="categoryList_"] [class*="category_"] svg[class*="mask_"] { width: 26px !important; height: 26px !important; }
 #app-mount [class*="categoryList_"] [class*="category_"] svg[class*="mask_"] foreignObject,
 #app-mount [class*="picker_"] [class*="sectionHeaderContent_"] svg[class*="mask_"] foreignObject { mask: none !important; }

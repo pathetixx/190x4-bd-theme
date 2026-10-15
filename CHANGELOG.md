@@ -2,6 +2,11 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [4.1.2] — 2026-10-15
+
+### Fixed
+- Тема легче для Discord: первая буква в поле ввода, наведение и открытие звуковой панели заметно меньше подтормаживают — курсоры и прозрачность окна звонка переписаны без дорогих правил.
+
 ## [4.1.1] — 2026-10-15
 
 ### Fixed
