@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 4.0.1
+ * @version 4.0.2
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -2155,6 +2155,42 @@ nav[class*="wrapper_ef3116"] [class*="stack_"][role="group"]:empty { display: no
 /* одинаковая подложка: у аватарок с прозрачными полями рисунок не «худеет» */
 nav[class*="wrapper_ef3116"] [class*="wrapper__6e9f8"][role="treeitem"] { background: #101018 !important; }
 
+/* ============ папки серверов в полосе ============
+   Discord строит папку вертикально: группа шириной в колонку (72px),
+   шапка 48px, раскрытый список — столбиком с высотой, которую задаёт
+   анимация в style. В полосе всё это укладываем в строку: шапку
+   масштабируем как иконки серверов, список и подложку — горизонтально. */
+nav[class*="wrapper_ef3116"] [class*="listItem__"]:has(> [class*="folderGroup__"]) { width: auto !important; }
+nav[class*="wrapper_ef3116"] [class*="folderGroup__"] {
+    display: flex !important; flex-direction: row !important; align-items: center;
+    width: auto !important; height: 40px; gap: 4px; flex: 0 0 auto;
+}
+nav[class*="wrapper_ef3116"] [class*="folderGroup__"] > [class*="listItem__"] { align-items: center; }
+/* 48px → 38px как у иконок; отрицательный отступ — чтобы в раскладке
+   шапка занимала ровно ячейку 40px, а не вылезала на соседей */
+nav[class*="wrapper_ef3116"] [class*="folderHeader__"] {
+    margin: -4px !important; transform: scale(0.8); transform-origin: center; flex: 0 0 auto;
+}
+nav[class*="wrapper_ef3116"] [class*="folderButtonInner__"] {
+    clip-path: polygon(var(--np-cut) 0, 100% 0, 100% calc(100% - var(--np-cut)), calc(100% - var(--np-cut)) 100%, 0 100%, 0 var(--np-cut));
+    border-radius: 0 !important;
+}
+nav[class*="wrapper_ef3116"] [class*="folderPreviewWrapper__"],
+nav[class*="wrapper_ef3116"] [class*="folderIcon__"] { border-radius: 0 !important; }
+nav[class*="wrapper_ef3116"] [class*="folderPreviewGuildIcon__"] { border-radius: 2px !important; }
+nav[class*="wrapper_ef3116"] [class*="folderGuildsList__"] {
+    display: flex !important; flex-direction: row !important; align-items: center;
+    height: 40px !important; width: auto !important; gap: 4px;
+    margin: 0 !important; padding: 0 !important; overflow: visible !important;
+}
+nav[class*="wrapper_ef3116"] [class*="folderGuildsList__"] > * { margin: 0 !important; }
+/* подложка раскрытой папки — во всю длину группы, со срезом углов */
+nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
+    inset: 0 -2px !important; width: auto !important; height: auto !important;
+    border-radius: 0 !important; border-color: rgba(255, 26, 58, 0.3) !important;
+    clip-path: polygon(var(--np-cut) 0, 100% 0, 100% calc(100% - var(--np-cut)), calc(100% - var(--np-cut)) 100%, 0 100%, 0 var(--np-cut));
+}
+
 /* «ПОДСКАЗКА» в быстром переходе (Ctrl+K) — зелёная у Discord. */
 [class*="protip_"] [class*="pro__"] {
     color: var(--x4-red-bright) !important;
@@ -2485,6 +2521,29 @@ nav[class*="wrapper_ef3116"] [class*="wrapper__6e9f8"][role="treeitem"] { backgr
 }
 #app-mount section[class*="panels__"] [class*="labelWrapper_"] a {
     font-family: var(--ct-mono) !important;
+}
+/* Строка статуса собирается столбиком с высотой по содержимому. Без этого
+   в режиме Discord «enlarge-target-size» (крупные элементы панели) строка
+   с пингом и название канала налезали друг на друга, а значок сигнала
+   раздувался до 32px. */
+#app-mount section[class*="panels__"] [class*="rtcConnectionStatus__"] {
+    height: auto !important; min-height: 32px; align-items: center !important;
+}
+#app-mount section[class*="panels__"] [class*="labelWrapper_"] {
+    display: flex !important; flex-direction: column !important; justify-content: center;
+    gap: 2px; flex: 1 1 auto; min-width: 0; margin: 0 !important; padding: 0 !important; overflow: hidden;
+}
+#app-mount section[class*="panels__"] [class*="labelWrapper_"] > * { flex: 0 0 auto; min-width: 0; max-width: 100%; margin: 0 !important; }
+#app-mount section[class*="panels__"] [class*="labelWrapper_"] > button { display: block !important; width: 100%; text-align: start; }
+#app-mount section[class*="panels__"] [class*="rtcConnectionStatusLabel"] {
+    height: auto !important; margin: 0 !important; line-height: 16px !important;
+}
+#app-mount section[class*="panels__"] .pingDisplay {
+    line-height: 14px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#app-mount section[class*="panels__"] svg[class*="largePing"] {
+    width: 20px !important; height: 20px !important; padding: 0 !important;
+    margin: 0 8px 0 0 !important; border-radius: 0 !important; box-shadow: none !important;
 }
 /* значок пинга — свои «палки сигнала», без зелёной подложки */
 #app-mount section[class*="panels__"] svg[class*="ping_"] {

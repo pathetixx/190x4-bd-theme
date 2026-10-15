@@ -2,6 +2,12 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [4.0.2] — 2026-10-15
+
+### Fixed
+- Папки серверов в полосе сверху: закрытая папка — обычная иконка в ряду, раскрытая разворачивается вправо.
+- Панель голосового подключения при крупных элементах интерфейса: пинг и название канала больше не налезают друг на друга.
+
 ## [4.0.1] — 2026-10-15
 
 ### Added
