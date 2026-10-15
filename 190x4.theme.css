@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 4.0.3
+ * @version 4.1.0
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -1887,7 +1887,11 @@ main[class*="chatContent_"] li[data-x4-self] > [class*="cozyMessage_"]:hover {
     border-radius: var(--x4-bubble-radius) var(--x4-bubble-joint) var(--x4-bubble-joint) var(--x4-bubble-radius) !important;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), 0 0 14px rgba(255, 26, 58, 0.1) !important;
 }
-main[class*="chatContent_"] li[data-x4-self] > [class*="cozyMessage_"][class*="groupStart_"] {
+/* margin-top повторяем и для :hover: правило своих выше перебивает
+   отступ начала группы, и при наведении пузырь прыгал на 1px. */
+main[class*="chatContent_"] li[data-x4-self] > [class*="cozyMessage_"][class*="groupStart_"],
+main[class*="chatContent_"] li[data-x4-self] > [class*="cozyMessage_"][class*="groupStart_"]:hover {
+    margin-top: 2px !important;
     border-top-right-radius: var(--x4-bubble-radius) !important;
 }
 main[class*="chatContent_"] li[data-x4-self][data-x4-end] > [class*="cozyMessage_"] {
@@ -2628,5 +2632,24 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
 }
 /* «закрыть» окно при наведении — красная плашка, значок белый */
 #app-mount [class*="winButton_"][class*="winButtonClose_"]:hover { --x4-ico-fill: #fff; }
+/* на красной заливке значок белый: красный градиент на красном не виден
+   (включённые камера/демонстрация, заглушённый микрофон под курсором) */
+#app-mount section[class*="panels__"] [class*="actionButtons_"] button:is([class*="Active"], [class*="active_"], [aria-checked="true"]),
+#app-mount section[class*="panels__"] button:is([aria-label="Отключиться"], [aria-label="Disconnect"]):hover,
+#app-mount section[class*="panels__"] button[class*="redGlow"]:hover,
+#app-mount section[class*="panels__"] button[role="switch"][aria-checked="true"] {
+    --x4-ico-fill: #fff;
+}
+/* Плашки «подпишись на Nitro» (качество стрима и др.) — цветной градиент,
+   красные ссылки и кнопки на нём не читаются: текст и значки белые. */
+#app-mount [class*="psell"] :is(a, [role="link"]) {
+    color: #fff !important;
+    text-decoration: underline !important;
+}
+#app-mount [class*="psell"] button,
+#app-mount [class*="psell"] button * {
+    color: #fff !important;
+    --x4-ico-fill: #fff;
+}
 /* неактивное — приглушённый хром */
 #app-mount :is([aria-disabled="true"], [class*="disabled_"]) { --x4-ico-fill: linear-gradient(135deg, #6e7380, #3a3d46); }

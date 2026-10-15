@@ -1,7 +1,7 @@
 /**
  * @name 190x4Companion
- * @description Компаньон темы 190x4: таблички с именем у участников голосового канала, пометка своих сообщений для чата в стиле Telegram (свои — справа) и анимации рамок, табличек и аватарок всегда — без наведения мыши; единая раскладка панели голосового подключения.
- * @version 2.2.0
+ * @description Компаньон темы 190x4: таблички с именем у участников голосового канала, пометка своих сообщений для чата в стиле Telegram (свои — справа) и анимации рамок, табличек и аватарок всегда — без наведения мыши; единая раскладка панели голосового подключения; окно мини-стрима можно скрыть крестиком и вернуть кнопкой «Стрим».
+ * @version 2.4.0
  * @author 190x4
  * @source https://github.com/pathetixx/190x4-bd-theme/tree/main/plugins
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/plugins/190x4Companion.plugin.js
@@ -21,6 +21,11 @@ const CDN = "https://cdn.discordapp.com/media/v1/collectibles-shop/";
 const ROW = '[class*="voiceUser__"]';
 const NAME = '[class*="username__"]';
 const MSG = 'li[id^="chat-messages-"]';
+// Окно мини-стрима, которое Discord держит поверх всего приложения.
+const PIP = '[class*="pictureInPictureWindow_"]';
+// Правая часть шапки окна: «Почта», «Помощь», кнопки окна. Скрытую
+// системную шапку (systemBar_) с тем же классом пропускаем.
+const TITLE_TRAILING = '[class*="bar_"]:not([class*="systemBar_"]) > [class*="trailing_"]';
 const GROUP_START = '[class*="groupStart_"]';
 // анимируемое: рамки аватаров (по sku и по пресету), анимированные аватарки
 // (хэш a_…), видео табличек с именем
@@ -43,6 +48,7 @@ module.exports = class Companion {
         this.AccessibilityStore = Webpack.getStore("AccessibilityStore");
         this.MessageStore = Webpack.getStore("MessageStore");
         this.settings = { alwaysAnimate: Data.load(this.meta.name, "alwaysAnimate") ?? true };
+        this.pipHidden = Data.load(this.meta.name, "pipHidden") ?? false;
         this.pinLayout();
 
         DOM.addStyle(this.meta.name, `
@@ -58,16 +64,40 @@ module.exports = class Companion {
                 opacity: 0.6; transition: opacity 0.3s;
             }
             .x4np-host:hover .x4np video { opacity: 0.9; }
+
+            html[data-x4-pip-hidden] ${PIP} { visibility: hidden !important; pointer-events: none !important; }
+            .x4pip-close, .x4pip-show {
+                display: flex; align-items: center; justify-content: center;
+                border: 1px solid rgba(255, 26, 58, 0.55); color: #fff; cursor: pointer;
+                background: rgba(10, 10, 15, 0.82); font: 600 12px/1 var(--font-primary, sans-serif);
+            }
+            .x4pip-close:hover, .x4pip-show:hover { background: #ff1a3a; border-color: #ff2d4d; }
+            .x4pip-close {
+                position: absolute; top: 8px; right: 8px; z-index: 10;
+                width: 24px; height: 24px; padding: 0; border-radius: 4px;
+                opacity: 0; transition: opacity 0.15s;
+            }
+            ${PIP}:hover .x4pip-close { opacity: 1; }
+            .x4pip-show {
+                gap: 6px; height: 24px; padding: 0 10px; margin-inline-end: 12px;
+                border-radius: 4px; box-shadow: 0 0 12px rgba(255, 26, 58, 0.3);
+                -webkit-app-region: no-drag; flex-shrink: 0;
+            }
+            .x4pip-close svg, .x4pip-show svg { width: 14px; height: 14px; }
         `);
 
-        // Пересканируем не чаще раза в 250 мс: MutationObserver на body
-        // ловит сотни мутаций в секунду, работа — только по таймеру.
+        // Сообщения ленты помечаем сразу, в колбэке: он срабатывает до
+        // отрисовки кадра, и новое сообщение ни разу не мелькнёт по старой
+        // разметке. Остальное пересканируем не чаще раза в 250 мс:
+        // MutationObserver на body ловит сотни мутаций в секунду.
         this.scan = this.scan.bind(this);
-        this.observer = new MutationObserver(() => {
+        this.observer = new MutationObserver(muts => {
+            try { this.markMutated(muts); } catch (e) { console.error(`[${this.meta.name}]`, e); }
             if (this.timer) return;
             this.timer = setTimeout(() => { this.timer = null; this.scan(); }, 250);
         });
-        this.observer.observe(document.body, { childList: true, subtree: true });
+        // id — у отправленного сообщения временный id меняется на настоящий.
+        this.observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["id"] });
 
         // Discord возвращает статичную картинку при уходе курсора (меняет src)
         // и ставит видео табличек на паузу — сразу возвращаем анимацию.
@@ -163,6 +193,8 @@ module.exports = class Companion {
             delete li.dataset.x4Self;
             delete li.dataset.x4End;
         });
+        document.querySelectorAll(".x4pip-close, .x4pip-show").forEach(n => n.remove());
+        delete document.documentElement.dataset.x4PipHidden;
         DOM.removeStyle(this.meta.name);
     }
 
@@ -210,6 +242,7 @@ module.exports = class Companion {
             try { this.render(row); } catch (e) { console.error(`[${this.meta.name}]`, e); }
         }
         try { this.markMessages(); } catch (e) { console.error(`[${this.meta.name}]`, e); }
+        try { this.syncPip(); } catch (e) { console.error(`[${this.meta.name}]`, e); }
         try { this.animateAll(); } catch (e) { console.error(`[${this.meta.name}]`, e); }
     }
 
@@ -221,21 +254,54 @@ module.exports = class Companion {
     markMessages() {
         const me = this.UserStore?.getCurrentUser()?.id;
         if (!me) return;
-        for (const li of document.querySelectorAll(MSG)) {
-            const [channelId, messageId] = li.id.slice("chat-messages-".length).split("-");
-            const author = this.MessageStore?.getMessage(channelId, messageId)?.author?.id;
-            const self = author === me;
-            if (self !== (li.dataset.x4Self === "1")) {
-                if (self) li.dataset.x4Self = "1"; else delete li.dataset.x4Self;
+        for (const li of document.querySelectorAll(MSG)) this.markMessage(li, me);
+    }
+
+    markMessage(li, me) {
+        const [channelId, messageId] = li.id.slice("chat-messages-".length).split("-");
+        const author = this.MessageStore?.getMessage(channelId, messageId)?.author?.id;
+        const self = author === me;
+        if (self !== (li.dataset.x4Self === "1")) {
+            if (self) li.dataset.x4Self = "1"; else delete li.dataset.x4Self;
+        }
+        // Группа кончается, если дальше не продолжение: другой узел
+        // (разделитель даты, «новые сообщения») или новый groupStart.
+        const next = li.nextElementSibling;
+        const end = !next?.matches(MSG) || !!next.querySelector(`:scope > ${GROUP_START}`);
+        if (end !== (li.dataset.x4End === "1")) {
+            if (end) li.dataset.x4End = "1"; else delete li.dataset.x4End;
+        }
+    }
+
+    // Только то, что затронули мутации: новые <li>, сменившие id, и соседи
+    // сверху — у них мог переехать конец группы. При подгрузке истории
+    // Discord пересоздаёт всю ленту, поэтому без задержки здесь мигала бы
+    // вся переписка.
+    markMutated(muts) {
+        const touched = new Set();
+        for (const m of muts) {
+            if (m.type === "attributes") {
+                if (m.target.matches?.(MSG)) touched.add(m.target);
+                continue;
             }
-            // Группа кончается, если дальше не продолжение: другой узел
-            // (разделитель даты, «новые сообщения») или новый groupStart.
-            const next = li.nextElementSibling;
-            const end = !next?.matches(MSG) || !!next.querySelector(`:scope > ${GROUP_START}`);
-            if (end !== (li.dataset.x4End === "1")) {
-                if (end) li.dataset.x4End = "1"; else delete li.dataset.x4End;
+            if (m.target.tagName === "OL" && m.previousSibling?.nodeType === 1 && m.previousSibling.matches(MSG)) {
+                touched.add(m.previousSibling);
+            }
+            for (const n of m.addedNodes) {
+                if (n.nodeType !== 1) continue;
+                if (n.matches(MSG)) touched.add(n);
+                else if (n.parentElement?.matches(MSG)) touched.add(n.parentElement);
+                else if (n.firstElementChild) for (const li of n.querySelectorAll(MSG)) touched.add(li);
             }
         }
+        if (!touched.size) return;
+        const me = this.UserStore?.getCurrentUser()?.id;
+        if (!me) return;
+        for (const li of [...touched]) {
+            const prev = li.previousElementSibling;
+            if (prev?.matches(MSG)) touched.add(prev);
+        }
+        for (const li of touched) if (li.isConnected) this.markMessage(li, me);
     }
 
     render(row) {
@@ -295,6 +361,52 @@ module.exports = class Companion {
         const mask = `linear-gradient(to right, rgba(0, 0, 0, 0.3) ${end}px, rgb(0, 0, 0) ${end + 50}px)`;
         const media = node.firstChild;
         if (media.style.maskImage !== mask) media.style.maskImage = mask;
+    }
+
+    // Окно мини-стрима: крестик прячет его, кнопка «Стрим» в шапке окна
+    // слева от «Почты» возвращает. Окно остаётся в DOM (visibility),
+    // Discord его не теряет.
+    setPipHidden(hidden) {
+        this.pipHidden = hidden;
+        Data.save(this.meta.name, "pipHidden", hidden);
+        this.syncPip();
+    }
+
+    syncPip() {
+        const win = document.querySelector(PIP);
+        const root = document.documentElement;
+        if (this.pipHidden) root.dataset.x4PipHidden = "1"; else delete root.dataset.x4PipHidden;
+
+        if (win && !win.querySelector(":scope > .x4pip-close")) {
+            win.appendChild(this.pipButton("x4pip-close", "Скрыть окно стрима",
+                '<path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
+                null, () => this.setPipHidden(true)));
+        }
+
+        let show = document.querySelector(".x4pip-show");
+        const bar = document.querySelector(TITLE_TRAILING);
+        if (!win || !this.pipHidden || !bar) { show?.remove(); return; }
+        if (!show) {
+            show = this.pipButton("x4pip-show", "Показать окно стрима",
+                '<rect x="3" y="5" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+                "Стрим", () => this.setPipHidden(false));
+        }
+        // Первым в ряду шапки: flex сам двигает кнопку при любой ширине окна.
+        if (bar.firstElementChild !== show) bar.prepend(show);
+    }
+
+    pipButton(cls, title, icon, label, onClick) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = cls;
+        b.title = title;
+        b.setAttribute("aria-label", title);
+        b.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon}</svg>`;
+        if (label) b.append(label);
+        // Окно перетаскивается за любую точку — не отдаём ему нажатие.
+        for (const type of ["pointerdown", "mousedown"]) b.addEventListener(type, e => e.stopPropagation());
+        b.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); onClick(); });
+        return b;
     }
 
     unhost(row) {
