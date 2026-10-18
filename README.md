@@ -4,7 +4,7 @@
 
 [**English**](#english) · [**Русский**](#русский)
 
-[![version](https://img.shields.io/badge/version-4.1.2-ff1a3a?style=flat-square)](#changelog)
+[![version](https://img.shields.io/badge/version-4.2.0-ff1a3a?style=flat-square)](#changelog)
 [![BetterDiscord](https://img.shields.io/badge/BetterDiscord-%E2%89%A5%201.10-ff1a3a?style=flat-square)](https://betterdiscord.app/)
 [![License](https://img.shields.io/badge/license-MIT-ff1a3a?style=flat-square)](LICENSE)
 
@@ -49,7 +49,8 @@ In the **Cozy** message display every message is a bubble sized to its content; 
 [`plugins/190x4Companion.plugin.js`](plugins/190x4Companion.plugin.js):
 
 - puts **your own messages on the right** in red bubbles (Discord's markup has no "own message" marker, so the theme can't do it alone — without the plugin all bubbles stay on the left);
-- shows **nameplates for voice channel participants** (Discord shows them only in the member list and DMs), animated on hover.
+- shows **nameplates for voice channel participants** (Discord shows them only in the member list and DMs), animated on hover;
+- **speeds the theme up**: swaps the theme's partial class matches for Discord's exact class names on the fly, so hovering, typing and the soundboard stay smooth (can be turned off in the plugin settings).
 
 Drop it into the BetterDiscord **plugins** folder (`%AppData%\BetterDiscord\plugins\` on Windows) and enable it in **Settings → BetterDiscord → Plugins**.
 
@@ -114,7 +115,8 @@ Cyberpunk-тема red-neon. Палитра выведена прямо из л�
 [`plugins/190x4Companion.plugin.js`](plugins/190x4Companion.plugin.js):
 
 - уводит **твои сообщения вправо** в красных пузырях (в разметке Discord нет признака «моё сообщение», одна тема этого не может — без плагина все пузыри слева);
-- показывает **таблички с именем у участников голосового канала** (Discord рисует их только в списке участников и ЛС), с анимацией при наведении.
+- показывает **таблички с именем у участников голосового канала** (Discord рисует их только в списке участников и ЛС), с анимацией при наведении;
+- **ускоряет тему**: на лету подставляет вместо частичных совпадений по классам точные классы текущей версии Discord — наведение, ввод текста и звуковая панель не подтормаживают (выключается в настройках плагина).
 
 Положи файл в папку **plugins** BetterDiscord (`%AppData%\BetterDiscord\plugins\` на Windows) и включи в **Настройки → BetterDiscord → Plugins**.
 

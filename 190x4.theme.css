@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 4.1.2
+ * @version 4.2.0
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -375,6 +375,12 @@ video + canvas {
     /* Информационные плашки (Mana notice info) — синие по умолчанию. */
     --icon-feedback-info:           var(--x4-red-bright) !important;
     --background-feedback-info:     rgba(255, 26, 58, 0.08) !important;
+
+    /* Mana-чекбоксы (списки «Добавить в беседу» и др.) — отмеченный синий. */
+    --checkbox-background-selected-default: var(--x4-red) !important;
+    --checkbox-background-selected-hover:   var(--x4-red-bright) !important;
+    --checkbox-border-selected-default:     var(--x4-red-bright) !important;
+    --checkbox-border-selected-hover:       var(--x4-red-bright) !important;
 }
 
 /* Все промежуточные обёртки → transparent.
@@ -605,6 +611,12 @@ html::after {
     background-image: none !important;
 }
 
+/* Фон окна звонка — анимированные пятна (центральное — синий Discord)
+   на сплошной подложке: закрывали обои. Убираем слой целиком. */
+[class*="gradientBackground__"]:has(> [class*="centerEllipse__"]) {
+    display: none !important;
+}
+
 /* Удалено в 3.6.2:
    section[class*="chat"] [class*="container_"]:not(message):not(form_)
        :not(input_):not(user):not(avatar):not(button)
@@ -789,6 +801,57 @@ pre code {
 [class*="footer_"] {
     background: rgba(6, 6, 10, 0.9) !important;
     border-top: 1px solid var(--x4-border-soft) !important;
+}
+
+/* Модалки Mana («Добавить в беседу» и др.) и выпадашки: общее правило
+   прозрачных container__ снимало им фон — сквозь окно просвечивал чат. */
+#app-mount [role="dialog"] > [class*="outerContainer__"] > [class*="container__"],
+/* выпадающие списки в попапах (подсказки поиска и т.п.) — та же беда */
+#app-mount [class*="layerContainer_"] [role="listbox"][class*="container__"] {
+    background: rgba(10, 10, 15, 0.98) !important;
+    border: 1px solid var(--x4-border) !important;
+    box-shadow: 0 0 30px rgba(255, 26, 58, 0.18) !important;
+}
+
+/* Полная карточка профиля (user-profile-modal-v2). Была полупрозрачной —
+   сквозь неё читался чат; левая колонка — серый Mana, заметка — чёрная полоса.
+   Теперь: плотное окно, левая колонка — остров как в раскладке темы. */
+.user-profile-modal-v2 {
+    background: rgba(8, 8, 12, 0.97) !important;
+    border: none !important;
+}
+.user-profile-modal-v2 main[class*="profile__"] {
+    background: linear-gradient(180deg, rgba(22, 22, 30, 0.96), rgba(11, 11, 16, 0.96)) !important;
+    border: 1px solid var(--ct-line, rgba(255, 26, 58, 0.34)) !important;
+    border-radius: 0 !important;
+    clip-path: var(--ct-chamfer);
+    box-shadow: inset 0 1px 0 rgba(255, 26, 58, 0.55) !important;
+}
+.user-profile-modal-v2 main[class*="profile__"] [class*="profileHeaderBannerContainer__"],
+.user-profile-modal-v2 main[class*="profile__"] [class*="banner_"] {
+    border-radius: 0 !important;
+}
+/* заметка: рамка на обёртке — высоту textarea Discord подгоняет сам */
+.user-profile-modal-v2 [class*="note_"] {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--x4-border-soft) !important;
+    border-radius: 4px;
+    padding: 6px 8px;
+    margin: 0 !important;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.user-profile-modal-v2 [class*="note_"]:focus-within {
+    border-color: var(--x4-red) !important;
+    box-shadow: 0 0 8px var(--x4-red-glow);
+}
+.user-profile-modal-v2 [class*="note_"] textarea,
+.user-profile-modal-v2 [class*="note_"] textarea:focus {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 /* User popout / profile */
@@ -1402,7 +1465,8 @@ input[type="checkbox"][class*="bdCheckbox"]:checked::after {
 /* Чекбоксы (квадратные) — тоже красные */
 [class*="checkbox_"][class*="checked_"],
 [class*="checkbox-"][class*="checked-"],
-[role="checkbox"][aria-checked="true"] {
+/* строки списков с чекбоксом (role=checkbox на всей строке) не заливаем */
+[role="checkbox"][aria-checked="true"]:not([data-list-item-id]) {
     background-color: var(--x4-red) !important;
     border-color: var(--x4-red-bright) !important;
 }
@@ -1628,8 +1692,10 @@ input[type="radio"] {
     overflow: hidden !important;
 }
 
-/* Сам input — фон/обводку убираем, чтобы не было двойного ring'а. */
+/* Сам input — фон/обводку убираем, чтобы не было двойного ring'а.
+   :focus — иначе общее input[class*="input_"]:focus рисует вторую рамку внутри. */
 input[data-mana-component="text-input"],
+input[data-mana-component="text-input"]:focus,
 input[class*="input__0f084"] {
     background: transparent !important;
     border: none !important;
@@ -1641,6 +1707,17 @@ input[class*="input__0f084"] {
    Переменная уже переопределена выше; правило-страховка. */
 [class*="icon__0f084"] svg path[fill*="icon"] {
     fill: var(--x4-red-bright) !important;
+}
+
+/* Пикер гифок/стикеров/эмодзи: серая подложка шапки с поиском — убираем */
+[class*="contentWrapper__"] [class*="header_"]:has(input[data-mana-component="text-input"]) {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Гифки: плитка «Избранное» — вместо синей вуали Discord красная */
+[class*="categoryFadeBlurple_"] {
+    background-color: rgba(120, 6, 22, 0.78) !important;
 }
 
 /* Soundboard panel root — picker__09f65 (выявлено DOM-дампом).
@@ -1954,6 +2031,9 @@ main[class*="chatContent_"] [class*="divider__"][class*="hasContent__"][role="se
 [class*="sidebar__5e434"] { grid-area: titleBarEnd / start / end / end !important; pointer-events: none; width: auto !important; }
 [class*="sidebar__5e434"] > * { pointer-events: auto; }
 [class*="sidebar__5e434"]::after { display: none !important; }
+/* ручка ширины сайдбара после переноса вправо оказалась у края окна:
+   курсор «растянуть» на правой кромке, тянуть пришлось бы наоборот — убираем */
+[class*="sidebarResizeHandle__"] { display: none !important; }
 [class*="page__5e434"] { grid-area: page !important; padding: 6px 0 0 var(--ct-gap); background: transparent !important;
     /* остров на 100% высоты + отступ сверху = переполнение на пару px, и
        Discord рисовал пустую полосу прокрутки на всю высоту. Сам page
@@ -2189,12 +2269,15 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
    тысяч элементов, и любой полный пересчёт стилей стоил ~40 мс. */
 #app-mount { cursor: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cdefs%3E%3ClinearGradient id=%22c%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23ffffff%22/%3E%3Cstop offset=%22.25%22 stop-color=%22%23d9dce4%22/%3E%3Cstop offset=%22.45%22 stop-color=%22%236e7380%22/%3E%3Cstop offset=%22.55%22 stop-color=%22%23f4f5f8%22/%3E%3Cstop offset=%22.75%22 stop-color=%22%239aa0ad%22/%3E%3Cstop offset=%221%22 stop-color=%22%233a3d46%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform=%22scale%281.35%29%22%3E%3Cpath d=%22M2 2 V16 L5.6 12.6 L8.3 18.4 L10.6 17.4 L8 11.7 H13 Z%22 fill=%22url%28%23c%29%22 stroke=%22%2307070b%22 stroke-width=%221.1%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M8 11.7 H13 L2 2%22 fill=%22none%22 stroke=%22%23ff1a3a%22 stroke-width=%22.9%22 stroke-linejoin=%22round%22/%3E%3C/g%3E%3C/svg%3E") 3 3, default !important; }
 #app-mount * { cursor: inherit !important; }
-#app-mount :is(a, button, label, select, summary,
-    [role="button"], [role="link"], [role="tab"], [role="treeitem"], [role="menuitem"],
-    [role="menuitemcheckbox"], [role="menuitemradio"], [role="option"], [role="switch"],
-    [role="checkbox"], [role="radio"], [class*="clickable"], [class*="interactive_"]),
+#app-mount a, #app-mount button, #app-mount label, #app-mount select, #app-mount summary,
+#app-mount [role="button"], #app-mount [role="link"], #app-mount [role="tab"], #app-mount [role="treeitem"],
+#app-mount [role="menuitem"], #app-mount [role="menuitemcheckbox"], #app-mount [role="menuitemradio"],
+#app-mount [role="option"], #app-mount [role="switch"], #app-mount [role="checkbox"], #app-mount [role="radio"],
+#app-mount [class*="clickable"], #app-mount [class*="interactive_"],
 /* ссылки внутри текста сообщения — снова указатель */
-#app-mount :is([class*="messageContent_"], [class*="markup_"]) :is(a, [role="button"], [class*="mention"]) {
+#app-mount :is([class*="messageContent_"], [class*="markup_"]) a,
+#app-mount :is([class*="messageContent_"], [class*="markup_"]) [role="button"],
+#app-mount :is([class*="messageContent_"], [class*="markup_"]) [class*="mention"] {
     cursor: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cdefs%3E%3ClinearGradient id=%22c%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23ffffff%22/%3E%3Cstop offset=%22.25%22 stop-color=%22%23d9dce4%22/%3E%3Cstop offset=%22.45%22 stop-color=%22%236e7380%22/%3E%3Cstop offset=%22.55%22 stop-color=%22%23f4f5f8%22/%3E%3Cstop offset=%22.75%22 stop-color=%22%239aa0ad%22/%3E%3Cstop offset=%221%22 stop-color=%22%233a3d46%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform=%22scale%281.35%29%22%3E%3Cpath d=%22M2 2 V16 L5.6 12.6 L8.3 18.4 L10.6 17.4 L8 11.7 H13 Z%22 fill=%22url%28%23c%29%22 stroke=%22%2307070b%22 stroke-width=%221.1%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M3.4 5.4 V12.8 L5.8 10.6 H9.4 Z%22 fill=%22%23ff1a3a%22/%3E%3Ccircle cx=%2214.5%22 cy=%2215.5%22 r=%221.6%22 fill=%22%23ff1a3a%22 stroke=%22%2307070b%22 stroke-width=%22.8%22/%3E%3C/g%3E%3C/svg%3E") 3 3, pointer !important;
 }
 #app-mount :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
@@ -2202,7 +2285,7 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     cursor: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cdefs%3E%3ClinearGradient id=%22c%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%235a5e69%22/%3E%3Cstop offset=%22.4%22 stop-color=%22%23ffffff%22/%3E%3Cstop offset=%221%22 stop-color=%22%233a3d46%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform=%22translate%2816 16%29 scale%281.35%29 translate%28-16 -16%29%22%3E%3Cpath d=%22M13 8.5 H15 L16 9.5 L17 8.5 H19 V9.9 H17.4 L16.7 10.6 V21.4 L17.4 22.1 H19 V23.5 H17 L16 22.5 L15 23.5 H13 V22.1 H14.6 L15.3 21.4 V10.6 L14.6 9.9 H13 Z%22 fill=%22url%28%23c%29%22 stroke=%22%2307070b%22 stroke-width=%22.8%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M16 11.4 V20.6%22 stroke=%22%23ff1a3a%22 stroke-width=%22.7%22/%3E%3C/g%3E%3C/svg%3E") 16 16, text !important;
 }
 /* системные курсоры, которые несут смысл */
-#app-mount :is([aria-disabled="true"], :disabled, [class*="disabled_"]) { cursor: not-allowed !important; }
+#app-mount [aria-disabled="true"], #app-mount :disabled, #app-mount [class*="disabled_"] { cursor: not-allowed !important; }
 #app-mount [class*="resizeHandle"],
 #app-mount [class*="ResizeHandle"] { cursor: col-resize !important; }
 
@@ -2383,35 +2466,49 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 d=%22M12.5 12a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0m6 0a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0m-12 0a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0%22/%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M12.5 12a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm6 0a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm-12 0a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
-#app-mount [class*="iconContainer__"]:is([aria-label^="Текст"],[aria-label^="Text"]) > svg > *,
-#app-mount [class*="iconContainer__"]:is([aria-label^="Голос"],[aria-label^="Voice"]) > svg > *,
-#app-mount [class*="iconContainer__"]:is([aria-label^="Объявлен"],[aria-label^="Announcement"]) > svg > *,
-#app-mount [class*="iconContainer__"]:is([aria-label^="Текст ("],[aria-label^="Text ("]) > svg > *,
-#app-mount [class*="iconContainer__"]:is([aria-label^="Голос ("],[aria-label^="Voice ("]) > svg > *,
-#app-mount [class*="mainContent_"]:is([aria-label$="(категория)"],[aria-label$="(category)"]) svg > *,
-#app-mount section[class*="panels__"] :is([aria-label="Настройки ввода"], [aria-label="Настройки вывода"], [aria-label="Input Options"], [aria-label="Output Options"]) svg > *,
-#app-mount :is([aria-label="Создать канал"], [aria-label="Create Channel"]) svg > *,
-#app-mount :is([aria-label="Настроить канал"], [aria-label="Edit Channel"], [aria-label="Настройки пользователя"], [aria-label="User Settings"]) svg > *,
-#app-mount :is([aria-label="Пригласить на канал"], [aria-label="Пригласить на сервер"], [aria-label="Create Invite"], [aria-label="Invite to Server"]) svg > *,
-#app-mount :is([aria-label="Ветки"], [aria-label="Threads"]) svg > *,
-#app-mount :is([aria-label="Параметры уведомлений"], [aria-label="Notification Settings"]) svg > *,
-#app-mount :is([aria-label="Закреплённые сообщения"], [aria-label="Pinned Messages"]) svg > *,
-#app-mount :is([aria-label="Скрыть список участников"], [aria-label="Показать список участников"], [aria-label="Hide Member List"], [aria-label="Show Member List"]) svg > *,
-#app-mount svg:is([aria-label="Поиск"], [aria-label="Search"]) > *,
-#app-mount section[class*="title_f75fb0"] :is([aria-label="Очистить"], [aria-label="Clear"]) svg > *,
-#app-mount form :is([aria-label="Другие настройки сообщений"], [aria-label="Upload a File or Send Invites"], [aria-label="More message options"]) svg > *,
-#app-mount form :is([aria-label="Отправить подарок"], [aria-label="Send a gift"]) svg > *,
-#app-mount form :is([aria-label="Открыть меню GIF"], [aria-label="Open GIF picker"]) svg > *,
-#app-mount form :is([aria-label="Открыть меню выбора стикеров"], [aria-label="Open sticker picker"]) svg > *,
-#app-mount form :is([aria-label="Приложения"], [aria-label="Apps"]) svg > *,
-#app-mount section[class*="panels__"] button[role="switch"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg > *,
-#app-mount section[class*="panels__"] button[role="switch"][aria-checked="true"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg > *,
-#app-mount section[class*="panels__"] button[role="switch"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg > *,
-#app-mount section[class*="panels__"] button[role="switch"][aria-checked="true"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg > *,
-#app-mount :is([aria-label="Добавить реакцию"], [aria-label="Add Reaction"])[class*="hoverBarButton"] svg > *,
-#app-mount :is([aria-label="Ответить"], [aria-label="Reply"])[class*="hoverBarButton"] svg > *,
-#app-mount :is([aria-label="Переслать"], [aria-label="Forward"])[class*="hoverBarButton"] svg > *,
-#app-mount :is([aria-label="Ещё"], [aria-label="More"])[class*="hoverBarButton"] svg > * {
+/* родной значок Discord под нашей маской прячем одним правилом: селектор
+   с «… > *» справа Chromium проверяет на каждом элементе, и три десятка
+   таких правил заметно утяжеляли полный пересчёт стилей */
+#app-mount :is(
+    [class*="iconContainer__"]:is([aria-label^="Текст"],[aria-label^="Text"]) > svg,
+    [class*="iconContainer__"]:is([aria-label^="Голос"],[aria-label^="Voice"]) > svg,
+    [class*="iconContainer__"]:is([aria-label^="Объявлен"],[aria-label^="Announcement"]) > svg,
+    [class*="iconContainer__"]:is([aria-label^="Текст ("],[aria-label^="Text ("]) > svg,
+    [class*="iconContainer__"]:is([aria-label^="Голос ("],[aria-label^="Voice ("]) > svg,
+    [class*="mainContent_"]:is([aria-label$="(категория)"],[aria-label$="(category)"]) svg,
+    section[class*="panels__"] :is([aria-label="Настройки ввода"], [aria-label="Настройки вывода"], [aria-label="Input Options"], [aria-label="Output Options"]) svg,
+    :is([aria-label="Создать канал"], [aria-label="Create Channel"]) svg,
+    :is([aria-label="Настроить канал"], [aria-label="Edit Channel"], [aria-label="Настройки пользователя"], [aria-label="User Settings"]) svg,
+    :is([aria-label="Пригласить на канал"], [aria-label="Пригласить на сервер"], [aria-label="Create Invite"], [aria-label="Invite to Server"]) svg,
+    :is([aria-label="Ветки"], [aria-label="Threads"]) svg,
+    :is([aria-label="Параметры уведомлений"], [aria-label="Notification Settings"]) svg,
+    :is([aria-label="Закреплённые сообщения"], [aria-label="Pinned Messages"]) svg,
+    :is([aria-label="Скрыть список участников"], [aria-label="Показать список участников"], [aria-label="Hide Member List"], [aria-label="Show Member List"]) svg,
+    svg:is([aria-label="Поиск"], [aria-label="Search"]),
+    section[class*="title_f75fb0"] :is([aria-label="Очистить"], [aria-label="Clear"]) svg,
+    form :is([aria-label="Другие настройки сообщений"], [aria-label="Upload a File or Send Invites"], [aria-label="More message options"]) svg,
+    form :is([aria-label="Отправить подарок"], [aria-label="Send a gift"]) svg,
+    form :is([aria-label="Открыть меню GIF"], [aria-label="Open GIF picker"]) svg,
+    form :is([aria-label="Открыть меню выбора стикеров"], [aria-label="Open sticker picker"]) svg,
+    form :is([aria-label="Приложения"], [aria-label="Apps"]) svg,
+    section[class*="panels__"] button[role="switch"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg,
+    section[class*="panels__"] button[role="switch"][aria-checked="true"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg,
+    section[class*="panels__"] button[role="switch"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg,
+    section[class*="panels__"] button[role="switch"][aria-checked="true"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg,
+    :is([aria-label="Добавить реакцию"], [aria-label="Add Reaction"])[class*="hoverBarButton"] svg,
+    :is([aria-label="Ответить"], [aria-label="Reply"])[class*="hoverBarButton"] svg,
+    :is([aria-label="Переслать"], [aria-label="Forward"])[class*="hoverBarButton"] svg,
+    :is([aria-label="Ещё"], [aria-label="More"])[class*="hoverBarButton"] svg,
+    [class*="sidebarList__"] li :is([id*="upcoming-events"], [data-list-item-id*="upcoming-events"]) ~ * svg[class*="icon__"],
+    [class*="sidebarList__"] li :is([id*="skill-trees"], [data-list-item-id*="skill-trees"]) ~ * svg[class*="icon__"],
+    section[class*="panels__"] svg[class*="ping_"],
+    section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(1) svg,
+    section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(2) svg,
+    section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(3) svg,
+    section[class*="panels__"] [class*="actionButtons_"] > div button svg,
+    section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(4) svg,
+    section[class*="panels__"] button:is([aria-label="Отключиться"],[aria-label="Disconnect"]) svg
+) > * {
     visibility: hidden !important;
 }
 
@@ -2427,20 +2524,18 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
 }
 
 /* строка «Мероприятия» — без aria-label, ловим по служебному id */
-#app-mount [class*="sidebarList__"] li:has(:is([id*="upcoming-events"],[data-list-item-id*="upcoming-events"])) svg[class*="icon__"] {
+#app-mount [class*="sidebarList__"] li :is([id*="upcoming-events"], [data-list-item-id*="upcoming-events"]) ~ * svg[class*="icon__"] {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 d=%22M17 4a1 1 0 1 0-2 0zm-2 2a1 1 0 1 0 2 0zM9 4a1 1 0 0 0-2 0zM7 6a1 1 0 0 0 2 0zM5 6v1h14V5H5zm15 1h-1v12h2V7zm-1 13v-1H5v2h14zM4 19h1V7H3v12zm0-8v1h16v-2H4zm12-7h-1v2h2V4zM8 4H7v2h2V4zM5 20v-1H3a2 2 0 0 0 2 2zm15-1h-1v2a2 2 0 0 0 2-2zM19 6v1h2a2 2 0 0 0-2-2zM5 6V5a2 2 0 0 0-2 2h2z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 d=%22M17 4a1 1 0 1 0-2 0zm-2 2a1 1 0 1 0 2 0zM9 4a1 1 0 0 0-2 0zM7 6a1 1 0 0 0 2 0zM5 6v1h14V5H5zm15 1h-1v12h2V7zm-1 13v-1H5v2h14zM4 19h1V7H3v12zm0-8v1h16v-2H4zm12-7h-1v2h2V4zM8 4H7v2h2V4zM5 20v-1H3a2 2 0 0 0 2 2zm15-1h-1v2a2 2 0 0 0 2-2zM19 6v1h2a2 2 0 0 0-2-2zM5 6V5a2 2 0 0 0-2 2h2z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
-#app-mount [class*="sidebarList__"] li:has(:is([id*="upcoming-events"],[data-list-item-id*="upcoming-events"])) svg[class*="icon__"] > * { visibility: hidden !important; }
 
 /* строка «Бусты сервера» — без aria-label, ловим по служебному id */
-#app-mount [class*="sidebarList__"] li:has(:is([id*="skill-trees"],[data-list-item-id*="skill-trees"])) svg[class*="icon__"] {
+#app-mount [class*="sidebarList__"] li :is([id*="skill-trees"], [data-list-item-id*="skill-trees"]) ~ * svg[class*="icon__"] {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M2.5 10h19M11 4l-3 6l4 10l4-10l-3-6M2.556 10.611l9.259 10.186c.1.109.27.109.37 0l9.26-10.186a1 1 0 0 0 .06-1.272L17.8 4.4A1 1 0 0 0 17 4H7a1 1 0 0 0-.8.4L2.496 9.339a1 1 0 0 0 .06 1.272%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M2.5 10h19M11 4l-3 6l4 10l4-10l-3-6M2.556 10.611l9.259 10.186c.1.109.27.109.37 0l9.26-10.186a1 1 0 0 0 .06-1.272L17.8 4.4A1 1 0 0 0 17 4H7a1 1 0 0 0-.8.4L2.496 9.339a1 1 0 0 0 .06 1.272%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
-#app-mount [class*="sidebarList__"] li:has(:is([id*="skill-trees"],[data-list-item-id*="skill-trees"])) svg[class*="icon__"] > * { visibility: hidden !important; }
 
 /* ============================================================
    ПАНЕЛЬ ГОЛОСОВОГО ПОДКЛЮЧЕНИЯ — HUD-модуль
@@ -2456,6 +2551,8 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     border: 1px solid var(--ct-line) !important;
     box-shadow: inset 0 1px 0 rgba(255, 26, 58, 0.55), 0 -8px 30px rgba(0, 0, 0, 0.35) !important;
 }
+/* Полоса заданий Discord (Quests, «Получить награду!») над панелью — убираем */
+[data-testid="quest-bar-container"] { display: none !important; }
 #app-mount section[class*="panels__"] [class*="container_e131a9"] {
     border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
     padding-bottom: 8px !important;
@@ -2489,7 +2586,6 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M4 17v2m4-5v5m4-8v8m4-11v11m4-14v14%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M4 17v2m4-5v5m4-8v8m4-11v11m4-14v14%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
-#app-mount section[class*="panels__"] svg[class*="ping_"] > * { visibility: hidden !important; }
 
 /* кнопки — контурные, срезанные углы */
 #app-mount section[class*="panels__"] [class*="actionButtons_"] button {
@@ -2516,25 +2612,21 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M3 12a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm14 2l3.238-1.995a.5.5 0 0 1 .762.426v5.138a.5.5 0 0 1-.762.425L17 16z%22/%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M15 7a3 3 0 1 1-6 0a3 3 0 0 1 6 0Zm-6 .5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M3 12a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm14 2l3.238-1.995a.5.5 0 0 1 .762.426v5.138a.5.5 0 0 1-.762.425L17 16z%22/%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M15 7a3 3 0 1 1-6 0a3 3 0 0 1 6 0Zm-6 .5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
-#app-mount section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(1) svg > * { visibility: hidden !important; }
 #app-mount section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(2) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 d=%22M7.757 19.03a1 1 0 1 0 .486 1.94L8 20zm8 1.94a1 1 0 1 0 .486-1.94L16 20zm4.06-4.173l-.158.987zM21 6.2h-1v9.6h2V6.2zM3 15.8h1V6.2H2v9.6zm16.818.997l.158-.987a49.5 49.5 0 0 0-15.952 0l.158.987l.159.987a47.5 47.5 0 0 1 15.318 0zM4.182 5.203l-.158.987a49.5 49.5 0 0 0 15.952 0l-.158-.987l-.159-.987a47.5 47.5 0 0 1-15.318 0zM12 16.5h-1v3h2v-3zM8 20l.242.97h.003l.013-.004l.295-.066a19 19 0 0 1 .861-.164A16 16 0 0 1 12 20.5v-2c-1.076 0-2.135.134-2.914.264a21 21 0 0 0-1.32.264l-.005.001h-.003zm4-.5v1c.924 0 1.865.116 2.586.236a19 19 0 0 1 1.172.234a463 463 0 0 1 .484-1.94l-.003-.001l-.006-.002l-.02-.005l-.076-.017l-.271-.06c-.231-.05-.56-.116-.952-.181c-.779-.13-1.838-.264-2.914-.264zm-9-3.7H2c0 1.256 1.132 2.178 2.34 1.984l-.158-.987l-.158-.987h-.011l-.01-.006l-.004-.004l.001.002V15.8zm18 0h-1v.002v-.002l-.003.004l-.01.005l-.004.001h-.007l-.158.987l-.159.987C20.87 17.978 22 17.056 22 15.8zm0-9.6h1c0-1.256-1.132-2.178-2.34-1.984l.158.987l.158.987h.011l.01.006l.004.004L20 6.198V6.2zm-18 0h1v-.002v.002l.003-.004l.01-.005l.004-.001h.007l.158-.987l.159-.987C3.13 4.022 2 4.944 2 6.2z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 d=%22M7.757 19.03a1 1 0 1 0 .486 1.94L8 20zm8 1.94a1 1 0 1 0 .486-1.94L16 20zm4.06-4.173l-.158.987zM21 6.2h-1v9.6h2V6.2zM3 15.8h1V6.2H2v9.6zm16.818.997l.158-.987a49.5 49.5 0 0 0-15.952 0l.158.987l.159.987a47.5 47.5 0 0 1 15.318 0zM4.182 5.203l-.158.987a49.5 49.5 0 0 0 15.952 0l-.158-.987l-.159-.987a47.5 47.5 0 0 1-15.318 0zM12 16.5h-1v3h2v-3zM8 20l.242.97h.003l.013-.004l.295-.066a19 19 0 0 1 .861-.164A16 16 0 0 1 12 20.5v-2c-1.076 0-2.135.134-2.914.264a21 21 0 0 0-1.32.264l-.005.001h-.003zm4-.5v1c.924 0 1.865.116 2.586.236a19 19 0 0 1 1.172.234a463 463 0 0 1 .484-1.94l-.003-.001l-.006-.002l-.02-.005l-.076-.017l-.271-.06c-.231-.05-.56-.116-.952-.181c-.779-.13-1.838-.264-2.914-.264zm-9-3.7H2c0 1.256 1.132 2.178 2.34 1.984l-.158-.987l-.158-.987h-.011l-.01-.006l-.004-.004l.001.002V15.8zm18 0h-1v.002v-.002l-.003.004l-.01.005l-.004.001h-.007l-.158.987l-.159.987C20.87 17.978 22 17.056 22 15.8zm0-9.6h1c0-1.256-1.132-2.178-2.34-1.984l.158.987l.158.987h.011l.01.006l.004.004L20 6.198V6.2zm-18 0h1v-.002v.002l.003-.004l.01-.005l.004-.001h.007l.158-.987l.159-.987C3.13 4.022 2 4.944 2 6.2z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
-#app-mount section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(2) svg > * { visibility: hidden !important; }
 #app-mount section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(3) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M15 9v3m-1.5-1.5h3M7 5c1 0 3 1 5 1s4-1 5-1c3 0 7 14 3 14c-3 0-4.5-4-8-4s-5 4-8 4C0 19 4 5 7 5Zm3 5.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M15 9v3m-1.5-1.5h3M7 5c1 0 3 1 5 1s4-1 5-1c3 0 7 14 3 14c-3 0-4.5-4-8-4s-5 4-8 4C0 19 4 5 7 5Zm3 5.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
-#app-mount section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(3) svg > * { visibility: hidden !important; }
 #app-mount section[class*="panels__"] [class*="actionButtons_"] > div button svg, #app-mount section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(4) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M4 10v4m4-7v10m4-13v16m4-13v10m4-7v4%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M4 10v4m4-7v10m4-13v16m4-13v10m4-7v4%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
-#app-mount section[class*="panels__"] [class*="actionButtons_"] > div button svg > *, #app-mount section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(4) svg > * { visibility: hidden !important; }
 
 /* «Отключиться» — красный квадрат со срезом */
 #app-mount section[class*="panels__"] button:is([aria-label="Отключиться"],[aria-label="Disconnect"]) {
@@ -2551,7 +2643,6 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M10 13.401a11.4 11.4 0 0 1-2.073-3.294a.47.47 0 0 1 .11-.507l1.606-1.607a.504.504 0 0 0 .058-.64c-.997-1.458-1.998-3.053-3.433-4.1a.47.47 0 0 0-.462-.047a4.9 4.9 0 0 0-2.82 3.31l-.015.063c-.068.274-.115.55-.104.832c.045 1.216.516 4.898 4.334 8.857M13 15.66c.372.193.684.329.893.413a.47.47 0 0 0 .507-.11l1.606-1.605a.5.5 0 0 1 .642-.057c1.462 1.013 2.983 2.017 4.085 3.428a.47.47 0 0 1 .057.476a4.87 4.87 0 0 1-3.295 2.806l-.074.018c-.273.069-.55.115-.832.105c-.979-.037-3.556-.35-6.59-2.462m6.719-11.89L3.283 20.219%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M10 13.401a11.4 11.4 0 0 1-2.073-3.294a.47.47 0 0 1 .11-.507l1.606-1.607a.504.504 0 0 0 .058-.64c-.997-1.458-1.998-3.053-3.433-4.1a.47.47 0 0 0-.462-.047a4.9 4.9 0 0 0-2.82 3.31l-.015.063c-.068.274-.115.55-.104.832c.045 1.216.516 4.898 4.334 8.857M13 15.66c.372.193.684.329.893.413a.47.47 0 0 0 .507-.11l1.606-1.605a.5.5 0 0 1 .642-.057c1.462 1.013 2.983 2.017 4.085 3.428a.47.47 0 0 1 .057.476a4.87 4.87 0 0 1-3.295 2.806l-.074.018c-.273.069-.55.115-.832.105c-.979-.037-3.556-.35-6.59-2.462m6.719-11.89L3.283 20.219%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
-#app-mount section[class*="panels__"] button:is([aria-label="Отключиться"],[aria-label="Disconnect"]) svg > * { visibility: hidden !important; }
 
 /* Центральный остров (разговор, звонок, главная) — лёгкое затемнение без
    размытия: обои (маска) видны чётко. Пузыри чата на своих плотных
@@ -2734,7 +2825,7 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     --np-br: var(--x4-red-bright);
 }
 #app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"]:hover img,
-#app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"]:has([class*="selected_"]) img { filter: none; }
+#app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"][class*="selected_"] img { filter: none; }
 #app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"][class*="selected_"],
 #app-mount [class*="categoryList_"] [class*="listItems_"] > [class*="category_"]:has([class*="selected_"]) {
     background: var(--x4-red-soft) !important;
@@ -2772,7 +2863,7 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     --np-br: var(--x4-red-bright);
     background-color: var(--x4-red-soft) !important;
 }
-#app-mount [class*="categoryList_"] [class*="categoryIcon_"]:has(path[d^="M19.73 4.87"]) svg { display: none !important; }
+#app-mount [class*="categoryList_"] [class*="categoryIcon_"] svg:has(path[d^="M19.73 4.87"]) { display: none !important; }
 #app-mount [class*="categoryList_"] [class*="categoryIcon_"]:has(path[d^="M19.73 4.87"])::before {
     position: static; inset: auto; background: none;
     content: "190"; font: 900 8px/1 'Orbitron', sans-serif; color: #fff; letter-spacing: 0.04em;
