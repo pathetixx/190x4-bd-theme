@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 4.2.0
+ * @version 4.2.1
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -2039,6 +2039,21 @@ main[class*="chatContent_"] [class*="divider__"][class*="hasContent__"][role="se
        Discord рисовал пустую полосу прокрутки на всю высоту. Сам page
        прокручивать нечего — у чата/профиля/звонка свои скроллеры внутри. */
     overflow: hidden !important; box-sizing: border-box; }
+/* Полноэкранный звонок/стрим: Discord разворачивает #app-mount и сам
+   схлопывает шапку и боковые панели — возвращаем ему ванильную сетку
+   и снимаем отступы и рамку острова, иначе видео сидит в рамке. */
+#app-mount:fullscreen [class*="base__5e434"] {
+    grid-template-areas: "titleBar titleBar titleBar" "guildsList notice notice" "guildsList channelsList page" !important;
+    grid-template-columns: [start] min-content [guildsEnd] min-content [channelsEnd] 1fr [end] !important;
+    grid-template-rows: [top] 0px [titleBarEnd] 0px [noticeEnd] 1fr [end] !important;
+}
+#app-mount:fullscreen [class*="content__5e434"],
+#app-mount:fullscreen [class*="page__5e434"] { padding: 0 !important; }
+#app-mount:fullscreen [class*="page__5e434"] > * {
+    border: none !important;
+    clip-path: none !important;
+    background: #000 !important;
+}
 /* полоса — «вкладки терминала»: без коробки, тонкая линия снизу */
 nav[class*="wrapper_ef3116"] {
     flex-direction: row !important; height: 44px !important; width: auto !important;

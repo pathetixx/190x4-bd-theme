@@ -2,6 +2,11 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [4.2.1] — 2026-10-26
+
+### Fixed
+- Стрим и звонок, развёрнутые на весь экран, снова занимают весь экран: без чёрной полосы сверху и красной рамки по краям.
+
 ## [4.2.0] — 2026-10-18
 
 ### Changed
