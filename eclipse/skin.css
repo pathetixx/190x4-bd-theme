@@ -113,12 +113,6 @@ nav[class*="wrapper_5dqHTG"] [class*="lowerBadge_"] [class*="numberBadge"] {
     background: {{art:burnt}} center / 100% 100% no-repeat !important;
 }
 
-/* --- багровый серп над правым краем --- */
-#app-mount::before {
-    content: ""; position: fixed; z-index: 3; pointer-events: none; top: 38px; right: 22px;
-    width: 54px; height: 54px; background: {{art:crescent}} center / contain no-repeat;
-}
-
 /* --- баннер над каналами --- */
 [class*="sidebarList_pog62O"] { padding-top: 158px; box-sizing: border-box !important; }
 [class*="sidebarList_pog62O"]::before {
@@ -561,7 +555,8 @@ nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has([aria-selected="true"])::a
 }
 nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has([aria-selected="true"])::before { filter: sepia(1) saturate(9) hue-rotate(-38deg) brightness(1.15) drop-shadow(0 0 3px rgba(210, 26, 60, 0.9)); }
 nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:hover::after { border-color: var(--e-bone); }
-#app-mount::before { top: 48px; right: 26px; width: 58px; height: 58px; }
+/* серп — фон самой полосы: не лежит поверх окон и исчезает вместе с ней в полноэкранном режиме */
+nav[class*="wrapper_5dqHTG"] { background: var(--e-art-crescent) right 26px center / 58px no-repeat !important; }
 nav[class*="wrapper_5dqHTG"] [class*="scroller_5dqHTG"],
 nav[class*="wrapper_5dqHTG"] [class*="tree_"],
 nav[class*="wrapper_5dqHTG"] [class*="stack_"] { scrollbar-width: none !important; }
