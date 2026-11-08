@@ -709,8 +709,11 @@ section[class*="title_z_gUBg"] [class*="searchBar_i16Ad0"]:focus-within { border
 #app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"]:is(:hover, :focus-within, [class*="playing_"], [class*="Playing_"]) [class*="soundName_"] { color: #fff !important; }
 #app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"] [class*="buttonOverlayBackground_"] { background: transparent !important; box-shadow: none !important; }
 
-/* блок «Рекомендуемые звуки» скрыт: звуки доступны из полной панели */
-#app-mount [class*="soundboardContainer_58b0l2"] { display: none !important; }
+/* всплывающий блок «Рекомендуемые звуки» при наведении на кнопку панели скрыт */
+[class*="container_KljP7l"]:has([class*="headerText_KljP7l"]) { display: none !important; }
+
+/* центральный значок Play закрывал название: нажатие на всю плашку и так запускает звук */
+#app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"] svg[class*="primaryIcon_"] { visibility: hidden !important; }
 
 /* название звука не заходит под кнопку воспроизведения и звёздочку */
 #app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"]:is(:hover, :focus-within) [class*="soundName_"] {
