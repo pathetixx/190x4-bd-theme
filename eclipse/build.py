@@ -112,9 +112,12 @@ def build() -> str:
     s = swap_icons(s)
 
     skin = (HERE / "skin.css").read_text(encoding="utf-8")
-    skin = re.sub(r"\{\{art:([\w-]+)\}\}", lambda m: f"url('{data_uri(next(ART.glob(m.group(1) + '.*')))}')", skin)
-    ico = ":root {\n" + "".join(f"    --e-ico-{p.stem}: url('{data_uri(p)}');\n" for p in sorted(ICONS.glob("*.png"))) + "}\n"
-    return HEADER + FONT_FACES + s + "\n" + ico + skin
+    # каждая картинка лежит в файле один раз, как переменная, и не дублируется в правилах
+    names = sorted(set(re.findall(r"\{\{art:([\w-]+)\}\}", skin)))
+    skin = re.sub(r"\{\{art:([\w-]+)\}\}", r"var(--e-art-\1)", skin)
+    art = "".join(f"    --e-art-{n}: url('{data_uri(next(ART.glob(n + '.*')))}');\n" for n in names)
+    ico = "".join(f"    --e-ico-{p.stem}: url('{data_uri(p)}');\n" for p in sorted(ICONS.glob("*.png")))
+    return HEADER + FONT_FACES + s + "\n:root {\n" + art + ico + "}\n" + skin
 
 
 if __name__ == "__main__":

@@ -301,3 +301,87 @@ main[class*="chatContent_"] [class*="messageContent_"] { font-size: 15.5px !impo
 #app-mount section[class*="panels_pog62O"] [class*="panelSubtextContainer_"] * { color: var(--e-dim) !important; }
 #app-mount section[class*="panels_pog62O"] [class*="buttons_"] button { background: transparent !important; box-shadow: none !important; }
 #app-mount section[class*="panels_pog62O"] [class*="buttons_"] button:hover { --x4-ico-fill: var(--e-blood2); }
+
+/* ============================================================
+   СПИСОК ЛИЧНЫХ СООБЩЕНИЙ: полоса бумаги для поиска, значки тушью,
+   чёрно-белые аватарки, цвет возвращается под курсором.
+   ============================================================ */
+[class*="privateChannels_"] [class*="searchBar_"] { border: none !important; box-shadow: none !important; height: 52px; padding: 8px 14px; }
+[class*="privateChannels_"] [class*="searchBar_"] button {
+    position: relative; height: 36px !important; justify-content: flex-start; padding: 0 12px 0 40px !important;
+    background: {{art:panel}} center / 100% 100% no-repeat !important; border: none !important; border-radius: 0 !important; box-shadow: none !important;
+    color: var(--e-dim) !important; font-size: 15px !important; font-weight: 400 !important;
+}
+[class*="privateChannels_"] [class*="searchBar_"] button:hover { color: var(--e-bone) !important; }
+[class*="privateChannels_"] [class*="searchBar_"] button::before {
+    content: ""; position: absolute; left: 13px; top: 8px; width: 20px; height: 20px; background: currentColor;
+    -webkit-mask: var(--e-ico-search) center / contain no-repeat; mask: var(--e-ico-search) center / contain no-repeat;
+}
+[class*="privateChannels_"] [class*="searchBar_"] [class*="buttonChildrenWrapper_"],
+[class*="privateChannels_"] [class*="searchBar_"] [class*="buttonChildren_"] { justify-content: flex-start !important; width: 100%; }
+
+/* разделы: Друзья, Nitro, Магазин, Задания */
+[class*="linkButton_zln"] { height: 40px !important; border-radius: 0 !important; background: transparent; }
+[class*="linkButton_zln"] [class*="name_TBNqol"] { color: var(--e-dim) !important; font-size: 16px !important; font-weight: 400 !important; }
+[class*="linkButton_zln"]:hover [class*="name_TBNqol"] { color: var(--e-bone) !important; }
+[class*="linkButton_zln"][class*="interactiveSelected_"] [class*="name_TBNqol"] { color: #fff !important; }
+a[href="/channels/@me"] { --e-nav: var(--e-ico-people); }
+a[href="/store"] { --e-nav: var(--e-ico-gem); }
+a[href="/shop"] { --e-nav: var(--e-ico-bag); }
+a[href="/quest-home"] { --e-nav: var(--e-ico-compass); }
+[class*="privateChannels_"] svg[class*="linkButtonIcon_"] {
+    width: 22px !important; height: 22px !important; background: var(--x4-ico-fill) !important;
+    -webkit-mask: var(--e-nav) center / contain no-repeat !important; mask: var(--e-nav) center / contain no-repeat !important;
+}
+[class*="privateChannels_"] svg[class*="linkButtonIcon_"] > * { visibility: hidden !important; }
+[class*="privateChannels_"] [class*="sectionDivider_"] {
+    height: 16px !important; margin: 6px 14px !important; border: none !important; opacity: 0.85;
+    background: {{art:chain}} left center / auto 100% repeat-x !important;
+}
+
+/* заголовок раздела с чертой тушью */
+[class*="privateChannelsHeaderContainer_"] { color: var(--e-dim) !important; padding: 0 12px 0 14px !important; }
+[class*="privateChannelsHeaderContainer_"] [class*="headerText_"] {
+    display: flex; align-items: center; gap: 10px; flex: 1; font-size: 14px !important; font-weight: 500 !important; text-transform: none !important;
+}
+[class*="privateChannelsHeaderContainer_"] [class*="headerText_"]::after { content: ""; flex: 1; height: 1px; background: var(--e-line2); }
+[class*="privateChannelsHeaderContainer_"] [aria-label="Создать сообщение"] svg,
+[class*="privateChannelsHeaderContainer_"] [aria-label="Create DM"] svg {
+    background: var(--x4-ico-fill) !important; -webkit-mask: var(--e-ico-plus) center / contain no-repeat !important; mask: var(--e-ico-plus) center / contain no-repeat !important;
+}
+[class*="privateChannelsHeaderContainer_"] [aria-label] svg > * { visibility: hidden !important; }
+
+/* строки бесед */
+li[class*="dm_zln"] { height: 48px !important; }
+li[class*="dm_zln"] [class*="interactive_zln"] { height: 46px !important; border-radius: 0 !important; }
+li[class*="dm_zln"] [class*="interactive_zln"]:hover:not([class*="interactiveSelected_"]) { background: rgba(232, 224, 212, 0.05) !important; }
+li[class*="dm_zln"] [class*="avatar_TBNqol"] img,
+li[class*="dm_zln"] foreignObject img { filter: grayscale(0.85) brightness(0.9) !important; transition: filter 0.15s ease; }
+li[class*="dm_zln"] [class*="interactive_zln"]:hover foreignObject img,
+li[class*="dm_zln"] [class*="interactiveSelected_"] foreignObject img { filter: none !important; }
+li[class*="dm_zln"] [class*="name_TBNqol"], li[class*="dm_zln"] [class*="name_TBNqol"] * { color: var(--e-bone) !important; font-size: 15.5px !important; font-weight: 500 !important; }
+li[class*="dm_zln"] [class*="subtext_zln"], li[class*="dm_zln"] [class*="subtext_zln"] * { color: var(--e-dim) !important; font-size: 12.5px !important; font-weight: 400 !important; }
+li[class*="dm_zln"] [class*="subtext_zln"] svg { color: var(--e-dim) !important; }
+li[class*="dm_zln"] [class*="subtext_zln"] svg path { fill: currentColor !important; }
+li[class*="dm_zln"] [class*="interactiveSelected_"] [class*="name_TBNqol"],
+li[class*="dm_zln"] [class*="interactiveSelected_"] [class*="name_TBNqol"] *,
+li[class*="dm_zln"] [class*="interactiveSelected_"] [class*="subtext_zln"],
+li[class*="dm_zln"] [class*="interactiveSelected_"] [class*="subtext_zln"] *,
+li[class*="dm_zln"] [class*="interactiveSelected_"] [class*="subtext_zln"] svg { color: #fff !important; }
+#app-mount li[class*="dm_zln"] [class*="interactiveSelected_"] {
+    background: {{art:brush}} 42px center / calc(100% - 48px) 92% no-repeat !important;
+}
+li[class*="dm_zln"] [class*="botTag_"] { background: transparent !important; border: 1px solid var(--e-line2); border-radius: 2px !important; color: var(--e-bone) !important; }
+li[class*="dm_zln"] [class*="botTag_"] svg { color: var(--e-bone) !important; }
+li[class*="dm_zln"] [class*="clanTag_"] { background: rgba(232, 224, 212, 0.08) !important; border-radius: 2px !important; }
+li[class*="dm_zln"] [class*="clanTag_"] * { color: var(--e-dim) !important; }
+li[class*="dm_zln"] svg[class*="closeIcon_"] {
+    background: var(--x4-ico-fill) !important; -webkit-mask: var(--e-ico-win-close) center / contain no-repeat !important; mask: var(--e-ico-win-close) center / contain no-repeat !important;
+}
+li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important; }
+
+/* «Новое»: бирка из обожжённой бумаги */
+[class*="privateChannels_"] [class*="newBadge_"] [class*="badge_4guu7"] {
+    background: var(--e-art-burnt) center / 100% 100% no-repeat !important; color: #1a1210 !important; border-radius: 0 !important; font-weight: 500 !important;
+}
+[class*="privateChannels_"] [class*="newBadge_"] [class*="label_4guu7"] { color: #1a1210 !important; }
