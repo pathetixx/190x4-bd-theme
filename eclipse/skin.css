@@ -517,7 +517,7 @@ li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important
 }
 nav[class*="wrapper_5dqHTG"] { position: relative; height: 92px !important; border-bottom: 1px solid var(--e-line) !important; overflow: hidden; }
 nav[class*="wrapper_5dqHTG"]::after {
-    content: ""; position: absolute; z-index: 0; left: 228px; right: 96px; top: 0; height: 24px; pointer-events: none;
+    content: ""; position: absolute; z-index: 0; left: 228px; right: 52px; top: 0; height: 24px; pointer-events: none;
     background: var(--e-art-chain) left center / auto 100% repeat-x;
 }
 nav[class*="wrapper_5dqHTG"]::before { position: relative; z-index: 1; }
@@ -550,7 +550,9 @@ nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has([aria-selected="true"])::a
 nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has([aria-selected="true"])::before { filter: sepia(1) saturate(9) hue-rotate(-38deg) brightness(1.15) drop-shadow(0 0 3px rgba(210, 26, 60, 0.9)); }
 nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:hover::after { border-color: var(--e-bone); }
 /* серп — фон самой полосы: не лежит поверх окон и исчезает вместе с ней в полноэкранном режиме */
-nav[class*="wrapper_5dqHTG"] { background: var(--e-art-crescent) right 26px center / 58px no-repeat !important; }
+nav[class*="wrapper_5dqHTG"] {
+    background: var(--e-art-chain-link) right 56px top 12px / 15px 24px no-repeat, var(--e-art-crescent) right 30px top 10px / auto 80px no-repeat !important;
+}
 nav[class*="wrapper_5dqHTG"] [class*="scroller_5dqHTG"],
 nav[class*="wrapper_5dqHTG"] [class*="tree_"],
 nav[class*="wrapper_5dqHTG"] [class*="stack_"] { scrollbar-width: none !important; }
