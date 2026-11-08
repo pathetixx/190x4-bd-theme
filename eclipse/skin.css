@@ -562,3 +562,7 @@ nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has([aria-selected="true"])::a
 nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has([aria-selected="true"])::before { filter: sepia(1) saturate(9) hue-rotate(-38deg) brightness(1.15) drop-shadow(0 0 3px rgba(210, 26, 60, 0.9)); }
 nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:hover::after { border-color: var(--e-bone); }
 #app-mount::before { top: 48px; right: 26px; width: 58px; height: 58px; }
+nav[class*="wrapper_5dqHTG"] [class*="scroller_5dqHTG"],
+nav[class*="wrapper_5dqHTG"] [class*="tree_"],
+nav[class*="wrapper_5dqHTG"] [class*="stack_"] { scrollbar-width: none !important; }
+nav[class*="wrapper_5dqHTG"] ::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
