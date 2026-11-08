@@ -3347,3 +3347,4 @@ li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important
 }
 [class*="leftTrayIcon_hbKzX7"] [class*="contents_"] > :is(svg, div) * { visibility: hidden !important; }
 [class*="rightTrayIcon_hbKzX7"] { color: var(--e-bone) !important; }
+[class*="avatarWrapper_SZIJT_"] { transform: scale(1.65); }
