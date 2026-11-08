@@ -2155,6 +2155,9 @@ main[class*="chatContent_"] [class*="divider_"][class*="hasContent_"][role="sepa
 }
 #app-mount:fullscreen [class*="content_pog62O"],
 #app-mount:fullscreen [class*="page_pog62O"] { padding: 0 !important; }
+/* При выходе Discord показывает панели примерно за 0,5 с до снятия :fullscreen,
+   и они попадали в сетку полного экрана: пока режим активен, панелей нет. */
+#app-mount:fullscreen [class*="sidebar_pog62O"] { display: none !important; }
 #app-mount:fullscreen [class*="page_pog62O"] > * {
     border: none !important;
     clip-path: none !important;
