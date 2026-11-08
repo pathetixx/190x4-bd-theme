@@ -645,3 +645,8 @@ section[class*="title_z_gUBg"] [class*="searchBar_i16Ad0"]:focus-within { border
 /* подпись под ником: приглушённый значок статуса */
 #app-mount section[class*="panels_pog62O"] [class*="panelSubtextContainer_"] svg { color: var(--e-dim) !important; }
 #app-mount section[class*="panels_pog62O"] [class*="panelSubtextContainer_"] svg :is(path, rect, circle) { fill: currentColor !important; }
+
+/* окно настроек: дворец под луной справа, под разделами и колонкой настроек тёмная зона */
+#app-mount [class*="modalContentInner__F9ieB"]:has([data-settings-sidebar-item]) {
+    background: linear-gradient(90deg, #0b090a 0%, #0b090a 20.5%, rgba(11, 9, 10, 0.9) 21%, rgba(11, 9, 10, 0.86) 62%, rgba(11, 9, 10, 0.42) 86%, rgba(11, 9, 10, 0.12) 100%), var(--e-art-bg-settings) right center / cover no-repeat !important;
+}
