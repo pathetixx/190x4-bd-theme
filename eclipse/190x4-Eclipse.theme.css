@@ -3184,7 +3184,8 @@ li[class*="dm_zln"] [class*="interactiveSelected_"] foreignObject img { filter: 
 li[class*="dm_zln"] [class*="name_TBNqol"], li[class*="dm_zln"] [class*="name_TBNqol"] * { color: var(--e-bone) !important; font-size: 15.5px !important; font-weight: 500 !important; }
 li[class*="dm_zln"] [class*="subtext_zln"], li[class*="dm_zln"] [class*="subtext_zln"] * { color: var(--e-dim) !important; font-size: 12.5px !important; font-weight: 400 !important; }
 li[class*="dm_zln"] [class*="subtext_zln"] svg { color: var(--e-dim) !important; }
-li[class*="dm_zln"] [class*="subtext_zln"] svg path { fill: currentColor !important; }
+li[class*="dm_zln"] [class*="subText_TBNqol"] svg { color: var(--e-dim) !important; }
+li[class*="dm_zln"] [class*="subText_TBNqol"] svg :is(path, rect, circle) { fill: currentColor !important; }
 li[class*="dm_zln"] [class*="interactiveSelected_"] [class*="name_TBNqol"],
 li[class*="dm_zln"] [class*="interactiveSelected_"] [class*="name_TBNqol"] *,
 li[class*="dm_zln"] [class*="interactiveSelected_"] [class*="subtext_zln"],
