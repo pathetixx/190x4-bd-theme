@@ -3275,3 +3275,75 @@ li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important
 #app-mount li[class*="dm_zln"] [class*="interactiveSelected_"] [class*="closeButton_"] * { --x4-ico-fill: #fff; color: #fff !important; }
 #app-mount [class*="modeSelected_"] [class*="children_TNyK-N"] svg,
 #app-mount li[class*="dm_zln"] [class*="interactiveSelected_"] svg[class*="closeIcon_"] { filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.85)); }
+
+/* ============================================================
+   ОКНО ЗВОНКА: плитки в рамке кистью на бумаге, панель без коробок.
+   Рамка не трогает видео: она лежит поверх и тоньше 4px по ширине штриха.
+   ============================================================ */
+[class*="callContainer_hbKzX7"], [class*="wrapper_hbKzX7"][class*="video_"] { background: transparent !important; }
+[class*="gradientContainer_rTsZa_"] { background: none !important; }
+[class*="headerBar_neq5ug"] { background: transparent !important; border: none !important; box-shadow: none !important; }
+[class*="headerBar_neq5ug"] h1, [class*="headerBar_neq5ug"] [class*="title_"] { font-size: 18px !important; font-weight: 500 !important; color: var(--e-bone) !important; }
+
+/* плитки */
+[class*="wrapper_7NOr2f"], [class*="tile_7NOr2f"], [class*="tileChild_7NOr2f"] { border-radius: 0 !important; }
+[class*="tile_7NOr2f"] { background: rgba(11, 9, 10, 0.72) !important; }
+[class*="background_SZIJT_"] { background: none !important; }
+[class*="videoWrapper_7NOr2f"], [class*="videoWrapper_7NOr2f"] * { border-radius: 0 !important; }
+[class*="border_7NOr2f"] { border-radius: 0 !important; }
+[class*="border_7NOr2f"]::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    border: 14px solid transparent; border-image: var(--e-art-frame) 60 / 14px / 0 stretch;
+}
+[class*="avatarWrapper_SZIJT_"] { position: relative; }
+[class*="avatarWrapper_SZIJT_"]::after {
+    content: ""; position: absolute; inset: -11px; pointer-events: none; background: var(--e-art-enso) center / contain no-repeat; opacity: 0.8;
+}
+[class*="overlayTitle_7NOr2f"] { background: none !important; backdrop-filter: none !important; box-shadow: none !important; }
+[class*="overlayTitle_7NOr2f"], [class*="overlayTitle_7NOr2f"] * { color: var(--e-bone) !important; font-size: 15px !important; font-weight: 500 !important; text-shadow: 0 1px 3px #000; }
+[class*="liveIndicator_"] { border-radius: 0 !important; background: none !important; }
+[class*="liveIndicator_"] [class*="badge_4guu7"] {
+    background: var(--e-art-burnt) center / 100% 100% no-repeat !important; color: #1a1210 !important; border-radius: 0 !important; font-weight: 500 !important;
+}
+[class*="liveIndicator_"] [class*="label_4guu7"] { color: #1a1210 !important; }
+
+/* панель управления: полоса бумаги и значки тушью */
+[class*="wrapper_9bvEB0"] {
+    gap: 0 !important; padding: 6px 18px; align-items: center;
+    background: var(--e-art-panel) center / 100% 100% no-repeat !important;
+}
+[class*="buttonSection_9bvEB0"] { background: transparent !important; border-radius: 0 !important; padding: 0 12px !important; gap: 6px !important; border-right: 1px solid var(--e-line2); box-shadow: none !important; }
+[class*="wrapper_9bvEB0"] [class*="centerButton_K9Xq13"],
+[class*="wrapper_9bvEB0"] [class*="contextMenuNub_K9Xq13"] { background: transparent !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; position: relative; }
+[class*="wrapper_9bvEB0"] [class*="contextMenuNub_K9Xq13"] { color: var(--e-dim) !important; }
+[class*="wrapper_9bvEB0"] [class*="centerButton_K9Xq13"]:hover,
+[class*="wrapper_9bvEB0"] [class*="centerButton_K9Xq13"]:is([class*="active_K9Xq13"], [class*="white_K9Xq13"], [class*="activeLight_K9Xq13"], [class*="primaryLight_K9Xq13"]) {
+    background: var(--e-art-brush) center / 100% 80% no-repeat !important;
+}
+[class*="wrapper_9bvEB0"] [class*="centerButton_K9Xq13"] :is(svg, [class*="lottieIcon"]) { width: 24px !important; height: 24px !important; }
+[class*="wrapper_9bvEB0"] button[aria-label="Заглушить"] { --e-call: var(--e-ico-mic); }
+[class*="wrapper_9bvEB0"] button[aria-label="Включить микрофон"] { --e-call: var(--e-ico-mic-off); }
+[class*="wrapper_9bvEB0"] button:is([aria-label="Включить камеру"], [aria-label="Выключить камеру"]) { --e-call: var(--e-ico-video); }
+[class*="wrapper_9bvEB0"] button[aria-label="Продемонстрируйте свой экран"] { --e-call: var(--e-ico-monitor); }
+[class*="wrapper_9bvEB0"] button[aria-label="Начать активность"] { --e-call: var(--e-ico-controller); }
+[class*="wrapper_9bvEB0"] button[aria-label="Открыть звуковую панель"] { --e-call: var(--e-ico-wave); }
+[class*="wrapper_9bvEB0"] button[aria-label="Другие настройки"] { --e-call: var(--e-ico-dots); }
+[class*="wrapper_9bvEB0"] button[aria-label="Отключиться"] { --e-call: var(--e-ico-hangup); }
+[class*="wrapper_9bvEB0"] [class*="centerButton_K9Xq13"] [class*="contents_"] :is([class*="lottieIcon"], [class*="contents_"] > svg) {
+    background: var(--x4-ico-fill) !important; color: transparent !important;
+    -webkit-mask: var(--e-call) center / contain no-repeat !important; mask: var(--e-call) center / contain no-repeat !important;
+}
+[class*="wrapper_9bvEB0"] [class*="centerButton_K9Xq13"] [class*="contents_"] :is([class*="lottieIcon"], [class*="contents_"] > svg) * { visibility: hidden !important; }
+/* камера выключена: красная черта кисти поверх значка */
+[class*="wrapper_9bvEB0"] button[aria-label="Включить камеру"]::after {
+    content: ""; position: absolute; left: 7px; right: 7px; top: 50%; height: 3px; background: var(--e-blood2); transform: rotate(-38deg); pointer-events: none;
+}
+[class*="wrapper_9bvEB0"] [class*="disconnect_K9Xq13"] { background: var(--e-art-brush) center / 100% 100% no-repeat !important; border-radius: 0 !important; }
+[class*="wrapper_9bvEB0"] [class*="disconnect_K9Xq13"]:hover { filter: brightness(1.2); }
+[class*="wrapper_9bvEB0"] [class*="centerButton_K9Xq13"][class*="disconnect_K9Xq13"],
+[class*="wrapper_9bvEB0"] [class*="contextMenuNub_K9Xq13"][class*="disconnect_K9Xq13"] { background: transparent !important; --x4-ico-fill: #fff; color: #fff !important; filter: none; }
+[class*="leftTrayIcon_hbKzX7"] [class*="contents_"] > :is(svg, div) {
+    background: var(--x4-ico-fill) !important; -webkit-mask: var(--e-ico-people) center / contain no-repeat !important; mask: var(--e-ico-people) center / contain no-repeat !important;
+}
+[class*="leftTrayIcon_hbKzX7"] [class*="contents_"] > :is(svg, div) * { visibility: hidden !important; }
+[class*="rightTrayIcon_hbKzX7"] { color: var(--e-bone) !important; }
