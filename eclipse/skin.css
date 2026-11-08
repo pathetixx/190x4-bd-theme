@@ -566,3 +566,24 @@ nav[class*="wrapper_5dqHTG"] [class*="scroller_5dqHTG"],
 nav[class*="wrapper_5dqHTG"] [class*="tree_"],
 nav[class*="wrapper_5dqHTG"] [class*="stack_"] { scrollbar-width: none !important; }
 nav[class*="wrapper_5dqHTG"] ::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+
+/* бейджи и динамик поверх кольца, кольцо не перекрывает иконку */
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]::after { z-index: 1; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"] > span { position: relative; z-index: 2; }
+
+/* главная: значок 190x4 Browser вместо подписи */
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"] {
+    background: var(--e-art-home) center / 86% no-repeat, #0b090a !important;
+}
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"]::before,
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"]::after { content: none !important; }
+
+/* «Добавить сервер» и «Путешествие»: значки тушью */
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___create-join-button"] { --e-nav: var(--e-ico-plus); }
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___guild-discover-button"] { --e-nav: var(--e-ico-compass); }
+nav[class*="wrapper_5dqHTG"] [class*="circleIconButton"] { background: #0b090a !important; }
+nav[class*="wrapper_5dqHTG"] svg[class*="circleIcon_"] {
+    width: 26px !important; height: 26px !important; background: var(--x4-ico-fill) !important;
+    -webkit-mask: var(--e-nav) center / contain no-repeat !important; mask: var(--e-nav) center / contain no-repeat !important;
+}
+nav[class*="wrapper_5dqHTG"] svg[class*="circleIcon_"] > * { visibility: hidden !important; }
