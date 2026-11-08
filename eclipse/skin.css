@@ -386,3 +386,54 @@ li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important
     background: var(--e-art-burnt) center / 100% 100% no-repeat !important; color: #1a1210 !important; border-radius: 0 !important; font-weight: 500 !important;
 }
 [class*="privateChannels_"] [class*="newBadge_"] [class*="label_4guu7"] { color: #1a1210 !important; }
+
+/* ============================================================
+   КАНАЛЫ СЕРВЕРА: тот же язык, что и в личных сообщениях.
+   ============================================================ */
+[aria-label="Мероприятия"] ~ [class*="basicChannelRowLink_"] { --e-nav: var(--e-ico-calendar); }
+[aria-label="Бусты сервера"] ~ [class*="basicChannelRowLink_"] { --e-nav: var(--e-ico-gem); }
+#app-mount [class*="sidebarList_pog62O"] li [class*="basicChannelRowLink_"] svg[class*="icon_TNyK-N"] {
+    width: 22px !important; height: 22px !important; background: var(--x4-ico-fill) !important;
+    -webkit-mask: var(--e-nav) center / contain no-repeat !important; mask: var(--e-nav) center / contain no-repeat !important;
+}
+[class*="basicChannelRowLink_"] svg[class*="icon_TNyK-N"] > * { visibility: hidden !important; }
+[class*="basicChannelRowLink_"] [class*="name_TNyK-N"] { color: var(--e-dim) !important; font-size: 16px !important; font-weight: 400 !important; }
+[class*="basicChannelRowLink_"]:hover [class*="name_TNyK-N"] { color: var(--e-bone) !important; }
+[class*="sidebarList_pog62O"] [class*="sectionDivider_"] {
+    height: 16px !important; margin: 6px 14px !important; border: none !important; opacity: 0.85;
+    background: var(--e-art-chain) left center / auto 100% repeat-x !important;
+}
+
+/* категории: подпись и черта тушью */
+[class*="containerDefault_yOdhm_"] [class*="mainContent_yOdhm_"] { display: flex; align-items: center; gap: 8px; }
+[class*="containerDefault_yOdhm_"] [class*="mainContent_yOdhm_"]::after { content: ""; flex: 1; height: 1px; background: var(--e-line2); }
+[class*="containerDefault_yOdhm_"] h3 { flex: none; color: var(--e-dim) !important; font-size: 14px !important; font-weight: 500 !important; text-transform: none !important; letter-spacing: 0.02em; }
+
+/* строки каналов */
+#app-mount [class*="iconContainer_TNyK-N"] > svg { width: 18px !important; height: 18px !important; }
+[class*="containerDefault_Wx6SnQ"] [class*="link_TNyK-N"] { border-radius: 0 !important; }
+[class*="containerDefault_Wx6SnQ"] [class*="name_TNyK-N"], [class*="containerDefault_Wx6SnQ"] [class*="name_TNyK-N"] * { color: var(--e-dim) !important; font-size: 16px !important; font-weight: 400 !important; }
+[class*="containerDefault_Wx6SnQ"] [class*="link_TNyK-N"]:hover [class*="name_TNyK-N"], [class*="containerDefault_Wx6SnQ"] [class*="link_TNyK-N"]:hover [class*="name_TNyK-N"] * { color: var(--e-bone) !important; }
+[class*="containerDefault_Wx6SnQ"] [class*="modeUnread_"] [class*="name_TNyK-N"], [class*="containerDefault_Wx6SnQ"] [class*="modeUnread_"] [class*="name_TNyK-N"] * { color: var(--e-bone) !important; font-weight: 500 !important; }
+[class*="containerDefault_Wx6SnQ"] [class*="unread_"] { background: var(--e-blood2) !important; }
+
+/* выбранный канал: мазок начинается после значка, текст читается */
+#app-mount [class*="containerDefault_Wx6SnQ"] [class*="modeSelected_"] [class*="link_TNyK-N"] {
+    background: var(--e-art-brush) 30px center / calc(100% - 40px) 96% no-repeat !important;
+}
+#app-mount [class*="containerDefault_Wx6SnQ"] [class*="modeSelected_"] :is([class*="name_TNyK-N"], [class*="name_TNyK-N"] *, [class*="subtitle_TNyK-N"], [class*="subtitle_TNyK-N"] *, [class*="channelInfo_"], [class*="channelInfo_"] *) { color: #fff !important; font-weight: 500 !important; }
+[class*="containerDefault_Wx6SnQ"] [class*="channelInfo_"], [class*="containerDefault_Wx6SnQ"] [class*="channelInfo_"] * { color: var(--e-dim) !important; font-size: 12.5px !important; }
+
+/* люди в голосовом канале */
+[class*="voiceUser_YUoOxm"] { border-radius: 0 !important; }
+[class*="voiceUser_YUoOxm"]:hover { background: rgba(232, 224, 212, 0.05) !important; }
+[class*="voiceUser_YUoOxm"] [class*="username_YUoOxm"] {
+    color: var(--e-dim) !important; font-family: 'Oswald', sans-serif !important; font-size: 14.5px !important; font-weight: 400 !important;
+    background: none !important; text-shadow: none !important; -webkit-text-fill-color: currentcolor !important; animation: none !important;
+}
+[class*="voiceUser_YUoOxm"] [class*="usernameSpeaking_"] { color: #fff !important; font-weight: 500 !important; }
+[class*="voiceUser_YUoOxm"] .x4np { opacity: 0.3; }
+[class*="voiceUser_YUoOxm"] [class*="badgeWrapper_"] [class*="badge_4guu7"] {
+    background: var(--e-art-burnt) center / 100% 100% no-repeat !important; color: #1a1210 !important; border-radius: 0 !important; font-weight: 500 !important;
+}
+[class*="voiceUser_YUoOxm"] [class*="badgeWrapper_"] [class*="label_4guu7"] { color: #1a1210 !important; }
