@@ -744,3 +744,17 @@ section[class*="title_z_gUBg"] [class*="searchBar_i16Ad0"]:focus-within { border
     background: var(--x4-ico-fill) !important; -webkit-mask: var(--e-ico-people) center / contain no-repeat !important; mask: var(--e-ico-people) center / contain no-repeat !important;
 }
 #app-mount [class*="sidebarList_pog62O"] [class*="inviteButton_XH4OpX"] svg > * { visibility: hidden !important; }
+
+/* ============================================================
+   НЕПРОЧИТАННЫЕ ЛС И ПАПКИ В ЦЕПИ. Discord держит у обёрток высоту
+   40px, а медальон высотой 78px: без этого он съезжает и обрезается.
+   ============================================================ */
+nav[class*="wrapper_5dqHTG"] :is([class*="stack_"], [class*="folderGuildsList_"]) > div:has(> [class*="listItem_"]) { height: 78px !important; }
+nav[class*="wrapper_5dqHTG"] [class*="folderGroup_"] { height: 78px !important; align-items: flex-end; gap: 12px; }
+nav[class*="wrapper_5dqHTG"] [class*="folderGroup_"] > [class*="listItem_"] { align-items: flex-end !important; }
+nav[class*="wrapper_5dqHTG"] [class*="folderGuildsList_"] { height: 78px !important; align-items: flex-end; gap: 12px; }
+/* шапка папки 48px стоит в центре кольца 52px, как иконки серверов */
+nav[class*="wrapper_5dqHTG"] [class*="folderHeader_"] { margin: 0 0 3px !important; transform: none; }
+nav[class*="wrapper_5dqHTG"] [class*="folderButtonInner_"] { clip-path: circle(50%) !important; border-radius: 50% !important; background: #0b090a !important; }
+nav[class*="wrapper_5dqHTG"] [class*="folderPreviewGuildIcon_"] { filter: saturate(0.5) brightness(0.72); }
+nav[class*="wrapper_5dqHTG"] [class*="folderGroupBackground_"] { display: none !important; }
