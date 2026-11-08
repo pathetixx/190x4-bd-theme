@@ -553,10 +553,6 @@ nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:hover::after { border-color: v
 nav[class*="wrapper_5dqHTG"] {
     background: var(--e-art-chain-link) right 56px top 12px / 15px 24px no-repeat, var(--e-art-crescent) right 30px top 10px / auto 80px no-repeat !important;
 }
-nav[class*="wrapper_5dqHTG"] [class*="scroller_5dqHTG"],
-nav[class*="wrapper_5dqHTG"] [class*="tree_"],
-nav[class*="wrapper_5dqHTG"] [class*="stack_"] { scrollbar-width: none !important; }
-nav[class*="wrapper_5dqHTG"] ::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
 
 /* бейджи и динамик поверх кольца, кольцо не перекрывает иконку */
 nav[class*="wrapper_5dqHTG"] [class*="listItem_"]::after { z-index: 1; }
@@ -771,3 +767,20 @@ nav[class*="wrapper_5dqHTG"] [class*="folderGroupBackground_"] { display: none !
 [class*="title_LnjVAX"] > div { color: var(--e-bone) !important; font: 500 15px/20px 'Oswald', sans-serif !important; letter-spacing: 0.03em; }
 [class*="title_LnjVAX"] > svg { width: 20px !important; height: 20px !important; background: var(--e-art-home) center / contain no-repeat !important; }
 [class*="title_LnjVAX"] > svg > * { visibility: hidden !important; }
+
+/* ============================================================
+   МНОГО СЕРВЕРОВ: медальоны не сжимаются, прокручивается один общий
+   ряд, тонкая полоса видна только когда ряд не помещается.
+   ============================================================ */
+nav[class*="wrapper_5dqHTG"] { padding-right: 104px !important; }
+nav[class*="wrapper_5dqHTG"] [class*="tree_"] { flex: 1 1 0 !important; min-width: 0 !important; overflow: hidden !important; }
+nav[class*="wrapper_5dqHTG"] [class*="scroller_5dqHTG"] {
+    flex: 1 1 auto !important; min-width: 0 !important; width: 100% !important;
+    overflow-x: auto !important; overflow-y: hidden !important; scrollbar-width: thin; scrollbar-color: var(--e-line2) transparent;
+}
+/* у самого прокручиваемого ряда тоже есть класс stack_ */
+nav[class*="wrapper_5dqHTG"] [class*="stack_"]:not([class*="scroller_5dqHTG"]) { flex: 0 0 auto !important; width: max-content !important; overflow: visible !important; scrollbar-width: none; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"],
+nav[class*="wrapper_5dqHTG"] [class*="tutorialContainer"],
+nav[class*="wrapper_5dqHTG"] :is([class*="stack_"], [class*="scroller_5dqHTG"], [class*="folderGuildsList_"]) > div { flex: 0 0 auto !important; }
+nav[class*="wrapper_5dqHTG"] [class*="folderGroup_"], nav[class*="wrapper_5dqHTG"] [class*="folderGuildsList_"] { flex: 0 0 auto !important; }

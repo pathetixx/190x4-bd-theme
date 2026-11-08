@@ -1,7 +1,7 @@
 /**
  * @name 190x4Companion
  * @description Компаньон темы 190x4: таблички с именем у участников голосового канала, пометка своих сообщений для чата в стиле Telegram (свои — справа) и анимации рамок, табличек и аватарок всегда — без наведения мыши; единая раскладка панели голосового подключения; окно мини-стрима можно скрыть крестиком и вернуть кнопкой «Стрим»; ускорение темы — меньше подтормаживаний при наведении, вводе и в звуковой панели.
- * @version 2.6.0
+ * @version 2.7.0
  * @author 190x4
  * @source https://github.com/pathetixx/190x4-bd-theme/tree/main/plugins
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/plugins/190x4Companion.plugin.js
@@ -363,10 +363,21 @@ class ThemeBooster {
     }
 }
 
+// В горизонтальной полосе серверов колесо мыши само не прокручивает ряд.
+// Без темы ряд вертикальный, scrollWidth не больше clientWidth, и обработчик не вмешивается.
+function onStripWheel(e) {
+    if (!e.deltaY || e.ctrlKey || e.shiftKey) return;
+    const strip = e.target.closest?.('nav[class*="guilds_"] [class*="scroller_"]') || e.target.closest?.('nav[class*="guilds_"]')?.querySelector('[class*="scroller_"]');
+    if (!strip || strip.scrollWidth <= strip.clientWidth) return;
+    strip.scrollLeft += e.deltaY;
+    e.preventDefault();
+}
+
 module.exports = class Companion {
     constructor(meta) { this.meta = meta; }
 
     start() {
+        document.addEventListener("wheel", onStripWheel, { capture: true, passive: false });
         this.UserStore = Webpack.getStore("UserStore");
         this.GuildMemberStore = Webpack.getStore("GuildMemberStore");
         this.AccessibilityStore = Webpack.getStore("AccessibilityStore");
@@ -524,6 +535,7 @@ module.exports = class Companion {
     }
 
     stop() {
+        document.removeEventListener("wheel", onStripWheel, true);
         this.stopBooster();
         this.unpinLayout();
         this.observer?.disconnect();
