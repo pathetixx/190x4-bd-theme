@@ -1,7 +1,7 @@
 /**
  * @name 190x4Companion
  * @description Компаньон темы 190x4: таблички с именем у участников голосового канала, пометка своих сообщений для чата в стиле Telegram (свои — справа) и анимации рамок, табличек и аватарок всегда — без наведения мыши; единая раскладка панели голосового подключения; окно мини-стрима можно скрыть крестиком и вернуть кнопкой «Стрим»; ускорение темы — меньше подтормаживаний при наведении, вводе и в звуковой панели.
- * @version 2.5.0
+ * @version 2.6.0
  * @author 190x4
  * @source https://github.com/pathetixx/190x4-bd-theme/tree/main/plugins
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/plugins/190x4Companion.plugin.js
@@ -18,8 +18,8 @@ const PALETTES = {
 };
 
 const CDN = "https://cdn.discordapp.com/media/v1/collectibles-shop/";
-const ROW = '[class*="voiceUser__"]';
-const NAME = '[class*="username__"]';
+const ROW = '[class*="voiceUser_"]';
+const NAME = '[class*="username_"]';
 const MSG = 'li[id^="chat-messages-"]';
 // Окно мини-стрима, которое Discord держит поверх всего приложения.
 const PIP = '[class*="pictureInPictureWindow_"]';
@@ -50,7 +50,7 @@ const THEME_STYLE = "190x4-theme-container";
 // токен сейчас не совпадает ни с одним классом — заглушка, которая ничего не ловит;
 // появится нужный CSS-чанк Discord — таблица пересоберётся
 const NONE = ".x4c-none";
-const RE_HASHED = /^\S+_[0-9a-f]{5,6}$/;
+const RE_HASHED = /^\S+_[\w-]{5,6}$/;
 const ATTR = /^\[class([*^$])="((?:[^"\\]|\\.)*)"\]/;
 // пределы: KA — классов в предке при «широкой» правой части, KB — при узкой,
 // KR — развёртка правой части по классам, EXP — копий селектора, LIMIT — его длина

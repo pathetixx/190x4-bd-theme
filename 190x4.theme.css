@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 4.2.1
+ * @version 4.3.0
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -220,8 +220,8 @@ html::before {
 
 /* bg-overlay div: ЕДВА затемняем + лёгкий красный тинт.
    Логотип 190x4 сам по себе тёмный — не дотемняем сильно. */
-[class*="bg__"][class*="theme-"],
-.bg__960e4 {
+[class*="bg_"][class*="theme-"],
+.bg_Fd0FEH {
     background: linear-gradient(
         135deg,
         rgba(0, 0, 0, 0.1) 0%,
@@ -390,24 +390,110 @@ video + canvas {
 #app-mount [class*="notAppAsidePanel"],
 #app-mount [class*="appDevToolsWrapper"],
 #app-mount [class^="app_"]:not([class*="application"]),
-#app-mount [class^="app__"]:not([class*="application"]),
 #app-mount [class*=" app_"]:not([class*="application"]),
-#app-mount [class*=" app__"]:not([class*="application"]),
 #app-mount [class*="layers_"],
-#app-mount [class*="layers__"],
 #app-mount [class*="baseLayer"],
-/* Структурные wrapper'ы — двойное подчёркивание (структура, не панели) */
-#app-mount [class*="container__"]:not([class*="container__5e434"][class*="message"]),
-#app-mount [class*="content__"]:not([class*="message"]):not([class*="contents__"]),
-#app-mount [class*="base__"],
-#app-mount [class*="page__"],
-#app-mount [class*="wrapper__"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+/* Структурные обёртки каркаса приложения */
+#app-mount [class*="container_-PdA9i"]:not([class*="container_-PdA9i"][class*="message"]),
+#app-mount [class*="container_-iD5lj"]:not([class*="container_-iD5lj"][class*="message"]),
+#app-mount [class*="container_02awqf"]:not([class*="container_02awqf"][class*="message"]),
+#app-mount [class*="container_0Ev8GP"]:not([class*="container_0Ev8GP"][class*="message"]),
+#app-mount [class*="container_0dhArF"]:not([class*="container_0dhArF"][class*="message"]),
+#app-mount [class*="container_2ECWxe"]:not([class*="container_2ECWxe"][class*="message"]),
+#app-mount [class*="container_3s6r26"]:not([class*="container_3s6r26"][class*="message"]),
+#app-mount [class*="container_4pNCmg"]:not([class*="container_4pNCmg"][class*="message"]),
+#app-mount [class*="container_5kshUk"]:not([class*="container_5kshUk"][class*="message"]),
+#app-mount [class*="container_6Qs7DF"]:not([class*="container_6Qs7DF"][class*="message"]),
+#app-mount [class*="container_72PQI1"]:not([class*="container_72PQI1"][class*="message"]),
+#app-mount [class*="container_7in7_8"]:not([class*="container_7in7_8"][class*="message"]),
+#app-mount [class*="container_7n2iBD"]:not([class*="container_7n2iBD"][class*="message"]),
+#app-mount [class*="container_AJis7Y"]:not([class*="container_AJis7Y"][class*="message"]),
+#app-mount [class*="container_AR-I8-"]:not([class*="container_AR-I8-"][class*="message"]),
+#app-mount [class*="container_DGtEk4"]:not([class*="container_DGtEk4"][class*="message"]),
+#app-mount [class*="container_FNEkcu"]:not([class*="container_FNEkcu"][class*="message"]),
+#app-mount [class*="container_FZcNoI"]:not([class*="container_FZcNoI"][class*="message"]),
+#app-mount [class*="container_FrbQJp"]:not([class*="container_FrbQJp"][class*="message"]),
+#app-mount [class*="container_GsRAr8"]:not([class*="container_GsRAr8"][class*="message"]),
+#app-mount [class*="container_HOJNvw"]:not([class*="container_HOJNvw"][class*="message"]),
+#app-mount [class*="container_HeWz1C"]:not([class*="container_HeWz1C"][class*="message"]),
+#app-mount [class*="container_HehSfW"]:not([class*="container_HehSfW"][class*="message"]),
+#app-mount [class*="container_IM8diO"]:not([class*="container_IM8diO"][class*="message"]),
+#app-mount [class*="container_JiW2R7"]:not([class*="container_JiW2R7"][class*="message"]),
+#app-mount [class*="container_K7aN4Z"]:not([class*="container_K7aN4Z"][class*="message"]),
+#app-mount [class*="container_Kou47m"]:not([class*="container_Kou47m"][class*="message"]),
+#app-mount [class*="container_PHnyXK"]:not([class*="container_PHnyXK"][class*="message"]),
+#app-mount [class*="container_Q-iJgG"]:not([class*="container_Q-iJgG"][class*="message"]),
+#app-mount [class*="container_SHuBkB"]:not([class*="container_SHuBkB"][class*="message"]),
+#app-mount [class*="container_U6yR7S"]:not([class*="container_U6yR7S"][class*="message"]),
+#app-mount [class*="container_UDm8JL"]:not([class*="container_UDm8JL"][class*="message"]),
+#app-mount [class*="container_UWRh5Q"]:not([class*="container_UWRh5Q"][class*="message"]),
+#app-mount [class*="container_Us_HOb"]:not([class*="container_Us_HOb"][class*="message"]),
+#app-mount [class*="container_V7nUkK"]:not([class*="container_V7nUkK"][class*="message"]),
+#app-mount [class*="container_Wn95fS"]:not([class*="container_Wn95fS"][class*="message"]),
+#app-mount [class*="container_XFjmsP"]:not([class*="container_XFjmsP"][class*="message"]),
+#app-mount [class*="container_XwrLyS"]:not([class*="container_XwrLyS"][class*="message"]),
+#app-mount [class*="container_Zdr5Tz"]:not([class*="container_Zdr5Tz"][class*="message"]),
+#app-mount [class*="container__B7Y3X"]:not([class*="container__B7Y3X"][class*="message"]),
+#app-mount [class*="container_clpvxq"]:not([class*="container_clpvxq"][class*="message"]),
+#app-mount [class*="container_cxf5TV"]:not([class*="container_cxf5TV"][class*="message"]),
+#app-mount [class*="container_dPPWEK"]:not([class*="container_dPPWEK"][class*="message"]),
+#app-mount [class*="container_ejC3ZL"]:not([class*="container_ejC3ZL"][class*="message"]),
+#app-mount [class*="container_fna9sW"]:not([class*="container_fna9sW"][class*="message"]),
+#app-mount [class*="container_g2fiji"]:not([class*="container_g2fiji"][class*="message"]),
+#app-mount [class*="container_g6VwXp"]:not([class*="container_g6VwXp"][class*="message"]),
+#app-mount [class*="container_gE80hU"]:not([class*="container_gE80hU"][class*="message"]),
+#app-mount [class*="container_gYY06b"]:not([class*="container_gYY06b"][class*="message"]),
+#app-mount [class*="container_isqatr"]:not([class*="container_isqatr"][class*="message"]),
+#app-mount [class*="container_oCxUd2"]:not([class*="container_oCxUd2"][class*="message"]),
+#app-mount [class*="container_orXH-o"]:not([class*="container_orXH-o"][class*="message"]),
+#app-mount [class*="container_p5e8gn"]:not([class*="container_p5e8gn"][class*="message"]),
+#app-mount [class*="container_pog62O"]:not([class*="container_pog62O"][class*="message"]),
+#app-mount [class*="container_rc97-L"]:not([class*="container_rc97-L"][class*="message"]),
+#app-mount [class*="container_s7QiTL"]:not([class*="container_s7QiTL"][class*="message"]),
+#app-mount [class*="container_sRjXhH"]:not([class*="container_sRjXhH"][class*="message"]),
+#app-mount [class*="container_srJQZC"]:not([class*="container_srJQZC"][class*="message"]),
+#app-mount [class*="container_tvVoIN"]:not([class*="container_tvVoIN"][class*="message"]),
+#app-mount [class*="container_xs4xcr"]:not([class*="container_xs4xcr"][class*="message"]),
+#app-mount [class*="container_yFHu6Z"]:not([class*="container_yFHu6Z"][class*="message"]),
+#app-mount [class*="container_zrUwGA"]:not([class*="container_zrUwGA"][class*="message"]),
+#app-mount [class*="content_0FfRcL"]:not([class*="message"]):not([class*="contents_"]),
+#app-mount [class*="content_4TfzT5"]:not([class*="message"]):not([class*="contents_"]),
+#app-mount [class*="content_5P_uZc"]:not([class*="message"]):not([class*="contents_"]),
+#app-mount [class*="content_KWWX2H"]:not([class*="message"]):not([class*="contents_"]),
+#app-mount [class*="content_YUoOxm"]:not([class*="message"]):not([class*="contents_"]),
+#app-mount [class*="content_pEFV0i"]:not([class*="message"]):not([class*="contents_"]),
+#app-mount [class*="content_pog62O"]:not([class*="message"]):not([class*="contents_"]),
+#app-mount [class*="content_tu5953"]:not([class*="message"]):not([class*="contents_"]),
+#app-mount [class*="content_zgsiD2"]:not([class*="message"]):not([class*="contents_"]),
+#app-mount [class*="base_CAMiwx"],
+#app-mount [class*="base_pog62O"],
+#app-mount [class*="page_7s3UAK"],
+#app-mount [class*="page_ETiMTD"],
+#app-mount [class*="page_gVbU0s"],
+#app-mount [class*="page_iar92T"],
+#app-mount [class*="page_pog62O"],
+#app-mount [class*="wrapper_6AvvhR"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_7KvOkT"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_7NOr2f"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_9jC23S"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_O41c2-"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_QQRrAh"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_SIG2n8"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_ST_Y69"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_TF1qYB"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_cELD0n"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_gncONC"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_kSdzCr"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_lj7V-K"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_nLdsb1"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_rfWwnu"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
+#app-mount [class*="wrapper_t2U4kv"]:not([class*="message"]):not([class*="avatar"]):not([class*="emoji"]),
 #app-mount [class*="contentRegion"],
 #app-mount [class*="standardSidebarView"],
 /* Friends/Now-Playing/Home wrapper'ы */
-#app-mount [class*="container__133bf"],
+#app-mount [class*="container_zrUwGA"],
 #app-mount [class*="upperContainer"],
-#app-mount [class*="tabBody__"],
+#app-mount [class*="tabBody_"],
 #app-mount [class*="nowPlayingColumn"],
 #app-mount [class*="peopleColumn"],
 #app-mount [class*="homeWrapper"],
@@ -415,7 +501,7 @@ video + canvas {
 /* Чат и channel wrapper'ы */
 #app-mount [class*="chatContent_"],
 #app-mount [class*="channelChatWrapper"],
-#app-mount [class*="form_"][class*="f75fb0"] {
+#app-mount [class*="form_z_gUBg"] {
     background: transparent !important;
     background-color: transparent !important;
     background-image: none !important;
@@ -489,7 +575,7 @@ html::after {
 }
 
 /* Unread mark */
-[class*="modeUnread_"] [class*="name_"] {
+[class*="modeUnread"] [class*="name_"] {
     color: var(--x4-text-bright) !important;
 }
 
@@ -530,7 +616,7 @@ html::after {
 [class*="rtcConnection"],
 [class*="pulseGradient"],
 [class*="pulse_"],
-[class*="gradient__"][class*="11664"] {
+[class*="gradient_"][class*="11664"] {
     background: transparent !important;
     background-color: transparent !important;
     background-image: none !important;
@@ -552,60 +638,63 @@ html::after {
 /* === VOICE CHANNEL PREVIEW — точная структура (Mana) ===
    container_HASH > tiles_HASH > wrapper_HASH > tile_HASH > tileChild + content + border
    + channelName + participantsRow + joinButton */
-[class*="container__5aa3a"],
-[class*="tiles__5aa3a"],
-[class*="wrapper__2f4f7"],
-[class*="tile__2f4f7"],
-[class*="tile__90dc5"],
-[class*="noBorder__90dc5"],
-[class*="wrapper_cb9592"],
-[class*="noChat_cb9592"],
-[class*="video_cb9592"],
-[class*="tileChild__2f4f7"],
-[class*="content__2f4f7"],
-[class*="border__2f4f7"],
-[class*="overlayContainer__2f4f7"],
-[class*="overlayTop__2f4f7"],
-[class*="indicators__2f4f7"],
-[class*="voiceChannelEffectsContainer__2f4f7"],
-[class*="channelName__5aa3a"],
-[class*="participantsRow__5aa3a"],
-[class*="joinButton__5aa3a"],
-[class*="focusTarget__54e4b"],
+[class*="container_mBjXoo"],
+[class*="tiles_mBjXoo"],
+[class*="wrapper_7NOr2f"],
+[class*="tile_7NOr2f"],
+[class*="tile_JPP66i"],
+[class*="noBorder_JPP66i"],
+[class*="wrapper_hbKzX7"],
+[class*="noChat_hbKzX7"],
+[class*="video_hbKzX7"],
+[class*="tileChild_7NOr2f"],
+[class*="content_7NOr2f"],
+[class*="border_7NOr2f"],
+[class*="overlayContainer_7NOr2f"],
+[class*="overlayTop_7NOr2f"],
+[class*="indicators_7NOr2f"],
+[class*="voiceChannelEffectsContainer_7NOr2f"],
+[class*="channelName_mBjXoo"],
+[class*="participantsRow_mBjXoo"],
+[class*="joinButton_mBjXoo"],
+[class*="focusTarget_EEwkB0"],
 /* Прицельные паттерны — на случай если хеш сменится */
-[class*="tiles__"],
-[class*="tileChild__"],
-[class*="overlayContainer__"],
-[class*="overlayTop__"],
+[class*="tiles_"],
+[class*="tileChild_"],
+[class*="overlayContainer_7NOr2f"],
+[class*="overlayContainer_PaSpLC"],
+[class*="overlayTop_"],
 [class*="participantsRow"],
 [class*="joinButton"],
-[class*="channelName__"] {
+[class*="channelName_SeV6PM"],
+[class*="channelName_bbJCi7"],
+[class*="channelName_mBjXoo"] {
     background: transparent !important;
     background-color: transparent !important;
     background-image: none !important;
 }
 
 /* Сам tile (плитка с аватаром) — лёгкая красная рамка вместо solid bg */
-[class*="tile__2f4f7"],
-[class*="wrapper__2f4f7"][class*="tile_"] {
+[class*="tile_7NOr2f"],
+[class*="wrapper_7NOr2f"][class*="tile_"] {
     background: rgba(0, 0, 0, 0.25) !important;
     border: 1px solid var(--x4-border-soft) !important;
     border-radius: 8px;
 }
 
-[class*="border__2f4f7"] {
+[class*="border_7NOr2f"] {
     border-color: var(--x4-border) !important;
     box-shadow: inset 0 0 0 1px var(--x4-border-soft);
 }
 
-/* Предки превью звонка (container__5aa3a) раньше делались прозрачными
+/* Предки превью звонка (container_mBjXoo) раньше делались прозрачными
    через :has() на любом структурном контейнере. С раскладкой 4.0 они
    прозрачны и так, а :has() на верхних узлах заставлял пересчитывать
    стили всей страницы при любом изменении внутри (ввод, наведение,
    индикатор говорящего) — блок удалён в 4.1.2. */
 
-/* Брат container__5aa3a: содержит "Участники без видео скрыты" */
-[class*="content__5aa3a"] {
+/* Брат container_mBjXoo: содержит "Участники без видео скрыты" */
+[class*="content_mBjXoo"] {
     background: transparent !important;
     background-color: transparent !important;
     background-image: none !important;
@@ -613,7 +702,7 @@ html::after {
 
 /* Фон окна звонка — анимированные пятна (центральное — синий Discord)
    на сплошной подложке: закрывали обои. Убираем слой целиком. */
-[class*="gradientBackground__"]:has(> [class*="centerEllipse__"]) {
+[class*="gradientBackground_"]:has(> [class*="centerEllipse_"]) {
     display: none !important;
 }
 
@@ -805,9 +894,9 @@ pre code {
 
 /* Модалки Mana («Добавить в беседу» и др.) и выпадашки: общее правило
    прозрачных container__ снимало им фон — сквозь окно просвечивал чат. */
-#app-mount [role="dialog"] > [class*="outerContainer__"] > [class*="container__"],
+#app-mount [role="dialog"] > [class*="outerContainer_"] > [class*="container_"],
 /* выпадающие списки в попапах (подсказки поиска и т.п.) — та же беда */
-#app-mount [class*="layerContainer_"] [role="listbox"][class*="container__"] {
+#app-mount [class*="layerContainer_"] [role="listbox"][class*="container_"] {
     background: rgba(10, 10, 15, 0.98) !important;
     border: 1px solid var(--x4-border) !important;
     box-shadow: 0 0 30px rgba(255, 26, 58, 0.18) !important;
@@ -820,15 +909,15 @@ pre code {
     background: rgba(8, 8, 12, 0.97) !important;
     border: none !important;
 }
-.user-profile-modal-v2 main[class*="profile__"] {
+.user-profile-modal-v2 main[class*="profile_"] {
     background: linear-gradient(180deg, rgba(22, 22, 30, 0.96), rgba(11, 11, 16, 0.96)) !important;
     border: 1px solid var(--ct-line, rgba(255, 26, 58, 0.34)) !important;
     border-radius: 0 !important;
     clip-path: var(--ct-chamfer);
     box-shadow: inset 0 1px 0 rgba(255, 26, 58, 0.55) !important;
 }
-.user-profile-modal-v2 main[class*="profile__"] [class*="profileHeaderBannerContainer__"],
-.user-profile-modal-v2 main[class*="profile__"] [class*="banner_"] {
+.user-profile-modal-v2 main[class*="profile_"] [class*="profileHeaderBannerContainer_"],
+.user-profile-modal-v2 main[class*="profile_"] [class*="banner_"] {
     border-radius: 0 !important;
 }
 /* заметка: рамка на обёртке — высоту textarea Discord подгоняет сам */
@@ -1400,7 +1489,7 @@ input[type="checkbox"][class*="bdCheckbox"]:checked::after {
    topPill_/bottomPill_ — это сам бар, его НЕ красим! */
 [role="tab"] [class*="indicator_"],
 [class*="tabBar_"] [class*="indicator_"],
-[class*="tabBar__133bf"] [class*="indicator_"] {
+[class*="tabBar_zrUwGA"] [class*="indicator_"] {
     background: var(--x4-red) !important;
     background-color: var(--x4-red) !important;
     box-shadow: 0 0 8px var(--x4-red-glow) !important;
@@ -1419,7 +1508,7 @@ input[type="checkbox"][class*="bdCheckbox"]:checked::after {
 
 /* Кнопка "Добавить в друзья" — не сплошной красный, тонкий outline */
 [class*="addFriend_"],
-[class*="addFriend__133bf"] {
+[class*="addFriend_zrUwGA"] {
     background: transparent !important;
     background-color: transparent !important;
     color: var(--x4-red-bright) !important;
@@ -1518,41 +1607,41 @@ input[type="radio"] {
    TITLE BAR — бренд «190x4 // NET_RUNNER_KAI» внутри шапки Discord
    Раньше это была отдельная накладка body::before над шапкой, а весь UI
    сдвигался на 24px вниз: за накладку нельзя было таскать окно. Теперь
-   бренд живёт в самой шапке (bar_c38106) — она уже зона перетаскивания
+   бренд живёт в самой шапке (bar_3zSH5d) — она уже зона перетаскивания
    (-webkit-app-region: drag), лишние 24px не нужны.
    ============================================================ */
 
-[class*="bar_c38106"] {
+[class*="bar_3zSH5d"] {
     background: linear-gradient(180deg, rgba(6, 6, 10, 0.98), rgba(10, 10, 15, 0.94)) !important;
     border-bottom: 1px solid rgba(255, 26, 58, 0.45) !important;
     box-shadow: 0 2px 14px rgba(255, 26, 58, 0.18);
 }
 /* бренд — сразу после стрелок; leading — no-drag, но надпись мелкая,
    остальная ширина шапки таскается */
-[class*="bar_c38106"] [class*="leading_"]::after {
+[class*="bar_3zSH5d"] [class*="leading_"]::after {
     content: "▰ 190x4 // NET_RUNNER_KAI ▰";
     align-self: center; margin-left: 10px; white-space: nowrap; pointer-events: none;
     font: 900 10px/1 'Orbitron', sans-serif; letter-spacing: 0.4em;
     color: var(--x4-red-bright);
     text-shadow: 0 0 6px var(--x4-red), 0 0 12px rgba(255, 26, 58, 0.55);
 }
-[class*="bar_c38106"] [class*="leading_"] { width: auto !important; }
+[class*="bar_3zSH5d"] [class*="leading_"] { width: auto !important; }
 
 /* --- свои иконки кнопок шапки: родной svg прячем, рисуем маской --- */
 [class*="backForwardButtons_"] [class*="button_"],
-[class*="bar_c38106"] [class*="trailing_"] [class*="clickable_"],
+[class*="bar_3zSH5d"] [class*="trailing_"] [class*="clickable_"],
 [class*="winButton_"] {
     position: relative;
     color: var(--x4-text-muted) !important;
     transition: color 0.15s ease, background-color 0.15s ease, filter 0.15s ease;
 }
 [class*="backForwardButtons_"] [class*="button_"] > svg,
-[class*="bar_c38106"] [class*="trailing_"] [class*="clickable_"] > svg,
+[class*="bar_3zSH5d"] [class*="trailing_"] [class*="clickable_"] > svg,
 [class*="winButton_"] > svg {
     opacity: 0 !important;
 }
 [class*="backForwardButtons_"] [class*="button_"]::before,
-[class*="bar_c38106"] [class*="trailing_"] [class*="clickable_"]::before,
+[class*="bar_3zSH5d"] [class*="trailing_"] [class*="clickable_"]::before,
 [class*="winButton_"]::before {
     content: ""; position: absolute; left: 50%; top: 50%;
     width: 18px; height: 18px; translate: -50% -50%;
@@ -1563,8 +1652,8 @@ input[type="radio"] {
 [class*="winButton_"]::before { width: 14px; height: 14px; }
 [class*="backForwardButtons_"] [class*="back_"]    { --x4-ico: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M14.657 17.657L9 12l5.657-5.657%22/%3E%3C/svg%3E"); }
 [class*="backForwardButtons_"] [class*="forward_"] { --x4-ico: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M9.343 6.343L15 12l-5.657 5.657%22/%3E%3C/svg%3E"); }
-[class*="bar_c38106"] [aria-label="Почта"], [class*="bar_c38106"] [aria-label="Inbox"] { --x4-ico: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M3.5 12h5a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 .5-.5h5m.236-.461l-3.448-6.035A1 1 0 0 0 16.42 5H7.58a1 1 0 0 0-.868.504l-3.448 6.035A2 2 0 0 0 3 12.53V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5.469a2 2 0 0 0-.264-.992Z%22/%3E%3C/svg%3E"); }
-[class*="bar_c38106"] [aria-label="Помощь"], [class*="bar_c38106"] [aria-label="Help"] { --x4-ico: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M12 17h.002m-2.627-6.875a2.625 2.625 0 1 1 3.601 2.438c-.512.205-.976.635-.976 1.187V14m9-2a9 9 0 1 1-18 0a9 9 0 0 1 18 0%22/%3E%3C/svg%3E"); }
+[class*="bar_3zSH5d"] [aria-label="Почта"], [class*="bar_3zSH5d"] [aria-label="Inbox"] { --x4-ico: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M3.5 12h5a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 .5-.5h5m.236-.461l-3.448-6.035A1 1 0 0 0 16.42 5H7.58a1 1 0 0 0-.868.504l-3.448 6.035A2 2 0 0 0 3 12.53V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5.469a2 2 0 0 0-.264-.992Z%22/%3E%3C/svg%3E"); }
+[class*="bar_3zSH5d"] [aria-label="Помощь"], [class*="bar_3zSH5d"] [aria-label="Help"] { --x4-ico: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M12 17h.002m-2.627-6.875a2.625 2.625 0 1 1 3.601 2.438c-.512.205-.976.635-.976 1.187V14m9-2a9 9 0 1 1-18 0a9 9 0 0 1 18 0%22/%3E%3C/svg%3E"); }
 [class*="winButton_"][aria-label="Свернуть"], [class*="winButton_"][aria-label="Minimize"] { --x4-ico: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22square%22 stroke-linejoin=%22miter%22%3E%3Cpath d=%22M5 16 H19%22/%3E%3C/svg%3E"); }
 [class*="winButton_"][aria-label="Развернуть"], [class*="winButton_"][aria-label="Maximize"],
 [class*="winButton_"][aria-label="Восстановить"], [class*="winButton_"][aria-label="Restore"] { --x4-ico: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22square%22 stroke-linejoin=%22miter%22%3E%3Cpath d=%22M9 5 H19 V15 L15 19 H5 V9 Z%22/%3E%3C/svg%3E"); }
@@ -1572,7 +1661,7 @@ input[type="radio"] {
 
 /* наведение: красный неон; «назад/вперёд» неактивные — тусклые */
 [class*="backForwardButtons_"] [class*="button_"]:hover:not([class*="disabled_"]),
-[class*="bar_c38106"] [class*="trailing_"] [class*="clickable_"]:hover,
+[class*="bar_3zSH5d"] [class*="trailing_"] [class*="clickable_"]:hover,
 [class*="winButton_"]:hover {
     color: var(--x4-red-bright) !important;
     filter: drop-shadow(0 0 5px rgba(255, 26, 58, 0.7));
@@ -1626,7 +1715,7 @@ input[type="radio"] {
 
 /* Voice info popover (RTC debug, settings, voice-status и т.д.).
    Outer popover_d6f39b совпадал с container__50387 на одном узле,
-   поэтому правило `#app-mount [class*="container__"]:not(...)` с
+   поэтому правило `#app-mount [class*="container_"]:not(...)` с
    specificity (1,3,0) било наш плоский `[class*="popover_"]` (0,1,0).
    Поднимаем специфичность через `#app-mount` + двойной attr-match. */
 #app-mount [class*="popover_"]:not([class*="popoutBottom"]):not([class*="popoutText"]) {
@@ -1638,24 +1727,34 @@ input[type="radio"] {
         0 0 30px rgba(255, 26, 58, 0.18) !important;
 }
 
+/* «Почта»: контейнер без своей подложки, иначе страница просвечивает сквозь шапку. */
+#app-mount [class*="container_uTMZTY"] {
+    background: rgba(10, 10, 15, 0.97) !important;
+    background-color: rgba(10, 10, 15, 0.97) !important;
+    border: 1px solid var(--x4-border) !important;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(255, 26, 58, 0.18) !important;
+}
+
 /* Внутренние слои popover'а — прозрачные, чтобы outer opaque просвечивал. */
-#app-mount [class*="popover_"] [class*="tabPanel__"],
-#app-mount [class*="popover_"] [class*="tabs__"],
-#app-mount [class*="popover_"] [class*="tabBarItem__"] {
+#app-mount [class*="popover_"] [class*="tabPanel_"],
+#app-mount [class*="popover_"] [class*="tabs_"],
+#app-mount [class*="popover_"] [class*="tabBarItem_"] {
     background: transparent !important;
     background-color: transparent !important;
 }
 
-/* Mana text-input — DOM: <div class="wrapper__72c38 container__0f084 ...">
-                              <div class="icon__0f084"><svg/></div>
-                              <input class="input__0f084" data-mana-component="text-input">
+/* Mana text-input — DOM: <div class="wrapper_UcGqzv container_0PLWhS ...">
+                              <div class="icon_0PLWhS"><svg/></div>
+                              <input class="input_0PLWhS" data-mana-component="text-input">
                           </div>
    Border-color и focus-ring живут на ВНЕШНЕМ div'е (контейнере),
    а не на input. В 3.6.11 пытался убрать через *:has() — оно резало
    border у любого предка с focused input, в т.ч. у soundboard popover'а.
    Теперь точечно по реальным классам. */
-[class*="wrapper__72c38"],
-[class*="container__0f084"] {
+[class*="wrapper_UcGqzv"],
+[class*="container_0PLWhS"] {
     background: rgba(6, 6, 10, 0.7) !important;
     border: 1px solid var(--x4-border-soft) !important;
     /* Форсим каждый угол отдельно — `border-radius` shorthand перебивался
@@ -1669,8 +1768,8 @@ input[type="radio"] {
     transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-[class*="wrapper__72c38"]:focus-within,
-[class*="container__0f084"]:focus-within {
+[class*="wrapper_UcGqzv"]:focus-within,
+[class*="container_0PLWhS"]:focus-within {
     border-color: var(--x4-red) !important;
     border-top-left-radius: 8px !important;
     border-top-right-radius: 8px !important;
@@ -1680,11 +1779,11 @@ input[type="radio"] {
     outline: none !important;
 }
 
-/* 3.6.15: `hasLeading__0f084` модификатор у Discord обнулял right-corners
+/* 3.6.15: `hasLeading_0PLWhS` модификатор у Discord обнулял right-corners
    правилом со specificity (0,2,0), и мой `[class*=...]` (0,1,0) проигрывал.
    Поднимаем до (0,3,0) через тройной class-match. */
-.wrapper__72c38.container__0f084.hasLeading__0f084,
-.wrapper__72c38.container__0f084 {
+.wrapper_UcGqzv.container_0PLWhS.hasLeading_0PLWhS,
+.wrapper_UcGqzv.container_0PLWhS {
     border-top-left-radius: 8px !important;
     border-top-right-radius: 8px !important;
     border-bottom-right-radius: 8px !important;
@@ -1696,7 +1795,7 @@ input[type="radio"] {
    :focus — иначе общее input[class*="input_"]:focus рисует вторую рамку внутри. */
 input[data-mana-component="text-input"],
 input[data-mana-component="text-input"]:focus,
-input[class*="input__0f084"] {
+input[class*="input_0PLWhS"] {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
@@ -1705,12 +1804,12 @@ input[class*="input__0f084"] {
 
 /* Icon в input'е (search-magnifier и т.п.) использует fill="var(--icon-strong)".
    Переменная уже переопределена выше; правило-страховка. */
-[class*="icon__0f084"] svg path[fill*="icon"] {
+[class*="icon_0PLWhS"] svg path[fill*="icon"] {
     fill: var(--x4-red-bright) !important;
 }
 
 /* Пикер гифок/стикеров/эмодзи: серая подложка шапки с поиском — убираем */
-[class*="contentWrapper__"] [class*="header_"]:has(input[data-mana-component="text-input"]) {
+[class*="contentWrapper_"] [class*="header_"]:has(input[data-mana-component="text-input"]) {
     background: transparent !important;
     box-shadow: none !important;
 }
@@ -1720,11 +1819,11 @@ input[class*="input__0f084"] {
     background-color: rgba(120, 6, 22, 0.78) !important;
 }
 
-/* Soundboard panel root — picker__09f65 (выявлено DOM-дампом).
+/* Soundboard panel root — picker_1lN7Eh (выявлено DOM-дампом).
    Это shared picker контейнер (emoji/GIF/soundboard), скоупим по
    :has() с soundboard placeholder чтобы не перекрашивать остальные. */
-[class*="picker__09f65"]:has(input[placeholder*="звук"]),
-[class*="picker__09f65"]:has(input[placeholder*="sound"]) {
+[class*="picker_1lN7Eh"]:has(input[placeholder*="звук"]),
+[class*="picker_1lN7Eh"]:has(input[placeholder*="sound"]) {
     background: rgba(10, 10, 15, 0.97) !important;
     border: 1px solid var(--x4-border) !important;
     border-radius: 8px !important;
@@ -1793,7 +1892,7 @@ button[data-mana-component="button"][class*="brand_a22cb0"]:not([class*="lookFil
 /* Разделители-строки в Account Settings и других местах. */
 [class*="divider_"]:not([class*="dividerRule_"]):not([class*="dividerLong_"]),
 [class*="dividerDefault_"],
-[class*="separator__66f0f"],
+[class*="separator_ymaupl"],
 [class*="userSettings"] hr,
 hr[class*="divider"],
 hr[class*="separator"] {
@@ -1807,13 +1906,13 @@ hr[class*="separator"] {
 #rtc_debug_panel-tab,
 #rtc_debug_panel-tab > div,
 #rtc_debug_panel-tab > div > div,
-[class*="graphContainer_effb26"],
-[class*="statsRow_effb26"],
-[class*="statsText_effb26"],
-[class*="userSelectText_effb26"],
-[class*="container_effb26"],
-[class*="devButtons_effb26"],
-[class*="securedBanner__66f0f"] {
+[class*="graphContainer_BlzJTq"],
+[class*="statsRow_BlzJTq"],
+[class*="statsText_BlzJTq"],
+[class*="userSelectText_BlzJTq"],
+[class*="container_BlzJTq"],
+[class*="devButtons_BlzJTq"],
+[class*="securedBanner_ymaupl"] {
     background-color: transparent !important;
 }
 
@@ -1825,7 +1924,7 @@ hr[class*="separator"] {
    --background-base-lower (у нас 0.18 alpha), а container__ гасит правило
    прозрачных обёрток выше, поэтому сквозь настройки читался чат.
    Даём модалке плотную подложку с размытием. (1,2,0) + позже по файлу. */
-#app-mount [class*="modal_"][class*="container__"] {
+#app-mount [class*="modal_"][class*="container_"] {
     background: rgba(8, 8, 12, 0.94) !important;
     background-color: rgba(8, 8, 12, 0.94) !important;
     border: 1px solid var(--x4-border) !important;
@@ -1840,7 +1939,14 @@ hr[class*="separator"] {
    аватарки (жёлтые/розовые/синие плашки поверх обоев). background-image
    рисуется ПОВЕРХ background-color — накрываем цвет тёмным слоем, лёгкий
    оттенок остаётся. opacity нельзя: аватар — потомок этого же узла. */
-[class*="tile__"] [class*="background_"][style*="background-color"] {
+[class*="tile_7NOr2f"] [class*="background_"][style*="background-color"],
+[class*="tile_BKJg6Y"] [class*="background_"][style*="background-color"],
+[class*="tile_JPP66i"] [class*="background_"][style*="background-color"],
+[class*="tile_iar92T"] [class*="background_"][style*="background-color"],
+[class*="tile_kGiB30"] [class*="background_"][style*="background-color"],
+[class*="tile_lS7BT7"] [class*="background_"][style*="background-color"],
+[class*="tile_mBjXoo"] [class*="background_"][style*="background-color"],
+[class*="tile_uBE_E_"] [class*="background_"][style*="background-color"] {
     background-image: linear-gradient(rgba(6, 6, 10, 0.86), rgba(6, 6, 10, 0.86)) !important;
 }
 
@@ -1981,7 +2087,7 @@ main[class*="chatContent_"] li[data-x4-self] [class*="timestamp_"] {
 }
 
 /* --- Разделитель даты: пилюля по центру вместо линии на всю ширину --- */
-main[class*="chatContent_"] [class*="divider__"][class*="hasContent__"][role="separator"] {
+main[class*="chatContent_"] [class*="divider_"][class*="hasContent_"][role="separator"] {
     height: auto !important;
     border-top: none !important;
     background: transparent !important;
@@ -1989,7 +2095,7 @@ main[class*="chatContent_"] [class*="divider__"][class*="hasContent__"][role="se
     justify-content: center !important;
     margin: 16px 0 8px !important;
 }
-main[class*="chatContent_"] [class*="divider__"][class*="hasContent__"][role="separator"] > span {
+main[class*="chatContent_"] [class*="divider_"][class*="hasContent_"][role="separator"] > span {
     position: static !important;
     margin: 0 auto !important;
     padding: 2px 10px !important;
@@ -2002,7 +2108,7 @@ main[class*="chatContent_"] [class*="divider__"][class*="hasContent__"][role="se
 
 /* ============================================================
    4.0 — COMMAND TERMINAL
-   Раскладка перестроена через сетку Discord (base__5e434 с именованными
+   Раскладка перестроена через сетку Discord (base_pog62O с именованными
    областями guildsList / channelsList / page): сверху — полоса серверов
    «> net», слева — разговор с читаемой колонкой по центру, справа —
    каналы HUD-островом со срезанными углами, под ними — док пользователя.
@@ -2020,21 +2126,21 @@ main[class*="chatContent_"] [class*="divider__"][class*="hasContent__"][role="se
 }
 
 /* --- раскладка --- */
-[class*="base__5e434"] {
+[class*="base_pog62O"] {
     grid-template-areas: "titleBar titleBar titleBar" "guildsList guildsList guildsList" "notice notice notice" "page channelsList channelsList" !important;
     grid-template-columns: [start] 1fr [guildsEnd] 0px [channelsEnd] min-content [end] !important;
     grid-template-rows: [top] var(--custom-app-top-bar-height) [titleBarEnd] 44px [guildsRowEnd] min-content [noticeEnd] 1fr [end] !important;
 }
 /* отступ от краёв окна — только у контента: на base он сдвигал и шапку,
    кнопки окна отъезжали от правого края */
-[class*="content__5e434"] { padding: 0 var(--ct-gap) var(--ct-gap) 0; box-sizing: border-box; }
-[class*="sidebar__5e434"] { grid-area: titleBarEnd / start / end / end !important; pointer-events: none; width: auto !important; }
-[class*="sidebar__5e434"] > * { pointer-events: auto; }
-[class*="sidebar__5e434"]::after { display: none !important; }
+[class*="content_pog62O"] { padding: 0 var(--ct-gap) var(--ct-gap) 0; box-sizing: border-box; }
+[class*="sidebar_pog62O"] { grid-area: titleBarEnd / start / end / end !important; pointer-events: none; width: auto !important; }
+[class*="sidebar_pog62O"] > * { pointer-events: auto; }
+[class*="sidebar_pog62O"]::after { display: none !important; }
 /* ручка ширины сайдбара после переноса вправо оказалась у края окна:
    курсор «растянуть» на правой кромке, тянуть пришлось бы наоборот — убираем */
-[class*="sidebarResizeHandle__"] { display: none !important; }
-[class*="page__5e434"] { grid-area: page !important; padding: 6px 0 0 var(--ct-gap); background: transparent !important;
+[class*="sidebarResizeHandle_"] { display: none !important; }
+[class*="page_pog62O"] { grid-area: page !important; padding: 6px 0 0 var(--ct-gap); background: transparent !important;
     /* остров на 100% высоты + отступ сверху = переполнение на пару px, и
        Discord рисовал пустую полосу прокрутки на всю высоту. Сам page
        прокручивать нечего — у чата/профиля/звонка свои скроллеры внутри. */
@@ -2042,49 +2148,49 @@ main[class*="chatContent_"] [class*="divider__"][class*="hasContent__"][role="se
 /* Полноэкранный звонок/стрим: Discord разворачивает #app-mount и сам
    схлопывает шапку и боковые панели — возвращаем ему ванильную сетку
    и снимаем отступы и рамку острова, иначе видео сидит в рамке. */
-#app-mount:fullscreen [class*="base__5e434"] {
+#app-mount:fullscreen [class*="base_pog62O"] {
     grid-template-areas: "titleBar titleBar titleBar" "guildsList notice notice" "guildsList channelsList page" !important;
     grid-template-columns: [start] min-content [guildsEnd] min-content [channelsEnd] 1fr [end] !important;
     grid-template-rows: [top] 0px [titleBarEnd] 0px [noticeEnd] 1fr [end] !important;
 }
-#app-mount:fullscreen [class*="content__5e434"],
-#app-mount:fullscreen [class*="page__5e434"] { padding: 0 !important; }
-#app-mount:fullscreen [class*="page__5e434"] > * {
+#app-mount:fullscreen [class*="content_pog62O"],
+#app-mount:fullscreen [class*="page_pog62O"] { padding: 0 !important; }
+#app-mount:fullscreen [class*="page_pog62O"] > * {
     border: none !important;
     clip-path: none !important;
     background: #000 !important;
 }
 /* полоса — «вкладки терминала»: без коробки, тонкая линия снизу */
-nav[class*="wrapper_ef3116"] {
+nav[class*="wrapper_5dqHTG"] {
     flex-direction: row !important; height: 44px !important; width: auto !important;
     margin: 0 0 0 var(--ct-gap); padding: 0 6px;
     background: transparent !important; border: none !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
-nav[class*="wrapper_ef3116"]::before {
+nav[class*="wrapper_5dqHTG"]::before {
     content: "> net"; align-self: center; margin-right: 12px;
     font: 600 12px/1 var(--ct-mono); color: var(--x4-red); letter-spacing: 0.05em;
 }
-nav[class*="wrapper_ef3116"] [class*="unreadMentionsIndicator"] { display: none !important; }
-nav[class*="wrapper_ef3116"] [class*="tree_"],
-nav[class*="wrapper_ef3116"] [class*="scroller_ef3116"],
-nav[class*="wrapper_ef3116"] [class*="stack_"] {
+nav[class*="wrapper_5dqHTG"] [class*="unreadMentionsIndicator"] { display: none !important; }
+nav[class*="wrapper_5dqHTG"] [class*="tree_"],
+nav[class*="wrapper_5dqHTG"] [class*="scroller_5dqHTG"],
+nav[class*="wrapper_5dqHTG"] [class*="stack_"] {
     flex-direction: row !important; height: 100% !important; width: auto !important;
     align-items: center; overflow-x: auto !important; overflow-y: hidden !important; gap: 4px;
     padding: 0 !important; margin: 0 !important;
 }
-nav[class*="wrapper_ef3116"] [class*="listItem__"],
-nav[class*="wrapper_ef3116"] [class*="tutorialContainer"] { width: 40px !important; height: 40px !important; margin: 0 !important; justify-content: center; }
-nav[class*="wrapper_ef3116"] [class*="listItem__"] > span { transform: scale(0.8); transform-origin: center; }
-nav[class*="wrapper_ef3116"] [class*="listItem__"] svg foreignObject > div,
-nav[class*="wrapper_ef3116"] [class*="listItem__"] [class*="childWrapper"] { border-radius: 8px !important; box-shadow: none !important; }
-nav[class*="wrapper_ef3116"] [class*="guildSeparator"] { width: 1px !important; height: 20px !important; margin: 0 6px !important; }
-nav[class*="wrapper_ef3116"] [class*="wrapper__58105"] { display: none !important; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"],
+nav[class*="wrapper_5dqHTG"] [class*="tutorialContainer"] { width: 40px !important; height: 40px !important; margin: 0 !important; justify-content: center; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"] > span { transform: scale(0.8); transform-origin: center; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"] svg foreignObject > div,
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"] [class*="childWrapper"] { border-radius: 8px !important; box-shadow: none !important; }
+nav[class*="wrapper_5dqHTG"] [class*="guildSeparator"] { width: 1px !important; height: 20px !important; margin: 0 6px !important; }
+nav[class*="wrapper_5dqHTG"] [class*="wrapper__o8_Xq"] { display: none !important; }
 
 /* --- острова --- */
-[class*="sidebarList__5e434"],
-[class*="page__5e434"] > *,
-[class*="container_c8ffbb"] {
+[class*="sidebarList_pog62O"],
+[class*="page_pog62O"] > *,
+[class*="container_86es0b"] {
     position: relative;
     background: var(--ct-bg) !important;
     border: 1px solid var(--ct-line) !important;
@@ -2097,18 +2203,18 @@ nav[class*="wrapper_ef3116"] [class*="wrapper__58105"] { display: none !importan
        скролле нет, размытие считается один раз на смену кадра под ним. */
     backdrop-filter: blur(14px) saturate(125%);
 }
-[class*="sidebarList__5e434"] { margin: 6px 0 0 var(--ct-gap); }
-[class*="container_c8ffbb"] { margin-left: var(--ct-gap); }
-[class*="sidebarList__5e434"]::after, [class*="container_c8ffbb"]::after {
+[class*="sidebarList_pog62O"] { margin: 6px 0 0 var(--ct-gap); }
+[class*="container_86es0b"] { margin-left: var(--ct-gap); }
+[class*="sidebarList_pog62O"]::after, [class*="container_86es0b"]::after {
     position: absolute; z-index: 5; pointer-events: none; bottom: 10px; right: 20px;
     font: 700 9px/1 'Orbitron', sans-serif; letter-spacing: 0.3em; color: var(--x4-red); opacity: .75;
 }
 /* над доком: Discord держит его высоту в --custom-app-panels-height */
-[class*="sidebarList__5e434"]::after { content: "SECTOR // CHANNELS"; bottom: calc(var(--custom-app-panels-height, 0px) + 12px); }
-[class*="container_c8ffbb"]::after { content: "CREW // ONLINE"; }
+[class*="sidebarList_pog62O"]::after { content: "SECTOR // CHANNELS"; bottom: calc(var(--custom-app-panels-height, 0px) + 12px); }
+[class*="container_86es0b"]::after { content: "CREW // ONLINE"; }
 
 /* --- док пользователя: под каналами, справа --- */
-section[class*="panels__5e434"] {
+section[class*="panels_pog62O"] {
     /* ширина — та же формула, что у списка каналов */
     left: auto !important; right: 0 !important; bottom: 0 !important;
     width: calc(var(--custom-guild-sidebar-width) - var(--custom-guild-list-width) - 1px) !important;
@@ -2118,19 +2224,19 @@ section[class*="panels__5e434"] {
 }
 
 /* --- шапка разговора: терминальная строка --- */
-section[class*="title_f75fb0"] {
+section[class*="title_z_gUBg"] {
     background: linear-gradient(90deg, rgba(255, 26, 58, 0.16), transparent 55%) !important;
     border-bottom: 1px solid var(--ct-line) !important;
     font-family: var(--ct-mono) !important;
 }
-section[class*="title_f75fb0"] h1 { font-family: var(--ct-mono) !important; letter-spacing: 0.06em; }
-section[class*="title_f75fb0"] h1::before { content: "> "; color: var(--x4-red); }
+section[class*="title_z_gUBg"] h1 { font-family: var(--ct-mono) !important; letter-spacing: 0.06em; }
+section[class*="title_z_gUBg"] h1::before { content: "> "; color: var(--x4-red); }
 
 /* --- разговор: читаемая колонка по центру, моно --- */
 /* лента — на всю ширину: пузыри сами ограничены 72%, а фиксированная
    колонка 1000px на широких мониторах оставляла пустые поля по бокам */
 main[class*="chatContent_"] [class*="messageContent_"],
-[class*="sidebarList__5e434"] [class*="name__"] {
+[class*="sidebarList_pog62O"] [class*="name_"] {
     font-family: var(--ct-mono) !important; font-size: 13.5px !important;
 }
 /* Пузыри — терминальные блоки. Без clip-path: аватар и время при
@@ -2142,30 +2248,30 @@ main[class*="chatContent_"] li[id^="chat-messages-"] > [class*="cozyMessage_"] {
 main[class*="chatContent_"] li[data-x4-self] > [class*="cozyMessage_"] { background: rgba(40, 4, 10, 0.92) !important; border-color: rgba(255, 26, 58, 0.5) !important; }
 /* Поле ввода без clip-path: над ним всплывают подсказки @/эмодзи. */
 [class*="channelTextArea_"] form { border-radius: 2px !important; }
-[class*="modeSelected__"] [class*="link__"] { border-radius: 0 !important; box-shadow: inset 2px 0 0 var(--x4-red), inset -2px 0 0 var(--x4-red) !important; }
+[class*="modeSelected_"] [class*="link_"] { border-radius: 0 !important; box-shadow: inset 2px 0 0 var(--x4-red), inset -2px 0 0 var(--x4-red) !important; }
 
 /* ============ иконки полосы: киберпанк ============ */
-nav[class*="wrapper_ef3116"] { --np-cut: 7px; --np-br: rgba(255, 255, 255, 0.28); }
+nav[class*="wrapper_5dqHTG"] { --np-cut: 7px; --np-br: rgba(255, 255, 255, 0.28); }
 /* снимаем маску-«скруглик» Discord — форма теперь наша */
-nav[class*="wrapper_ef3116"] foreignObject { mask: none !important; }
-nav[class*="wrapper_ef3116"] [class*="wrapper__6e9f8"],
-nav[class*="wrapper_ef3116"] [class*="circleIconButton"] {
+nav[class*="wrapper_5dqHTG"] foreignObject { mask: none !important; }
+nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"],
+nav[class*="wrapper_5dqHTG"] [class*="circleIconButton"] {
     position: relative; border-radius: 0 !important; overflow: visible !important;
 }
 /* сама картинка: срезаны левый-верхний и правый-нижний углы */
-nav[class*="wrapper_ef3116"] [class*="wrapper__6e9f8"],
-nav[class*="wrapper_ef3116"] [class*="childWrapper"],
-nav[class*="wrapper_ef3116"] [class*="circleIconButton"] {
+nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"],
+nav[class*="wrapper_5dqHTG"] [class*="childWrapper"],
+nav[class*="wrapper_5dqHTG"] [class*="circleIconButton"] {
     clip-path: polygon(var(--np-cut) 0, 100% 0, 100% calc(100% - var(--np-cut)), calc(100% - var(--np-cut)) 100%, 0 100%, 0 var(--np-cut));
     border-radius: 0 !important;
 }
-nav[class*="wrapper_ef3116"] [class*="wrapper__6e9f8"] > img {
+nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"] > img {
     filter: saturate(0.5) brightness(0.8) contrast(1.1);
     transition: filter 0.2s ease;
 }
 /* HUD-скобки на двух оставшихся углах */
-nav[class*="wrapper_ef3116"] [class*="wrapper__6e9f8"]::after,
-nav[class*="wrapper_ef3116"] [class*="circleIconButton"]::after {
+nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"]::after,
+nav[class*="wrapper_5dqHTG"] [class*="circleIconButton"]::after {
     content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2;
     --c: var(--np-br);
     background:
@@ -2176,88 +2282,88 @@ nav[class*="wrapper_ef3116"] [class*="circleIconButton"]::after {
     transition: inset 0.2s ease;
 }
 /* наведение и выбор — полный цвет, красные скобки, свечение */
-nav[class*="wrapper_ef3116"] [class*="listItem__"]:hover [class*="wrapper__6e9f8"] > img,
-nav[class*="wrapper_ef3116"] [class*="wrapper__6e9f8"][aria-selected="true"] > img { filter: none; }
-nav[class*="wrapper_ef3116"] [class*="listItem__"]:hover [class*="wrapper__6e9f8"]::after,
-nav[class*="wrapper_ef3116"] [class*="listItem__"]:hover [class*="circleIconButton"]::after,
-nav[class*="wrapper_ef3116"] [class*="wrapper__6e9f8"][aria-selected="true"]::after {
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:hover [class*="wrapper_JJ-hgR"] > img,
+nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"][aria-selected="true"] > img { filter: none; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:hover [class*="wrapper_JJ-hgR"]::after,
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:hover [class*="circleIconButton"]::after,
+nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"][aria-selected="true"]::after {
     --c: var(--x4-red-bright);
 }
-nav[class*="wrapper_ef3116"] [class*="blobContainer_"][class*="selected_"] { filter: drop-shadow(0 0 6px rgba(255, 26, 58, 0.55)); }
+nav[class*="wrapper_5dqHTG"] [class*="blobContainer_"][class*="selected_"] { filter: drop-shadow(0 0 6px rgba(255, 26, 58, 0.55)); }
 /* подчёркивание выбранного */
-nav[class*="wrapper_ef3116"] [class*="listItem__"]:has([aria-selected="true"])::after {
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has([aria-selected="true"])::after {
     content: ""; position: absolute; left: 10px; right: 10px; bottom: 0; height: 2px;
     background: var(--x4-red); box-shadow: 0 0 8px var(--x4-red-glow);
 }
 /* бейдж непрочитанного — прямоугольная плашка */
-nav[class*="wrapper_ef3116"] [class*="lowerBadge_"] [class*="numberBadge"] {
+nav[class*="wrapper_5dqHTG"] [class*="lowerBadge_"] [class*="numberBadge"] {
     border-radius: 0 !important; font: 700 9px/14px 'Orbitron', sans-serif !important; padding: 0 3px !important;
     clip-path: polygon(3px 0, 100% 0, 100% 100%, 0 100%, 0 3px);
 }
 /* «+» и «компас» — контурные */
-nav[class*="wrapper_ef3116"] [class*="circleIconButton"] {
+nav[class*="wrapper_5dqHTG"] [class*="circleIconButton"] {
     background: rgba(255, 26, 58, 0.08) !important; color: var(--x4-red-bright) !important; box-shadow: none !important;
 }
-nav[class*="wrapper_ef3116"] [class*="listItem__"]:hover [class*="circleIconButton"] { background: rgba(255, 26, 58, 0.22) !important; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:hover [class*="circleIconButton"] { background: rgba(255, 26, 58, 0.22) !important; }
 
 /* ============ знак 190x4 вместо логотипа Discord ============ */
-nav[class*="wrapper_ef3116"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"] {
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"] {
     background: #08080e !important; box-shadow: none !important;
     flex-direction: column; justify-content: center; gap: 0; line-height: 1;
 }
-nav[class*="wrapper_ef3116"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"] svg { display: none !important; }
-nav[class*="wrapper_ef3116"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"]::before {
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"] svg { display: none !important; }
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"]::before {
     content: "190"; font: 900 11px/1 'Orbitron', sans-serif; color: #fff; letter-spacing: 0.04em;
 }
-nav[class*="wrapper_ef3116"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"]::after {
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"]::after {
     content: "x4"; font: 900 13px/1 'Orbitron', sans-serif; color: var(--x4-red-bright);
     text-shadow: 0 0 6px var(--x4-red-glow); margin-top: 1px;
 }
-nav[class*="wrapper_ef3116"] [data-list-item-id="guildsnav___home"] { --np-br: rgba(255, 26, 58, 0.6); }
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___home"] { --np-br: rgba(255, 26, 58, 0.6); }
 /* ячейка разделителя: 40px под линию в 1px — сужаем */
-nav[class*="wrapper_ef3116"] [class*="listItem__"]:has(> [class*="guildSeparator"]) { width: 13px !important; }
-nav[class*="wrapper_ef3116"] [class*="stack_"][role="group"]:empty { display: none !important; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has(> [class*="guildSeparator"]) { width: 13px !important; }
+nav[class*="wrapper_5dqHTG"] [class*="stack_"][role="group"]:empty { display: none !important; }
 /* одинаковая подложка: у аватарок с прозрачными полями рисунок не «худеет» */
-nav[class*="wrapper_ef3116"] [class*="wrapper__6e9f8"][role="treeitem"] { background: #101018 !important; }
+nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"][role="treeitem"] { background: #101018 !important; }
 
 /* ============ папки серверов в полосе ============
    Discord строит папку вертикально: группа шириной в колонку (72px),
    шапка 48px, раскрытый список — столбиком с высотой, которую задаёт
    анимация в style. В полосе всё это укладываем в строку: шапку
    масштабируем как иконки серверов, список и подложку — горизонтально. */
-nav[class*="wrapper_ef3116"] [class*="listItem__"]:has(> [class*="folderGroup__"]) { width: auto !important; }
-nav[class*="wrapper_ef3116"] [class*="folderGroup__"] {
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has(> [class*="folderGroup_"]) { width: auto !important; }
+nav[class*="wrapper_5dqHTG"] [class*="folderGroup_"] {
     display: flex !important; flex-direction: row !important; align-items: center;
     width: auto !important; height: 40px; gap: 4px; flex: 0 0 auto;
 }
-nav[class*="wrapper_ef3116"] [class*="folderGroup__"] > [class*="listItem__"] { align-items: center; }
+nav[class*="wrapper_5dqHTG"] [class*="folderGroup_"] > [class*="listItem_"] { align-items: center; }
 /* 48px → 38px как у иконок; отрицательный отступ — чтобы в раскладке
    шапка занимала ровно ячейку 40px, а не вылезала на соседей */
-nav[class*="wrapper_ef3116"] [class*="folderHeader__"] {
+nav[class*="wrapper_5dqHTG"] [class*="folderHeader_"] {
     margin: -4px !important; transform: scale(0.8); transform-origin: center; flex: 0 0 auto;
 }
-nav[class*="wrapper_ef3116"] [class*="folderButtonInner__"] {
+nav[class*="wrapper_5dqHTG"] [class*="folderButtonInner_"] {
     clip-path: polygon(var(--np-cut) 0, 100% 0, 100% calc(100% - var(--np-cut)), calc(100% - var(--np-cut)) 100%, 0 100%, 0 var(--np-cut));
     border-radius: 0 !important;
 }
-nav[class*="wrapper_ef3116"] [class*="folderPreviewWrapper__"],
-nav[class*="wrapper_ef3116"] [class*="folderIcon__"] { border-radius: 0 !important; }
-nav[class*="wrapper_ef3116"] [class*="folderPreviewGuildIcon__"] { border-radius: 2px !important; }
-nav[class*="wrapper_ef3116"] [class*="folderGuildsList__"] {
+nav[class*="wrapper_5dqHTG"] [class*="folderPreviewWrapper_"],
+nav[class*="wrapper_5dqHTG"] [class*="folderIcon_"] { border-radius: 0 !important; }
+nav[class*="wrapper_5dqHTG"] [class*="folderPreviewGuildIcon_"] { border-radius: 2px !important; }
+nav[class*="wrapper_5dqHTG"] [class*="folderGuildsList_"] {
     display: flex !important; flex-direction: row !important; align-items: center;
     height: 40px !important; width: auto !important; gap: 4px;
     margin: 0 !important; padding: 0 !important; overflow: visible !important;
 }
-nav[class*="wrapper_ef3116"] [class*="folderGuildsList__"] > * { margin: 0 !important; }
+nav[class*="wrapper_5dqHTG"] [class*="folderGuildsList_"] > * { margin: 0 !important; }
 /* подложка раскрытой папки — во всю длину группы, со срезом углов */
-nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
+nav[class*="wrapper_5dqHTG"] [class*="folderGroupBackground_"] {
     inset: 0 -2px !important; width: auto !important; height: auto !important;
     border-radius: 0 !important; border-color: rgba(255, 26, 58, 0.3) !important;
     clip-path: polygon(var(--np-cut) 0, 100% 0, 100% calc(100% - var(--np-cut)), calc(100% - var(--np-cut)) 100%, 0 100%, 0 var(--np-cut));
 }
 
 /* «ПОДСКАЗКА» в быстром переходе (Ctrl+K) — зелёная у Discord. */
-[class*="protip_"] [class*="pro__"] {
+[class*="protip_"] [class*="pro_"] {
     color: var(--x4-red-bright) !important;
 }
 
@@ -2312,38 +2418,38 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
    aria-label (ru + en), состояния — по aria-checked.
    ============================================================ */
 
-#app-mount [class*="iconContainer__"]:is([aria-label^="Текст"],[aria-label^="Text"]) > svg {
+#app-mount [class*="iconContainer_"]:is([aria-label^="Текст"],[aria-label^="Text"]) > svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M5 9h15M4.5 15h15M10 4L8 20m8-16l-2 16%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M5 9h15M4.5 15h15M10 4L8 20m8-16l-2 16%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
-#app-mount [class*="iconContainer__"]:is([aria-label^="Голос"],[aria-label^="Voice"]) > svg {
+#app-mount [class*="iconContainer_"]:is([aria-label^="Голос"],[aria-label^="Voice"]) > svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M17 9.764A3 3 0 0 1 18 12c0 .888-.386 1.687-1 2.236m2-6.708A6 6 0 0 1 21 12a6 6 0 0 1-2 4.472M14 4v16l-6.74-4.814A1 1 0 0 0 6.68 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2.68a1 1 0 0 0 .58-.186z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M17 9.764A3 3 0 0 1 18 12c0 .888-.386 1.687-1 2.236m2-6.708A6 6 0 0 1 21 12a6 6 0 0 1-2 4.472M14 4v16l-6.74-4.814A1 1 0 0 0 6.68 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2.68a1 1 0 0 0 .58-.186z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
-#app-mount [class*="iconContainer__"]:is([aria-label^="Объявлен"],[aria-label^="Announcement"]) > svg {
+#app-mount [class*="iconContainer_"]:is([aria-label^="Объявлен"],[aria-label^="Announcement"]) > svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M18 9.268a2 2 0 1 1 0 3.465M9 7v11.29a1.71 1.71 0 0 1-3.354.47L4 13m10.907 3.68L17.2 18.4a.5.5 0 0 0 .8-.4V3.87a.5.5 0 0 0-.752-.431l-2.752 1.605A12 12 0 0 1 9.115 6.66l-2.62.146a3.7 3.7 0 0 0 0 7.388l1.877.104a12 12 0 0 1 6.535 2.382Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M18 9.268a2 2 0 1 1 0 3.465M9 7v11.29a1.71 1.71 0 0 1-3.354.47L4 13m10.907 3.68L17.2 18.4a.5.5 0 0 0 .8-.4V3.87a.5.5 0 0 0-.752-.431l-2.752 1.605A12 12 0 0 1 9.115 6.66l-2.62.146a3.7 3.7 0 0 0 0 7.388l1.877.104a12 12 0 0 1 6.535 2.382Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
-#app-mount [class*="iconContainer__"]:is([aria-label^="Текст ("],[aria-label^="Text ("]) > svg {
+#app-mount [class*="iconContainer_"]:is([aria-label^="Текст ("],[aria-label^="Text ("]) > svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg transform=%22scale%28.8%29%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M5 9h15M4.5 15h15M10 4L8 20m8-16l-2 16%22/%3E%3C/g%3E%3Cg transform=%22translate%2812.5 12.5%29 scale%28.48%29%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M12 15v2m0-2a1 1 0 1 0 0-2a1 1 0 0 0 0 2Zm5-6V8A5 5 0 0 0 7 8v1zM5 21h14a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1Z%22/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg transform=%22scale%28.8%29%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M5 9h15M4.5 15h15M10 4L8 20m8-16l-2 16%22/%3E%3C/g%3E%3Cg transform=%22translate%2812.5 12.5%29 scale%28.48%29%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M12 15v2m0-2a1 1 0 1 0 0-2a1 1 0 0 0 0 2Zm5-6V8A5 5 0 0 0 7 8v1zM5 21h14a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1Z%22/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
-#app-mount [class*="iconContainer__"]:is([aria-label^="Голос ("],[aria-label^="Voice ("]) > svg {
+#app-mount [class*="iconContainer_"]:is([aria-label^="Голос ("],[aria-label^="Voice ("]) > svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg transform=%22scale%28.8%29%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M17 9.764A3 3 0 0 1 18 12c0 .888-.386 1.687-1 2.236m2-6.708A6 6 0 0 1 21 12a6 6 0 0 1-2 4.472M14 4v16l-6.74-4.814A1 1 0 0 0 6.68 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2.68a1 1 0 0 0 .58-.186z%22/%3E%3C/g%3E%3Cg transform=%22translate%2812.5 12.5%29 scale%28.48%29%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M12 15v2m0-2a1 1 0 1 0 0-2a1 1 0 0 0 0 2Zm5-6V8A5 5 0 0 0 7 8v1zM5 21h14a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1Z%22/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg transform=%22scale%28.8%29%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M17 9.764A3 3 0 0 1 18 12c0 .888-.386 1.687-1 2.236m2-6.708A6 6 0 0 1 21 12a6 6 0 0 1-2 4.472M14 4v16l-6.74-4.814A1 1 0 0 0 6.68 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2.68a1 1 0 0 0 .58-.186z%22/%3E%3C/g%3E%3Cg transform=%22translate%2812.5 12.5%29 scale%28.48%29%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M12 15v2m0-2a1 1 0 1 0 0-2a1 1 0 0 0 0 2Zm5-6V8A5 5 0 0 0 7 8v1zM5 21h14a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1Z%22/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
 #app-mount [class*="mainContent_"]:is([aria-label$="(категория)"],[aria-label$="(category)"]) svg,
-#app-mount section[class*="panels__"] :is([aria-label="Настройки ввода"], [aria-label="Настройки вывода"], [aria-label="Input Options"], [aria-label="Output Options"]) svg {
+#app-mount section[class*="panels_pog62O"] :is([aria-label="Настройки ввода"], [aria-label="Настройки вывода"], [aria-label="Input Options"], [aria-label="Output Options"]) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M17.657 9.343L12 15L6.343 9.343%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M17.657 9.343L12 15L6.343 9.343%22/%3E%3C/svg%3E") center / contain no-repeat !important;
@@ -2397,7 +2503,7 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22m15.879 15.879l4.242 4.242M18 10.5a7.5 7.5 0 1 1-15 0a7.5 7.5 0 0 1 15 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
-#app-mount section[class*="title_f75fb0"] :is([aria-label="Очистить"], [aria-label="Clear"]) svg {
+#app-mount section[class*="title_z_gUBg"] :is([aria-label="Очистить"], [aria-label="Clear"]) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22m9.172 9.171l5.656 5.657m-5.656 0l5.656-5.656M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22m9.172 9.171l5.656 5.657m-5.656 0l5.656-5.656M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
@@ -2433,25 +2539,25 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M20 5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1zM10 5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1zm10 8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1zm-10 4a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
-#app-mount section[class*="panels__"] button[role="switch"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg {
+#app-mount section[class*="panels_pog62O"] button[role="switch"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M12 19v2m0-2a7 7 0 0 1-6.93-6M12 19a7 7 0 0 0 6.929-6M12 16a4 4 0 0 1-4-4V7a4 4 0 1 1 8 0v5a4 4 0 0 1-4 4Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M12 19v2m0-2a7 7 0 0 1-6.93-6M12 19a7 7 0 0 0 6.929-6M12 16a4 4 0 0 1-4-4V7a4 4 0 1 1 8 0v5a4 4 0 0 1-4 4Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
-#app-mount section[class*="panels__"] button[role="switch"][aria-checked="true"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg {
+#app-mount section[class*="panels_pog62O"] button[role="switch"][aria-checked="true"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M12 19v2m0-2a7 7 0 0 1-6.93-6M12 19c.695 0 1.366-.101 2-.29M18.929 13a6.98 6.98 0 0 1-1.98 3.95M12 16a4 4 0 0 1-4-4M4.222 4.223L8 8m11.778 11.778L16.95 16.95M8 8V7a4 4 0 1 1 8 0v5a4 4 0 0 1-1.172 2.829M8 8l6.828 6.828m0 0l2.121 2.121%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M12 19v2m0-2a7 7 0 0 1-6.93-6M12 19c.695 0 1.366-.101 2-.29M18.929 13a6.98 6.98 0 0 1-1.98 3.95M12 16a4 4 0 0 1-4-4M4.222 4.223L8 8m11.778 11.778L16.95 16.95M8 8V7a4 4 0 1 1 8 0v5a4 4 0 0 1-1.172 2.829M8 8l6.828 6.828m0 0l2.121 2.121%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
-#app-mount section[class*="panels__"] button[role="switch"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg {
+#app-mount section[class*="panels_pog62O"] button[role="switch"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M4.125 16.414C3.631 15.432 3 14.494 3 11.942C3 7.005 7.03 3 12 3s9 4.004 9 8.943c0 2.552-.631 3.49-1.125 4.47m-15.75 0l1.444-1.354a1.5 1.5 0 0 1 2.084.03l.92.914a2 2 0 0 1 0 2.837l-.236.235c-.533.53-1.377.584-1.926.07c-.903-.843-1.883-1.93-2.286-2.731Zm15.75 0l-1.444-1.354a1.5 1.5 0 0 0-2.084.03l-.92.914a2 2 0 0 0 0 2.837l.236.235c.533.53 1.377.584 1.926.07c.903-.843 1.883-1.93 2.286-2.731Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M4.125 16.414C3.631 15.432 3 14.494 3 11.942C3 7.005 7.03 3 12 3s9 4.004 9 8.943c0 2.552-.631 3.49-1.125 4.47m-15.75 0l1.444-1.354a1.5 1.5 0 0 1 2.084.03l.92.914a2 2 0 0 1 0 2.837l-.236.235c-.533.53-1.377.584-1.926.07c-.903-.843-1.883-1.93-2.286-2.731Zm15.75 0l-1.444-1.354a1.5 1.5 0 0 0-2.084.03l-.92.914a2 2 0 0 0 0 2.837l.236.235c.533.53 1.377.584 1.926.07c.903-.843 1.883-1.93 2.286-2.731Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
-#app-mount section[class*="panels__"] button[role="switch"][aria-checked="true"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg {
+#app-mount section[class*="panels_pog62O"] button[role="switch"][aria-checked="true"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M4.125 16.414C3.631 15.432 3 14.494 3 11.942C3 7.005 7.03 3 12 3s9 4.004 9 8.943c0 2.552-.631 3.49-1.125 4.47m-15.75 0l1.444-1.354a1.5 1.5 0 0 1 2.084.03l.92.914a2 2 0 0 1 0 2.837l-.236.235c-.533.53-1.377.584-1.926.07c-.903-.843-1.883-1.93-2.286-2.731Zm15.75 0l-1.444-1.354a1.5 1.5 0 0 0-2.084.03l-.92.914a2 2 0 0 0 0 2.837l.236.235c.533.53 1.377.584 1.926.07c.903-.843 1.883-1.93 2.286-2.731Z%22/%3E%3Cpath d=%22M3.2 3.2 L20.8 20.8%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M4.125 16.414C3.631 15.432 3 14.494 3 11.942C3 7.005 7.03 3 12 3s9 4.004 9 8.943c0 2.552-.631 3.49-1.125 4.47m-15.75 0l1.444-1.354a1.5 1.5 0 0 1 2.084.03l.92.914a2 2 0 0 1 0 2.837l-.236.235c-.533.53-1.377.584-1.926.07c-.903-.843-1.883-1.93-2.286-2.731Zm15.75 0l-1.444-1.354a1.5 1.5 0 0 0-2.084.03l-.92.914a2 2 0 0 0 0 2.837l.236.235c.533.53 1.377.584 1.926.07c.903-.843 1.883-1.93 2.286-2.731Z%22/%3E%3Cpath d=%22M3.2 3.2 L20.8 20.8%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22/%3E%3C/svg%3E") center / contain no-repeat !important;
@@ -2485,13 +2591,13 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
    с «… > *» справа Chromium проверяет на каждом элементе, и три десятка
    таких правил заметно утяжеляли полный пересчёт стилей */
 #app-mount :is(
-    [class*="iconContainer__"]:is([aria-label^="Текст"],[aria-label^="Text"]) > svg,
-    [class*="iconContainer__"]:is([aria-label^="Голос"],[aria-label^="Voice"]) > svg,
-    [class*="iconContainer__"]:is([aria-label^="Объявлен"],[aria-label^="Announcement"]) > svg,
-    [class*="iconContainer__"]:is([aria-label^="Текст ("],[aria-label^="Text ("]) > svg,
-    [class*="iconContainer__"]:is([aria-label^="Голос ("],[aria-label^="Voice ("]) > svg,
+    [class*="iconContainer_"]:is([aria-label^="Текст"],[aria-label^="Text"]) > svg,
+    [class*="iconContainer_"]:is([aria-label^="Голос"],[aria-label^="Voice"]) > svg,
+    [class*="iconContainer_"]:is([aria-label^="Объявлен"],[aria-label^="Announcement"]) > svg,
+    [class*="iconContainer_"]:is([aria-label^="Текст ("],[aria-label^="Text ("]) > svg,
+    [class*="iconContainer_"]:is([aria-label^="Голос ("],[aria-label^="Voice ("]) > svg,
     [class*="mainContent_"]:is([aria-label$="(категория)"],[aria-label$="(category)"]) svg,
-    section[class*="panels__"] :is([aria-label="Настройки ввода"], [aria-label="Настройки вывода"], [aria-label="Input Options"], [aria-label="Output Options"]) svg,
+    section[class*="panels_pog62O"] :is([aria-label="Настройки ввода"], [aria-label="Настройки вывода"], [aria-label="Input Options"], [aria-label="Output Options"]) svg,
     :is([aria-label="Создать канал"], [aria-label="Create Channel"]) svg,
     :is([aria-label="Настроить канал"], [aria-label="Edit Channel"], [aria-label="Настройки пользователя"], [aria-label="User Settings"]) svg,
     :is([aria-label="Пригласить на канал"], [aria-label="Пригласить на сервер"], [aria-label="Create Invite"], [aria-label="Invite to Server"]) svg,
@@ -2500,29 +2606,29 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     :is([aria-label="Закреплённые сообщения"], [aria-label="Pinned Messages"]) svg,
     :is([aria-label="Скрыть список участников"], [aria-label="Показать список участников"], [aria-label="Hide Member List"], [aria-label="Show Member List"]) svg,
     svg:is([aria-label="Поиск"], [aria-label="Search"]),
-    section[class*="title_f75fb0"] :is([aria-label="Очистить"], [aria-label="Clear"]) svg,
+    section[class*="title_z_gUBg"] :is([aria-label="Очистить"], [aria-label="Clear"]) svg,
     form :is([aria-label="Другие настройки сообщений"], [aria-label="Upload a File or Send Invites"], [aria-label="More message options"]) svg,
     form :is([aria-label="Отправить подарок"], [aria-label="Send a gift"]) svg,
     form :is([aria-label="Открыть меню GIF"], [aria-label="Open GIF picker"]) svg,
     form :is([aria-label="Открыть меню выбора стикеров"], [aria-label="Open sticker picker"]) svg,
     form :is([aria-label="Приложения"], [aria-label="Apps"]) svg,
-    section[class*="panels__"] button[role="switch"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg,
-    section[class*="panels__"] button[role="switch"][aria-checked="true"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg,
-    section[class*="panels__"] button[role="switch"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg,
-    section[class*="panels__"] button[role="switch"][aria-checked="true"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg,
+    section[class*="panels_pog62O"] button[role="switch"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg,
+    section[class*="panels_pog62O"] button[role="switch"][aria-checked="true"]:is([aria-label="Заглушить"], [aria-label="Включить микрофон"], [aria-label="Mute"], [aria-label="Unmute"]) svg,
+    section[class*="panels_pog62O"] button[role="switch"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg,
+    section[class*="panels_pog62O"] button[role="switch"][aria-checked="true"]:is([aria-label="Откл. звук"], [aria-label="Включить звук"], [aria-label="Deafen"], [aria-label="Undeafen"]) svg,
     :is([aria-label="Добавить реакцию"], [aria-label="Add Reaction"])[class*="hoverBarButton"] svg,
     :is([aria-label="Ответить"], [aria-label="Reply"])[class*="hoverBarButton"] svg,
     :is([aria-label="Переслать"], [aria-label="Forward"])[class*="hoverBarButton"] svg,
     :is([aria-label="Ещё"], [aria-label="More"])[class*="hoverBarButton"] svg,
-    [class*="sidebarList__"] li :is([id*="upcoming-events"], [data-list-item-id*="upcoming-events"]) ~ * svg[class*="icon__"],
-    [class*="sidebarList__"] li :is([id*="skill-trees"], [data-list-item-id*="skill-trees"]) ~ * svg[class*="icon__"],
-    section[class*="panels__"] svg[class*="ping_"],
-    section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(1) svg,
-    section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(2) svg,
-    section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(3) svg,
-    section[class*="panels__"] [class*="actionButtons_"] > div button svg,
-    section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(4) svg,
-    section[class*="panels__"] button:is([aria-label="Отключиться"],[aria-label="Disconnect"]) svg
+    [class*="sidebarList_pog62O"] li :is([id*="upcoming-events"], [data-list-item-id*="upcoming-events"]) ~ * svg[class*="icon_"],
+    [class*="sidebarList_pog62O"] li :is([id*="skill-trees"], [data-list-item-id*="skill-trees"]) ~ * svg[class*="icon_"],
+    section[class*="panels_pog62O"] svg[class*="ping_"],
+    section[class*="panels_pog62O"] [class*="actionButtons_"] > button:nth-of-type(1) svg,
+    section[class*="panels_pog62O"] [class*="actionButtons_"] > button:nth-of-type(2) svg,
+    section[class*="panels_pog62O"] [class*="actionButtons_"] > button:nth-of-type(3) svg,
+    section[class*="panels_pog62O"] [class*="actionButtons_"] > div button svg,
+    section[class*="panels_pog62O"] [class*="actionButtons_"] > button:nth-of-type(4) svg,
+    section[class*="panels_pog62O"] button:is([aria-label="Отключиться"],[aria-label="Disconnect"]) svg
 ) > * {
     visibility: hidden !important;
 }
@@ -2539,14 +2645,14 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
 }
 
 /* строка «Мероприятия» — без aria-label, ловим по служебному id */
-#app-mount [class*="sidebarList__"] li :is([id*="upcoming-events"], [data-list-item-id*="upcoming-events"]) ~ * svg[class*="icon__"] {
+#app-mount [class*="sidebarList_pog62O"] li :is([id*="upcoming-events"], [data-list-item-id*="upcoming-events"]) ~ * svg[class*="icon_"] {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 d=%22M17 4a1 1 0 1 0-2 0zm-2 2a1 1 0 1 0 2 0zM9 4a1 1 0 0 0-2 0zM7 6a1 1 0 0 0 2 0zM5 6v1h14V5H5zm15 1h-1v12h2V7zm-1 13v-1H5v2h14zM4 19h1V7H3v12zm0-8v1h16v-2H4zm12-7h-1v2h2V4zM8 4H7v2h2V4zM5 20v-1H3a2 2 0 0 0 2 2zm15-1h-1v2a2 2 0 0 0 2-2zM19 6v1h2a2 2 0 0 0-2-2zM5 6V5a2 2 0 0 0-2 2h2z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 d=%22M17 4a1 1 0 1 0-2 0zm-2 2a1 1 0 1 0 2 0zM9 4a1 1 0 0 0-2 0zM7 6a1 1 0 0 0 2 0zM5 6v1h14V5H5zm15 1h-1v12h2V7zm-1 13v-1H5v2h14zM4 19h1V7H3v12zm0-8v1h16v-2H4zm12-7h-1v2h2V4zM8 4H7v2h2V4zM5 20v-1H3a2 2 0 0 0 2 2zm15-1h-1v2a2 2 0 0 0 2-2zM19 6v1h2a2 2 0 0 0-2-2zM5 6V5a2 2 0 0 0-2 2h2z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
 /* строка «Бусты сервера» — без aria-label, ловим по служебному id */
-#app-mount [class*="sidebarList__"] li :is([id*="skill-trees"], [data-list-item-id*="skill-trees"]) ~ * svg[class*="icon__"] {
+#app-mount [class*="sidebarList_pog62O"] li :is([id*="skill-trees"], [data-list-item-id*="skill-trees"]) ~ * svg[class*="icon_"] {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M2.5 10h19M11 4l-3 6l4 10l4-10l-3-6M2.556 10.611l9.259 10.186c.1.109.27.109.37 0l9.26-10.186a1 1 0 0 0 .06-1.272L17.8 4.4A1 1 0 0 0 17 4H7a1 1 0 0 0-.8.4L2.496 9.339a1 1 0 0 0 .06 1.272%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M2.5 10h19M11 4l-3 6l4 10l4-10l-3-6M2.556 10.611l9.259 10.186c.1.109.27.109.37 0l9.26-10.186a1 1 0 0 0 .06-1.272L17.8 4.4A1 1 0 0 0 17 4H7a1 1 0 0 0-.8.4L2.496 9.339a1 1 0 0 0 .06 1.272%22/%3E%3C/svg%3E") center / contain no-repeat !important;
@@ -2560,7 +2666,7 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
    свои иконки. Кнопки идут в порядке камера / экран / активность /
    звуковая панель — подписей у них нет (только aria-describedby).
    ============================================================ */
-#app-mount section[class*="panels__5e434"] {
+#app-mount section[class*="panels_pog62O"] {
     background: linear-gradient(180deg, rgba(20, 6, 10, 0.72), rgba(8, 8, 12, 0.78)) !important;
     backdrop-filter: blur(16px) saturate(130%);
     border: 1px solid var(--ct-line) !important;
@@ -2568,42 +2674,42 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
 }
 /* Полоса заданий Discord (Quests, «Получить награду!») над панелью — убираем */
 [data-testid="quest-bar-container"] { display: none !important; }
-#app-mount section[class*="panels__"] [class*="container_e131a9"] {
+#app-mount section[class*="panels_pog62O"] [class*="container_9U6LUN"] {
     border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
     padding-bottom: 8px !important;
 }
 /* «Голосовая связь подключена» — моно, без капса, не обрезается */
-#app-mount section[class*="panels__"] [class*="rtcConnectionStatus_"],
-#app-mount section[class*="panels__"] [class*="rtcConnectionStatusConnected"] {
+#app-mount section[class*="panels_pog62O"] [class*="rtcConnectionStatus_"],
+#app-mount section[class*="panels_pog62O"] [class*="rtcConnectionStatusConnected"] {
     font-family: var(--ct-mono) !important;
     font-size: 12px !important;
     font-weight: 600 !important;
     letter-spacing: 0.02em !important;
     text-transform: none !important;
 }
-#app-mount section[class*="panels__"] [class*="rtcConnectionStatusConnected"]::before {
+#app-mount section[class*="panels_pog62O"] [class*="rtcConnectionStatusConnected"]::before {
     content: "● "; color: var(--x4-red-bright); text-shadow: 0 0 6px var(--x4-red-glow);
 }
-#app-mount section[class*="panels__"] .pingDisplay,
-#app-mount section[class*="panels__"] [class*="pingDisplay"] {
+#app-mount section[class*="panels_pog62O"] .pingDisplay,
+#app-mount section[class*="panels_pog62O"] [class*="pingDisplay"] {
     font-family: var(--ct-mono) !important; font-size: 11px !important;
     color: var(--x4-text-muted) !important; letter-spacing: 0.06em;
 }
-#app-mount section[class*="panels__"] [class*="labelWrapper_"] a {
+#app-mount section[class*="panels_pog62O"] [class*="labelWrapper_"] a {
     font-family: var(--ct-mono) !important;
 }
 /* значок пинга — свои «палки сигнала», без зелёной подложки */
-#app-mount section[class*="panels__"] svg[class*="ping_"] {
+#app-mount section[class*="panels_pog62O"] svg[class*="ping_"] {
     background: transparent !important; color: var(--x4-red-bright) !important;
 }
-#app-mount section[class*="panels__"] svg[class*="ping_"] {
+#app-mount section[class*="panels_pog62O"] svg[class*="ping_"] {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M4 17v2m4-5v5m4-8v8m4-11v11m4-14v14%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M4 17v2m4-5v5m4-8v8m4-11v11m4-14v14%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
 /* кнопки — контурные, срезанные углы */
-#app-mount section[class*="panels__"] [class*="actionButtons_"] button {
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button {
     background: rgba(255, 255, 255, 0.04) !important;
     border: 1px solid rgba(255, 26, 58, 0.3) !important;
     color: var(--x4-text) !important;
@@ -2612,48 +2718,48 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
     transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease !important;
 }
-#app-mount section[class*="panels__"] [class*="actionButtons_"] button:hover:not([class*="disabled_"]) {
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button:hover:not([class*="disabled_"]) {
     background: rgba(255, 26, 58, 0.16) !important;
     border-color: var(--x4-red) !important;
     color: var(--x4-red-bright) !important;
 }
 /* включённые камера/демонстрация — Discord меняет класс на *Active* / aria-checked */
-#app-mount section[class*="panels__"] [class*="actionButtons_"] button:is([class*="Active"], [class*="active_"], [aria-checked="true"]) {
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button:is([class*="Active"], [class*="active_"], [aria-checked="true"]) {
     background: var(--x4-red) !important; color: #fff !important; border-color: var(--x4-red-bright) !important;
 }
-#app-mount section[class*="panels__"] [class*="actionButtons_"] button[class*="disabled_"] { opacity: 0.4; }
-#app-mount section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(1) svg {
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button[class*="disabled_"] { opacity: 0.4; }
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] > button:nth-of-type(1) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M3 12a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm14 2l3.238-1.995a.5.5 0 0 1 .762.426v5.138a.5.5 0 0 1-.762.425L17 16z%22/%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M15 7a3 3 0 1 1-6 0a3 3 0 0 1 6 0Zm-6 .5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M3 12a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm14 2l3.238-1.995a.5.5 0 0 1 .762.426v5.138a.5.5 0 0 1-.762.425L17 16z%22/%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 d=%22M15 7a3 3 0 1 1-6 0a3 3 0 0 1 6 0Zm-6 .5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
-#app-mount section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(2) svg {
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] > button:nth-of-type(2) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 d=%22M7.757 19.03a1 1 0 1 0 .486 1.94L8 20zm8 1.94a1 1 0 1 0 .486-1.94L16 20zm4.06-4.173l-.158.987zM21 6.2h-1v9.6h2V6.2zM3 15.8h1V6.2H2v9.6zm16.818.997l.158-.987a49.5 49.5 0 0 0-15.952 0l.158.987l.159.987a47.5 47.5 0 0 1 15.318 0zM4.182 5.203l-.158.987a49.5 49.5 0 0 0 15.952 0l-.158-.987l-.159-.987a47.5 47.5 0 0 1-15.318 0zM12 16.5h-1v3h2v-3zM8 20l.242.97h.003l.013-.004l.295-.066a19 19 0 0 1 .861-.164A16 16 0 0 1 12 20.5v-2c-1.076 0-2.135.134-2.914.264a21 21 0 0 0-1.32.264l-.005.001h-.003zm4-.5v1c.924 0 1.865.116 2.586.236a19 19 0 0 1 1.172.234a463 463 0 0 1 .484-1.94l-.003-.001l-.006-.002l-.02-.005l-.076-.017l-.271-.06c-.231-.05-.56-.116-.952-.181c-.779-.13-1.838-.264-2.914-.264zm-9-3.7H2c0 1.256 1.132 2.178 2.34 1.984l-.158-.987l-.158-.987h-.011l-.01-.006l-.004-.004l.001.002V15.8zm18 0h-1v.002v-.002l-.003.004l-.01.005l-.004.001h-.007l-.158.987l-.159.987C20.87 17.978 22 17.056 22 15.8zm0-9.6h1c0-1.256-1.132-2.178-2.34-1.984l.158.987l.158.987h.011l.01.006l.004.004L20 6.198V6.2zm-18 0h1v-.002v.002l.003-.004l.01-.005l.004-.001h.007l.158-.987l.159-.987C3.13 4.022 2 4.944 2 6.2z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 d=%22M7.757 19.03a1 1 0 1 0 .486 1.94L8 20zm8 1.94a1 1 0 1 0 .486-1.94L16 20zm4.06-4.173l-.158.987zM21 6.2h-1v9.6h2V6.2zM3 15.8h1V6.2H2v9.6zm16.818.997l.158-.987a49.5 49.5 0 0 0-15.952 0l.158.987l.159.987a47.5 47.5 0 0 1 15.318 0zM4.182 5.203l-.158.987a49.5 49.5 0 0 0 15.952 0l-.158-.987l-.159-.987a47.5 47.5 0 0 1-15.318 0zM12 16.5h-1v3h2v-3zM8 20l.242.97h.003l.013-.004l.295-.066a19 19 0 0 1 .861-.164A16 16 0 0 1 12 20.5v-2c-1.076 0-2.135.134-2.914.264a21 21 0 0 0-1.32.264l-.005.001h-.003zm4-.5v1c.924 0 1.865.116 2.586.236a19 19 0 0 1 1.172.234a463 463 0 0 1 .484-1.94l-.003-.001l-.006-.002l-.02-.005l-.076-.017l-.271-.06c-.231-.05-.56-.116-.952-.181c-.779-.13-1.838-.264-2.914-.264zm-9-3.7H2c0 1.256 1.132 2.178 2.34 1.984l-.158-.987l-.158-.987h-.011l-.01-.006l-.004-.004l.001.002V15.8zm18 0h-1v.002v-.002l-.003.004l-.01.005l-.004.001h-.007l-.158.987l-.159.987C20.87 17.978 22 17.056 22 15.8zm0-9.6h1c0-1.256-1.132-2.178-2.34-1.984l.158.987l.158.987h.011l.01.006l.004.004L20 6.198V6.2zm-18 0h1v-.002v.002l.003-.004l.01-.005l.004-.001h.007l.158-.987l.159-.987C3.13 4.022 2 4.944 2 6.2z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
-#app-mount section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(3) svg {
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] > button:nth-of-type(3) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M15 9v3m-1.5-1.5h3M7 5c1 0 3 1 5 1s4-1 5-1c3 0 7 14 3 14c-3 0-4.5-4-8-4s-5 4-8 4C0 19 4 5 7 5Zm3 5.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M15 9v3m-1.5-1.5h3M7 5c1 0 3 1 5 1s4-1 5-1c3 0 7 14 3 14c-3 0-4.5-4-8-4s-5 4-8 4C0 19 4 5 7 5Zm3 5.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0Z%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
-#app-mount section[class*="panels__"] [class*="actionButtons_"] > div button svg, #app-mount section[class*="panels__"] [class*="actionButtons_"] > button:nth-of-type(4) svg {
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] > div button svg, #app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] > button:nth-of-type(4) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M4 10v4m4-7v10m4-13v16m4-13v10m4-7v4%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M4 10v4m4-7v10m4-13v16m4-13v10m4-7v4%22/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
 /* «Отключиться» — красный квадрат со срезом */
-#app-mount section[class*="panels__"] button:is([aria-label="Отключиться"],[aria-label="Disconnect"]) {
+#app-mount section[class*="panels_pog62O"] button:is([aria-label="Отключиться"],[aria-label="Disconnect"]) {
     color: var(--x4-red-bright) !important;
     background: rgba(255, 26, 58, 0.08) !important;
     border-radius: 0 !important;
     clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
 }
-#app-mount section[class*="panels__"] button:is([aria-label="Отключиться"],[aria-label="Disconnect"]):hover {
+#app-mount section[class*="panels_pog62O"] button:is([aria-label="Отключиться"],[aria-label="Disconnect"]):hover {
     background: var(--x4-red) !important; color: #fff !important;
 }
-#app-mount section[class*="panels__"] button:is([aria-label="Отключиться"],[aria-label="Disconnect"]) svg {
+#app-mount section[class*="panels_pog62O"] button:is([aria-label="Отключиться"],[aria-label="Disconnect"]) svg {
     background: var(--x4-ico-fill) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M10 13.401a11.4 11.4 0 0 1-2.073-3.294a.47.47 0 0 1 .11-.507l1.606-1.607a.504.504 0 0 0 .058-.64c-.997-1.458-1.998-3.053-3.433-4.1a.47.47 0 0 0-.462-.047a4.9 4.9 0 0 0-2.82 3.31l-.015.063c-.068.274-.115.55-.104.832c.045 1.216.516 4.898 4.334 8.857M13 15.66c.372.193.684.329.893.413a.47.47 0 0 0 .507-.11l1.606-1.605a.5.5 0 0 1 .642-.057c1.462 1.013 2.983 2.017 4.085 3.428a.47.47 0 0 1 .057.476a4.87 4.87 0 0 1-3.295 2.806l-.074.018c-.273.069-.55.115-.832.105c-.979-.037-3.556-.35-6.59-2.462m6.719-11.89L3.283 20.219%22/%3E%3C/svg%3E") center / contain no-repeat !important;
     mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 stroke=%22black%22 stroke-linecap=%22round%22 stroke-width=%222%22 d=%22M10 13.401a11.4 11.4 0 0 1-2.073-3.294a.47.47 0 0 1 .11-.507l1.606-1.607a.504.504 0 0 0 .058-.64c-.997-1.458-1.998-3.053-3.433-4.1a.47.47 0 0 0-.462-.047a4.9 4.9 0 0 0-2.82 3.31l-.015.063c-.068.274-.115.55-.104.832c.045 1.216.516 4.898 4.334 8.857M13 15.66c.372.193.684.329.893.413a.47.47 0 0 0 .507-.11l1.606-1.605a.5.5 0 0 1 .642-.057c1.462 1.013 2.983 2.017 4.085 3.428a.47.47 0 0 1 .057.476a4.87 4.87 0 0 1-3.295 2.806l-.074.018c-.273.069-.55.115-.832.105c-.979-.037-3.556-.35-6.59-2.462m6.719-11.89L3.283 20.219%22/%3E%3C/svg%3E") center / contain no-repeat !important;
@@ -2662,7 +2768,7 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
 /* Центральный остров (разговор, звонок, главная) — лёгкое затемнение без
    размытия: обои (маска) видны чётко. Пузыри чата на своих плотных
    подложках, читаемость не страдает. Матовое стекло — у боковых островов. */
-[class*="page__5e434"] > * {
+[class*="page_pog62O"] > * {
     background: rgba(6, 6, 10, 0.32) !important;
     backdrop-filter: none !important;
 }
@@ -2679,12 +2785,12 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
 }
 /* наведение на любой кликабельный хост иконки */
 #app-mount :is(button, a, [role="button"], [role="switch"], [role="tab"], [role="link"],
-    [class*="iconWrapper"], [class*="clickable"], [class*="link__"], [class*="hoverBarButton"],
+    [class*="iconWrapper"], [class*="clickable"], [class*="link_"], [class*="hoverBarButton"],
     [class*="backForwardButtons_"] [class*="button_"], [class*="winButton_"]):hover {
     --x4-ico-fill: var(--x4-ico-red);
 }
 /* выбранный канал, нажатые кнопки, включённые тумблеры шапки */
-#app-mount [class*="modeSelected__"],
+#app-mount [class*="modeSelected_"],
 #app-mount [aria-checked="true"],
 #app-mount [aria-pressed="true"],
 #app-mount [class*="iconWrapper"][class*="selected"] {
@@ -2694,10 +2800,10 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
 #app-mount [class*="winButton_"][class*="winButtonClose_"]:hover { --x4-ico-fill: #fff; }
 /* на красной заливке значок белый: красный градиент на красном не виден
    (включённые камера/демонстрация, заглушённый микрофон под курсором) */
-#app-mount section[class*="panels__"] [class*="actionButtons_"] button:is([class*="Active"], [class*="active_"], [aria-checked="true"]),
-#app-mount section[class*="panels__"] button:is([aria-label="Отключиться"], [aria-label="Disconnect"]):hover,
-#app-mount section[class*="panels__"] button[class*="redGlow"]:hover,
-#app-mount section[class*="panels__"] button[role="switch"][aria-checked="true"] {
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button:is([class*="Active"], [class*="active_"], [aria-checked="true"]),
+#app-mount section[class*="panels_pog62O"] button:is([aria-label="Отключиться"], [aria-label="Disconnect"]):hover,
+#app-mount section[class*="panels_pog62O"] button[class*="redGlow"]:hover,
+#app-mount section[class*="panels_pog62O"] button[role="switch"][aria-checked="true"] {
     --x4-ico-fill: #fff;
 }
 /* Плашки «подпишись на Nitro» (качество стрима и др.) — цветной градиент,
@@ -2719,7 +2825,7 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
    «Вы были в голосовом канале…» и прочие notice Discord: вместо
    зелёной/синей полосы — графит с красной кромкой и контурной кнопкой.
    ============================================================ */
-#app-mount [class*="notice__"] {
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]) {
     background: linear-gradient(90deg, rgba(255, 26, 58, 0.1), rgba(14, 4, 7, 0.94) 25%, rgba(14, 4, 7, 0.94) 75%, rgba(255, 26, 58, 0.1)) !important;
     color: var(--x4-text) !important;
     border-bottom: 1px solid var(--x4-border) !important;
@@ -2728,11 +2834,11 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     letter-spacing: 0.02em;
 }
 /* важное (ошибки, предупреждения) — заметнее, но в той же гамме */
-#app-mount [class*="notice__"]:is([class*="colorDanger"], [class*="colorWarning"], [class*="colorError"]) {
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]):is([class*="colorDanger"], [class*="colorWarning"], [class*="colorError"]) {
     background: linear-gradient(90deg, rgba(179, 0, 31, 0.55), rgba(40, 4, 10, 0.95) 30%, rgba(40, 4, 10, 0.95) 70%, rgba(179, 0, 31, 0.55)) !important;
     border-bottom-color: var(--x4-red) !important;
 }
-#app-mount [class*="notice__"] :is(button, a[class*="button"]) {
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]) :is(button, a[class*="button"]) {
     background: transparent !important;
     border: 1px solid var(--x4-red) !important;
     border-radius: 0 !important;
@@ -2740,12 +2846,12 @@ nav[class*="wrapper_ef3116"] [class*="folderGroupBackground__"] {
     clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
     transition: background-color 0.15s ease !important;
 }
-#app-mount [class*="notice__"] :is(button, a[class*="button"]):hover {
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]) :is(button, a[class*="button"]):hover {
     background: var(--x4-red) !important;
 }
-#app-mount [class*="notice__"] [class*="closeButton_"] { color: var(--x4-text-muted, #9a9aa5) !important; opacity: 1 !important; }
-#app-mount [class*="notice__"] [class*="closeButton_"]:hover { color: var(--x4-red-bright) !important; }
-#app-mount [class*="notice__"] [class*="closeButton_"] svg path { fill: currentColor !important; }
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]) [class*="closeButton_"] { color: var(--x4-text-muted, #9a9aa5) !important; opacity: 1 !important; }
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]) [class*="closeButton_"]:hover { color: var(--x4-red-bright) !important; }
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]) [class*="closeButton_"] svg path { fill: currentColor !important; }
 
 /* ============================================================
    4.1.1 — ЗВУКОВАЯ ПАНЕЛЬ
