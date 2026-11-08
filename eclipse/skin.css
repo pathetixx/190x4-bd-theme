@@ -437,3 +437,11 @@ li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important
     background: var(--e-art-burnt) center / 100% 100% no-repeat !important; color: #1a1210 !important; border-radius: 0 !important; font-weight: 500 !important;
 }
 [class*="voiceUser_YUoOxm"] [class*="badgeWrapper_"] [class*="label_4guu7"] { color: #1a1210 !important; }
+
+/* значки на мазке кисти: белые, с тёмной тенью, в том числе под курсором */
+#app-mount [class*="modeSelected_"] [class*="children_TNyK-N"],
+#app-mount [class*="modeSelected_"] [class*="children_TNyK-N"] *,
+#app-mount li[class*="dm_zln"] [class*="interactiveSelected_"] [class*="closeButton_"],
+#app-mount li[class*="dm_zln"] [class*="interactiveSelected_"] [class*="closeButton_"] * { --x4-ico-fill: #fff; color: #fff !important; }
+#app-mount [class*="modeSelected_"] [class*="children_TNyK-N"] svg,
+#app-mount li[class*="dm_zln"] [class*="interactiveSelected_"] svg[class*="closeIcon_"] { filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.85)); }
