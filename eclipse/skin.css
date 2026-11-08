@@ -539,7 +539,8 @@ nav[class*="wrapper_5dqHTG"] [class*="stack_"] { position: relative; z-index: 1;
 nav[class*="wrapper_5dqHTG"] [class*="scroller_5dqHTG"] { padding-bottom: 6px !important; box-sizing: border-box; gap: 12px !important; }
 nav[class*="wrapper_5dqHTG"] [class*="listItem_"] { position: relative; overflow: visible !important; height: 78px !important; align-items: flex-end !important; }
 nav[class*="wrapper_5dqHTG"] [class*="tutorialContainer"] { height: 78px !important; }
-nav[class*="wrapper_5dqHTG"] [class*="listItem_"] > span { margin-bottom: 3px; }
+/* иконка Discord 40px: увеличена до 48 и поставлена точно в центр кольца 52px */
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"] > span { margin-bottom: 7px; transform: scale(1.2); transform-origin: center; }
 /* звено от цепи к медальону */
 nav[class*="wrapper_5dqHTG"] [class*="listItem_"]::before {
     content: ""; position: absolute; left: 50%; top: 6px; width: 15px; height: 24px; margin-left: -7.5px; pointer-events: none;
