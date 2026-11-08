@@ -154,18 +154,7 @@ main[class*="chatContent_"] [class*="messageContent_"] { font-size: 15.5px !impo
     background: rgba(20, 16, 18, 0.78) !important; border: 1px solid var(--e-line2) !important; border-radius: 3px !important; box-shadow: none !important;
 }
 
-/* --- док и войс --- */
-#app-mount section[class*="panels_pog62O"] {
-    clip-path: none !important; border-radius: 0 !important; border: none !important; border-top: 1px solid var(--e-line) !important;
-    background: rgba(11, 9, 10, 0.92) !important; box-shadow: none !important;
-}
-#app-mount section[class*="panels_pog62O"] [class*="rtcConnectionStatusConnected"] { color: var(--e-bone) !important; }
-#app-mount section[class*="panels_pog62O"] [class*="rtcConnectionStatusConnected"]::before { color: var(--e-blood2) !important; text-shadow: none !important; }
-#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button {
-    background: transparent !important; border: 1px solid var(--e-line) !important; border-radius: 3px !important;
-}
-#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button:hover:not([class*="disabled_"]) { background: rgba(232, 224, 212, 0.07) !important; border-color: var(--e-line2) !important; }
-#app-mount section[class*="panels_pog62O"] button:is([aria-label="Отключиться"], [aria-label="Disconnect"]) { background: transparent !important; }
+/* --- блок голоса и профиля: см. конец файла --- */
 [class*="username_"] { text-transform: none !important; }
 
 /* --- кнопки и всплывающие окна без неона --- */
@@ -232,3 +221,83 @@ main[class*="chatContent_"] [class*="messageContent_"] { font-size: 15.5px !impo
 [class*="winButton_"][aria-label="Закрыть"], [class*="winButton_"][aria-label="Close"] { --x4-ico: var(--e-ico-win-close); }
 [class*="bar_3zSH5d"] [aria-label="Почта"], [class*="bar_3zSH5d"] [aria-label="Inbox"] { --x4-ico: var(--e-ico-inbox); }
 [class*="bar_3zSH5d"] [aria-label="Помощь"], [class*="bar_3zSH5d"] [aria-label="Help"] { --x4-ico: var(--e-ico-question); }
+
+/* ============================================================
+   БЛОК ГОЛОСА И ПРОФИЛЯ: рваная бумага, тушь, цепь между частями.
+   Коробок и заливок нет, состояния показывает только мазок кисти.
+   ============================================================ */
+#app-mount section[class*="panels_pog62O"] {
+    clip-path: none !important; border-radius: 0 !important; border: none !important; box-shadow: none !important;
+    background: linear-gradient(transparent 34px, #0b090a 74px) center top / 100% 74px no-repeat, {{art:panel}} center top / 100% 74px no-repeat, #0b090a !important;
+}
+#app-mount section[class*="panels_pog62O"] [class*="container_9U6LUN"] { border: none !important; background: transparent !important; }
+#app-mount section[class*="panels_pog62O"] [class*="connection_"] { position: relative; padding: 4px 0 0; }
+
+/* связь: одна спокойная строка, канал под ней */
+#app-mount section[class*="panels_pog62O"] svg[class*="ping_"] {
+    width: 24px !important; height: 24px !important;
+    -webkit-mask: var(--e-ico-wave) center / contain no-repeat !important; mask: var(--e-ico-wave) center / contain no-repeat !important;
+    background: var(--e-blood2) !important;
+}
+#app-mount section[class*="panels_pog62O"] [class*="rtcConnectionStatusConnected"] {
+    color: var(--e-bone) !important; font: 500 16px/20px 'Oswald', sans-serif !important; letter-spacing: 0.02em; text-transform: none !important;
+}
+#app-mount section[class*="panels_pog62O"] [class*="rtcConnectionStatusConnected"]::before { content: none !important; }
+#app-mount section[class*="panels_pog62O"] [class*="labelWrapper_"] a { color: var(--e-dim) !important; text-decoration: none !important; }
+#app-mount section[class*="panels_pog62O"] [class*="labelWrapper_"] a [class*="subtext_"],
+#app-mount section[class*="panels_pog62O"] [class*="labelWrapper_"] a [class*="subtext_"] * { color: var(--e-dim) !important; font-size: 13px !important; }
+#app-mount section[class*="panels_pog62O"] [class*="pingDisplay"] {
+    position: absolute !important; right: 44px; top: 8px; color: var(--x4-text-faint) !important; font: 400 12px/16px 'Oswald', sans-serif !important;
+}
+#app-mount section[class*="panels_pog62O"] .regionSwitcher-pill {
+    display: inline-flex !important; align-items: center; gap: 4px; height: 20px; margin: 4px 0 0 !important; padding: 0 9px !important;
+    border: none !important; border-radius: 0 !important; box-shadow: none !important;
+    background: {{art:burnt}} center / 100% 100% no-repeat !important; cursor: pointer;
+}
+#app-mount section[class*="panels_pog62O"] .regionSwitcher-pill :is(.rs-prefix, .rs-name) {
+    color: #1a1210 !important; opacity: 1 !important; font: 500 12px/1 'Oswald', sans-serif !important; text-shadow: none !important;
+}
+
+/* отключиться: один значок, красный под курсором */
+#app-mount section[class*="panels_pog62O"] button:is([aria-label="Отключиться"], [aria-label="Disconnect"]),
+#app-mount section[class*="panels_pog62O"] button:is([aria-label="Отключиться"], [aria-label="Disconnect"]):hover {
+    background: transparent !important; border: none !important; box-shadow: none !important;
+}
+#app-mount section[class*="panels_pog62O"] button:is([aria-label="Отключиться"], [aria-label="Disconnect"]):hover { --x4-ico-fill: var(--e-blood2); }
+
+/* камера, экран, активность, звуки: значки тушью через тонкие черты */
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] {
+    gap: 0 !important; margin: 0 12px; padding: 0 !important;
+    border-top: 1px solid var(--e-line); border-bottom: none;
+}
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button {
+    height: 38px !important; min-height: 38px; background: transparent !important; border: none !important; border-radius: 0 !important; box-shadow: none !important;
+}
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] > :is(button, div):not(:last-of-type) { border-right: 1px solid var(--e-line) !important; }
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button svg { width: 22px !important; height: 22px !important; }
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button:hover:not([class*="disabled_"]),
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button:is([class*="Active"], [class*="active_"], [aria-checked="true"]) {
+    background: {{art:brush}} center / 84% 72% no-repeat !important; border-color: transparent !important; --x4-ico-fill: #fff;
+}
+
+/* профиль: без таблички, кольцо туши, спокойное имя */
+#app-mount section[class*="panels_pog62O"] [class*="fitInAccount_"] { display: none !important; }
+#app-mount section[class*="panels_pog62O"] [class*="containerRtcOpened_"] { position: relative; background: transparent !important; }
+#app-mount section[class*="panels_pog62O"] [class*="containerRtcOpened_"]::before {
+    content: ""; position: absolute; z-index: 2; left: 10px; right: 10px; top: -9px; height: 18px; pointer-events: none;
+    background: {{art:chain}} left center / auto 100% repeat-x;
+}
+#app-mount section[class*="panels_pog62O"] [class*="accountPopoutButtonWrapper_"] { background: transparent !important; box-shadow: none !important; }
+#app-mount section[class*="panels_pog62O"] [class*="accountPopoutButtonWrapper_"] [class*="avatar_"]::after {
+    content: ""; position: absolute; inset: -5px; pointer-events: none; background: {{art:enso}} center / contain no-repeat;
+}
+#app-mount section[class*="panels_pog62O"] [class*="nameTag_"] * {
+    font-family: 'Oswald', sans-serif !important; background: none !important; text-shadow: none !important; -webkit-text-fill-color: currentcolor !important;
+    text-decoration: none !important; animation: none !important; filter: none !important;
+}
+#app-mount section[class*="panels_pog62O"] [class*="panelTitleContainer_"] *::before,
+#app-mount section[class*="panels_pog62O"] [class*="panelTitleContainer_"] *::after { display: none !important; }
+#app-mount section[class*="panels_pog62O"] [class*="panelTitleContainer_"] * { color: var(--e-bone) !important; font-size: 16px !important; font-weight: 500 !important; }
+#app-mount section[class*="panels_pog62O"] [class*="panelSubtextContainer_"] * { color: var(--e-dim) !important; }
+#app-mount section[class*="panels_pog62O"] [class*="buttons_"] button { background: transparent !important; box-shadow: none !important; }
+#app-mount section[class*="panels_pog62O"] [class*="buttons_"] button:hover { --x4-ico-fill: var(--e-blood2); }
