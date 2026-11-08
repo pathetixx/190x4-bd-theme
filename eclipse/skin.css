@@ -587,3 +587,7 @@ nav[class*="wrapper_5dqHTG"] svg[class*="circleIcon_"] > * { visibility: hidden 
 nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"] > img { filter: saturate(0.5) brightness(0.62) !important; transition: filter 0.15s ease; }
 nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:hover [class*="wrapper_JJ-hgR"] > img,
 nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"][aria-selected="true"] > img { filter: none !important; }
+
+/* выход из полноэкранного режима: Discord показывает панели примерно за 0,5 с до снятия
+   :fullscreen, и они попадали в сетку полного экрана. Пока режим активен, панелей нет. */
+#app-mount:fullscreen [class*="sidebar_pog62O"] { display: none !important; }
