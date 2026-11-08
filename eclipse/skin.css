@@ -133,9 +133,7 @@ nav[class*="wrapper_5dqHTG"] [class*="lowerBadge_"] [class*="numberBadge"] {
 [class*="modeSelected_"] [class*="name_"] { color: var(--x4-text-bright) !important; text-shadow: none !important; }
 
 /* --- шапка разговора --- */
-section[class*="title_z_gUBg"] { background: transparent !important; border-bottom: 1px solid var(--e-line) !important; }
 section[class*="title_z_gUBg"] h1::before { content: none !important; }
-section[class*="title_z_gUBg"] h1 { font-size: 19px !important; letter-spacing: 0.02em; }
 
 /* --- сообщения: ровная лента без пузырей --- */
 main[class*="chatContent_"] [class*="messageContent_"] { font-size: 15.5px !important; font-weight: 400; line-height: 1.45; color: var(--e-bone); }
@@ -274,8 +272,12 @@ main[class*="chatContent_"] [class*="messageContent_"] { font-size: 15.5px !impo
     background: {{art:chain}} left center / auto 100% repeat-x;
 }
 #app-mount section[class*="panels_pog62O"] [class*="accountPopoutButtonWrapper_"] { background: transparent !important; box-shadow: none !important; }
+#app-mount section[class*="panels_pog62O"] [class*="accountPopoutButtonWrapper_"] [class*="avatar_"] { position: relative; }
 #app-mount section[class*="panels_pog62O"] [class*="accountPopoutButtonWrapper_"] [class*="avatar_"]::after {
-    content: ""; position: absolute; inset: -5px; pointer-events: none; background: {{art:enso}} center / contain no-repeat;
+    content: ""; position: absolute; z-index: 0; inset: -6px; pointer-events: none; background: var(--e-art-enso) center / contain no-repeat; opacity: 0.85;
+}
+#app-mount section[class*="panels_pog62O"] [class*="accountPopoutButtonWrapper_"] [class*="avatar_"] svg { position: relative; z-index: 1; }
+ center / contain no-repeat;
 }
 #app-mount section[class*="panels_pog62O"] [class*="nameTag_"] * {
     font-family: 'Oswald', sans-serif !important; background: none !important; text-shadow: none !important; -webkit-text-fill-color: currentcolor !important;
@@ -595,7 +597,7 @@ nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"][aria-selected="true"] > i
     content: ""; position: absolute; left: 14px; right: 14px; bottom: -4px; height: 9px; pointer-events: none; opacity: 0;
     background: var(--e-art-brush) center / 100% 100% no-repeat; transition: opacity 0.15s ease;
 }
-#app-mount [class*="channelTextArea_"] form:focus-within [class*="scrollableContainer_"]::after { opacity: 1; }
+#app-mount [class*="channelTextArea_"]:focus-within [class*="scrollableContainer_"]::after { opacity: 1; }
 #app-mount [class*="channelTextArea_"] [class*="placeholder_"] { color: var(--e-dim) !important; font-size: 16px !important; }
 #app-mount [class*="channelTextArea_"] [class*="slateTextArea_"] { color: var(--e-bone); font-size: 16px; }
 #app-mount [class*="channelTextArea_"] [class*="buttons_2x8-Qn"] { gap: 4px; }
@@ -609,3 +611,37 @@ nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"][aria-selected="true"] > i
     width: 24px !important; height: 24px !important; background: var(--x4-ico-fill) !important;
     -webkit-mask: var(--e-ico-emoji) center / contain no-repeat !important; mask: var(--e-ico-emoji) center / contain no-repeat !important;
 }
+
+/* ============================================================
+   ШАПКА РАЗГОВОРА: полоса бумаги рваным краем вниз, значки тушью.
+   ============================================================ */
+#app-mount section[class*="title_z_gUBg"] {
+    min-height: 52px; border: none !important; box-shadow: none !important;
+    background: var(--e-art-panel-down) center / 100% 100% no-repeat, rgba(11, 9, 10, 0.86) !important;
+}
+section[class*="title_z_gUBg"] [class*="avatar_z_gUBg"] { position: relative; width: 26px !important; height: 26px !important; margin-right: 10px; }
+section[class*="title_z_gUBg"] [class*="avatar_z_gUBg"] [class*="wrapper_XpIUHy"] { transform: scale(1.3); transform-origin: top left; }
+section[class*="title_z_gUBg"] [class*="avatar_z_gUBg"]::after {
+    content: ""; position: absolute; inset: -5px; pointer-events: none; background: var(--e-art-enso) center / contain no-repeat; opacity: 0.85;
+}
+section[class*="title_z_gUBg"] h1, section[class*="title_z_gUBg"] h1 * { font-size: 20px !important; font-weight: 500 !important; color: var(--e-bone) !important; letter-spacing: 0.02em; }
+section[class*="title_z_gUBg"] [class*="dmHeaderActivityStatus"], section[class*="title_z_gUBg"] [class*="dmHeaderActivityStatus"] * { color: var(--e-dim) !important; }
+section[class*="title_z_gUBg"] [class*="dmHeaderActivityStatus"] svg :is(path, rect, circle) { fill: currentColor !important; }
+#app-mount section[class*="title_z_gUBg"] [aria-label="Начать голосовой звонок"] { --e-h: var(--e-ico-hangup); }
+#app-mount section[class*="title_z_gUBg"] [aria-label="Начать видеозвонок"] { --e-h: var(--e-ico-video); }
+#app-mount section[class*="title_z_gUBg"] [aria-label="Добавить в беседу"] { --e-h: var(--e-ico-people); }
+#app-mount section[class*="title_z_gUBg"] [aria-label="Показать профиль пользователя"],
+#app-mount section[class*="title_z_gUBg"] [aria-label="Скрыть профиль пользователя"] { --e-h: var(--e-ico-user); }
+#app-mount section[class*="title_z_gUBg"] :is([aria-label="Начать голосовой звонок"], [aria-label="Начать видеозвонок"], [aria-label="Добавить в беседу"], [aria-label="Показать профиль пользователя"], [aria-label="Скрыть профиль пользователя"]) svg {
+    background: var(--x4-ico-fill) !important; -webkit-mask: var(--e-h) center / contain no-repeat !important; mask: var(--e-h) center / contain no-repeat !important;
+}
+#app-mount section[class*="title_z_gUBg"] :is([aria-label="Начать голосовой звонок"], [aria-label="Начать видеозвонок"], [aria-label="Добавить в беседу"], [aria-label="Показать профиль пользователя"], [aria-label="Скрыть профиль пользователя"]) svg > * { visibility: hidden !important; }
+section[class*="title_z_gUBg"] [class*="iconWrapper_ybUK7Z"] svg { width: 22px !important; height: 22px !important; }
+section[class*="title_z_gUBg"] [class*="searchBar_i16Ad0"] {
+    background: transparent !important; border: none !important; border-bottom: 1px solid var(--e-line2) !important; border-radius: 0 !important; box-shadow: none !important;
+}
+section[class*="title_z_gUBg"] [class*="searchBar_i16Ad0"]:focus-within { border-bottom-color: var(--e-blood2) !important; }
+
+/* подпись под ником: приглушённый значок статуса */
+#app-mount section[class*="panels_pog62O"] [class*="panelSubtextContainer_"] svg { color: var(--e-dim) !important; }
+#app-mount section[class*="panels_pog62O"] [class*="panelSubtextContainer_"] svg :is(path, rect, circle) { fill: currentColor !important; }
