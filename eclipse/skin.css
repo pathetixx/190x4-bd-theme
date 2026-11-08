@@ -1,0 +1,234 @@
+/* ============================================================
+   190x4 ECLIPSE — чёрная бумага, костяная тушь, багровая аура.
+   Слой поверх базы: только внешний вид, раскладку и карту классов
+   даёт 190x4.theme.css.
+   ============================================================ */
+:root {
+    --e-bone: #e8e0d4;
+    --e-dim: #9b9288;
+    --e-line: rgba(232, 224, 212, 0.14);
+    --e-line2: rgba(232, 224, 212, 0.3);
+    --e-blood: #b3122e;
+    --e-blood2: #d21a3c;
+
+    --x4-bg-deep: #050405;
+    --x4-bg-base: #0b090a;
+    --x4-bg-panel: #141012;
+    --x4-bg-elevated: #1a1517;
+    --x4-bg-hover: rgba(232, 224, 212, 0.06);
+    --x4-bg-active: rgba(179, 18, 46, 0.18);
+    --x4-red-glow: rgba(179, 18, 46, 0.3);
+    --x4-orange: #e8560f;
+    --x4-text: #e8e0d4;
+    --x4-text-bright: #f3ece2;
+    --x4-text-muted: #9b9288;
+    --x4-text-faint: #6d6467;
+    --x4-border: var(--e-line);
+    --x4-border-soft: rgba(232, 224, 212, 0.08);
+    --x4-bg-image: {{art:paper}};
+    --x4-overlay: linear-gradient(transparent, transparent);
+    --x4-font-display: 'Oswald', sans-serif;
+    --x4-font-ui: 'Oswald', 'gg sans', sans-serif;
+    --x4-ico-chrome: var(--e-bone);
+    --x4-ico-red: var(--e-blood2);
+
+    --ct-bg: transparent;
+    --ct-line: var(--e-line);
+    --ct-chamfer: none;
+    --ct-mono: 'Oswald', sans-serif;
+
+    --background-base-lowest: #050405;
+    --background-base-lower: #0b090a;
+    --background-base-low: #0b090a;
+    --background-surface-high: #141012;
+    --background-surface-higher: #1a1517;
+    --background-surface-highest: #211b1d;
+    --brand-500: #b3122e;
+    --text-link: #d21a3c;
+    --text-default: #e8e0d4;
+    --status-speaking: #d21a3c;
+    --text-feedback-positive: #e8e0d4;
+    --interactive-hover: var(--e-bone);
+    --interactive-active: var(--e-bone);
+    --background-modifier-hover: rgba(232, 224, 212, 0.06);
+    --background-modifier-selected: rgba(179, 18, 46, 0.2);
+    --mention-foreground: #e8e0d4;
+}
+
+html, body, #app-mount, #app-mount * { font-family: 'Oswald', 'gg sans', sans-serif; letter-spacing: 0.012em; }
+#app-mount code, #app-mount pre, #app-mount pre * { font-family: 'Consolas', monospace !important; letter-spacing: 0; }
+html::before { background-color: #050405 !important; }
+
+/* --- шапка окна: никакого свечения и подписей --- */
+[class*="bar_3zSH5d"] { background: transparent !important; border-bottom: none !important; box-shadow: none !important; }
+[class*="bar_3zSH5d"] [class*="leading_"]::after { content: none !important; }
+
+/* --- бумага вместо стеклянных островов --- */
+[class*="sidebarList_pog62O"],
+[class*="page_pog62O"] > *,
+[class*="container_86es0b"] {
+    background: transparent !important;
+    border: none !important;
+    clip-path: none !important;
+    backdrop-filter: none !important;
+}
+[class*="sidebarList_pog62O"] { border-left: 1px solid var(--e-line) !important; margin-top: 0; }
+[class*="container_86es0b"] { border-left: 1px solid var(--e-line) !important; margin-left: 0; }
+[class*="sidebarList_pog62O"]::after, [class*="container_86es0b"]::after { content: none !important; }
+[class*="content_pog62O"] { padding: 0; }
+[class*="page_pog62O"] { padding: 0; }
+
+/* --- полоса серверов: слово кистью, кольца туши --- */
+[class*="base_pog62O"] {
+    grid-template-rows: [top] var(--custom-app-top-bar-height) [titleBarEnd] 64px [guildsRowEnd] min-content [noticeEnd] 1fr [end] !important;
+}
+nav[class*="wrapper_5dqHTG"] {
+    height: 64px !important; margin: 0; padding: 0 16px;
+    border-bottom: 1px solid var(--e-line) !important;
+}
+nav[class*="wrapper_5dqHTG"]::before {
+    content: ""; flex: 0 0 196px; height: 54px; margin-right: 14px; align-self: center;
+    background: {{art:wordmark}} left center / contain no-repeat;
+}
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"],
+nav[class*="wrapper_5dqHTG"] [class*="tutorialContainer"] { width: 54px !important; height: 54px !important; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"] > span { transform: none; }
+nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"],
+nav[class*="wrapper_5dqHTG"] [class*="childWrapper"],
+nav[class*="wrapper_5dqHTG"] [class*="circleIconButton"] { clip-path: circle(50%) !important; border-radius: 50% !important; }
+nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"] > img { filter: grayscale(0.55) contrast(1.05) brightness(0.9); }
+nav[class*="wrapper_5dqHTG"] [class*="wrapper_JJ-hgR"]::after,
+nav[class*="wrapper_5dqHTG"] [class*="circleIconButton"]::after { background: none !important; }
+nav[class*="wrapper_5dqHTG"] [class*="blobContainer_"][class*="selected_"] { filter: none; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has([aria-selected="true"])::after {
+    left: -3px; right: -3px; top: -3px; bottom: -3px; height: auto; box-shadow: none;
+    background: {{art:enso}} center / contain no-repeat; pointer-events: none;
+}
+nav[class*="wrapper_5dqHTG"] [class*="circleIconButton"] { background: rgba(232, 224, 212, 0.06) !important; color: var(--e-bone) !important; }
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"] { background: #141012 !important; }
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"]::before { color: var(--e-bone); font-size: 12px; font-weight: 700; }
+nav[class*="wrapper_5dqHTG"] [data-list-item-id="guildsnav___home"] [class*="childWrapper"]::after { color: var(--e-blood2); font-size: 14px; font-weight: 700; text-shadow: none; }
+nav[class*="wrapper_5dqHTG"] [class*="lowerBadge_"] [class*="numberBadge"] {
+    clip-path: none !important; border-radius: 3px !important; color: #1a1210 !important; font-weight: 700 !important;
+    background: {{art:burnt}} center / 100% 100% no-repeat !important;
+}
+
+/* --- багровый серп над правым краем --- */
+#app-mount::before {
+    content: ""; position: fixed; z-index: 3; pointer-events: none; top: 38px; right: 22px;
+    width: 54px; height: 54px; background: {{art:crescent}} center / contain no-repeat;
+}
+
+/* --- баннер над каналами --- */
+[class*="sidebarList_pog62O"] { padding-top: 158px; box-sizing: border-box !important; }
+[class*="sidebarList_pog62O"]::before {
+    content: ""; position: absolute; z-index: 0; top: 0; left: 0; right: 0; height: 158px; pointer-events: none;
+    background: {{art:banner}} center 32% / cover no-repeat;
+    -webkit-mask: linear-gradient(#000 74%, transparent); mask: linear-gradient(#000 74%, transparent);
+}
+[class*="sidebarList_pog62O"] > * { position: relative; z-index: 1; }
+
+/* --- выбранный канал: мазок кисти --- */
+[class*="modeSelected_"] [class*="link_"],
+[class*="sidebarList_pog62O"] [class*="interactiveSelected_"] {
+    background: {{art:brush}} left center / 92% 100% no-repeat !important;
+    box-shadow: none !important; border-radius: 0 !important;
+}
+[class*="modeSelected_"],
+[class*="modeSelected_"]:hover { background: transparent !important; box-shadow: none !important; }
+[class*="modeSelected_"] [class*="name_"] { color: var(--x4-text-bright) !important; text-shadow: none !important; }
+
+/* --- шапка разговора --- */
+section[class*="title_z_gUBg"] { background: transparent !important; border-bottom: 1px solid var(--e-line) !important; }
+section[class*="title_z_gUBg"] h1::before { content: none !important; }
+section[class*="title_z_gUBg"] h1 { font-size: 19px !important; letter-spacing: 0.02em; }
+
+/* --- сообщения: ровная лента без пузырей --- */
+main[class*="chatContent_"] [class*="messageContent_"] { font-size: 15.5px !important; font-weight: 400; line-height: 1.45; color: var(--e-bone); }
+[class*="username_"] { font-weight: 500 !important; }
+[class*="divider_"][class*="hasContent_"] { border-color: var(--e-line) !important; }
+
+/* --- поле ввода --- */
+[class*="channelTextArea_"] form,
+[class*="channelTextArea_"] > [class*="scrollableContainer_"] {
+    background: rgba(20, 16, 18, 0.78) !important; border: 1px solid var(--e-line2) !important; border-radius: 3px !important; box-shadow: none !important;
+}
+
+/* --- док и войс --- */
+#app-mount section[class*="panels_pog62O"] {
+    clip-path: none !important; border-radius: 0 !important; border: none !important; border-top: 1px solid var(--e-line) !important;
+    background: rgba(11, 9, 10, 0.92) !important; box-shadow: none !important;
+}
+#app-mount section[class*="panels_pog62O"] [class*="rtcConnectionStatusConnected"] { color: var(--e-bone) !important; }
+#app-mount section[class*="panels_pog62O"] [class*="rtcConnectionStatusConnected"]::before { color: var(--e-blood2) !important; text-shadow: none !important; }
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button {
+    background: transparent !important; border: 1px solid var(--e-line) !important; border-radius: 3px !important;
+}
+#app-mount section[class*="panels_pog62O"] [class*="actionButtons_"] button:hover:not([class*="disabled_"]) { background: rgba(232, 224, 212, 0.07) !important; border-color: var(--e-line2) !important; }
+#app-mount section[class*="panels_pog62O"] button:is([aria-label="Отключиться"], [aria-label="Disconnect"]) { background: transparent !important; }
+[class*="username_"] { text-transform: none !important; }
+
+/* --- кнопки и всплывающие окна без неона --- */
+#app-mount [class*="lookFilled_"][class*="colorBrand_"], #app-mount [class*="colorBrand_"] { box-shadow: none !important; }
+#app-mount [role="dialog"], #app-mount [class*="layerContainer_"] [role="listbox"], #app-mount [class*="menu_"] {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.7) !important; backdrop-filter: none !important;
+}
+
+/* --- силуэт в углу разговора: только красная нить, тёмное тело не закрывает текст --- */
+[class*="page_pog62O"] { position: relative; }
+[class*="page_pog62O"]::after {
+    content: ""; position: absolute; z-index: 0; right: 0; bottom: 74px; width: 400px; height: 320px; pointer-events: none;
+    background: {{art:silhouette}} right bottom / contain no-repeat; opacity: 0.9;
+}
+[class*="page_pog62O"] > * { position: relative; z-index: 1; }
+#app-mount:fullscreen [class*="page_pog62O"]::after { display: none; }
+
+/* --- сервер со своим баннером: родная картинка скрыта, её место занимает наш арт,
+       название сервера и меню остаются поверх --- */
+[class*="sidebarList_pog62O"]:has([class*="hasBanner_XH4OpX"]) { padding-top: 0; }
+[class*="sidebarList_pog62O"]:has([class*="hasBanner_XH4OpX"])::before { height: 150px; }
+[class*="sidebarList_pog62O"] [class*="animatedContainer_XH4OpX"] { visibility: hidden; }
+[class*="sidebarList_pog62O"] [class*="header_XH4OpX"] { background: linear-gradient(rgba(5, 4, 5, 0.72), transparent) !important; }
+
+/* --- настройки: рисованные значки и мазок на выбранном разделе --- */
+#app-mount [data-settings-sidebar-item="account_panel"] { --e-set: var(--e-ico-user); }
+#app-mount [data-settings-sidebar-item="data_and_privacy_panel"] { --e-set: var(--e-ico-shield); }
+#app-mount [data-settings-sidebar-item="messaging_permissions_panel"] { --e-set: var(--e-ico-chat); }
+#app-mount [data-settings-sidebar-item="notifications_panel"] { --e-set: var(--e-ico-bell); }
+#app-mount [data-settings-sidebar-item="nitro_panel"] { --e-set: var(--e-ico-gem); }
+#app-mount [data-settings-sidebar-item="premium_guild_subscriptions_panel"] { --e-set: var(--e-ico-gem); }
+#app-mount [data-settings-sidebar-item="subscriptions_panel"] { --e-set: var(--e-ico-card); }
+#app-mount [data-settings-sidebar-item="gift_panel"] { --e-set: var(--e-ico-gift); }
+#app-mount [data-settings-sidebar-item="billing_panel"] { --e-set: var(--e-ico-receipt); }
+#app-mount [data-settings-sidebar-item="voice_and_video_panel"] { --e-set: var(--e-ico-mic); }
+#app-mount [data-settings-sidebar-item="appearance_panel"] { --e-set: var(--e-ico-palette); }
+#app-mount [data-settings-sidebar-item="accessibility_panel"] { --e-set: var(--e-ico-user); }
+#app-mount [data-settings-sidebar-item="system_panel"] { --e-set: var(--e-ico-laptop); }
+#app-mount [data-settings-sidebar-item="language_and_time_panel"] { --e-set: var(--e-ico-globe); }
+#app-mount [data-settings-sidebar-item="registered_games_panel"] { --e-set: var(--e-ico-controller); }
+#app-mount [data-settings-sidebar-item="activity_privacy_panel"] { --e-set: var(--e-ico-lock); }
+#app-mount [data-settings-sidebar-item="clips_panel"] { --e-set: var(--e-ico-video); }
+#app-mount [data-settings-sidebar-item="overlay_panel"] { --e-set: var(--e-ico-monitor); }
+#app-mount [data-settings-sidebar-item="connected_apps_panel"] { --e-set: var(--e-ico-puzzle); }
+#app-mount [data-settings-sidebar-item="betterdiscord_settings_panel"] { --e-set: var(--e-ico-wrench); }
+#app-mount [data-settings-sidebar-item="betterdiscord_updates_panel"] { --e-set: var(--e-ico-inbox); }
+#app-mount [data-settings-sidebar-item="betterdiscord_customcss_tab_panel"] { --e-set: var(--e-ico-brush); }
+#app-mount [data-settings-sidebar-item="betterdiscord_plugins_panel"] { --e-set: var(--e-ico-puzzle); }
+#app-mount [data-settings-sidebar-item="betterdiscord_themes_panel"] { --e-set: var(--e-ico-palette); }
+#app-mount [data-settings-sidebar-item="developer_panel"] { --e-set: var(--e-ico-wrench); }
+#app-mount [data-settings-sidebar-item] svg[class*="icon_xyJHva"] {
+    background: var(--x4-ico-fill) !important; -webkit-mask: var(--e-set) center / contain no-repeat !important; mask: var(--e-set) center / contain no-repeat !important;
+}
+#app-mount [data-settings-sidebar-item] svg[class*="icon_xyJHva"] > * { visibility: hidden !important; }
+#app-mount [class*="item_xyJHva"][class*="active_xyJHva"] {
+    background: {{art:brush}} left center / 96% 100% no-repeat !important; box-shadow: none !important; border-radius: 0 !important;
+}
+#app-mount [role="dialog"] h1, #app-mount [role="dialog"] h2 { letter-spacing: 0.02em; }
+
+/* --- кнопки окна тушью, значки шапки --- */
+[class*="winButton_"][aria-label="Свернуть"], [class*="winButton_"][aria-label="Minimize"] { --x4-ico: var(--e-ico-win-min); }
+[class*="winButton_"][aria-label="Развернуть"], [class*="winButton_"][aria-label="Maximize"],
+[class*="winButton_"][aria-label="Восстановить"], [class*="winButton_"][aria-label="Restore"] { --x4-ico: var(--e-ico-win-max); }
+[class*="winButton_"][aria-label="Закрыть"], [class*="winButton_"][aria-label="Close"] { --x4-ico: var(--e-ico-win-close); }
+[class*="bar_3zSH5d"] [aria-label="Почта"], [class*="bar_3zSH5d"] [aria-label="Inbox"] { --x4-ico: var(--e-ico-inbox); }
+[class*="bar_3zSH5d"] [aria-label="Помощь"], [class*="bar_3zSH5d"] [aria-label="Help"] { --x4-ico: var(--e-ico-question); }
