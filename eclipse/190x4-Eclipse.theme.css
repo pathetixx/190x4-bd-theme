@@ -3560,3 +3560,26 @@ section[class*="title_z_gUBg"] [class*="searchBar_i16Ad0"]:focus-within { border
 #app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"]:is(:hover, :focus-within) [class*="soundName_"] {
     box-sizing: border-box; max-width: 100%; padding: 0 30px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
+
+/* ============================================================
+   НАЗВАНИЕ СЕРВЕРА НА БАННЕРЕ: крупно, на мазке кисти, без стекла.
+   ============================================================ */
+#app-mount [class*="sidebarList_pog62O"] :is([class*="headerEllipseBackdrop_"], [class*="headerEllipseForeground_"], [class*="headerGlass_"]) { display: none !important; }
+#app-mount [class*="sidebarList_pog62O"] [class*="header_XH4OpX"] { background: none !important; box-shadow: none !important; }
+#app-mount [class*="guildDropdown_XH4OpX"] {
+    padding: 2px 22px 2px 8px !important; margin-left: -2px; border-radius: 0 !important;
+    background: var(--e-art-brush) left center / 100% 100% no-repeat !important; filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.75));
+}
+#app-mount [class*="guildDropdown_XH4OpX"]:hover { filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.75)) brightness(1.15); }
+#app-mount [class*="guildBadgeAndName_XH4OpX"] h2 {
+    color: #fff !important; font: 700 19px/24px 'Oswald', sans-serif !important; letter-spacing: 0.03em !important; text-transform: none !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+}
+#app-mount [class*="guildBadgeAndName_XH4OpX"] [class*="guildIconContainer_"] { filter: grayscale(1) brightness(1.5); }
+#app-mount [class*="guildDropdown_XH4OpX"] [class*="headerChildren_"] svg { color: #fff !important; }
+#app-mount [class*="sidebarList_pog62O"] [class*="inviteButton_XH4OpX"] {
+    border-radius: 50% !important; background: rgba(5, 4, 5, 0.62) !important; border: 1px solid var(--e-line2) !important; box-sizing: border-box;
+}
+#app-mount [class*="sidebarList_pog62O"] [class*="inviteButton_XH4OpX"] svg {
+    background: var(--x4-ico-fill) !important; -webkit-mask: var(--e-ico-people) center / contain no-repeat !important; mask: var(--e-ico-people) center / contain no-repeat !important;
+}
+#app-mount [class*="sidebarList_pog62O"] [class*="inviteButton_XH4OpX"] svg > * { visibility: hidden !important; }
