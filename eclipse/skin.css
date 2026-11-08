@@ -713,6 +713,6 @@ section[class*="title_z_gUBg"] [class*="searchBar_i16Ad0"]:focus-within { border
 #app-mount [class*="soundboardContainer_58b0l2"] { display: none !important; }
 
 /* название звука не заходит под кнопку воспроизведения и звёздочку */
-#app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"] [class*="soundName_"] {
+#app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"]:is(:hover, :focus-within) [class*="soundName_"] {
     box-sizing: border-box; max-width: 100%; padding: 0 30px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
