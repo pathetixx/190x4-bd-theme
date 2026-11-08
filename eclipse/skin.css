@@ -519,3 +519,45 @@ li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important
 [class*="leftTrayIcon_hbKzX7"] [class*="contents_"] > :is(svg, div) * { visibility: hidden !important; }
 [class*="rightTrayIcon_hbKzX7"] { color: var(--e-bone) !important; }
 [class*="avatarWrapper_SZIJT_"] { transform: scale(1.65); }
+
+/* ============================================================
+   ВЕРХНЯЯ ПОЛОСА: серверы висят медальонами на одной цепи.
+   Цепь и звенья декоративны и не перехватывают клики.
+   ============================================================ */
+[class*="base_pog62O"] {
+    grid-template-rows: [top] var(--custom-app-top-bar-height) [titleBarEnd] 92px [guildsRowEnd] min-content [noticeEnd] 1fr [end] !important;
+}
+nav[class*="wrapper_5dqHTG"] { position: relative; height: 92px !important; border-bottom: 1px solid var(--e-line) !important; overflow: hidden; }
+nav[class*="wrapper_5dqHTG"]::after {
+    content: ""; position: absolute; z-index: 0; left: 228px; right: 96px; top: 0; height: 24px; pointer-events: none;
+    background: var(--e-art-chain) left center / auto 100% repeat-x;
+}
+nav[class*="wrapper_5dqHTG"]::before { position: relative; z-index: 1; }
+nav[class*="wrapper_5dqHTG"] [class*="tree_"],
+nav[class*="wrapper_5dqHTG"] [class*="scroller_5dqHTG"],
+nav[class*="wrapper_5dqHTG"] [class*="stack_"] { position: relative; z-index: 1; overflow-y: hidden !important; align-items: flex-end !important; }
+nav[class*="wrapper_5dqHTG"] [class*="scroller_5dqHTG"] { padding-bottom: 6px !important; box-sizing: border-box; gap: 12px !important; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"] { position: relative; overflow: visible !important; height: 78px !important; align-items: flex-end !important; }
+nav[class*="wrapper_5dqHTG"] [class*="tutorialContainer"] { height: 78px !important; }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"] > span { margin-bottom: 3px; }
+/* звено от цепи к медальону */
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]::before {
+    content: ""; position: absolute; left: 50%; top: 6px; width: 15px; height: 24px; margin-left: -7.5px; pointer-events: none;
+    background: var(--e-art-chain-link) center / contain no-repeat;
+}
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has(> [class*="guildSeparator"])::before,
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has(> [class*="folderGroup_"])::before { content: none; }
+/* кольцо медальона */
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]::after {
+    content: ""; position: absolute; left: 1px; right: 1px; bottom: 1px; height: 52px; box-sizing: border-box; border-radius: 50%; pointer-events: none; border: 2px solid rgba(232, 224, 212, 0.62);
+}
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has(> [class*="guildSeparator"])::after,
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has(> [class*="folderGroup_"])::after { content: none; }
+/* активный: раскалённый контур и красное звено */
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has([aria-selected="true"])::after {
+    left: 1px; right: 1px; top: auto; bottom: 1px; height: 52px; background: none;
+    border-color: var(--e-blood2); box-shadow: 0 0 9px rgba(210, 26, 60, 0.75), inset 0 0 5px rgba(232, 86, 15, 0.45);
+}
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:has([aria-selected="true"])::before { filter: sepia(1) saturate(9) hue-rotate(-38deg) brightness(1.15) drop-shadow(0 0 3px rgba(210, 26, 60, 0.9)); }
+nav[class*="wrapper_5dqHTG"] [class*="listItem_"]:hover::after { border-color: var(--e-bone); }
+#app-mount::before { top: 48px; right: 26px; width: 58px; height: 58px; }

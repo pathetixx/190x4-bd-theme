@@ -117,7 +117,8 @@ def build() -> str:
 
     skin = (HERE / "skin.css").read_text(encoding="utf-8")
     # каждая картинка лежит в файле один раз, как переменная, и не дублируется в правилах
-    names = sorted(set(re.findall(r"\{\{art:([\w-]+)\}\}", skin)))
+    names = sorted(set(re.findall(r"\{\{art:([\w-]+)\}\}|var\(--e-art-([\w-]+)\)", skin)))
+    names = sorted({a or b for a, b in names})
     skin = re.sub(r"\{\{art:([\w-]+)\}\}", r"var(--e-art-\1)", skin)
     art = "".join(f"    --e-art-{n}: url('{data_uri(next(ART.glob(n + '.*')))}');\n" for n in names)
     ico = "".join(f"    --e-ico-{p.stem}: url('{data_uri(p)}');\n" for p in sorted(ICONS.glob("*.png")))
