@@ -7,7 +7,7 @@ Discord, карта иконок) + переводы цветов и шрифт�
 """
 import base64, pathlib, re
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 ART = ROOT / "assets" / "eclipse"
