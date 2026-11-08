@@ -491,21 +491,22 @@ li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important
     background: var(--e-art-brush) center / 100% 80% no-repeat !important;
 }
 [class*="wrapper_9bvEB0"] [class*="centerButton_K9Xq13"] :is(svg, [class*="lottieIcon"]) { width: 24px !important; height: 24px !important; }
-[class*="wrapper_9bvEB0"] button[aria-label="Заглушить"] { --e-call: var(--e-ico-mic); }
-[class*="wrapper_9bvEB0"] button[aria-label="Включить микрофон"] { --e-call: var(--e-ico-mic-off); }
-[class*="wrapper_9bvEB0"] button:is([aria-label="Включить камеру"], [aria-label="Выключить камеру"]) { --e-call: var(--e-ico-video); }
-[class*="wrapper_9bvEB0"] button[aria-label="Продемонстрируйте свой экран"] { --e-call: var(--e-ico-monitor); }
-[class*="wrapper_9bvEB0"] button[aria-label="Начать активность"] { --e-call: var(--e-ico-controller); }
-[class*="wrapper_9bvEB0"] button[aria-label="Открыть звуковую панель"] { --e-call: var(--e-ico-wave); }
-[class*="wrapper_9bvEB0"] button[aria-label="Другие настройки"] { --e-call: var(--e-ico-dots); }
-[class*="wrapper_9bvEB0"] button[aria-label="Отключиться"] { --e-call: var(--e-ico-hangup); }
-[class*="wrapper_9bvEB0"] [class*="centerButton_K9Xq13"] [class*="contents_"] :is([class*="lottieIcon"], [class*="contents_"] > svg) {
+/* значок задаётся только для известных подписей: у незнакомой кнопки остаётся родная иконка */
+[class*="wrapper_9bvEB0"] button:is([aria-label="Заглушить"], [aria-label="Mute"]) { --e-call: var(--e-ico-mic); }
+[class*="wrapper_9bvEB0"] button:is([aria-label="Вкл. микрофон"], [aria-label="Включить микрофон"], [aria-label="Unmute"]) { --e-call: var(--e-ico-mic-off); }
+[class*="wrapper_9bvEB0"] button:is([aria-label="Включить камеру"], [aria-label="Вкл. камеру"], [aria-label="Выключить камеру"], [aria-label="Выкл. камеру"], [aria-label="Turn On Camera"], [aria-label="Turn Off Camera"]) { --e-call: var(--e-ico-video); }
+[class*="wrapper_9bvEB0"] button:is([aria-label="Продемонстрируйте свой экран"], [aria-label="Share Your Screen"]) { --e-call: var(--e-ico-monitor); }
+[class*="wrapper_9bvEB0"] button:is([aria-label="Начать активность"], [aria-label="Start An Activity"]) { --e-call: var(--e-ico-controller); }
+[class*="wrapper_9bvEB0"] button:is([aria-label="Открыть звуковую панель"], [aria-label="Open Soundboard"]) { --e-call: var(--e-ico-wave); }
+[class*="wrapper_9bvEB0"] button:is([aria-label="Другие настройки"], [aria-label="More Options"]) { --e-call: var(--e-ico-dots); }
+[class*="wrapper_9bvEB0"] button:is([aria-label="Отключиться"], [aria-label="Disconnect"]) { --e-call: var(--e-ico-hangup); }
+[class*="wrapper_9bvEB0"] button:is([aria-label="Заглушить"], [aria-label="Mute"], [aria-label="Вкл. микрофон"], [aria-label="Включить микрофон"], [aria-label="Unmute"], [aria-label="Включить камеру"], [aria-label="Вкл. камеру"], [aria-label="Выключить камеру"], [aria-label="Выкл. камеру"], [aria-label="Turn On Camera"], [aria-label="Turn Off Camera"], [aria-label="Продемонстрируйте свой экран"], [aria-label="Share Your Screen"], [aria-label="Начать активность"], [aria-label="Start An Activity"], [aria-label="Открыть звуковую панель"], [aria-label="Open Soundboard"], [aria-label="Другие настройки"], [aria-label="More Options"], [aria-label="Отключиться"], [aria-label="Disconnect"]) [class*="contents_"] :is([class*="lottieIcon"], [class*="contents_"] > svg) {
     background: var(--x4-ico-fill) !important; color: transparent !important;
     -webkit-mask: var(--e-call) center / contain no-repeat !important; mask: var(--e-call) center / contain no-repeat !important;
 }
-[class*="wrapper_9bvEB0"] [class*="centerButton_K9Xq13"] [class*="contents_"] :is([class*="lottieIcon"], [class*="contents_"] > svg) * { visibility: hidden !important; }
+[class*="wrapper_9bvEB0"] button:is([aria-label="Заглушить"], [aria-label="Mute"], [aria-label="Вкл. микрофон"], [aria-label="Включить микрофон"], [aria-label="Unmute"], [aria-label="Включить камеру"], [aria-label="Вкл. камеру"], [aria-label="Выключить камеру"], [aria-label="Выкл. камеру"], [aria-label="Turn On Camera"], [aria-label="Turn Off Camera"], [aria-label="Продемонстрируйте свой экран"], [aria-label="Share Your Screen"], [aria-label="Начать активность"], [aria-label="Start An Activity"], [aria-label="Открыть звуковую панель"], [aria-label="Open Soundboard"], [aria-label="Другие настройки"], [aria-label="More Options"], [aria-label="Отключиться"], [aria-label="Disconnect"]) [class*="contents_"] :is([class*="lottieIcon"], [class*="contents_"] > svg) * { visibility: hidden !important; }
 /* камера выключена: красная черта кисти поверх значка */
-[class*="wrapper_9bvEB0"] button[aria-label="Включить камеру"]::after {
+[class*="wrapper_9bvEB0"] button:is([aria-label="Включить камеру"], [aria-label="Вкл. камеру"], [aria-label="Turn On Camera"])::after {
     content: ""; position: absolute; left: 7px; right: 7px; top: 50%; height: 3px; background: var(--e-blood2); transform: rotate(-38deg); pointer-events: none;
 }
 [class*="wrapper_9bvEB0"] [class*="disconnect_K9Xq13"] { background: var(--e-art-brush) center / 100% 100% no-repeat !important; border-radius: 0 !important; }
