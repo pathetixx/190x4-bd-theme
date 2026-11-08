@@ -3491,3 +3491,61 @@ section[class*="title_z_gUBg"] [class*="searchBar_i16Ad0"]:focus-within { border
 #app-mount [class*="modalContentInner__F9ieB"]:has([data-settings-sidebar-item]) {
     background: linear-gradient(90deg, #0b090a 0%, #0b090a 20.5%, rgba(11, 9, 10, 0.9) 21%, rgba(11, 9, 10, 0.86) 62%, rgba(11, 9, 10, 0.42) 86%, rgba(11, 9, 10, 0.12) 100%), var(--e-art-bg-settings) right center / cover no-repeat !important;
 }
+
+/* ============================================================
+   ЗВУКОВАЯ ПАНЕЛЬ: лист бумаги, звуки — обрывки с чертой тушью,
+   под курсором мазок кисти. Без срезанных углов и неона.
+   ============================================================ */
+#app-mount [class*="picker_1lN7Eh"] {
+    background: var(--e-art-paper) center / cover no-repeat, #0b090a !important;
+    border: 1px solid var(--e-line2) !important; border-radius: 0 !important; clip-path: none !important; box-shadow: 0 10px 34px rgba(0, 0, 0, 0.75) !important;
+}
+#app-mount [class*="picker_1lN7Eh"] > [class*="header_"] { background: transparent !important; border-bottom: 1px solid var(--e-line) !important; box-shadow: none !important; }
+#app-mount [class*="picker_1lN7Eh"] > [class*="header_"] [class*="control_"],
+#app-mount [class*="picker_1lN7Eh"] > [class*="header_"] [class*="container_"],
+#app-mount [class*="picker_1lN7Eh"] > [class*="header_"] input {
+    background: transparent !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; outline: none !important; clip-path: none !important;
+}
+#app-mount [class*="picker_1lN7Eh"] > [class*="header_"] [class*="control_"] { border-bottom: 1px solid var(--e-line2) !important; }
+#app-mount [class*="picker_1lN7Eh"] > [class*="header_"] [class*="control_"]:focus-within { border-bottom-color: var(--e-blood2) !important; }
+#app-mount [class*="picker_1lN7Eh"] > [class*="header_"] input { color: var(--e-bone) !important; font: 400 16px 'Oswald', sans-serif !important; }
+#app-mount [class*="picker_1lN7Eh"] > [class*="header_"] input::placeholder { color: var(--e-dim) !important; }
+#app-mount [class*="picker_1lN7Eh"] svg[class*="settingsIcon_"] {
+    background: var(--x4-ico-fill) !important; -webkit-mask: var(--e-ico-speaker) center / contain no-repeat !important; mask: var(--e-ico-speaker) center / contain no-repeat !important;
+}
+#app-mount [class*="picker_1lN7Eh"] svg[class*="settingsIcon_"] > * { visibility: hidden !important; }
+
+/* разделы слева: те же медальоны, что и в полосе серверов */
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryList_"] { background: transparent !important; border-right: 1px solid var(--e-line) !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryList_"] [class*="listItems_"] > [class*="category_"] {
+    background: #0b090a !important; border: 2px solid rgba(232, 224, 212, 0.55) !important; border-radius: 50% !important; clip-path: none !important; box-shadow: none !important; overflow: hidden; box-sizing: content-box;
+}
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryList_"] [class*="listItems_"] > [class*="category_"]::after { content: none !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryList_"] [class*="listItems_"] > [class*="category_"]:hover { border-color: var(--e-bone) !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryList_"] [class*="listItems_"] > [class*="category_"][class*="selected_"] { border-color: var(--e-blood2) !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryList_"] [class*="category_"] img { filter: saturate(0.5) brightness(0.7); border-radius: 50%; }
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryList_"] [class*="category_"]:is(:hover, [class*="selected_"]) img { filter: none; }
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryList_"] svg[class*="categoryIconIcon_"] { color: var(--e-bone) !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryList_"] [class*="selected_"] svg[class*="categoryIconIcon_"] { color: var(--e-blood2) !important; }
+/* «Звуки Discord»: знак браузера вместо подписи 190x4 */
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryList_"] [class*="listItems_"] > [class*="categoryIcon_"]:has(path[d^="M19.73 4.87"]) { background: var(--e-art-home) center / 84% no-repeat, #0b090a !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryIcon_"]:has(path[d^="M19.73 4.87"])::before,
+#app-mount [class*="picker_1lN7Eh"] [class*="categoryIcon_"]:has(path[d^="M19.73 4.87"])::after { content: none !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="sectionHeaderContent_"]:has(> svg > path[d^="M19.73 4.87"])::before { content: none !important; }
+
+/* заголовки */
+#app-mount [class*="picker_1lN7Eh"] [class*="sectionHeader_"] { background: transparent !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="sectionTitle_"] { color: var(--e-dim) !important; font: 500 14px 'Oswald', sans-serif !important; text-transform: none !important; letter-spacing: 0.02em; text-shadow: none !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="sectionHeaderContent_"] svg { color: var(--e-dim) !important; }
+
+/* звуки */
+#app-mount [class*="picker_1lN7Eh"] li[class*="soundButtonWrapper_"] { background: transparent !important; border: none !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"] {
+    background: rgba(20, 16, 18, 0.72) !important; border: none !important; border-bottom: 1px solid var(--e-line2) !important; border-radius: 0 !important; clip-path: none !important; box-shadow: none !important;
+}
+#app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"] [class*="soundName_"] { color: var(--e-bone) !important; font: 400 15px 'Oswald', sans-serif !important; text-shadow: none !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"]:is(:hover, :focus-within, [class*="playing_"], [class*="Playing_"]) {
+    background: var(--e-art-brush) center / 100% 92% no-repeat, rgba(20, 16, 18, 0.72) !important; border-bottom-color: transparent !important; box-shadow: none !important;
+}
+#app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"]:is(:hover, :focus-within, [class*="playing_"], [class*="Playing_"]) [class*="soundName_"] { color: #fff !important; }
+#app-mount [class*="picker_1lN7Eh"] [class*="soundButton_"] [class*="buttonOverlayBackground_"] { background: transparent !important; box-shadow: none !important; }
