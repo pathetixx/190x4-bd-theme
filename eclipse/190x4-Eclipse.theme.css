@@ -3599,3 +3599,16 @@ nav[class*="wrapper_5dqHTG"] [class*="folderHeader_"] { margin: 0 0 3px !importa
 nav[class*="wrapper_5dqHTG"] [class*="folderButtonInner_"] { clip-path: circle(50%) !important; border-radius: 50% !important; background: #0b090a !important; }
 nav[class*="wrapper_5dqHTG"] [class*="folderPreviewGuildIcon_"] { filter: saturate(0.5) brightness(0.72); }
 nav[class*="wrapper_5dqHTG"] [class*="folderGroupBackground_"] { display: none !important; }
+
+/* ============================================================
+   ЗАГОЛОВОК ОКНА: подпись между чертами туши, знак браузера вместо логотипа.
+   ============================================================ */
+[class*="title_LnjVAX"] { display: flex; align-items: center; gap: 10px; }
+[class*="title_LnjVAX"]::before, [class*="title_LnjVAX"]::after {
+    content: ""; flex: none; width: 150px; height: 1px; pointer-events: none;
+}
+[class*="title_LnjVAX"]::before { background: linear-gradient(90deg, transparent, var(--e-line2)); margin-right: 4px; }
+[class*="title_LnjVAX"]::after { background: linear-gradient(90deg, var(--e-line2), transparent); margin-left: 4px; }
+[class*="title_LnjVAX"] > div { color: var(--e-bone) !important; font: 500 15px/20px 'Oswald', sans-serif !important; letter-spacing: 0.03em; }
+[class*="title_LnjVAX"] > svg { width: 20px !important; height: 20px !important; background: var(--e-art-home) center / contain no-repeat !important; }
+[class*="title_LnjVAX"] > svg > * { visibility: hidden !important; }
