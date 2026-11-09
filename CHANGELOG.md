@@ -2,6 +2,15 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [4.4.2] — 2026-11-09
+
+### Added
+- 190x4Companion 2.8.0: панель «Активные контакты» скрыта по умолчанию, значок в шапке окна открывает её, крестик в панели прячет.
+
+### Changed
+- 190x4 Eclipse 1.0.2: плашки над окном и панель «Активные контакты» в стиле темы, сглажена кромка блока профиля.
+- 190x4 Eclipse 1.0.2: скрыты плитка приглашения в пустом звонке, временная строка приглашения при входе в канал, кнопка приглашения на баннере сервера.
+
 ## [4.4.1] — 2026-11-08
 
 ### Fixed
