@@ -833,3 +833,6 @@ aside.refresh-active-now [class*="itemCard_"]:hover :is(foreignObject img, [clas
     content: ""; position: absolute; left: 0; right: 0; top: -26px; height: 26px; pointer-events: none;
     background: linear-gradient(rgba(11, 9, 10, 0), #0b090a);
 }
+
+/* один в канале: плитка с картинками и кнопками приглашения скрыта */
+[class*="tile_xFRALB"]:has(> [class*="tileSizer_"] > [class*="singleUserRoot_"]) { display: none !important; }
