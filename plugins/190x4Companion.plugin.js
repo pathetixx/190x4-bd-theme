@@ -36,8 +36,9 @@ const ACTIVE_NOW_CSS = `
     }
     .x4an-close:hover, .x4an-show:hover { background: #ff1a3a; border-color: #ff2d4d; }
     .x4an-close { position: absolute; top: 12px; right: 12px; z-index: 10; width: 28px; height: 28px; padding: 0; border-radius: 4px; }
-    .x4an-show { gap: 6px; height: 24px; padding: 0 10px; margin-inline-end: 12px; border-radius: 4px; -webkit-app-region: no-drag; flex-shrink: 0; }
-    .x4an-close svg, .x4an-show svg { width: 14px; height: 14px; }
+    .x4an-show { width: 24px; height: 24px; padding: 0; margin-inline-end: 12px; border-radius: 4px; -webkit-app-region: no-drag; flex-shrink: 0; }
+    .x4an-close svg { width: 14px; height: 14px; }
+    .x4an-show svg { width: 18px; height: 18px; }
 `;
 const TITLE_TRAILING = '[class*="bar_"]:not([class*="systemBar_"]) > [class*="trailing_"]';
 const GROUP_START = '[class*="groupStart_"]';
@@ -402,7 +403,7 @@ module.exports = class Companion {
         };
         if (this.settings.fastTheme) this.startBooster();
         this.pipHidden = Data.load(this.meta.name, "pipHidden") ?? false;
-        this.activeNowHidden = Data.load(this.meta.name, "activeNowHidden") ?? false;
+        this.activeNowHidden = Data.load(this.meta.name, "activeNowHidden") ?? true;
         this.pinLayout();
 
         DOM.addStyle(this.meta.name, `
@@ -796,8 +797,8 @@ module.exports = class Companion {
         if (!column || !this.activeNowHidden || !bar) { show?.remove(); return; }
         if (!show) {
             show = this.pipButton("x4an-show", "Показать активные контакты",
-                '<circle cx="9" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7M17 4a4 4 0 0 1 0 8M19 14c2 1 3 4 3 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
-                "Активные", () => this.setActiveNowHidden(false));
+                '<circle cx="12" cy="8" r="4.5" fill="currentColor"/><path d="M3.5 21.5c0-5 3.8-8 8.5-8s8.5 3 8.5 8z" fill="currentColor"/>',
+                null, () => this.setActiveNowHidden(false));
         }
         // Только вставка: кнопка стрима сама встаёт первой, сравнение порядка зациклило бы наблюдатель.
         if (show.parentElement !== bar) bar.prepend(show);

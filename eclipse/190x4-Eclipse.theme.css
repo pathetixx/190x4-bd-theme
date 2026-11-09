@@ -3662,4 +3662,9 @@ aside.refresh-active-now [class*="clickable_"], aside.refresh-active-now [class*
 aside.refresh-active-now :is(foreignObject img, [class*="headerIcon_"], section img) { filter: grayscale(0.7) brightness(0.9); transition: filter 0.15s ease; }
 aside.refresh-active-now [class*="itemCard_"]:hover :is(foreignObject img, [class*="headerIcon_"], section img) { filter: none; }
 #app-mount .x4an-close, #app-mount .x4an-show { background: rgba(5, 4, 5, 0.6) !important; border: 1px solid var(--e-line2) !important; border-radius: 0 !important; box-shadow: none !important; color: var(--e-bone) !important; font-family: 'Oswald', sans-serif !important; }
-#app-mount .x4an-close:hover, #app-mount .x4an-show:hover { background: var(--e-art-brush) center / 100% 100% no-repeat !important; border-color: transparent !important; color: #fff !important; }
+/* кнопка возврата — человечек тушью без рамки, как значки шапки рядом */
+#app-mount .x4an-show { background: transparent !important; border: none !important; --x4-ico-fill: var(--e-bone); }
+#app-mount .x4an-show:hover { background: transparent !important; --x4-ico-fill: var(--e-blood2); }
+#app-mount .x4an-show svg { width: 22px; height: 22px; background: var(--x4-ico-fill); -webkit-mask: var(--e-ico-user) center / contain no-repeat; mask: var(--e-ico-user) center / contain no-repeat; }
+#app-mount .x4an-show svg > * { visibility: hidden; }
+#app-mount .x4an-close:hover { background: var(--e-art-brush) center / 100% 100% no-repeat !important; border-color: transparent !important; color: #fff !important; }
