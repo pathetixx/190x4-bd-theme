@@ -212,7 +212,7 @@ main[class*="chatContent_"] [class*="messageContent_"] { font-size: 15.5px !impo
    ============================================================ */
 #app-mount section[class*="panels_pog62O"] {
     clip-path: none !important; border-radius: 0 !important; border: none !important; box-shadow: none !important;
-    background: linear-gradient(transparent 34px, #0b090a 74px) center top / 100% 74px no-repeat, {{art:panel}} center top / 100% 74px no-repeat, #0b090a !important;
+    background: {{art:dock}} center top / 100% 28px no-repeat, linear-gradient(#0b090a, #0b090a) center 27px / 100% calc(100% - 27px) no-repeat !important;
 }
 #app-mount section[class*="panels_pog62O"] [class*="container_9U6LUN"] { border: none !important; background: transparent !important; }
 #app-mount section[class*="panels_pog62O"] [class*="connection_"] { position: relative; padding: 4px 0 0; }
