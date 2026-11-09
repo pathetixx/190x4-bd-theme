@@ -836,3 +836,6 @@ aside.refresh-active-now [class*="itemCard_"]:hover :is(foreignObject img, [clas
 
 /* один в канале: плитка с картинками и кнопками приглашения скрыта */
 [class*="tile_xFRALB"]:has(> [class*="tileSizer_"] > [class*="singleUserRoot_"]) { display: none !important; }
+
+/* при входе в канал: временная строка «Пригласить в голосовой чат» в списке участников */
+[class*="animation_MRjIbW"]:has([class*="clickable_MRjIbW"]) { display: none !important; }
