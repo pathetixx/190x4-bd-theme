@@ -827,3 +827,9 @@ aside.refresh-active-now [class*="itemCard_"]:hover :is(foreignObject img, [clas
 #app-mount .x4an-show svg { width: 22px; height: 22px; background: var(--x4-ico-fill); -webkit-mask: var(--e-ico-user) center / contain no-repeat; mask: var(--e-ico-user) center / contain no-repeat; }
 #app-mount .x4an-show svg > * { visibility: hidden; }
 #app-mount .x4an-close:hover { background: var(--e-art-brush) center / 100% 100% no-repeat !important; border-color: transparent !important; color: #fff !important; }
+
+/* над блоком профиля строки списка гаснут заранее и не просвечивают у кромки */
+#app-mount section[class*="panels_pog62O"]::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -26px; height: 26px; pointer-events: none;
+    background: linear-gradient(rgba(11, 9, 10, 0), #0b090a);
+}
