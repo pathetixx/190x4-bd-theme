@@ -784,3 +784,41 @@ nav[class*="wrapper_5dqHTG"] [class*="listItem_"],
 nav[class*="wrapper_5dqHTG"] [class*="tutorialContainer"],
 nav[class*="wrapper_5dqHTG"] :is([class*="stack_"], [class*="scroller_5dqHTG"], [class*="folderGuildsList_"]) > div { flex: 0 0 auto !important; }
 nav[class*="wrapper_5dqHTG"] [class*="folderGroup_"], nav[class*="wrapper_5dqHTG"] [class*="folderGuildsList_"] { flex: 0 0 auto !important; }
+
+/* ============================================================
+   ПЛАШКИ НАД ОКНОМ: полоса рваной бумаги, кнопка — мазок кисти.
+   ============================================================ */
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]) {
+    background: var(--e-art-panel) center / 100% 100% no-repeat, #0b090a !important;
+    border: none !important; box-shadow: none !important; color: var(--e-bone) !important;
+    font: 400 15px/38px 'Oswald', sans-serif !important; letter-spacing: 0.02em;
+}
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]) :is(button, a[class*="button"]) {
+    background: var(--e-art-brush) center / 100% 100% no-repeat !important; border: none !important; border-radius: 0 !important; clip-path: none !important;
+    color: #fff !important; font: 500 14px/24px 'Oswald', sans-serif !important; padding: 0 18px !important;
+}
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]) :is(button, a[class*="button"]):hover { background: var(--e-art-brush) center / 100% 100% no-repeat !important; filter: brightness(1.18); }
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]) svg[class*="closeIcon_"] {
+    background: var(--x4-ico-fill) !important; -webkit-mask: var(--e-ico-win-close) center / contain no-repeat !important; mask: var(--e-ico-win-close) center / contain no-repeat !important;
+}
+#app-mount :is([class*="notice_6XH7h0"], [class*="notice_6g5Jai"], [class*="notice_FHSxiv"], [class*="notice_Q02kKo"], [class*="notice_UBdWBJ"], [class*="notice_ipBn6f"], [class*="notice_sPmmqh"]) svg[class*="closeIcon_"] > * { visibility: hidden !important; }
+
+/* ============================================================
+   АКТИВНЫЕ КОНТАКТЫ: лист тёмной бумаги над артом, строки через
+   черту туши, без карточек. Кнопка скрытия — из 190x4Companion.
+   ============================================================ */
+#app-mount [class*="nowPlayingColumn_"], #app-mount aside.refresh-active-now { background: rgba(11, 9, 10, 0.93) !important; border: none !important; box-shadow: none !important; }
+#app-mount [class*="nowPlayingColumn_"] { border-left: 1px solid var(--e-line2) !important; }
+aside.refresh-active-now h2 { color: var(--e-bone) !important; font: 500 21px/28px 'Oswald', sans-serif !important; letter-spacing: 0.02em; padding-right: 40px; }
+#app-mount aside.refresh-active-now [class*="itemCard_"] {
+    background: transparent !important; border: none !important; border-bottom: 1px solid var(--e-line) !important; border-radius: 0 !important; box-shadow: none !important; margin-bottom: 0 !important; overflow: visible;
+}
+#app-mount aside.refresh-active-now [class*="itemCard_"]:hover { background: rgba(232, 224, 212, 0.05) !important; }
+#app-mount aside.refresh-active-now [class*="itemCard_"] :is(header, section, [class*="inset_"]) { background: transparent !important; border-color: var(--e-line) !important; border-radius: 0 !important; }
+aside.refresh-active-now [class*="itemCard_"] [class*="multipleIconWrapper_"] { background: transparent !important; }
+aside.refresh-active-now [class*="textContent_"], aside.refresh-active-now [class*="textContent_"] * { color: var(--e-bone) !important; font-weight: 500 !important; }
+aside.refresh-active-now [class*="clickable_"], aside.refresh-active-now [class*="voiceSection_"], aside.refresh-active-now [class*="gameSection_"] { color: var(--e-dim) !important; }
+aside.refresh-active-now :is(foreignObject img, [class*="headerIcon_"], section img) { filter: grayscale(0.7) brightness(0.9); transition: filter 0.15s ease; }
+aside.refresh-active-now [class*="itemCard_"]:hover :is(foreignObject img, [class*="headerIcon_"], section img) { filter: none; }
+#app-mount .x4an-close, #app-mount .x4an-show { background: rgba(5, 4, 5, 0.6) !important; border: 1px solid var(--e-line2) !important; border-radius: 0 !important; box-shadow: none !important; color: var(--e-bone) !important; font-family: 'Oswald', sans-serif !important; }
+#app-mount .x4an-close:hover, #app-mount .x4an-show:hover { background: var(--e-art-brush) center / 100% 100% no-repeat !important; border-color: transparent !important; color: #fff !important; }
