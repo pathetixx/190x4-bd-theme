@@ -3575,13 +3575,8 @@ section[class*="title_z_gUBg"] [class*="searchBar_i16Ad0"]:focus-within { border
 }
 #app-mount [class*="guildBadgeAndName_XH4OpX"] [class*="guildIconContainer_"] { filter: grayscale(1) brightness(1.5); }
 #app-mount [class*="guildDropdown_XH4OpX"] [class*="headerChildren_"] svg { color: #fff !important; }
-#app-mount [class*="sidebarList_pog62O"] [class*="inviteButton_XH4OpX"] {
-    border-radius: 50% !important; background: rgba(5, 4, 5, 0.62) !important; border: 1px solid var(--e-line2) !important; box-sizing: border-box;
-}
-#app-mount [class*="sidebarList_pog62O"] [class*="inviteButton_XH4OpX"] svg {
-    background: var(--x4-ico-fill) !important; -webkit-mask: var(--e-ico-people) center / contain no-repeat !important; mask: var(--e-ico-people) center / contain no-repeat !important;
-}
-#app-mount [class*="sidebarList_pog62O"] [class*="inviteButton_XH4OpX"] svg > * { visibility: hidden !important; }
+/* «Пригласить» на баннере скрыто, приглашение остаётся в меню сервера */
+#app-mount [class*="sidebarList_pog62O"] [class*="inviteButton_XH4OpX"] { display: none !important; }
 
 /* ============================================================
    НЕПРОЧИТАННЫЕ ЛС И ПАПКИ В ЦЕПИ. Discord держит у обёрток высоту
