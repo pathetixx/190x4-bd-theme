@@ -2,6 +2,12 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [4.5.0] — 2026-11-12
+
+### Changed
+- 190x4 Eclipse 1.1.0: чат снова в стиле Telegram — пузыри, свои сообщения справа, в красках темы.
+- 190x4 Eclipse 1.1.0: плитки участников звонка занимают левую половину окна, справа виден арт темы.
+
 ## [4.4.2] — 2026-11-09
 
 ### Added
