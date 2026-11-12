@@ -135,7 +135,35 @@ nav[class*="wrapper_5dqHTG"] [class*="lowerBadge_"] [class*="numberBadge"] {
 /* --- шапка разговора --- */
 section[class*="title_z_gUBg"] h1::before { content: none !important; }
 
-/* --- сообщения: ровная лента без пузырей --- */
+/* --- сообщения: пузыри как в Telegram (раскладка из базы), краски Eclipse ---
+   Заливка — тушь на чёрной бумаге, цвет несёт только кромка: у чужих костяная
+   линия слева, у своих — багровая справа, как мазок кисти. Скругления
+   телеграмные: терминал базы сжимает их до 3px. */
+:root {
+    --x4-bubble-other: linear-gradient(135deg, rgba(20, 16, 17, 0.92), rgba(8, 6, 7, 0.92));
+    --x4-bubble-other-border: rgba(232, 224, 212, 0.1);
+    --x4-bubble-self: linear-gradient(135deg, rgba(10, 6, 7, 0.92) 30%, rgba(62, 8, 18, 0.92));
+    --x4-bubble-self-border: rgba(179, 18, 46, 0.42);
+}
+main[class*="chatContent_"] li[id^="chat-messages-"] > [class*="cozyMessage_"],
+main[class*="chatContent_"] li[id^="chat-messages-"] > [class*="cozyMessage_"]:hover {
+    --x4-bubble-radius: 16px; --x4-bubble-joint: 6px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), inset 2px 0 0 rgba(232, 224, 212, 0.22) !important;
+}
+main[class*="chatContent_"] li[data-x4-self] > [class*="cozyMessage_"],
+main[class*="chatContent_"] li[data-x4-self] > [class*="cozyMessage_"]:hover {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), inset -2px 0 0 var(--e-blood2), 0 0 16px rgba(179, 18, 46, 0.12) !important;
+}
+main[class*="chatContent_"] li[data-x4-self] [class*="timestamp_"] { color: rgba(232, 224, 212, 0.5) !important; }
+main[class*="chatContent_"] li[id^="chat-messages-"] > [class*="cozyMessage_"][class*="mentioned_"] {
+    border-color: rgba(210, 26, 60, 0.55) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), inset 2px 0 0 var(--e-blood2), 0 0 14px rgba(179, 18, 46, 0.18) !important;
+}
+main[class*="chatContent_"] [class*="cozyMessage_"] [class*="repliedMessage_"] {
+    background: rgba(232, 224, 212, 0.05) !important;
+    border-left-color: var(--e-blood2) !important;
+}
+main[class*="chatContent_"] [class*="cozyMessage_"] [class*="repliedMessage_"] [class*="username_"] { color: var(--e-blood2) !important; }
 main[class*="chatContent_"] [class*="messageContent_"] { font-size: 15.5px !important; font-weight: 400; line-height: 1.45; color: var(--e-bone); }
 [class*="username_"] { font-weight: 500 !important; }
 [class*="divider_"][class*="hasContent_"] { border-color: var(--e-line) !important; }
@@ -443,6 +471,11 @@ li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important
 [class*="headerBar_neq5ug"] { background: transparent !important; border: none !important; box-shadow: none !important; }
 [class*="headerBar_neq5ug"] h1, [class*="headerBar_neq5ug"] [class*="title_"] { font-size: 18px !important; font-weight: 500 !important; color: var(--e-bone) !important; }
 
+/* плитки — в левой половине окна, справа остаётся арт темы. Ширину плиток
+   Discord считает сам от ширины сетки, поэтому сужаем только скроллер. */
+[class*="wrapper_hbKzX7"]:not([class*="fullScreen_hbKzX7"]) [class*="videoGrid_QKgWuD"][class*="scroller_"] {
+    flex: 0 0 auto !important; width: min(50%, 900px) !important; margin-right: auto !important;
+}
 /* плитки */
 [class*="wrapper_7NOr2f"], [class*="tile_7NOr2f"], [class*="tileChild_7NOr2f"] { border-radius: 0 !important; }
 [class*="tile_7NOr2f"] { background: rgba(11, 9, 10, 0.72) !important; }

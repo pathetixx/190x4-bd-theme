@@ -110,7 +110,6 @@ def swap_icons(s: str) -> str:
 def build() -> str:
     s = (ROOT / "190x4.theme.css").read_text(encoding="utf-8")
     s = s[s.index("/* ============================================================\n   190x4 — Cyberpunk"):]
-    s = cut(s, "3.9.0 — ЧАТ В СТИЛЕ TELEGRAM", "4.0 — COMMAND TERMINAL")
     s = cut(s, "КУРСОР — хромированные", "ИКОНКИ 190x4 — свой набор")
     s = re.sub(r'(?m)^main\[class\*="chatContent_"\] li(\[data-x4-self\])? ?> ?\[class\*="cozyMessage_"\] \{.*?\}\n', "", s, flags=re.S)
     for a, b in COLORS.items():
