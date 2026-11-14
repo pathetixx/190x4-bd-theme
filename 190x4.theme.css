@@ -1,7 +1,7 @@
 /**
  * @name 190x4
  * @author 190x4
- * @version 4.5.0
+ * @version 4.6.0
  * @description Cyberpunk command-center theme for Discord — gunmetal PCB + red neon, inspired by 190x4.pw hub design.
  * @source https://github.com/pathetixx/190x4-bd-theme
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/190x4.theme.css
@@ -1266,22 +1266,9 @@ textarea[class*="input_"]:focus {
     outline: none !important;
 }
 
-/* ============================================================
-   ANIMATIONS — pulse для уведомлений
-   ============================================================ */
-
-/* Pulse через opacity, не box-shadow. box-shadow не композитится GPU —
-   каждый кадр анимации = repaint бейджа, дорого если бейджей много. */
-@keyframes x4-pulse {
-    0%, 100% { opacity: 1; }
-    50%      { opacity: 0.55; }
-}
-
-[class*="numberBadge_"]:not(:empty),
-[class*="lowerBadge_"][class*="numberBadge_"] {
-    animation: x4-pulse 2.4s ease-in-out infinite;
-    will-change: opacity;
-}
+/* Бейджи непрочитанного не пульсируют: бесконечная анимация заставляла
+   Chromium перерисовывать кадр 60+ раз в секунду всё время, пока висит
+   хоть один бейдж (замер: GPU-процесс 21% ядра против 5% без неё). */
 
 /* ============================================================
    FOCUS RING — везде красный, не сине-фиолетовый

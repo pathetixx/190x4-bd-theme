@@ -475,7 +475,10 @@ li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important
    Discord считает сам от ширины сетки, поэтому сужаем только скроллер. */
 [class*="wrapper_hbKzX7"]:not([class*="fullScreen_hbKzX7"]) [class*="videoGrid_QKgWuD"][class*="scroller_"] {
     flex: 0 0 auto !important; width: min(50%, 900px) !important; margin-right: auto !important;
+    scrollbar-width: none !important; scrollbar-gutter: auto !important;
 }
+/* без желоба прокрутки: его трек давал еле заметную полосу справа от плиток */
+[class*="wrapper_hbKzX7"]:not([class*="fullScreen_hbKzX7"]) [class*="videoGrid_QKgWuD"][class*="scroller_"]::-webkit-scrollbar { display: none !important; width: 0 !important; }
 /* плитки */
 [class*="wrapper_7NOr2f"], [class*="tile_7NOr2f"], [class*="tileChild_7NOr2f"] { border-radius: 0 !important; }
 [class*="tile_7NOr2f"] { background: rgba(11, 9, 10, 0.72) !important; }

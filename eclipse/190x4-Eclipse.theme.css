@@ -1,7 +1,7 @@
 /**
  * @name 190x4 Eclipse
  * @author 190x4
- * @version 1.1.0
+ * @version 1.2.0
  * @description Чёрная бумага, тушь и багровый серп: истинный банкай из финала Bleach.
  * @source https://github.com/pathetixx/190x4-bd-theme
  */
@@ -1212,22 +1212,9 @@ textarea[class*="input_"]:focus {
     outline: none !important;
 }
 
-/* ============================================================
-   ANIMATIONS — pulse для уведомлений
-   ============================================================ */
-
-/* Pulse через opacity, не box-shadow. box-shadow не композитится GPU —
-   каждый кадр анимации = repaint бейджа, дорого если бейджей много. */
-@keyframes x4-pulse {
-    0%, 100% { opacity: 1; }
-    50%      { opacity: 0.55; }
-}
-
-[class*="numberBadge_"]:not(:empty),
-[class*="lowerBadge_"][class*="numberBadge_"] {
-    animation: x4-pulse 2.4s ease-in-out infinite;
-    will-change: opacity;
-}
+/* Бейджи непрочитанного не пульсируют: бесконечная анимация заставляла
+   Chromium перерисовывать кадр 60+ раз в секунду всё время, пока висит
+   хоть один бейдж (замер: GPU-процесс 21% ядра против 5% без неё). */
 
 /* ============================================================
    FOCUS RING — везде красный, не сине-фиолетовый
@@ -3466,7 +3453,10 @@ li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important
    Discord считает сам от ширины сетки, поэтому сужаем только скроллер. */
 [class*="wrapper_hbKzX7"]:not([class*="fullScreen_hbKzX7"]) [class*="videoGrid_QKgWuD"][class*="scroller_"] {
     flex: 0 0 auto !important; width: min(50%, 900px) !important; margin-right: auto !important;
+    scrollbar-width: none !important; scrollbar-gutter: auto !important;
 }
+/* без желоба прокрутки: его трек давал еле заметную полосу справа от плиток */
+[class*="wrapper_hbKzX7"]:not([class*="fullScreen_hbKzX7"]) [class*="videoGrid_QKgWuD"][class*="scroller_"]::-webkit-scrollbar { display: none !important; width: 0 !important; }
 /* плитки */
 [class*="wrapper_7NOr2f"], [class*="tile_7NOr2f"], [class*="tileChild_7NOr2f"] { border-radius: 0 !important; }
 [class*="tile_7NOr2f"] { background: rgba(11, 9, 10, 0.72) !important; }

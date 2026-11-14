@@ -1,7 +1,7 @@
 /**
  * @name 190x4Companion
- * @description Компаньон темы 190x4: таблички с именем у участников голосового канала, пометка своих сообщений для чата в стиле Telegram (свои — справа) и анимации рамок, табличек и аватарок всегда — без наведения мыши; единая раскладка панели голосового подключения; окно мини-стрима можно скрыть крестиком и вернуть кнопкой «Стрим»; ускорение темы — меньше подтормаживаний при наведении, вводе и в звуковой панели.
- * @version 2.8.0
+ * @description Компаньон темы 190x4: таблички с именем у участников голосового канала, пометка своих сообщений для чата в стиле Telegram (свои — справа) и анимации рамок, табличек и аватарок всегда — без наведения мыши; единая раскладка панели голосового подключения; окно мини-стрима можно скрыть крестиком и вернуть кнопкой «Стрим»; ускорение темы — меньше подтормаживаний при наведении, вводе и в звуковой панели; скрывает рекламу заданий; экономия при просмотре стрима; включает обратно тему и плагины комплекта, если они выключились сами.
+ * @version 2.9.0
  * @author 190x4
  * @source https://github.com/pathetixx/190x4-bd-theme/tree/main/plugins
  * @updateUrl https://raw.githubusercontent.com/pathetixx/190x4-bd-theme/main/plugins/190x4Companion.plugin.js
@@ -51,6 +51,9 @@ const ANIM = 'img[src*="/collectibles-shop/"], img[src*="avatar-decoration-prese
 // одним блоком, значок сигнала крупный. Тема рассчитана на этот вариант,
 // а у части людей Discord включает другой — строки налезают друг на друга.
 // Включаем вариант 2 на сеанс (без записи в аккаунт), у всех одинаково.
+// события видео, по которым перепроверяем режим экономии
+const SAVER_EVENTS = ["play", "playing", "pause", "ended", "emptied"];
+
 const LAYOUT_EXPERIMENT = "2026-09-a11y-chassis-target-size";
 const LAYOUT_VARIANT = 2;
 
@@ -378,6 +381,151 @@ class ThemeBooster {
     }
 }
 
+// Реклама заданий (Quests): плашка «Задание … / Принять задание» в звонке,
+// полоса над панелью пользователя, карточки на странице заданий. Всё это
+// Discord берёт из QuestStore, поэтому прячем незапринятые задания прямо там —
+// без привязки к классам. Запринятые остаются: прогресс и награду видно.
+class QuestHider {
+    start() {
+        this.quests = Webpack.getStore("QuestStore");
+        this.ads = Webpack.getStore("AdDeliveryStore");
+        const store = this.quests;
+        if (!store) return;
+        const proto = Object.getPrototypeOf(store);
+        const getter = Object.getOwnPropertyDescriptor(proto, "quests")?.get;
+        const accepted = q => !!q?.userStatus?.enrolledAt;
+        if (getter) {
+            let src = null, out = null;
+            Object.defineProperty(store, "quests", {
+                configurable: true,
+                get() {
+                    const all = getter.call(this);
+                    if (all !== src) { src = all; out = new Map([...all].filter(([, q]) => accepted(q))); }
+                    return out;
+                }
+            });
+        }
+        if (typeof proto.getQuest === "function") {
+            store.getQuest = function (id) { const q = proto.getQuest.call(this, id); return accepted(q) ? q : undefined; };
+        }
+        if (this.ads && typeof Object.getPrototypeOf(this.ads).getQuestHomeHero === "function") this.ads.getQuestHomeHero = () => null;
+        store.emitChange?.();
+    }
+
+    stop() {
+        const store = this.quests;
+        if (store) { delete store.quests; delete store.getQuest; store.emitChange?.(); }
+        if (this.ads) delete this.ads.getQuestHomeHero;
+        this.quests = this.ads = null;
+    }
+}
+
+// Тема и плагины комплекта иногда оказываются выключенными после запуска: BD
+// выключает аддон, если файл заменили на ходу (обновление комплекта), или если
+// плагин упал при старте после обновления Discord. Выключение руками от этого
+// отличаем по файлу: перезаписанный файл BD читает заново, и у него меняется
+// время изменения. Руками выключенное запоминаем и не трогаем, остальное
+// включаем обратно — при запуске Discord и на лету.
+const KIT_PLUGINS = ["RegionSwitcher", "ShowPing"];
+const KIT_THEMES = ["190x4 Eclipse", "190x4"];
+
+class AddonKeeper {
+    constructor(name) {
+        this.name = name;
+        this.seen = new Map();
+        this.userOff = Data.load(name, "keeperUserOff") ?? {};
+        this.theme = Data.load(name, "keeperTheme") ?? null;
+        this.themesOff = Data.load(name, "keeperThemesOff") ?? false;
+    }
+
+    save() {
+        Data.save(this.name, "keeperUserOff", this.userOff);
+        Data.save(this.name, "keeperTheme", this.theme);
+        Data.save(this.name, "keeperThemesOff", this.themesOff);
+    }
+
+    start() {
+        // плагины BD запускает по очереди — даём им стартовать, потом проверяем
+        this.first = true;
+        this.timer = setTimeout(() => { this.tick(); this.interval = setInterval(() => this.tick(), 5000); }, 3000);
+    }
+
+    stop() {
+        clearTimeout(this.timer);
+        clearInterval(this.interval);
+    }
+
+    snapshot(api, name) {
+        const a = api.get(name);
+        return a ? { on: api.isEnabled(name), modified: a.modified, partial: !!a.partial } : null;
+    }
+
+    tick() {
+        try { this.plugins(); this.themes(); } catch (e) { console.error(`[${this.name}] сторож аддонов`, e); }
+        this.first = false;
+    }
+
+    plugins() {
+        const api = BdApi.Plugins;
+        let dirty = false;
+        for (const name of KIT_PLUGINS) {
+            const now = this.snapshot(api, name);
+            if (!now) continue;
+            const prev = this.seen.get(name);
+            if (!now.on && !now.partial) {
+                const reloaded = prev && prev.modified !== now.modified;
+                if (prev?.on && !reloaded) { this.userOff[name] = true; dirty = true; }
+                else if ((this.first || reloaded) && !this.userOff[name]) {
+                    api.enable(name);
+                    now.on = api.isEnabled(name);
+                    if (now.on) console.log(`[${this.name}] включён обратно плагин ${name}`);
+                }
+            } else if (now.on && this.userOff[name]) { delete this.userOff[name]; dirty = true; }
+            this.seen.set(name, now);
+        }
+        if (dirty) this.save();
+    }
+
+    themes() {
+        const api = BdApi.Themes;
+        const present = KIT_THEMES.filter(n => api.get(n));
+        if (!present.length) return;
+        const snaps = new Map(present.map(n => [n, this.snapshot(api, n)]));
+        const on = present.filter(n => snaps.get(n).on);
+        let dirty = false;
+        if (on.length) {
+            if (this.theme !== on[0] || this.themesOff) { this.theme = on[0]; this.themesOff = false; dirty = true; }
+        } else {
+            const was = present.find(n => this.seen.get(n)?.on);
+            const reloaded = was && this.seen.get(was).modified !== snaps.get(was).modified;
+            if (was && !reloaded) { this.themesOff = true; dirty = true; }
+            else if ((this.first || reloaded) && !this.themesOff) {
+                const pick = reloaded ? was : (present.includes(this.theme) ? this.theme : present[present.length - 1]);
+                api.enable(pick);
+                snaps.get(pick).on = api.isEnabled(pick);
+                if (snaps.get(pick).on) { console.log(`[${this.name}] включена обратно тема ${pick}`); this.theme = pick; dirty = true; }
+            }
+        }
+        for (const [n, v] of snaps) this.seen.set(n, v);
+        if (dirty) this.save();
+    }
+}
+
+// Сам компаньон тоже выключается при замене файла на ходу. Его stop() в этот
+// момент ещё может завести таймер: если файл перечитан (время изменения
+// другое), а плагин так и остался выключенным — включаем себя обратно.
+// Выключение руками помечаем в настройках: сторож Kit смотрит на эту пометку.
+function reviveSelf(name, modified) {
+    setTimeout(() => {
+        try {
+            const me = BdApi.Plugins.get(name);
+            if (!me || BdApi.Plugins.isEnabled(name)) return;
+            if (me.modified !== modified && !me.partial) BdApi.Plugins.enable(name);
+            else Data.save(name, "userDisabled", true);
+        } catch (e) { /* BD выгружается */ }
+    }, 2500);
+}
+
 // В горизонтальной полосе серверов колесо мыши само не прокручивает ряд.
 // Без темы ряд вертикальный, scrollWidth не больше clientWidth, и обработчик не вмешивается.
 function onStripWheel(e) {
@@ -399,9 +547,16 @@ module.exports = class Companion {
         this.MessageStore = Webpack.getStore("MessageStore");
         this.settings = {
             alwaysAnimate: Data.load(this.meta.name, "alwaysAnimate") ?? true,
-            fastTheme: Data.load(this.meta.name, "fastTheme") ?? true
+            fastTheme: Data.load(this.meta.name, "fastTheme") ?? true,
+            hideQuests: Data.load(this.meta.name, "hideQuests") ?? true,
+            keepAddons: Data.load(this.meta.name, "keepAddons") ?? true,
+            saver: Data.load(this.meta.name, "saver") ?? true
         };
+        this.StreamingStore = Webpack.getStore("ApplicationStreamingStore");
+        Data.save(this.meta.name, "userDisabled", false);
         if (this.settings.fastTheme) this.startBooster();
+        if (this.settings.hideQuests) this.startQuestHider();
+        if (this.settings.keepAddons) this.startKeeper();
         this.pipHidden = Data.load(this.meta.name, "pipHidden") ?? false;
         this.activeNowHidden = Data.load(this.meta.name, "activeNowHidden") ?? true;
         this.pinLayout();
@@ -440,6 +595,8 @@ module.exports = class Companion {
             }
             .x4pip-close svg, .x4pip-show svg { width: 14px; height: 14px; }
             ${ACTIVE_NOW_CSS}
+            html[data-x4-saver]::after { content: none !important; }
+            html[data-x4-saver] section[class*="panels_"] { backdrop-filter: none !important; }
         `);
 
         // Сообщения ленты помечаем сразу, в колбэке: он срабатывает до
@@ -469,6 +626,12 @@ module.exports = class Companion {
             }
         };
         document.addEventListener("pause", this.onPause, true);
+        this.onSaverSignal = () => {
+            clearTimeout(this.saverTimer);
+            this.saverTimer = setTimeout(() => this.syncSaver(), 150);
+        };
+        document.addEventListener("visibilitychange", this.onSaverSignal);
+        for (const type of SAVER_EVENTS) document.addEventListener(type, this.onSaverSignal, true);
         this.scan();
     }
 
@@ -486,11 +649,32 @@ module.exports = class Companion {
                 name: "Ускорение темы",
                 note: "Тема 190x4 подстраивается под текущую версию Discord, и наведение, ввод текста и звуковая панель меньше подтормаживают. Внешний вид не меняется.",
                 value: this.settings.fastTheme
+            }, {
+                type: "switch",
+                id: "hideQuests",
+                name: "Скрыть рекламу заданий",
+                note: "Убирает плашки «Задание… / Принять задание» в звонках, над панелью пользователя и на странице заданий. Уже принятые задания остаются.",
+                value: this.settings.hideQuests
+            }, {
+                type: "switch",
+                id: "keepAddons",
+                name: "Держать комплект включённым",
+                note: "Если тема или плагины комплекта выключились сами (обновление файла, сбой после обновления Discord) — включает их обратно. Выключенное руками не трогает.",
+                value: this.settings.keepAddons
+            }, {
+                type: "switch",
+                id: "saver",
+                name: "Экономия при просмотре стрима",
+                note: "Пока смотришь или ведёшь стрим, включена камера или окно Discord свёрнуто — анимации рамок и табличек на паузе, виньетка и размытие поверх видео выключены. Меньше нагрузки на видеокарту, стрим идёт плавнее.",
+                value: this.settings.saver
             }],
             onChange: (_, id, value) => {
                 this.settings[id] = value;
                 Data.save(this.meta.name, id, value);
                 if (id === "fastTheme") { if (value) this.startBooster(); else this.stopBooster(); return; }
+                if (id === "hideQuests") { if (value) this.startQuestHider(); else this.stopQuestHider(); return; }
+                if (id === "keepAddons") { if (value) this.startKeeper(); else this.stopKeeper(); return; }
+                if (id === "saver") { this.syncSaver(); return; }
                 if (value) this.animateAll(); else this.restoreStatic();
             }
         });
@@ -507,8 +691,56 @@ module.exports = class Companion {
         this.booster = null;
     }
 
+    // Видео на экране: стрим (свой или чужой) по стору Discord, плюс любое
+    // играющее крупное видео не из декораций — камера, вложение.
+    videoOnScreen() {
+        try { if (this.StreamingStore?.getAllActiveStreams?.().length) return true; } catch { /* стор сменился */ }
+        for (const v of document.querySelectorAll("video")) {
+            if (v.paused || (v.currentSrc || v.src || "").includes("/collectibles-shop/")) continue;
+            if (v.clientWidth >= 160 && v.clientHeight >= 90) return true;
+        }
+        return false;
+    }
+
+    syncSaver() {
+        clearTimeout(this.saverTimer);
+        this.saverTimer = null;
+        const on = !!this.settings?.saver && (document.hidden || this.videoOnScreen());
+        if (on === !!this.saving) return;
+        this.saving = on;
+        if (on) {
+            document.documentElement.dataset.x4Saver = "";
+            this.restoreStatic();
+        } else {
+            delete document.documentElement.dataset.x4Saver;
+            this.animateAll();
+        }
+    }
+
+    startQuestHider() {
+        this.stopQuestHider();
+        try { this.questHider = new QuestHider(); this.questHider.start(); }
+        catch (e) { console.error(`[${this.meta.name}] скрытие заданий`, e); }
+    }
+
+    stopQuestHider() {
+        try { this.questHider?.stop(); } catch (e) { /* Discord выгружается */ }
+        this.questHider = null;
+    }
+
+    startKeeper() {
+        this.stopKeeper();
+        this.keeper = new AddonKeeper(this.meta.name);
+        this.keeper.start();
+    }
+
+    stopKeeper() {
+        this.keeper?.stop();
+        this.keeper = null;
+    }
+
     animating() {
-        return this.settings?.alwaysAnimate && !this.AccessibilityStore?.useReducedMotion;
+        return this.settings?.alwaysAnimate && !this.AccessibilityStore?.useReducedMotion && !this.saving;
     }
 
     // Статичный URL → анимированный (null — менять нечего). Проверено по CDN:
@@ -552,14 +784,22 @@ module.exports = class Companion {
     }
 
     stop() {
+        reviveSelf(this.meta.name, BdApi.Plugins.get(this.meta.name)?.modified);
         document.removeEventListener("wheel", onStripWheel, true);
         this.stopBooster();
+        this.stopQuestHider();
+        this.stopKeeper();
         this.unpinLayout();
         this.observer?.disconnect();
         this.observer = null;
         this.srcObserver?.disconnect();
         this.srcObserver = null;
         document.removeEventListener("pause", this.onPause, true);
+        document.removeEventListener("visibilitychange", this.onSaverSignal);
+        for (const type of SAVER_EVENTS) document.removeEventListener(type, this.onSaverSignal, true);
+        clearTimeout(this.saverTimer);
+        this.saving = false;
+        delete document.documentElement.dataset.x4Saver;
         this.restoreStatic();
         clearTimeout(this.timer);
         this.timer = null;
@@ -615,6 +855,7 @@ module.exports = class Companion {
     }
 
     scan() {
+        this.syncSaver();
         for (const row of document.querySelectorAll(ROW)) {
             try { this.render(row); } catch (e) { console.error(`[${this.meta.name}]`, e); }
         }
