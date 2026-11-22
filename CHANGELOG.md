@@ -2,6 +2,11 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [4.6.1] — 2026-11-22
+
+### Fixed
+- 190x4 Eclipse 1.2.1: ники снова показываются своим шрифтом и эффектом (градиент, неон, «поп» и другие), если человек настроил стиль ника в Discord.
+
 ## [4.6.0] — 2026-11-14
 
 ### Added

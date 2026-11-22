@@ -1,7 +1,7 @@
 /**
  * @name 190x4 Eclipse
  * @author 190x4
- * @version 1.2.0
+ * @version 1.2.1
  * @description Чёрная бумага, тушь и багровый серп: истинный банкай из финала Bleach.
  * @source https://github.com/pathetixx/190x4-bd-theme
  */
@@ -3285,13 +3285,14 @@ main[class*="chatContent_"] [class*="messageContent_"] { font-size: 15.5px !impo
 #app-mount section[class*="panels_pog62O"] [class*="accountPopoutButtonWrapper_"] [class*="avatar_"] svg { position: relative; z-index: 1; }
  center / contain no-repeat;
 }
-#app-mount section[class*="panels_pog62O"] [class*="nameTag_"] * {
+#app-mount section[class*="panels_pog62O"] [class*="nameTag_"] *:not([class*="dnsFont_"], [class*="dnsFont_"] *) {
     font-family: 'Oswald', sans-serif !important; background: none !important; text-shadow: none !important; -webkit-text-fill-color: currentcolor !important;
     text-decoration: none !important; animation: none !important; filter: none !important;
 }
-#app-mount section[class*="panels_pog62O"] [class*="panelTitleContainer_"] *::before,
-#app-mount section[class*="panels_pog62O"] [class*="panelTitleContainer_"] *::after { display: none !important; }
-#app-mount section[class*="panels_pog62O"] [class*="panelTitleContainer_"] * { color: var(--e-bone) !important; font-size: 16px !important; font-weight: 500 !important; }
+#app-mount section[class*="panels_pog62O"] [class*="panelTitleContainer_"] *:not([class*="dnsFont_"] *)::before,
+#app-mount section[class*="panels_pog62O"] [class*="panelTitleContainer_"] *:not([class*="dnsFont_"] *)::after { display: none !important; }
+#app-mount section[class*="panels_pog62O"] [class*="panelTitleContainer_"] * { font-size: 16px !important; font-weight: 500 !important; }
+#app-mount section[class*="panels_pog62O"] [class*="panelTitleContainer_"] *:not([class*="dnsFont_"], [class*="dnsFont_"] *) { color: var(--e-bone) !important; }
 #app-mount section[class*="panels_pog62O"] [class*="panelSubtextContainer_"] * { color: var(--e-dim) !important; }
 #app-mount section[class*="panels_pog62O"] [class*="buttons_"] button { background: transparent !important; box-shadow: none !important; }
 #app-mount section[class*="panels_pog62O"] [class*="buttons_"] button:hover { --x4-ico-fill: var(--e-blood2); }
@@ -3423,6 +3424,8 @@ li[class*="dm_zln"] svg[class*="closeIcon_"] > * { visibility: hidden !important
 [class*="voiceUser_YUoOxm"]:hover { background: rgba(232, 224, 212, 0.05) !important; }
 [class*="voiceUser_YUoOxm"] [class*="username_YUoOxm"] {
     color: var(--e-dim) !important; font-family: 'Oswald', sans-serif !important; font-size: 14.5px !important; font-weight: 400 !important;
+}
+[class*="voiceUser_YUoOxm"] [class*="username_YUoOxm"]:not(:has([data-username-with-effects])) {
     background: none !important; text-shadow: none !important; -webkit-text-fill-color: currentcolor !important; animation: none !important;
 }
 [class*="voiceUser_YUoOxm"] [class*="usernameSpeaking_"] { color: #fff !important; font-weight: 500 !important; }
@@ -3848,3 +3851,22 @@ aside.refresh-active-now [class*="itemCard_"]:hover :is(foreignObject img, [clas
 
 /* при входе в канал: временная строка «Пригласить в голосовой чат» в списке участников */
 [class*="animation_MRjIbW"]:has([class*="clickable_MRjIbW"]) { display: none !important; }
+
+/* Custom display name styles (Nitro): Discord puts the font class on the outer
+   dnsFont_ element and the effect class on the inner [data-username-with-effects]
+   span. The theme-wide font rule outranks Discord's font classes, so restore them
+   here; the effect span and its letters inherit that font. */
+:is(html) body #app-mount [class*="dnsFont_"][class*="cherryBomb_"] { font-family: Sakura, 'gg sans', sans-serif !important; letter-spacing: 0.04em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="chicle_"] { font-family: Jellybean, 'gg sans', sans-serif !important; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="museoModerno_"] { font-family: Modern, 'gg sans', sans-serif !important; letter-spacing: 0.01em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="neoCastel_"] { font-family: Medieval, 'gg sans', sans-serif !important; letter-spacing: 0.02em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="pixelify_"] { font-family: "8Bit", 'gg sans', sans-serif !important; letter-spacing: 0.02em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="sinistre_"] { font-family: Vampyre, 'gg sans', sans-serif !important; letter-spacing: 0.01em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="zillaSlab_"] { font-family: Tempo, 'gg sans', sans-serif !important; letter-spacing: 0.03em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="playpenSans_"] { font-family: 'Monkey Bars', 'gg sans', sans-serif !important; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="orbitron_"] { font-family: Mainframe, 'gg sans', sans-serif !important; letter-spacing: 0.03em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="newRocker_"] { font-family: Headbang, 'gg sans', sans-serif !important; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="kalam_"] { font-family: Journal, 'gg sans', sans-serif !important; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="pricedown_"] { font-family: Pricedown, 'gg sans', sans-serif !important; }
+:is(html) body #app-mount [class*="dnsFont_"] [data-username-with-effects],
+:is(html) body #app-mount [class*="dnsFont_"] [data-username-with-effects] * { font-family: inherit !important; letter-spacing: inherit; }
