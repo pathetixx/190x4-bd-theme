@@ -2,6 +2,11 @@
 
 All notable changes to the theme are listed here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the version line matches `@version` inside `190x4.theme.css`.
 
+## [4.6.2] — 2026-11-22
+
+### Changed
+- 190x4 Eclipse 1.2.2: русские ники со стилем шрифта показываются похожим шрифтом с кириллицей, а не обычным — у десяти шрифтов Discord русских букв нет.
+
 ## [4.6.1] — 2026-11-22
 
 ### Fixed

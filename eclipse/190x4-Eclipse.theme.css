@@ -1,7 +1,7 @@
 /**
  * @name 190x4 Eclipse
  * @author 190x4
- * @version 1.2.1
+ * @version 1.2.2
  * @description Чёрная бумага, тушь и багровый серп: истинный банкай из финала Bleach.
  * @source https://github.com/pathetixx/190x4-bd-theme
  */
@@ -3856,17 +3856,30 @@ aside.refresh-active-now [class*="itemCard_"]:hover :is(foreignObject img, [clas
    dnsFont_ element and the effect class on the inner [data-username-with-effects]
    span. The theme-wide font rule outranks Discord's font classes, so restore them
    here; the effect span and its letters inherit that font. */
-:is(html) body #app-mount [class*="dnsFont_"][class*="cherryBomb_"] { font-family: Sakura, 'gg sans', sans-serif !important; letter-spacing: 0.04em; }
-:is(html) body #app-mount [class*="dnsFont_"][class*="chicle_"] { font-family: Jellybean, 'gg sans', sans-serif !important; }
-:is(html) body #app-mount [class*="dnsFont_"][class*="museoModerno_"] { font-family: Modern, 'gg sans', sans-serif !important; letter-spacing: 0.01em; }
-:is(html) body #app-mount [class*="dnsFont_"][class*="neoCastel_"] { font-family: Medieval, 'gg sans', sans-serif !important; letter-spacing: 0.02em; }
-:is(html) body #app-mount [class*="dnsFont_"][class*="pixelify_"] { font-family: "8Bit", 'gg sans', sans-serif !important; letter-spacing: 0.02em; }
-:is(html) body #app-mount [class*="dnsFont_"][class*="sinistre_"] { font-family: Vampyre, 'gg sans', sans-serif !important; letter-spacing: 0.01em; }
-:is(html) body #app-mount [class*="dnsFont_"][class*="zillaSlab_"] { font-family: Tempo, 'gg sans', sans-serif !important; letter-spacing: 0.03em; }
+/* Most of Discord's name fonts have no Cyrillic glyphs, so Russian names fell back
+   to gg sans. A look-alike Cyrillic face goes right after each of them; the browser
+   uses it only for the missing letters, Latin stays in the original font. */
+@font-face { font-family: 'x4cyr-cherryBomb'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/nunito/files/nunito-cyrillic-900-normal.woff2') format('woff2'); unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: 'x4cyr-chicle'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/lobster/files/lobster-cyrillic-400-normal.woff2') format('woff2'); unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: 'x4cyr-museoModerno'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/comfortaa/files/comfortaa-cyrillic-700-normal.woff2') format('woff2'); unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: 'x4cyr-neoCastel'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/kurale/files/kurale-cyrillic-400-normal.woff2') format('woff2'); unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: 'x4cyr-pixelify'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/pixelify-sans/files/pixelify-sans-cyrillic-500-normal.woff2') format('woff2'); unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: 'x4cyr-sinistre'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/yeseva-one/files/yeseva-one-cyrillic-400-normal.woff2') format('woff2'); unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: 'x4cyr-zillaSlab'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/roboto-slab/files/roboto-slab-cyrillic-600-normal.woff2') format('woff2'); unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: 'x4cyr-orbitron'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/russo-one/files/russo-one-cyrillic-400-normal.woff2') format('woff2'); unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: 'x4cyr-newRocker'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/ruslan-display/files/ruslan-display-cyrillic-400-normal.woff2') format('woff2'); unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: 'x4cyr-kalam'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/caveat/files/caveat-cyrillic-600-normal.woff2') format('woff2'); unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="cherryBomb_"] { font-family: Sakura, 'x4cyr-cherryBomb', 'gg sans', sans-serif !important; letter-spacing: 0.04em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="chicle_"] { font-family: Jellybean, 'x4cyr-chicle', 'gg sans', sans-serif !important; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="museoModerno_"] { font-family: Modern, 'x4cyr-museoModerno', 'gg sans', sans-serif !important; letter-spacing: 0.01em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="neoCastel_"] { font-family: Medieval, 'x4cyr-neoCastel', 'gg sans', sans-serif !important; letter-spacing: 0.02em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="pixelify_"] { font-family: "8Bit", 'x4cyr-pixelify', 'gg sans', sans-serif !important; letter-spacing: 0.02em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="sinistre_"] { font-family: Vampyre, 'x4cyr-sinistre', 'gg sans', sans-serif !important; letter-spacing: 0.01em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="zillaSlab_"] { font-family: Tempo, 'x4cyr-zillaSlab', 'gg sans', sans-serif !important; letter-spacing: 0.03em; }
 :is(html) body #app-mount [class*="dnsFont_"][class*="playpenSans_"] { font-family: 'Monkey Bars', 'gg sans', sans-serif !important; }
-:is(html) body #app-mount [class*="dnsFont_"][class*="orbitron_"] { font-family: Mainframe, 'gg sans', sans-serif !important; letter-spacing: 0.03em; }
-:is(html) body #app-mount [class*="dnsFont_"][class*="newRocker_"] { font-family: Headbang, 'gg sans', sans-serif !important; }
-:is(html) body #app-mount [class*="dnsFont_"][class*="kalam_"] { font-family: Journal, 'gg sans', sans-serif !important; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="orbitron_"] { font-family: Mainframe, 'x4cyr-orbitron', 'gg sans', sans-serif !important; letter-spacing: 0.03em; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="newRocker_"] { font-family: Headbang, 'x4cyr-newRocker', 'gg sans', sans-serif !important; }
+:is(html) body #app-mount [class*="dnsFont_"][class*="kalam_"] { font-family: Journal, 'x4cyr-kalam', 'gg sans', sans-serif !important; }
 :is(html) body #app-mount [class*="dnsFont_"][class*="pricedown_"] { font-family: Pricedown, 'gg sans', sans-serif !important; }
 :is(html) body #app-mount [class*="dnsFont_"] [data-username-with-effects],
 :is(html) body #app-mount [class*="dnsFont_"] [data-username-with-effects] * { font-family: inherit !important; letter-spacing: inherit; }
